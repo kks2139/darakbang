@@ -50,16 +50,19 @@ const style = css`
             border-color: black;
             background-color: #02BCD6;
             color: white;
+            font-weight: bold;
         }
         .normal {
             color: #B4B4B4;
             border: 1px solid transparent;  
             padding: 8px;  
+            font-weight: 500;
         }
         .normal.sel {
             border-color: black;
             background-color: #FFA89C;
             color: black;
+            font-weight: 600;
         }
     }
     .line {
