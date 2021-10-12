@@ -31,6 +31,7 @@ function GatheringFilter({filters, onClickFilter}: Props){
 }
 
 const style = css`
+    margin-bottom: 30px;
     .filter {
         display: flex;
         font-size: 16px;

@@ -18,6 +18,16 @@ function GatheringCard({info}: Props){
                 </div>
             </div> 
             <div className='detail'>
+                <div className='row-1'>
+                    <div className='name'>{info.name}</div>
+                    <div className='likes'>👍🏻{info.likes}</div>
+                </div>
+                <div className='row-2'>{info.description}</div>
+                <div className='row-3'>{info.interests}</div>
+                <div className='row-4'>
+                    <div>{info.period} 까지 모집</div>
+                    <div>{info.place}</div>
+                </div>
             </div>       
         </div>
     );
@@ -25,6 +35,7 @@ function GatheringCard({info}: Props){
 
 const style = css`
     width: 264px;
+    margin: 0 10px 32px 10px;
     .preview {
         position: relative;
         height: 280px;
@@ -54,8 +65,39 @@ const style = css`
         }
     }
     .detail {
-        height: 160px;
         border: 1px solid black;
+        border-bottom: 0;
+        display: flex;
+        flex-direction: column;
+        > [class*="row"] {
+            border-bottom: 1px solid black;
+            font-size: 16px;
+            padding: 3px;
+        }
+        .row-1 {
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            .name {
+                font-weight: 600;
+            }
+            .likes {
+                color: #B4B4B4;
+            }
+        }
+        .row-2 {
+            height: 70px;
+        }
+        .row-3 {
+            height: 30px;
+            color: #B4B4B4;
+        }
+        .row-4 {
+            display: flex;
+            justify-content: space-between;
+            height: 30px;
+            font-weight: 500;
+        }
     }
 `;
 

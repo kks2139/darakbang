@@ -15,13 +15,13 @@ function GatheringList({list}: Props){
                 <input type='checkbox' id='endYn'></input>
                 <label htmlFor='endYn'>마감 팀 안보기</label>
             </div>
-            <div className='contents'>
-                {list.map(info => (
+            <div className='list-box'>
+                {list.map((info, i) => (
                     <GatheringCard key={info.id} info={info}></GatheringCard>
                 ))}
             </div>
             <div className='show-more'>
-                더보기
+                <img src='vector.png'></img>더보기
             </div>
         </div>
     );
@@ -35,9 +35,12 @@ const style = css`
             font-size: 16px;
             font-weight: 500;
         }
+        margin: 18px 0;
     }
-    .contents {
-
+    .list-box {
+        // width: 852px;
+        display: flex;
+        flex-wrap: wrap;
     }
     .show-more {
         display: flex;
@@ -45,6 +48,10 @@ const style = css`
         cursor: pointer;
         font-size: 16px;
         font-weight: 600;
+        margin: 10px 0;
+        img {
+            margin-right: 10px;
+        }
     }
 `;
 
