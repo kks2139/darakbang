@@ -26,7 +26,8 @@ const initState: stateType = {
     gatheringList: [
         {
             id: '1',
-            filter: '한 번 만남',
+            filter: ['한 번 만남'],
+            title: ['신규 팀', '인기 팀'],
             bookmark: true,
             imgUrl: 'sample.png',
             name: '다락방',
@@ -38,7 +39,8 @@ const initState: stateType = {
         },
         {
             id: '2',
-            filter: '비대면',
+            filter: ['비대면'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample2.png',
             name: '다락방',
@@ -50,7 +52,8 @@ const initState: stateType = {
         },
         {
             id: '3',
-            filter: '온라인',
+            filter: ['온라인'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample3.png',
             name: '다락방',
@@ -62,7 +65,8 @@ const initState: stateType = {
         },
         {
             id: '4',
-            filter: '한 번 만남',
+            filter: ['한 번 만남'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample.png',
             name: '다락방',
@@ -74,7 +78,8 @@ const initState: stateType = {
         },
         {
             id: '5',
-            filter: '비대면',
+            filter: ['비대면'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample2.png',
             name: '다락방',
@@ -86,7 +91,8 @@ const initState: stateType = {
         },
         {
             id: '6',
-            filter: '온라인',
+            filter: ['온라인'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample3.png',
             name: '다락방',
@@ -97,7 +103,8 @@ const initState: stateType = {
             place: '연남동'
         },{
             id: '7',
-            filter: '한 번 만남',
+            filter: ['한 번 만남'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample.png',
             name: '다락방',
@@ -109,7 +116,8 @@ const initState: stateType = {
         },
         {
             id: '8',
-            filter: '비대면',
+            filter: ['비대면'],
+            title: [],
             bookmark: true,
             imgUrl: 'sample2.png',
             name: '다락방',

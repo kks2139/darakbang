@@ -13,8 +13,15 @@ function GatheringCard({info}: Props){
             <div className='preview'>
                 <img alt={info.name} src={info.imgUrl}></img>
                 <div className='top'>
-                    <div className='t1'>{info.filter}</div>
-                    <div className='t2'>😀</div>
+                    <div className='close-soon'>마감임박</div>
+                    <div className='filter-box'>
+                        {info.filter.map(f => (
+                            <div key={f} className='filter'>{f}</div>
+                        ))}
+                        {info.title.map(t => (
+                            <div key={t} className='title'>{t}</div>
+                        ))}
+                    </div>
                 </div>
             </div> 
             <div className='detail'>
@@ -50,54 +57,45 @@ const style = css`
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             padding: 8px;
-            .t1 {
-                display: flex;
-                align-items: center;
-                height: 19px;
-                padding: 4px;
+            .close-soon {
                 font-size: 12px;
                 font-weight: 600;
-                background-color: #EDFF1C;
-                border: 1px solid black;
+                color: white;
+                background-color: red;
+                border: 1px solid white;
+                padding: 1px 5px;
+            }
+            .filter-box {
+                > div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    height: 19px;
+                    padding: 4px;
+                    font-size: 12px;
+                    font-weight: 600;
+                    border: 1px solid black;
+                    border-radius: 10px;
+                    margin-bottom: 10px;
+                }
+                .filter {
+                    background-color: #FFA89C;
+                }
+                .title {
+                    background-color: #EDFF1C;
+                }
+
             }
         }
     }
     .detail {
-        border: 1px solid black;
+        border: 1px solid #F3F3F3;
+        border-radius: 10px;
         border-bottom: 0;
         display: flex;
         flex-direction: column;
-        > [class*="row"] {
-            border-bottom: 1px solid black;
-            font-size: 16px;
-            padding: 3px;
-        }
-        .row-1 {
-            height: 30px;
-            display: flex;
-            justify-content: space-between;
-            .name {
-                font-weight: 600;
-            }
-            .likes {
-                color: #B4B4B4;
-            }
-        }
-        .row-2 {
-            height: 70px;
-        }
-        .row-3 {
-            height: 30px;
-            color: #B4B4B4;
-        }
-        .row-4 {
-            display: flex;
-            justify-content: space-between;
-            height: 30px;
-            font-weight: 500;
-        }
     }
 `;
 

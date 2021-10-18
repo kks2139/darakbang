@@ -4,7 +4,8 @@ export interface test {
 
 export interface GatheringInfo {
     id: string;
-    filter: string
+    filter: string[]
+    title: string[]
     bookmark: boolean
     imgUrl: string
     name: string

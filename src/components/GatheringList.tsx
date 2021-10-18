@@ -31,6 +31,7 @@ const style = css`
     .filter-check {
         display: flex;
         justify-content: flex-end;
+        padding-right: 10px;
         label {
             font-size: 16px;
             font-weight: 500;
