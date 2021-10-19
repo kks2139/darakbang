@@ -16,16 +16,10 @@ function GatheringFilter({filters, onClickFilter}: Props){
     return (
         <div css={style}>
             <div className='filter'>
-                <div className='pay' onClick={onClick}>유료</div>
-                <div className='pay' onClick={onClick}>무료</div>
-            </div>
-            <div className='line'></div>
-            <div className='filter'>
                 {filters.map(f => (
                     <div key={f} className='normal' onClick={onClick}>{f}</div>
-                    ))}
+                ))}
             </div>
-            <div className='line'></div>
         </div>
     );
 }
@@ -39,38 +33,22 @@ const style = css`
             display: flex;
             align-items: center;
             height: 32px;
-            margin-right: 16px;
             cursor: pointer;
-        }
-        .pay {
-            color: #B4B4B4;
-            border: 1px solid #B4B4B4;  
-            padding: 0 16px;  
-        }
-        .pay.sel {
-            border-color: black;
-            background-color: #02BCD6;
-            color: white;
-            font-weight: bold;
         }
         .normal {
             color: #B4B4B4;
             border: 1px solid transparent;  
             padding: 8px;  
+            margin-right: 16px;
             font-weight: 500;
         }
         .normal.sel {
             border-color: black;
             background-color: #FFA89C;
             color: black;
+            border-radius: 10px;
             font-weight: 600;
         }
-    }
-    .line {
-        width: 100%;
-        height: 1px;
-        background-color: #D9D9D9;
-        margin: 8px 0; 
     }
 `;
 
