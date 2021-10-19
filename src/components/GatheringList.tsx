@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../util/interfaces';
@@ -6,18 +6,31 @@ import {GatheringCard} from './index';
 
 interface Props {
     list: GatheringInfo[]
+    onClickGathering: (param: GatheringInfo)=> void
 }
 
-function GatheringList({list}: Props){
+function GatheringList({list, onClickGathering}: Props){
+    const [filteredList, setFilteredList] = useState<GatheringInfo[]>([]);
+    const [hideClosed, setHideClosed] = useState(false);
+
+    const onCheckChanged = (e: React.ChangeEvent<HTMLInputElement>)=>{
+        setHideClosed(pre => !pre);
+    }
+
+    useEffect(()=>{
+        const filtered = list.filter(d => !hideClosed || (hideClosed && d.id !== '6'));
+        setFilteredList(filtered);
+    }, [hideClosed]);
+
     return (
         <div css={style}>
             <div className='filter-check'>
-                <input type='checkbox' id='endYn'></input>
+                <input type='checkbox' id='endYn' onChange={onCheckChanged} checked={hideClosed}></input>
                 <label htmlFor='endYn'>마감 팀 안보기</label>
             </div>
             <div className='list-box'>
-                {list.map((info, i) => (
-                    <GatheringCard key={info.id} info={info}></GatheringCard>
+                {filteredList.map((info, i) => (
+                    <GatheringCard key={info.id} info={info} onClickGathering={onClickGathering}></GatheringCard>
                 ))}
             </div>
             <div className='show-more'>

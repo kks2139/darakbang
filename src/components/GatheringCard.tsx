@@ -5,14 +5,19 @@ import {GatheringInfo} from '../util/interfaces';
 
 interface Props {
     info: GatheringInfo
+    onClickGathering: (param: GatheringInfo)=> void
 }
 
-function GatheringCard({info}: Props){
+function GatheringCard({info, onClickGathering}: Props){
     const isCloseSoon = info.id === '1';
     const isEnd = info.id === '6';
 
+    const onClick = ()=>{
+        onClickGathering(info);
+    } 
+
     return (
-        <div css={style()}>
+        <div css={style()} onClick={onClick}>
             <div className={isEnd ? 'apply-end' : ''}></div>
             <div className='preview'>
                 <img alt={info.name} src={info.imgUrl}></img>
@@ -70,6 +75,7 @@ const style = ()=>(css`
         position: relative;
         height: 280px;
         margin-bottom: 16px;
+        transition: .3s;
         img {
             position: absolute;
             width: 100%;
@@ -134,6 +140,7 @@ const style = ()=>(css`
         border-radius: 10px;
         transform: translateY(-22px);
         background-color: white;
+        transition: .3s;
         [class*='row'] {
             display: flex;
         }
@@ -196,6 +203,17 @@ const style = ()=>(css`
         height: calc(100% - 22px);
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    transition: .3s;
+    &:hover {
+        transform: translateY(-10px);
+        .preview {
+            box-shadow : 0 0 10px -3px black;
+        }
+        .detail {
+            box-shadow : 0 0 10px -3px black;
+        }
     }
 `);
 

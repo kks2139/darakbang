@@ -1,10 +1,14 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { GatheringFilterContainers, GatheringListContainers} from './containers';
+import { GatheringFilterContainers, GatheringListContainers} from './containers/index';
+import {GatheringInfo} from './util/interfaces';
 import {Tab} from './components/index';
 
 function App() {
+  const onClickGathering = (info: GatheringInfo)=>{
+    alert(info.description);
+  }
 
   return (
     <div css={style}> 
@@ -15,7 +19,7 @@ function App() {
             </div>
             <div>
               <GatheringFilterContainers></GatheringFilterContainers>
-              <GatheringListContainers></GatheringListContainers>
+              <GatheringListContainers onClickGathering={onClickGathering}></GatheringListContainers>
             </div>
           </>
       </Tab>
