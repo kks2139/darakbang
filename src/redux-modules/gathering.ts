@@ -32,10 +32,14 @@ const initState: stateType = {
             imgUrl: 'sample.png',
             name: '다락방',
             likes: 562,
-            description: '사이클링 번개 팀원 모집',
-            interests: '취미 > 스포츠',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '사이클링 번개',
+            interests: '취미 > 스포츠 > 자전거',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 1,
+            girl: 2
         },
         {
             id: '2',
@@ -45,10 +49,14 @@ const initState: stateType = {
             imgUrl: 'sample2.png',
             name: '다락방',
             likes: 562,
-            description: '[레트로 감성 > ㅠ < ] 비대면 독서 펜 팔 팀원 모집',
-            interests: '취미 > 독서',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '비대면 독서 펜팔',
+            interests: '취미 > 독서 > 비대면',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 0,
+            boy: 0,
+            girl: 0
         },
         {
             id: '3',
@@ -58,10 +66,14 @@ const initState: stateType = {
             imgUrl: 'sample3.png',
             name: '다락방',
             likes: 562,
-            description: '[온라인] 독서 모임 북토크 팀원 모집',
-            interests: '취미 > 독서',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '독서 모임 북토크',
+            interests: '취미 > 독서 > 대면',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 5,
+            boy: 0,
+            girl: 5
         },
         {
             id: '4',
@@ -71,10 +83,14 @@ const initState: stateType = {
             imgUrl: 'sample.png',
             name: '다락방',
             likes: 562,
-            description: '사이클링 번개 팀원 모집',
-            interests: '취미 > 스포츠',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '사이클링 번개',
+            interests: '취미 > 스포츠 > 자전거',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 0,
+            girl: 0
         },
         {
             id: '5',
@@ -84,10 +100,14 @@ const initState: stateType = {
             imgUrl: 'sample2.png',
             name: '다락방',
             likes: 562,
-            description: '[레트로 감성 > ㅠ < ] 비대면 독서 펜 팔 팀원 모집',
-            interests: '취미 > 독서',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '비대면 독서 펜팔',
+            interests: '취미 > 독서 > 비대면',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 1,
+            girl: 2
         },
         {
             id: '6',
@@ -97,10 +117,14 @@ const initState: stateType = {
             imgUrl: 'sample3.png',
             name: '다락방',
             likes: 562,
-            description: '[온라인] 독서 모임 북토크 팀원 모집',
-            interests: '취미 > 독서',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '독서 모임 북토크',
+            interests: '취미 > 독서 > 대면',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 1,
+            girl: 2
         },{
             id: '7',
             filter: ['한 번 만남'],
@@ -109,10 +133,14 @@ const initState: stateType = {
             imgUrl: 'sample.png',
             name: '다락방',
             likes: 562,
-            description: '사이클링 번개 팀원 모집',
-            interests: '취미 > 스포츠',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '사이클링 번개',
+            interests: '취미 > 스포츠 > 자전거',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 1,
+            girl: 2
         },
         {
             id: '8',
@@ -122,10 +150,14 @@ const initState: stateType = {
             imgUrl: 'sample2.png',
             name: '다락방',
             likes: 562,
-            description: '[레트로 감성 > ㅠ < ] 비대면 독서 펜 팔 팀원 모집',
-            interests: '취미 > 독서',
-            period: '10.10 ~ 10.20',
-            place: '연남동'
+            description: '비대면 독서 펜팔',
+            interests: '취미 > 독서 > 비대면',
+            applyFrom: '10월 30일 8 : 00 AM',
+            applyTo: '10.20',
+            place: '연남동',
+            people: 3,
+            boy: 1,
+            girl: 2
         },
     ]
 };

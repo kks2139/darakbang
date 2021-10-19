@@ -12,6 +12,10 @@ export interface GatheringInfo {
     likes: number
     description: string
     interests: string
-    period: string
+    applyFrom: string
+    applyTo: string
     place: string
+    people?: number
+    boy?: number
+    girl?: number
 }

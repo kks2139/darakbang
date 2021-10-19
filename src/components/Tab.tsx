@@ -23,16 +23,21 @@ function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: 
         }
     }
 
-    const selectChild = (e: React.MouseEvent<HTMLDivElement>)=>{
+    const selectChild = (e: React.MouseEvent<HTMLDivElement> | number)=>{
         const selected = divRef.current?.querySelector('.sel');
-        selected?.classList.remove('sel');
-        e.currentTarget.classList.add('sel');
-
-        setIndex(Number(e.currentTarget.dataset.idx));
+        if(typeof e === 'number'){
+            selected?.classList.remove('sel');
+            divRef.current?.querySelector(`[data-idx="${e}"]`)?.classList.add('sel');
+            setIndex(e);
+        }else{
+            selected?.classList.remove('sel');
+            e.currentTarget.classList.add('sel');
+            setIndex(Number(e.currentTarget.dataset.idx));
+        }
     }
 
     useEffect(()=>{
-        divRef.current?.querySelector('.tab')?.classList.add('sel');
+        selectChild(selectedIndex);
     }, []);
 
     return (
