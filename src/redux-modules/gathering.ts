@@ -2,6 +2,7 @@ import {GatheringInfo} from '../util/interfaces';
 
 const SET_FILTERS = 'gathering/SET_FILTERS' as const;
 const SET_GATHERING_LIST = 'gathering/SET_GATHERING_LIST' as const;
+const SET_SELECTED_GATHERING = 'gathering/SET_SELECTED_GATHERING' as const;
 
 export const setFilters = (arg: string[])=> ({ 
     type : SET_FILTERS,
@@ -11,18 +12,25 @@ export const setGatheringList = (arg: GatheringInfo[])=> ({
     type : SET_GATHERING_LIST,
     payload : arg
 });
+export const setSelectedGathering = (arg: GatheringInfo)=> ({ 
+    type : SET_SELECTED_GATHERING,
+    payload : arg
+});
 
 type actionType = 
     | ReturnType<typeof setFilters>
     | ReturnType<typeof setGatheringList>
+    | ReturnType<typeof setSelectedGathering>
 
 type stateType = {
     filters: string[]
     gatheringList: GatheringInfo[]
+    selectedGathering: GatheringInfo | null
 }
 
 const initState: stateType = {
     filters: ['한 번 만남', '비대면', '온라인', '오프라인', '지역', '성비 균등', '다락방 주최'],
+    selectedGathering: null,
     gatheringList: [
         {
             id: '1',
@@ -405,6 +413,18 @@ function gathering(state: stateType = initState, action: actionType) {
             return {
                 ...state,
                 gatheringList: action.payload.map(d => ({...d}))
+            };
+        case SET_SELECTED_GATHERING:
+            const {filter, title, activeDateList, subImgUrls} = action.payload
+            return {
+                ...state,
+                selectedGahering: {
+                    ...action.payload,
+                    filter: filter.slice(),
+                    title: title.slice(),
+                    activeDateList: activeDateList.slice(),
+                    subImgUrls: subImgUrls.slice(),
+                }
             };
         default:
             return state;

@@ -6,9 +6,6 @@ import {GatheringInfo} from './util/interfaces';
 import {Tab} from './components/index';
 
 function App() {
-  const onClickGathering = (info: GatheringInfo)=>{
-    alert(info.description);
-  }
 
   return (
     <div css={style}> 
@@ -19,7 +16,7 @@ function App() {
             </div>
             <div>
               <GatheringFilterContainers></GatheringFilterContainers>
-              <GatheringListContainers onClickGathering={onClickGathering}></GatheringListContainers>
+              <GatheringListContainers></GatheringListContainers>
             </div>
           </>
       </Tab>
