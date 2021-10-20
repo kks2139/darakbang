@@ -47,7 +47,7 @@ function GatheringCard({info, onClickGathering}: Props){
                     {info.description}
                 </div>
                 <div className='row3'>
-                    {info.applyFrom}
+                    {info.nextActiveDate}
                 </div>
                 <div className='row4'>
                     {info.place}
