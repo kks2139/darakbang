@@ -9,7 +9,6 @@ interface Props {
 }
 
 function GatheringCard({info, onClickGathering}: Props){
-    const isCloseSoon = info.id === '1';
     const isEnd = info.id === '6';
 
     const onClick = ()=>{
@@ -22,8 +21,8 @@ function GatheringCard({info, onClickGathering}: Props){
             <div className='preview'>
                 <img alt={info.name} src={info.imgUrl}></img>
                 <div className='top'>
-                    <div className={isEnd ? 'end' : isCloseSoon ? 'close-soon' : ''}>
-                        {isEnd ? '마감' : isCloseSoon ? '마감임박' : ''}
+                    <div className={isEnd ? 'end' : info.closeSoon === 'Y' ? 'close-soon' : ''}>
+                        {isEnd ? '마감' : info.closeSoon === 'Y' ? '마감임박' : ''}
                     </div>
                     <div className='filter-box'>
                         {info.filter.map(f => (
@@ -128,7 +127,6 @@ const style = ()=>(css`
                 .title {
                     background-color: #EDFF1C;
                 }
-
             }
         }
     }

@@ -15,6 +15,7 @@ export interface GatheringInfo {
     interests: string
     nextActiveDate: string
     applyTo: string
+    closeSoon: 'Y' | 'N'
     place: string
     people?: number
     boy?: number
