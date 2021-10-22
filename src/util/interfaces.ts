@@ -20,6 +20,8 @@ export interface GatheringInfo {
     people?: number
     boy?: number
     girl?: number
+    currBoy?: number
+    currGirl?: number
     initDate: string
     lastActiveDate: string
     currentTeam: number

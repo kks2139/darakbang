@@ -12,7 +12,7 @@ export const setGatheringList = (arg: GatheringInfo[])=> ({
     type : SET_GATHERING_LIST,
     payload : arg
 });
-export const setSelectedGathering = (arg: GatheringInfo)=> ({ 
+export const setSelectedGathering = (arg: GatheringInfo | null)=> ({ 
     type : SET_SELECTED_GATHERING,
     payload : arg
 });
@@ -50,6 +50,8 @@ const initState: stateType = {
             people: 3,
             boy: 1,
             girl: 2,
+            currBoy: 0,
+            currGirl: 1,
             initDate: '20211010',
             lastActiveDate: '20211025',
             currentTeam: 6,
@@ -423,6 +425,12 @@ function gathering(state: stateType = initState, action: actionType) {
                 gatheringList: action.payload.map(d => ({...d}))
             };
         case SET_SELECTED_GATHERING:
+            if(!action.payload) {
+                return {
+                    ...state,
+                    selectedGathering : null
+                };
+            }
             const {filter, title, activeDateList, subImgUrls} = action.payload
             return {
                 ...state,
