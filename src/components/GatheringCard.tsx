@@ -5,20 +5,26 @@ import {GatheringInfo} from '../util/interfaces';
 
 interface Props {
     info: GatheringInfo
+    onClickGathering: (param: GatheringInfo)=> void
 }
 
-function GatheringCard({info}: Props){
-    const isCloseSoon = info.id === '1';
+function GatheringCard({info, onClickGathering}: Props){
     const isEnd = info.id === '6';
 
+    const onClick = ()=>{
+        if(!isEnd){
+            onClickGathering(info);
+        }
+    } 
+
     return (
-        <div css={style()}>
+        <div css={style()} onClick={onClick}>
             <div className={isEnd ? 'apply-end' : ''}></div>
             <div className='preview'>
                 <img alt={info.name} src={info.imgUrl}></img>
                 <div className='top'>
-                    <div className={isEnd ? 'end' : isCloseSoon ? 'close-soon' : ''}>
-                        {isEnd ? '마감' : isCloseSoon ? '마감임박' : ''}
+                    <div className={isEnd ? 'end' : info.closeSoon === 'Y' ? 'close-soon' : ''}>
+                        {isEnd ? '마감' : info.closeSoon === 'Y' ? '마감임박' : ''}
                     </div>
                     <div className='filter-box'>
                         {info.filter.map(f => (
@@ -42,7 +48,7 @@ function GatheringCard({info}: Props){
                     {info.description}
                 </div>
                 <div className='row3'>
-                    {info.applyFrom}
+                    {info.nextActiveDate}
                 </div>
                 <div className='row4'>
                     {info.place}
@@ -70,6 +76,7 @@ const style = ()=>(css`
         position: relative;
         height: 280px;
         margin-bottom: 16px;
+        transition: .3s;
         img {
             position: absolute;
             width: 100%;
@@ -122,7 +129,6 @@ const style = ()=>(css`
                 .title {
                     background-color: #EDFF1C;
                 }
-
             }
         }
     }
@@ -134,6 +140,7 @@ const style = ()=>(css`
         border-radius: 10px;
         transform: translateY(-22px);
         background-color: white;
+        transition: .3s;
         [class*='row'] {
             display: flex;
         }
@@ -196,6 +203,17 @@ const style = ()=>(css`
         height: calc(100% - 22px);
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
+    }
+
+    transition: .3s;
+    &:hover {
+        transform: translateY(-10px);
+        .preview {
+            box-shadow : 0 0 10px -3px black;
+        }
+        .detail {
+            box-shadow : 0 0 10px -3px black;
+        }
     }
 `);
 
