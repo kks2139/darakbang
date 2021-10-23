@@ -6,15 +6,16 @@ import {RootState} from '../redux-modules/index';
 import {setSelectedGathering} from '../redux-modules/gathering';
 
 interface Props {
-
+    onGatheringSelected: ()=> void
 }
 
-function GatheringListContainers({}: Props){
+function GatheringListContainers({onGatheringSelected}: Props){
     const dispatch = useDispatch();
     const gatheringList = useSelector((state: RootState)=> state.gathering.gatheringList);
 
     const onClickGathering = (info: GatheringInfo)=>{
         dispatch(setSelectedGathering(info));
+        onGatheringSelected();
     }
 
     return (
