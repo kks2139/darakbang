@@ -12,7 +12,9 @@ function GatheringCard({info, onClickGathering}: Props){
     const isEnd = info.id === '6';
 
     const onClick = ()=>{
-        onClickGathering(info);
+        if(!isEnd){
+            onClickGathering(info);
+        }
     } 
 
     return (

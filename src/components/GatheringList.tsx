@@ -52,7 +52,7 @@ const style = css`
         margin: 18px 0;
     }
     .list-box {
-        // width: 852px;
+        width: 852px;
         display: flex;
         flex-wrap: wrap;
     }

@@ -3,6 +3,8 @@ import React, { useRef } from "react";
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../util/interfaces';
 import {divDate} from '../util/util';
+import {GoThumbsup, GoThumbsdown} from 'react-icons/go';
+import {FiUpload, FiPocket} from 'react-icons/fi';
 
 interface Props {
     info: GatheringInfo | null
@@ -14,6 +16,7 @@ function GatheringDetail({info, onBack}: Props){
     const nextAct = divDate(info?.nextActiveDate || '');
     const initDate = divDate(info?.initDate || '');
     const lastActiveDate = divDate(info?.lastActiveDate || '');
+    const isOnce = info?.filter.includes('한 번 만남');
 
     const onClickBack = ()=>{
         onBack();
@@ -21,6 +24,24 @@ function GatheringDetail({info, onBack}: Props){
     
     const onClickDate = (e: React.MouseEvent<HTMLDivElement>)=>{
         selectDate(e);
+    }
+    
+    const onClickJoin = (e: React.MouseEvent<HTMLDivElement>)=>{
+        const {type} = e.currentTarget.dataset;
+        if(type === 'once'){
+
+        }else{
+
+        }
+    }
+    
+    const onClickIcon = (e: React.MouseEvent<HTMLDivElement>)=>{
+        const {type} = e.currentTarget.dataset;
+        if(type === 'share'){
+    
+        }else{
+    
+        }
     }
     
     const selectDate = (e: React.MouseEvent<HTMLDivElement>)=>{
@@ -116,30 +137,34 @@ function GatheringDetail({info, onBack}: Props){
                             <div className='val'>{info.purpose}</div>
                         </div>
                     </div>
-                    <div className='active-info'>
-                        <div className='title'>활동 소개</div>
-                        <div className='content'>
-                            <div className='img-box'>
-                                {info.subImgUrls.map(d => (
-                                    <img key={d} src={d}></img>
-                                ))}
+                    {isOnce ? 
+                        <div className='active-info'>
+                            <div className='title'>활동 소개</div>
+                            <div className='content'>
+                                <div className='img-box'>
+                                    {info.subImgUrls.map(d => (
+                                        <img key={d} src={d}></img>
+                                    ))}
+                                </div>
+                                <div className='desc'>
+                                    {info.detailDescription}
+                                </div>
                             </div>
-                            <div className='desc'>
-                                {info.detailDescription}
+                        </div> 
+                    : null}
+                    {isOnce ? 
+                        <div className='caution-info'>
+                            <div className='text'>
+                                • 다락방의 모든 팀 및 활동은 단순 사교 활동을 지양합니다.<br/>
+                                &nbsp;&nbsp;불편사항은 <span>문의하기</span>를 통해 운영자에게 전달해주세요.<br/>
+                                <br/>
+                                • 활동 중 발생한 사고에 대해서는 본사에서 책임을 지지 않습니다.<br/>
+                                <br/>
+                                • 모든 활동은 코로나19 방역준수기준을 따릅니다. 지켜지지 않는 모임이 발생할 경우<br/>
+                                &nbsp;&nbsp;신고 바랍니다.
                             </div>
                         </div>
-                    </div>
-                    <div className='caution-info'>
-                        <div className='text'>
-                            • 다락방의 모든 팀 및 활동은 단순 사교 활동을 지양합니다.<br/>
-                            &nbsp;&nbsp;불편사항은 <span>문의하기</span>를 통해 운영자에게 전달해주세요.<br/>
-                            <br/>
-                            • 활동 중 발생한 사고에 대해서는 본사에서 책임을 지지 않습니다.<br/>
-                            <br/>
-                            • 모든 활동은 코로나19 방역준수기준을 따릅니다. 지켜지지 않는 모임이 발생할 경우<br/>
-                            &nbsp;&nbsp;신고 바랍니다.
-                        </div>
-                    </div>
+                    : null}
                 </section>
                 <section className='floating-section'>
                     <div className='floating-box'>
@@ -162,24 +187,30 @@ function GatheringDetail({info, onBack}: Props){
                             </div>
                             <div className='line2'></div>
                             <div className='likes'>
-                                <div className='good'></div>
-                                <div className='bad'></div>
+                                <div className='good'>
+                                    <GoThumbsup size='20'/>
+                                    <div>{info.likes}</div>
+                                </div>
+                                <div className='bad'>
+                                    <GoThumbsdown size='20'/>
+                                    <div>{info.hates}</div>
+                                </div>
                             </div>
-                            <div className='btn'>이 팀에 합류하기</div>
+                            <div className='btn' onClick={onClickJoin}>이 팀에 합류하기</div>
                         </div>
-                        {info.filter.includes('한 번 만남') ? 
+                        {isOnce ? 
                             <div className='once-box'>
-                                <div className='btn once'>한 번 참여하기</div>
+                                <div className='btn once' data-type='once' onClick={onClickJoin}>한 번 참여하기</div>
                                 <div className='txt'>• 한 번 만남이 가능한 게시물입니다.</div>
                             </div>
                         : null}
                         <div className='icons'>
-                            <div className='icon'>
-                                <img src=''></img>
+                            <div className='icon' data-type='share' onClick={onClickIcon}>
+                                <FiUpload size='25'/>
                                 <div className='txt'>공유하기</div>
                             </div>
-                            <div className='icon'>
-                                <img src=''></img>
+                            <div className='icon' data-type='pocket' onClick={onClickIcon}>
+                                <FiPocket size='25'/>
                                 <div className='txt'>주머니 담기</div>
                             </div>
                         </div>
@@ -196,7 +227,11 @@ const style = css`
         width: 70px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid black;
+        border: 1px solid #02BCD6;
+        border-radius: 5px;
+        background-color: white;
+        color: #02BCD6;
+        font-weight: bold;
         margin: 10px 0;
     }
     .wrapper {
@@ -384,7 +419,6 @@ const style = css`
                 }
                 .content {
                     min-width: 265px;
-                    height: 440px;
                     padding: 12px;
                     border: 1px solid #C4C4C4;
                     border-radius: 10px;
@@ -415,13 +449,44 @@ const style = css`
                         transform: translateX(-12px);
                         width: calc(100% + 24px);
                         margin: 12px 0 24px 0;
-                        height: 2px;
+                        height: 1px;
                         background-color: #C4C4C4;
                     }
                     .line2 {
-                        margin-bottom: 24px;
+                        margin-bottom: 20px;
                         height: 1px;
                         background-color: #C4C4C4;
+                    }
+                    .likes {
+                        display: flex;
+                        justify-content: center;
+                        margin-bottom: 40px;
+                        color: #9D9D9D;
+                        font-size: 24px;
+                        > div {
+                            margin: 0 25px;
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                        }
+                        .good {
+                            color: #02BCD6;
+                        }
+                    }
+                }
+                .icons {
+                    display: flex;
+                    justify-content: center;
+                    margin-top: 19px;
+                    .icon {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 0 12px;
+                        cursor: pointer;
+                        .txt {
+                            font-size: 16px;
+                        }
                     }
                 }
                 .btn {
