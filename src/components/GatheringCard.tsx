@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../util/interfaces';
+import {divDate} from '../util/util';
 
 interface Props {
     info: GatheringInfo
@@ -9,6 +10,7 @@ interface Props {
 }
 
 function GatheringCard({info, onClickGathering}: Props){
+    const nextAct = divDate(info?.nextActiveDate || '');
     const isEnd = info.id === '6';
 
     const onClick = ()=>{
@@ -48,7 +50,8 @@ function GatheringCard({info, onClickGathering}: Props){
                     {info.description}
                 </div>
                 <div className='row3'>
-                    {info.nextActiveDate}
+                    {/* {info.nextActiveDate} */}
+                    {`${nextAct.MM}월 ${nextAct.dd}일 ${nextAct.HH} : ${nextAct.mm} ${nextAct.ampm}`}
                 </div>
                 <div className='row4'>
                     {info.place}

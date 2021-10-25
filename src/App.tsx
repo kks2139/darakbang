@@ -25,7 +25,7 @@ function App() {
         <Tab names={['유료', '일반']} width={894}>
             <>
               <div>
-                유료 화면 ~~~~
+                유료 화면 ~~~~8888888888888888888888888888888888888888
               </div>
               <div>
                 <GatheringFilterContainers/>
@@ -42,7 +42,7 @@ const style = (showDetail: boolean)=>(css`
   min-height: 100vh;
   display: flex;
   justify-content: center;
-
+  
   background-color: ${showDetail ? '#E5E5E5' : 'white'};
 `);
 
