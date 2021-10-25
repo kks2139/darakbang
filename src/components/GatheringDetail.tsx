@@ -137,21 +137,19 @@ function GatheringDetail({info, onBack}: Props){
                             <div className='val'>{info.purpose}</div>
                         </div>
                     </div>
-                    {isOnce ? 
-                        <div className='active-info'>
-                            <div className='title'>활동 소개</div>
-                            <div className='content'>
-                                <div className='img-box'>
-                                    {info.subImgUrls.map(d => (
-                                        <img key={d} src={d}></img>
-                                    ))}
-                                </div>
-                                <div className='desc'>
-                                    {info.detailDescription}
-                                </div>
+                    <div className='active-info'>
+                        <div className='title'>활동 소개</div>
+                        <div className='content'>
+                            <div className='img-box'>
+                                {info.subImgUrls.map(d => (
+                                    <img key={d} src={d}></img>
+                                ))}
                             </div>
-                        </div> 
-                    : null}
+                            <div className='desc'>
+                                {info.detailDescription}
+                            </div>
+                        </div>
+                    </div> 
                     <div className='caution-info'>
                         <div className='text'>
                             • 다락방의 모든 팀 및 활동은 단순 사교 활동을 지양합니다.<br/>
