@@ -137,34 +137,30 @@ function GatheringDetail({info, onBack}: Props){
                             <div className='val'>{info.purpose}</div>
                         </div>
                     </div>
-                    {isOnce ? 
-                        <div className='active-info'>
-                            <div className='title'>활동 소개</div>
-                            <div className='content'>
-                                <div className='img-box'>
-                                    {info.subImgUrls.map(d => (
-                                        <img key={d} src={d}></img>
-                                    ))}
-                                </div>
-                                <div className='desc'>
-                                    {info.detailDescription}
-                                </div>
+                    <div className='active-info'>
+                        <div className='title'>활동 소개</div>
+                        <div className='content'>
+                            <div className='img-box'>
+                                {info.subImgUrls.map(d => (
+                                    <img key={d} src={d}></img>
+                                ))}
                             </div>
-                        </div> 
-                    : null}
-                    {isOnce ? 
-                        <div className='caution-info'>
-                            <div className='text'>
-                                • 다락방의 모든 팀 및 활동은 단순 사교 활동을 지양합니다.<br/>
-                                &nbsp;&nbsp;불편사항은 <span>문의하기</span>를 통해 운영자에게 전달해주세요.<br/>
-                                <br/>
-                                • 활동 중 발생한 사고에 대해서는 본사에서 책임을 지지 않습니다.<br/>
-                                <br/>
-                                • 모든 활동은 코로나19 방역준수기준을 따릅니다. 지켜지지 않는 모임이 발생할 경우<br/>
-                                &nbsp;&nbsp;신고 바랍니다.
+                            <div className='desc'>
+                                {info.detailDescription}
                             </div>
                         </div>
-                    : null}
+                    </div> 
+                    <div className='caution-info'>
+                        <div className='text'>
+                            • 다락방의 모든 팀 및 활동은 단순 사교 활동을 지양합니다.<br/>
+                            &nbsp;&nbsp;불편사항은 <span>문의하기</span>를 통해 운영자에게 전달해주세요.<br/>
+                            <br/>
+                            • 활동 중 발생한 사고에 대해서는 본사에서 책임을 지지 않습니다.<br/>
+                            <br/>
+                            • 모든 활동은 코로나19 방역준수기준을 따릅니다. 지켜지지 않는 모임이 발생할 경우<br/>
+                            &nbsp;&nbsp;신고 바랍니다.
+                        </div>
+                    </div>
                 </section>
                 <section className='floating-section'>
                     <div className='floating-box'>
