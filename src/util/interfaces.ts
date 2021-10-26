@@ -1,7 +1,3 @@
-export interface test {
-
-}
-
 export interface GatheringInfo {
     id: string;
     filter: string[]
@@ -35,4 +31,8 @@ export interface GatheringInfo {
     purpose: string
     subImgUrls: string[]
     detailDescription: string
+}
+
+export interface TeamInfo {
+    
 }

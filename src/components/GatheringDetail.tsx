@@ -406,7 +406,7 @@ const style = css`
             position: relative;
             .floating-box {
                 position: fixed;
-                top: 80px;
+                top: 150px;
                 margin-left: 24px;
                 .title {
                     font-weight: bold;
