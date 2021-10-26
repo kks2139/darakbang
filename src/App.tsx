@@ -71,7 +71,8 @@ const style = (showDetail: boolean)=>(css`
     .content-box {
       width: 100%;
       display: flex;
-      justify-content: center;
+      padding: 50px 100px;
+      // justify-content: center;
     }
   }
 
