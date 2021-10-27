@@ -44,7 +44,7 @@ const style = css`
         }
         .normal.sel {
             border-color: black;
-            background-color: #FFA89C;
+            background-color: var(--color-peach);
             color: black;
             border-radius: 10px;
             font-weight: 600;

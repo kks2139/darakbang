@@ -127,10 +127,10 @@ const style = ()=>(css`
                     margin-bottom: 5px;
                 }
                 .filter {
-                    background-color: #FFA89C;
+                    background-color: var(--color-peach);
                 }
                 .title {
-                    background-color: #EDFF1C;
+                    background-color: var(--color-yellow);
                 }
             }
         }
@@ -157,11 +157,11 @@ const style = ()=>(css`
                     margin-right: 8px;
                 }
                 .it {
-                    color: #9D9D9D;
+                    color: var(--color-gray);
                 }
             }
             .lk {
-                color: #9D9D9D;
+                color: var(--color-gray);
             }
         }
         .row2 {
@@ -181,7 +181,7 @@ const style = ()=>(css`
         .row5 {
             display: flex;
             font-size: 12px;
-            color: #9D9D9D;
+            color: var(--color-gray);
             > div {
                 margin-right: 5px;
             }

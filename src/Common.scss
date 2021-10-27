@@ -1,5 +1,10 @@
 :root {
-  
+  --color-gray: #9D9D9D;
+  --color-light-gray: #E5E5E5;
+  --color-main-text: #02BCD6;
+  --color-yellow: #EDFF1C;
+  --color-peach: #FFA89C;
+  --color-warn: rgb(255, 95, 95);
 }
 
 body {
@@ -21,5 +26,5 @@ code {
 }
 
 .invalid {
-  box-shadow: 0 0 0 3px rgb(255, 95, 95);
+  box-shadow: 0 0 0 3px var(--color-warn);
 }

@@ -223,10 +223,10 @@ const style = css`
         width: 70px;
         text-align: center;
         cursor: pointer;
-        border: 1px solid #02BCD6;
+        border: 1px solid var(--color-main-text);
         border-radius: 5px;
         background-color: white;
-        color: #02BCD6;
+        color: var(--color-main-text);
         font-weight: bold;
         margin: 10px 0;
     }
@@ -234,7 +234,7 @@ const style = css`
         display: flex;
         .interests {
             font-size: 16px;
-            color: #9D9D9D;
+            color: var(--color-gray);
             margin-bottom: 16px;
         }
         .header {
@@ -249,9 +249,9 @@ const style = css`
                 height: 32px;
                 font-size: 16px;
                 font-weight: bold;
-                color: #02BCD6;
+                color: var(--color-main-text);
                 background-color: white;
-                border: 1px solid #02BCD6; 
+                border: 1px solid var(--color-main-text); 
             }
             .desc {
                 font-size: 24px;
@@ -270,10 +270,10 @@ const style = css`
                 padding: 1px 0;
             }
             .filter {
-                background-color: #FFA89C;
+                background-color: var(--color-peach);
             }
             .title {
-                background-color: #EDFF1C;
+                background-color: var(--color-yellow);
             }
             .tag {
                 display: flex;
@@ -297,7 +297,7 @@ const style = css`
             padding: 20px;
             border-radius: 10px;
             background-color: white;
-            // border: 1px solid #9D9D9D;
+            // border: 1px solid var(--color-gray);
             margin-bottom: 40px;
             .row {
                 display: flex;
@@ -311,17 +311,17 @@ const style = css`
                     display: flex;
                     font-size: 16px;
                     .can-apply {
-                        color: #FFA89C;
-                        border: 1px solid #FFA89C;
+                        color: var(--color-peach);
+                        border: 1px solid var(--color-peach);
                         border-radius: 10px;
                         padding: 0 3px;
                     }
                     .gray {
-                        color: #9D9D9D;
+                        color: var(--color-gray);
                         margin: 0 8px;
                     }
                     .else {
-                        color: #FFA89C;
+                        color: var(--color-peach);
                         margin: 0 5px;
                     }
                 }
@@ -376,7 +376,7 @@ const style = css`
                 padding: 20px;
                 border-radius: 10px;
                 background-color: white;
-                // border: 1px solid #9D9D9D;
+                // border: 1px solid var(--color-gray);
                 .img-box {
                     img {
                         margin-bottom: 24px;
@@ -394,7 +394,7 @@ const style = css`
             margin: 80px 0;
             .text {
                 white-space: pre-line;
-                color: #9D9D9D;
+                color: var(--color-gray);
                 font-size: 16px;
                 span {
                     color: black;
@@ -421,7 +421,7 @@ const style = css`
                     background-color: white;
                     margin-bottom: 12px;
                     .interests {
-                        color: #9D9D9D;
+                        color: var(--color-gray);
                         font-size: 16px;
                         margin-bottom: 24px;
                     }
@@ -437,7 +437,7 @@ const style = css`
                         }
                         .txt2 {
                             font-size: 12px;
-                            color: #9D9D9D;
+                            color: var(--color-gray);
                             margin-top: 5px;
                         }
                     }
@@ -457,7 +457,7 @@ const style = css`
                         display: flex;
                         justify-content: center;
                         margin-bottom: 40px;
-                        color: #9D9D9D;
+                        color: var(--color-gray);
                         font-size: 24px;
                         > div {
                             margin: 0 25px;
@@ -466,7 +466,7 @@ const style = css`
                             align-items: center;
                         }
                         .good {
-                            color: #02BCD6;
+                            color: var(--color-main-text);
                         }
                     }
                 }
@@ -497,17 +497,17 @@ const style = css`
                     text-align: center;
                     border: 1px solid black;
                     border-radius: 25px;
-                    background-color: #EDFF1C;
+                    background-color: var(--color-yellow);
                     cursor: pointer;
                 }
                 .btn.once {
-                    background-color: #FFA89C;
+                    background-color: var(--color-peach);
                 }
                 .once-box {
                     .txt {
                         text-align: center;
                         font-size: 8px;
-                        color: #9D9D9D;
+                        color: var(--color-gray);
                         margin-top: 4px;
                     }
                 }

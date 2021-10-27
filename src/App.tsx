@@ -30,7 +30,6 @@ function App() {
 
   return (
     <div css={style(showDetail)}> 
-      <button onClick={test}>TEST</button>
       <div className='top'>탑 메뉴</div>
       <div className='body'>
         <div className='side-menu'>사이드 메뉴</div>
@@ -65,7 +64,7 @@ function App() {
 
 const style = (showDetail: boolean)=>(css`
   min-height: 100vh;
-  background-color: ${showDetail ? '#E5E5E5' : 'white'};
+  background-color: ${showDetail ? 'var(--color-light-gray)' : 'white'};
 
   .body {
     display: flex;

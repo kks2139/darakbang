@@ -85,12 +85,12 @@ const style = css`
         margin: 24px 0 8px 0;
     }
     .intro-box {
-        border: 1px solid #9D9D9D;
+        border: 1px solid var(--color-gray);
         border-bottom: transparent;
         .row {
             display: flex;
             height: 92px;
-            border-bottom: 1px solid #9D9D9D; 
+            border-bottom: 1px solid var(--color-gray); 
             .field {
                 display: flex;
                 justify-content: center;
@@ -107,7 +107,7 @@ const style = css`
             .wall {
                 height: 100%;
                 width: 1px;
-                background-color: #9D9D9D;
+                background-color: var(--color-gray);
             }
         }
     }
