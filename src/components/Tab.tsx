@@ -14,7 +14,7 @@ interface Props {
 function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: Props){
     const [index, setIndex] = useState(0);
     const divRef = useRef<HTMLDivElement | null>(null);
-    const childs = children.props.children;
+    const child = children.props.children ? children.props.children : children;
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>)=>{
         selectChild(e);
@@ -48,7 +48,7 @@ function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: 
                 ))}
             </div>
             <div className='content'>
-                {childs[index]}
+                {Array.isArray(child) ? child[index] : child}
             </div>
         </div>
     );
@@ -64,22 +64,22 @@ const style = (width: number)=>(css`
             justify-content: center;
             height: 32px;
             width: 64px;
-            color: #9D9D9D;
+            color: var(--color-gray);
             font-size: 16px;
             border: 1px solid transparent;  
             cursor: pointer;
             transform: translateY(1px);
         }
         .tab.sel {
-            border-color: #9D9D9D;
+            border-color: var(--color-gray);
             border-bottom: transparent;
             background-color: white;
-            color: #02BCD6;
+            color: var(--color-main-text);
             font-weight: bold;
         }
     }
     .content {
-        border: 1px solid #9D9D9D;  
+        border: 1px solid var(--color-gray);  
         padding: 20px;
     }
 `);

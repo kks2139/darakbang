@@ -21,11 +21,12 @@ const initState: stateType = {
 function makeTeam(state: stateType = initState, action: actionType) {
     switch (action.type) {
         case SET_TEAM_INFO:
-            return action.payload ? {
-                teamInfo: {
+            return {
+                ...state,
+                teamInfo: action.payload ? {
                     ...action.payload
-                }
-            } : null;
+                } : null
+            };
         default:
             return state;
   }
