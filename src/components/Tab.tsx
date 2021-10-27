@@ -14,7 +14,7 @@ interface Props {
 function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: Props){
     const [index, setIndex] = useState(0);
     const divRef = useRef<HTMLDivElement | null>(null);
-    const childs = children.props.children;
+    const child = children.props.children ? children.props.children : children;
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>)=>{
         selectChild(e);
@@ -48,7 +48,7 @@ function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: 
                 ))}
             </div>
             <div className='content'>
-                {childs[index]}
+                {Array.isArray(child) ? child[index] : child}
             </div>
         </div>
     );

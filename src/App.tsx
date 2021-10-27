@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers} from './containers/index';
+import { GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers, MakeTeamContainers} from './containers/index';
 import {Tab} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
@@ -24,15 +24,19 @@ function App() {
 
   });
 
+  const test = ()=>{
+    history.push('/make-team');
+  }
+
   return (
     <div css={style(showDetail)}> 
-
+      <button onClick={test}>TEST</button>
       <div className='top'>탑 메뉴</div>
       <div className='body'>
         <div className='side-menu'>사이드 메뉴</div>
         <main className='content-box'>
           <Switch>
-            <Route path='/' render={()=> (
+            <Route path='/' exact render={()=> (
               <>
                 {selectedGathering ? <GatheringDetailContainers onClickBack={onClickBack}/> : null}
                 <div className='tab' hidden={selectedGathering !== null}>
@@ -50,7 +54,7 @@ function App() {
                 </div>
               </>
             )}/>
-            <Route path='/적절한url' exact render={()=> <div>새로운 화면~~~</div>}/>
+            <Route path='/make-team' render={()=> <MakeTeamContainers/>}/>
           </Switch>
         </main>
       </div>
