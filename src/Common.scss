@@ -25,6 +25,27 @@ code {
   box-sizing: border-box;
 }
 
+*, *:focus, *:hover { 
+  outline:none;
+}
+
+input {
+  border: 0;
+}
+
+.required {
+  position: relative;
+  &::before {
+    content: '*';
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    left: -10px;
+    transform: translateY(-5px);
+  }
+}
+
 .invalid {
   box-shadow: 0 0 0 3px var(--color-warn);
 }

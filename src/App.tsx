@@ -7,17 +7,21 @@ import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
 import {Route, Switch, useHistory} from 'react-router-dom';
 
+interface Style {
+  backgroundColor: string
+}
+
 function App() {
   const history = useHistory();
-  const [showDetail, setShowDetail] = useState(false);
   const {selectedGathering} = useSelector((state: RootState)=> state.gathering);
+  const {backgroundColor} = useSelector((state: RootState)=> state.app);
 
   const onGatheringSelected = ()=>{
-    setShowDetail(pre => !pre);
+    
   }
   
   const onClickBack = ()=>{
-    setShowDetail(pre => !pre);
+    
   }
 
   useEffect(()=>{
@@ -29,7 +33,10 @@ function App() {
   }
 
   return (
-    <div css={style(showDetail)}> 
+    <div css={style({backgroundColor})}> 
+
+    <button onClick={test}>TEST</button>
+    
       <div className='top'>탑 메뉴</div>
       <div className='body'>
         <div className='side-menu'>사이드 메뉴</div>
@@ -62,9 +69,9 @@ function App() {
   );
 }
 
-const style = (showDetail: boolean)=>(css`
+const style = ({backgroundColor}: Style)=>(css`
   min-height: 100vh;
-  background-color: ${showDetail ? 'var(--color-light-gray)' : 'white'};
+  background-color: ${backgroundColor || 'white'};
 
   .body {
     display: flex;

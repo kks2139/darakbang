@@ -1,26 +1,27 @@
-const DO_SOMETHING = 'app/DO_SOMETHING' as const;
+const SET_BAKCGROUND_COLOR = 'app/SET_BAKCGROUND_COLOR' as const;
 
-export const doSomething = (arg: string)=> ({ 
-    type : DO_SOMETHING,
+export const setBackgroundColor = (arg: string)=> ({ 
+    type : SET_BAKCGROUND_COLOR,
     payload : arg
 });
 
 type actionType = 
-    | ReturnType<typeof doSomething>
+    | ReturnType<typeof setBackgroundColor>
 
 type stateType = {
-    someValue: string
+    backgroundColor: string
 }
 
 const initState: stateType = {
-    someValue: ''
+    backgroundColor: ''
 };
 
 function app(state: stateType = initState, action: actionType) {
     switch (action.type) {
-        case DO_SOMETHING:
+        case SET_BAKCGROUND_COLOR:
             return {
-                someValue: ''
+                ...state,
+                backgroundColor: action.payload
             };
         default:
             return state;

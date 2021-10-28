@@ -1,15 +1,48 @@
-import React from "react";
+import React, { useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab} from '../components/index';
+import {Tab, Combobox} from '../components/index';
+import {ComboboxItem} from '../util/interfaces';
+
+
+
+interface Inputs {
+    teamName: string
+    category: string
+    purpose: string
+}
 
 interface Props {
 
 }
 
 function MakeTeam({}: Props){
+    const [inputs, setInputs] = useState<Inputs>({
+        teamName: '',
+        category: '',
+        purpose: '',
+    });
+    
+    const testOptions = [
+        {label: 'First Name', value: 'first_name'},
+        {label: 'Last Name', value: 'last_name'},
+        {label: 'Age', value: 'age'},
+    ]
+
+    const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>)=>{
+
+    }
+
+    const onComboChange = (selected: ComboboxItem)=>{
+        setInputs({
+            ...inputs,
+            teamName: selected.label
+        });
+    }
+
     return (
         <div css={style}>
+            <Combobox items={testOptions} onComboChange={onComboChange}></Combobox>
             <Tab names={['일반']}>
                 <>
                     <div className='img-box'>
@@ -24,16 +57,21 @@ function MakeTeam({}: Props){
             <div className='sub-tit'>팀 소개</div>
             <div className='intro-box'>
                 <div className='row'>
-                    <div className='field'>팀명</div>
-                    <div className='desc'></div>
+                    <div className='field required'>팀명</div>
+                    <div className='val1'>
+                        <span className='txt1'>팀</span> 
+                        <span>{'{'}</span>
+                        <input onChange={onChangeValue}></input>
+                        <span>{'}'}</span>
+                    </div>
                 </div>
                 <div className='row'>
-                    <div className='field'>카테고리</div>
-                    <div className='desc'></div>
+                    <div className='field required'>카테고리</div>
+                    <div className='val2'></div>
                 </div>
                 <div className='row'>
-                    <div className='field'>팀 목적</div>
-                    <div className='desc'></div>
+                    <div className='field required'>팀 목적</div>
+                    <div className='val3'></div>
                 </div>
             </div>
             <div className='sub-tit'>팀장 소개</div>
@@ -99,10 +137,33 @@ const style = css`
                 font-size: 24px;
                 font-weight: bold;
             }
-            .desc {
+            [class*='val'] {
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                flex-grow: 1;
+            }
+            .val1 {
+                .txt1 {
+                    margin-right: 12px;
+                }
+                span {
+                    font-size: 24px;
+                    font-weight: 500;
+                }
+                input {
+                    width: 221px;
+                    text-align: center;
+                    margin: 0 30px;
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+            }
+            .val2 {
+
+            }
+            .val3 {
+
             }
             .wall {
                 height: 100%;
