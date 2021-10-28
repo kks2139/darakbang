@@ -34,5 +34,10 @@ export interface GatheringInfo {
 }
 
 export interface TeamInfo {
-    
+
+}
+
+export interface ComboboxItem {
+    label: string
+    value: string
 }
