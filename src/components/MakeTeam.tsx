@@ -4,8 +4,6 @@ import {css} from '@emotion/react';
 import {Tab, Combobox} from '../components/index';
 import {ComboboxItem} from '../util/interfaces';
 
-
-
 interface Inputs {
     teamName: string
     category: string
@@ -22,7 +20,7 @@ function MakeTeam({}: Props){
         category: '',
         purpose: '',
     });
-    
+
     const testOptions = [
         {label: 'First Name', value: 'first_name'},
         {label: 'Last Name', value: 'last_name'},
@@ -33,7 +31,7 @@ function MakeTeam({}: Props){
 
     }
 
-    const onComboChange = (selected: ComboboxItem)=>{
+    const onSelected = (selected: ComboboxItem)=>{
         setInputs({
             ...inputs,
             teamName: selected.label
@@ -42,7 +40,7 @@ function MakeTeam({}: Props){
 
     return (
         <div css={style}>
-            <Combobox items={testOptions} onComboChange={onComboChange}></Combobox>
+            <Combobox items={testOptions} onSelected={onSelected}></Combobox>
             <Tab names={['일반']}>
                 <>
                     <div className='img-box'>
