@@ -32,15 +32,14 @@ function MakeTeam({}: Props){
     }
 
     const onSelected = (selected: ComboboxItem)=>{
-        setInputs({
-            ...inputs,
-            teamName: selected.label
-        });
+        // setInputs({
+        //     ...inputs,
+        //     teamName: selected.label
+        // });
     }
 
     return (
         <div css={style}>
-            <Combobox items={testOptions} onSelected={onSelected}></Combobox>
             <Tab names={['일반']}>
                 <>
                     <div className='img-box'>
@@ -65,7 +64,11 @@ function MakeTeam({}: Props){
                 </div>
                 <div className='row'>
                     <div className='field required'>카테고리</div>
-                    <div className='val2'></div>
+                    <div className='val2'>
+                        <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox>
+                        <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox>
+                        <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox>
+                    </div>
                 </div>
                 <div className='row'>
                     <div className='field required'>팀 목적</div>
@@ -135,7 +138,7 @@ const style = css`
                 font-size: 24px;
                 font-weight: bold;
             }
-            [class*='val'] {
+            > [class*='val'] {
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -158,7 +161,8 @@ const style = css`
                 }
             }
             .val2 {
-
+                display: flex;
+                justify-content: space-even;
             }
             .val3 {
 
