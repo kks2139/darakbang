@@ -27,7 +27,7 @@ function MakeTeam({}: Props){
         {label: 'Age', value: 'age'},
     ]
 
-    const onChangeValue = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const onChangeValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
 
     }
 
@@ -72,12 +72,30 @@ function MakeTeam({}: Props){
                 </div>
                 <div className='row'>
                     <div className='field required'>팀 목적</div>
-                    <div className='val3'></div>
+                    <div className='val3'>
+                        <span>{'“'}</span>
+                            <textarea onChange={onChangeValue}></textarea>
+                        <span>{'”'}</span>
+                    </div>
                 </div>
             </div>
-            <div className='sub-tit'>팀장 소개</div>
+            <div className='sub-tit'>
+                팀장 소개
+                <span>팀장의 기본정보는 자동으로 등록됩니다.</span>
+            </div>
             <div className='intro-box'>
-
+                <div className='row'>
+                    <div className='val4'>
+                        <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox>
+                        <div className='wall'></div>
+                        {/* <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox> */}
+                        <div className='wall'></div>
+                        {/* <Combobox items={testOptions} onSelected={onSelected} styles={{margin: '0 18px'}}></Combobox> */}
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='field required'>성향</div>
+                </div>
             </div>
         </div>
     );
@@ -122,6 +140,12 @@ const style = css`
         font-size: 24px;
         font-weight: bold;
         margin: 24px 0 8px 0;
+        span {
+            font-weight: 500;
+            font-size: 12px;
+            color: var(--color-gray);
+            margin-left: 19px;
+        }
     }
     .intro-box {
         border: 1px solid var(--color-gray);
@@ -165,12 +189,23 @@ const style = css`
                 justify-content: space-even;
             }
             .val3 {
-
+                font-size: 36px;
+                font-weight: bold;
+                textarea {
+                    min-width: 500px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    padding: 0 30px;
+                    border-bottom: 1px solid #C4C4C4;
+                }
+            }
+            .val4 {
+                justify-content: space-evenly;
             }
             .wall {
                 height: 100%;
                 width: 1px;
-                background-color: var(--color-gray);
+                background-color: var(--color-light-gray);
             }
         }
     }

@@ -29,8 +29,9 @@ code {
   outline:none;
 }
 
-input {
+input, textarea {
   border: 0;
+  resize: none;
 }
 
 .required {
