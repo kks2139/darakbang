@@ -29,6 +29,7 @@ const Header = () => {
 const styles = css`
     width: 100%;
     height: 128px;
+    background-color: #FFF;
     border-bottom: 1px solid #C4C4C4;
 
     .header {

@@ -33,9 +33,8 @@ const styles = css`
     width: 100%;
     height: 117px;
     
+    background-color: #FFF;
     border-top: 1px solid #000;
-    position: fixed;
-    bottom: 0;
 
     .footer {
         max-width: 1285px;
