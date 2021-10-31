@@ -6,6 +6,9 @@ import {Tab} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
 import {Route, Switch, useHistory} from 'react-router-dom';
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
+import SideMenu from './components/common/SideMenu';
 
 interface Style {
   backgroundColor: string
@@ -37,9 +40,9 @@ function App() {
 
     <button onClick={test}>TEST</button>
     
-      <div className='top'>탑 메뉴</div>
+     <Header />
       <div className='body'>
-        <div className='side-menu'>사이드 메뉴</div>
+        <SideMenu />
         <main className='content-box'>
           <Switch>
             <Route path='/' exact render={()=> (
@@ -64,7 +67,7 @@ function App() {
           </Switch>
         </main>
       </div>
-      <div className='footer'>Footer</div>
+      <Footer />
     </div>
   );
 }
@@ -86,7 +89,7 @@ const style = ({backgroundColor}: Style)=>(css`
     }
   }
 
-  > .top, .footer, .side-menu {
+  > .side-menu {
     border: 1px solid black;
     height: 60px;
   }
