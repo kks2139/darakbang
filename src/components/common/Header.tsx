@@ -1,13 +1,20 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { useHistory } from 'react-router';
 
 const Header = () => {
+    const history = useHistory();
+
+    const toGathering = () => {
+        history.push('/');
+    }
+
     return (
         <header css={styles}>
             <div className="header">
                 <div className="header__logo">
-                    <div className="header__logo__logo">다락방</div>
+                    <div className="header__logo__logo" onClick={toGathering}>다락방</div>
                     <div className="header__logo__about gray-16">About</div>
                 </div>
                 <div className="header__gethering">

@@ -110,6 +110,13 @@ const SideMenu = () => {
                     )
                 })
             }
+
+            <div className="make-team">
+                <span>
+                    팀<br />
+                    만들기
+                </span>
+            </div>
         </div>
     );
 };
@@ -126,6 +133,25 @@ const styles = css`
 
         :not(:first-of-type) {
             border-top: 1px solid #E5E5E5
+        }
+    }
+
+    .make-team {
+        width: 100px;
+        height: 100px;
+        background-color: #FFF;
+        border-radius: 50%;
+        border: 2px solid #02BCD6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        > span {
+            padding-bottm: 8px;
+            font-size: 24px;
+            font-weight: 600;
+            color: #02BCD6;
         }
     }
 `;
