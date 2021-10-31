@@ -4,11 +4,11 @@ import {css} from '@emotion/react';
 import {ComboboxItem} from '../util/interfaces';
 
 interface Style {
-    width: string
-    height: string
-    margin: string
-    border: string
-    transform: string
+    width?: string
+    height?: string
+    margin?: string
+    border?: string
+    transform?: string
 }
 
 interface Props {
@@ -36,6 +36,7 @@ function Combobox({items, onSelected, placeholder='전체', styles}: Props){
             const state = value === 'empty' ? null : {value, label};
             setSelected(state);
             toggleItems();
+            onSelected(state!);
         }
     }
 
@@ -47,7 +48,7 @@ function Combobox({items, onSelected, placeholder='전체', styles}: Props){
     useEffect(()=>{
         const item = divRef.current?.querySelector('.list-box .item');
         if(item){
-            setItemHeight(item.getBoundingClientRect().height * items.length + 5);
+            setItemHeight(item.getBoundingClientRect().height * (items.length + 1) + 2);
         }
     }, []);
 
@@ -77,6 +78,7 @@ function Combobox({items, onSelected, placeholder='전체', styles}: Props){
 
 const style = (ih: number, st?: Style)=>(css`
     width: ${st ? st.width || '120px' : '120px'};
+    ${st ? st.margin ? `margin: ${st.margin};` : '' : ''}
     .back {
         display: none;
         position : fixed;
@@ -97,11 +99,12 @@ const style = (ih: number, st?: Style)=>(css`
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
             height: 100%;
             position: relative;
             z-index: 1;
             padding: 0 10px;
-            // border: 1px solid var(--color-gray);
+            border-radius: 10px;
             background-color: white;
             cursor: pointer;
             .placehoder {
@@ -110,15 +113,19 @@ const style = (ih: number, st?: Style)=>(css`
         }
         .list-box {
             height: 0px;
-            border: 1px solid var(--color-peach); 
-            border-radius: 7px;
-            transform: translateY(-2px);
+            box-shadow: 0 0 40px -18px black; 
+            border-radius: 10px;
+            // transform: translateY(-2px);
             overflow: hidden;
             transition: height .3s;
             .item {
                 padding: 5px;
                 font-size: 15px;
                 background-color: white;
+                transition: .3s;
+                &:hover {
+                    background-color: var(--color-light-gray);
+                }
             }
             .empty {
                 color: var(--color-gray);
