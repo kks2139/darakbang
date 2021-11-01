@@ -34,10 +34,25 @@ export interface GatheringInfo {
 }
 
 export interface TeamInfo {
-
+    teamName: string
+    category: string
+    purpose: string
+    filter_1: string
+    filter_2: string
+    filter_3: string
+    career: string
+    wordCount: number
 }
 
-export interface ComboboxItem {
+export interface SelectedCombo {
     label: string
     value: string
+    name: string
+}
+
+export interface TeamLeaderInfo {
+    career: string
+    nickName: string
+    gender: string
+    propensity: string
 }

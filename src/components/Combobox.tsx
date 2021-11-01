@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {ComboboxItem} from '../util/interfaces';
+import {SelectedCombo} from '../util/interfaces';
 
 interface Style {
     width?: string
@@ -11,14 +11,21 @@ interface Style {
     transform?: string
 }
 
+interface ComboboxItem {
+    label: string
+    value: string
+}
+
 interface Props {
+    selectValue?: string
     items: ComboboxItem[]
-    onSelected: (arg: ComboboxItem)=> void
+    onSelected: (arg: SelectedCombo | null)=> void
     placeholder?: string
+    name?: string
     styles?: Style
 }
 
-function Combobox({items, onSelected, placeholder='전체', styles}: Props){
+function Combobox({selectValue, items, onSelected, placeholder='전체', name='', styles}: Props){
     const [itemHeight, setItemHeight] = useState(0);
     const [selected, setSelected] = useState<ComboboxItem | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -33,7 +40,7 @@ function Combobox({items, onSelected, placeholder='전체', styles}: Props){
 
         if(item instanceof HTMLDivElement && item.classList.contains('item')){
             let [value, label] = [item.dataset.value!, item.textContent!];
-            const state = value === 'empty' ? null : {value, label};
+            const state = value === 'empty' ? null : {value, label, name};
             setSelected(state);
             toggleItems();
             onSelected(state!);
@@ -48,7 +55,7 @@ function Combobox({items, onSelected, placeholder='전체', styles}: Props){
     useEffect(()=>{
         const item = divRef.current?.querySelector('.list-box .item');
         if(item){
-            setItemHeight(item.getBoundingClientRect().height * (items.length + 1) + 2);
+            setItemHeight(item.getBoundingClientRect().height * (items.length + 1));
         }
     }, []);
 
@@ -109,12 +116,14 @@ const style = (ih: number, st?: Style)=>(css`
             cursor: pointer;
             .placehoder {
                 color: var(--color-gray);
+                font-weight: 600;
+                font-size: 18px;
             }
         }
         .list-box {
             height: 0px;
-            box-shadow: 0 0 40px -18px black; 
-            border-radius: 10px;
+            box-shadow: 0 8px 30px -15px black; 
+            border-radius: 5px;
             // transform: translateY(-2px);
             overflow: hidden;
             transition: height .3s;

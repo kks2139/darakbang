@@ -1,5 +1,6 @@
 :root {
   --color-gray: #9D9D9D;
+  --color-dim-gray: #C4C4C4;
   --color-light-gray: #E5E5E5;
   --color-main-text: #02BCD6;
   --color-yellow: #EDFF1C;
@@ -29,8 +30,9 @@ code {
   outline:none;
 }
 
-input {
+input, textarea {
   border: 0;
+  resize: none;
 }
 
 .required {
