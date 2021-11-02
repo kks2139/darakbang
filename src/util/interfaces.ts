@@ -54,5 +54,6 @@ export interface TeamLeaderInfo {
     career: string
     nickName: string
     gender: string
-    propensity: string
+    propensitys: string[]
+    propensityList: string[]
 }

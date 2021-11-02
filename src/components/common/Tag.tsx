@@ -18,7 +18,7 @@ function Tag({name, selected}: Props){
 }
 
 const style = (selected: boolean) => (css`
-margin: 25px;
+margin: 4px;
     .tag {
         border-radius: 25px;
         padding: 12px;
@@ -27,9 +27,11 @@ margin: 25px;
         font-weight: 500;
         color: #000000;
 
+        cursor: pointer;
+
         ${selected ? 
-            'background-color: #02BCD6; border: 2px solid #000000;'
-            : 'background-color: #EDFF1C; border: 1px solid #000000;'
+            'background-color: var(--color-main-text); border: 2px solid #000000;'
+            : 'background-color: var(--color-yellow); border: 1px solid #000000;'
         }
     }
 `);
