@@ -5,6 +5,8 @@ import Tab from "./Tab"
 import GatheringDetail from "./GatheringDetail"
 import MakeTeam from "./MakeTeam"
 import Combobox from "./Combobox"
+import Tag from "./common/Tag"
+import MakeTeamDone from "./MakeTeamDone"
 
 export {
     GatheringFilter,
@@ -14,4 +16,6 @@ export {
     GatheringDetail,
     MakeTeam,
     Combobox,
+    Tag,
+    MakeTeamDone,
 }

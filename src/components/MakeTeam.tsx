@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab, Combobox} from '../components/index';
+import {Tab, Combobox, Tag} from '../components/index';
 import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../util/interfaces';
 
 interface Param {
@@ -44,11 +44,13 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged}
                     <>
                         <div className='img-box'>
                             <div className='txt'>팀 만들기</div>
-                            <input type='file' ></input>
-                            <div className='add-btn'>
-                                <div className='hori'></div>
-                                <div className='vert'></div>
-                            </div>
+                            <label htmlFor='fileOpen'>
+                                <div className='add-btn'>
+                                    <div className='hori'></div>
+                                    <div className='vert'></div>
+                                </div>
+                            </label>
+                            <input id='fileOpen' type='file' hidden={true}></input>
                         </div>
                     </>
                 </Tab>
@@ -103,8 +105,13 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged}
                             </div>
                         </div>
                     </div>
-                    <div className='row'>
+                    <div className='row noheight'>
                         <div className='field required'>성향</div>
+                        <div className='tag-box'>
+                            {teamLeaderInfo.propensityList.map(pro => (
+                                <Tag key={pro} name={pro} selected={pro === '나익기 알바생'}></Tag>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div className='foot'>
@@ -177,8 +184,9 @@ const style = css`
             border-bottom: 1px solid var(--color-gray); 
             .field {
                 display: flex;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
+                width: 105px;
                 margin-left: 67px;
                 font-size: 24px;
                 font-weight: bold;
@@ -251,6 +259,14 @@ const style = css`
                     }
                 }
             }
+            .tag-box {
+                display: flex;
+                flex-wrap: wrap;
+                padding: 20px 0;
+            }
+        }
+        .noheight {
+            height: unset !important; 
         }
     }
     .foot {
@@ -275,7 +291,7 @@ const style = css`
                 padding: 16px 36px;
                 background-color: var(--color-yellow);
                 border: 1px solid black;
-                border-radius: 25px;
+                border-radius: 50px;
                 margin-bottom: 8px;
                 cursor: pointer;
             }

@@ -36,7 +36,12 @@ const initState: stateType = {
         career: '',
         nickName: '',
         gender: '',
-        propensity: '',
+        propensitys: [],
+        propensityList: [
+            '교회오빠','교회언니','이장님','이모님','복학생'
+            ,'쎈언니','나익기 알바생','미치광이 과학자'
+            ,'러씨 알바생','올영 알바생','수련회 교관'
+        ],
     }
 };
 
