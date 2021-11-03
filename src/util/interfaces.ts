@@ -40,8 +40,6 @@ export interface TeamInfo {
     filter_1: string
     filter_2: string
     filter_3: string
-    career: string
-    wordCount: number
 }
 
 export interface SelectedCombo {
@@ -52,8 +50,8 @@ export interface SelectedCombo {
 
 export interface TeamLeaderInfo {
     career: string
-    nickName: string
+    nickname: string
     gender: string
-    propensitys: string[]
+    propensity: string
     propensityList: string[]
 }

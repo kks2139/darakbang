@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers, MakeTeamContainers} from './containers/index';
+import { GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers, MakeTeamContainers, MakeTeamDoneContainer} from './containers/index';
 import {Tab} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
@@ -31,21 +31,14 @@ function App() {
 
   });
 
-  const test = ()=>{
-    history.push('/make-team');
-  }
-
   return (
     <div css={style({backgroundColor})}> 
-
-    <button onClick={test}>TEST</button>
-    
-     <Header />
+      <Header />
       <div className='body'>
         <SideMenu />
         <main className='content-box'>
           <Switch>
-            <Route path='/' exact render={()=> (
+            <Route path={['/', '/gatherings']} exact render={()=> (
               <>
                 {selectedGathering ? <GatheringDetailContainers onClickBack={onClickBack}/> : null}
                 <div className='tab' hidden={selectedGathering !== null}>
@@ -63,7 +56,8 @@ function App() {
                 </div>
               </>
             )}/>
-            <Route path='/make-team' render={()=> <MakeTeamContainers/>}/>
+            <Route path='/make-team' exact render={()=> <MakeTeamContainers/>}/>
+            <Route path='/make-team/done' exact render={()=> <MakeTeamDoneContainer/>}/>
           </Switch>
         </main>
       </div>

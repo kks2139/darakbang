@@ -3,6 +3,7 @@ import {MakeTeam} from '../components/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux-modules/index';
 import {setTeamInfo} from '../redux-modules/makeTeam';
+import {useHistory} from 'react-router-dom';
 
 interface Param {
     value: string
@@ -12,35 +13,33 @@ interface Param {
 
 function MakeTeamContainers(){
     const dispatch = useDispatch();
+    const history = useHistory();
     const {teamLeaderInfo, teamInfo} = useSelector((state: RootState)=> state.makeTeam);
 
     const onInputChanged = (param: Param)=>{
         const {value, name} = param;
-        let obj = null;
-
-        if(name === 'teamName'){
-            obj = teamInfo ? {
-                ...teamInfo,
-                teamName: value
-            } : null;
-        }else if(name === 'purpose'){
-            const over = value.length > 50;
-            obj = teamInfo ? {
-                ...teamInfo,
-                purpose: over ? teamInfo.purpose : value,
-                wordCount: over ? 50 : value.length
-            } : null;
-        }
+        const obj = {
+            ...teamInfo,
+            [name]: value
+        };
         dispatch(setTeamInfo(obj));
     }
 
     const onComboboxSelected = (param: Param)=>{
         const {label, name} = param;
-        const obj = teamInfo ? {
+        const obj = {
             ...teamInfo,
             [name]: label
-        } : null;
+        };
         dispatch(setTeamInfo(obj));
+    }
+
+    const onMakeTeam = ()=>{
+        history.push('/make-team/done');
+    }
+
+    const onCancel = ()=>{
+        history.goBack();
     }
 
     return (
@@ -48,7 +47,9 @@ function MakeTeamContainers(){
             teamLeaderInfo={teamLeaderInfo}
             teamInfo={teamInfo}
             onInputChanged={onInputChanged}
-            onComboboxSelected={onComboboxSelected}/>
+            onComboboxSelected={onComboboxSelected}
+            onMakeTeam={onMakeTeam}
+            onCancel={onCancel}/>
     );
 }
 

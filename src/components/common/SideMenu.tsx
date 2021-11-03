@@ -1,6 +1,7 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import {useHistory} from 'react-router-dom';
 
 const sideMenuMock = [
     {
@@ -86,6 +87,12 @@ const sideMenuMock = [
 ]
 
 const SideMenu = () => {
+    const history = useHistory();
+
+    const onClickMakeTeam = ()=>{
+        history.push('/make-team');
+    }
+
     return (
         <div css={styles}>
             {
@@ -111,7 +118,7 @@ const SideMenu = () => {
                 })
             }
 
-            <div className="make-team">
+            <div className="make-team" onClick={onClickMakeTeam}>
                 <span>
                     팀<br />
                     만들기
@@ -146,6 +153,7 @@ const styles = css`
         align-items: center;
         justify-content: center;
         text-align: center;
+        cursor: pointer;
 
         > span {
             padding-bottm: 8px;

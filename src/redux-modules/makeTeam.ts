@@ -3,7 +3,7 @@ import {TeamInfo, TeamLeaderInfo} from '../util/interfaces';
 const SET_TEAM_INFO = 'makeTeam/SET_TEAM_INFO' as const;
 const SET_TEAMLEADER_INFO = 'makeTeam/SET_TEAMLEADER_INFO' as const;
 
-export const setTeamInfo = (arg: TeamInfo | null)=> ({ 
+export const setTeamInfo = (arg: TeamInfo)=> ({ 
     type : SET_TEAM_INFO,
     payload : arg
 });
@@ -17,7 +17,7 @@ type actionType =
     | ReturnType<typeof setTeamLeaderInfo>
 
 type stateType = {
-    teamInfo: TeamInfo | null
+    teamInfo: TeamInfo
     teamLeaderInfo: TeamLeaderInfo
 }
 
@@ -29,14 +29,12 @@ const initState: stateType = {
         filter_1: '',
         filter_2: '',
         filter_3: '',
-        career: '',
-        wordCount: 0,
     },
     teamLeaderInfo: {
         career: '',
-        nickName: '',
+        nickname: '',
         gender: '',
-        propensitys: [],
+        propensity: '',
         propensityList: [
             '교회오빠','교회언니','이장님','이모님','복학생'
             ,'쎈언니','나익기 알바생','미치광이 과학자'
@@ -50,9 +48,9 @@ function makeTeam(state: stateType = initState, action: actionType) {
         case SET_TEAM_INFO:
             return {
                 ...state,
-                teamInfo: action.payload ? {
+                teamInfo:  {
                     ...action.payload
-                } : null
+                }
             };
         case SET_TEAMLEADER_INFO:
             return {

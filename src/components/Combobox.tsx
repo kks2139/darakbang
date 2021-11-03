@@ -114,6 +114,9 @@ const style = (ih: number, st?: Style)=>(css`
             border-radius: 10px;
             background-color: white;
             cursor: pointer;
+            .value {
+                color: black;
+            }
             .placehoder {
                 color: var(--color-gray);
                 font-weight: 600;
@@ -128,7 +131,8 @@ const style = (ih: number, st?: Style)=>(css`
             overflow: hidden;
             transition: height .3s;
             .item {
-                padding: 5px;
+                color: black;
+                padding: 8px 0 5px 7px;
                 font-size: 15px;
                 background-color: white;
                 transition: .3s;
