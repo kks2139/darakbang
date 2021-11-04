@@ -16,20 +16,11 @@ function MakeTeamContainers(){
     const history = useHistory();
     const {teamLeaderInfo, teamInfo} = useSelector((state: RootState)=> state.makeTeam);
 
-    const onInputChanged = (param: Param)=>{
+    const onTeamInfoChanged = (param: Param)=>{
         const {value, name} = param;
         const obj = {
             ...teamInfo,
             [name]: value
-        };
-        dispatch(setTeamInfo(obj));
-    }
-
-    const onComboboxSelected = (param: Param)=>{
-        const {label, name} = param;
-        const obj = {
-            ...teamInfo,
-            [name]: label
         };
         dispatch(setTeamInfo(obj));
     }
@@ -46,8 +37,7 @@ function MakeTeamContainers(){
         <MakeTeam 
             teamLeaderInfo={teamLeaderInfo}
             teamInfo={teamInfo}
-            onInputChanged={onInputChanged}
-            onComboboxSelected={onComboboxSelected}
+            onTeamInfoChanged={onTeamInfoChanged}
             onMakeTeam={onMakeTeam}
             onCancel={onCancel}/>
     );

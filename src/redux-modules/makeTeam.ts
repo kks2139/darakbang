@@ -32,8 +32,8 @@ const initState: stateType = {
     },
     teamLeaderInfo: {
         career: '',
-        nickname: '',
-        gender: '',
+        nickname: '주인장',
+        gender: '남',
         propensity: '',
         propensityList: [
             '교회오빠','교회언니','이장님','이모님','복학생'

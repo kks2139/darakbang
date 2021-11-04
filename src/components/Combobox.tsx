@@ -22,10 +22,11 @@ interface Props {
     onSelected: (arg: SelectedCombo | null)=> void
     placeholder?: string
     name?: string
+    required?: boolean
     styles?: Style
 }
 
-function Combobox({selectValue, items, onSelected, placeholder='전체', name='', styles}: Props){
+function Combobox({selectValue, items, onSelected, placeholder='전체', name='', required=false, styles}: Props){
     const [itemHeight, setItemHeight] = useState(0);
     const [selected, setSelected] = useState<ComboboxItem | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -48,21 +49,28 @@ function Combobox({selectValue, items, onSelected, placeholder='전체', name=''
     }
 
     const toggleItems = ()=>{
-        const listBox = divRef.current?.querySelector('.list-box')?.classList.toggle('show');
-        const back = divRef.current?.querySelector('.back')?.classList.toggle('show');
+        divRef.current?.querySelector('.list-box')?.classList.toggle('show');
+        divRef.current?.querySelector('.back')?.classList.toggle('show');
     }
 
-    useEffect(()=>{
+    const init = ()=>{
         const item = divRef.current?.querySelector('.list-box .item');
         if(item){
             setItemHeight(item.getBoundingClientRect().height * (items.length + 1));
         }
+        if(selectValue){
+            
+        }
+    }
+
+    useEffect(()=>{
+        init();
     }, []);
 
     return (
-        <div css={style(itemHeight, styles)} ref={divRef}>
+        <div css={style(itemHeight, styles)} ref={divRef} data-combo>
             <div className='wrapper'>
-                <div className='value-box' onClick={onClickBox}>
+                <div className={`value-box ${required ? 'red-star' : ''}`} onClick={onClickBox}>
                     {selected ? 
                         <div className='value'>{selected.label}</div> :
                         <div className='placehoder'>{placeholder}</div>

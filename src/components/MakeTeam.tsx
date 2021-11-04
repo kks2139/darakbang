@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab, Combobox, Tag} from '../components/index';
+import {Tab, Combobox, Tag, RedBox} from '../components/index';
 import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../util/interfaces';
+import {validate} from '../util/util';
 
 interface Param {
     value: string
@@ -13,18 +14,20 @@ interface Param {
 interface Props {
     teamLeaderInfo: TeamLeaderInfo
     teamInfo: TeamInfo
-    onInputChanged: (param: Param)=> void
-    onComboboxSelected: (param: Param)=> void
+    onTeamInfoChanged: (param: Param)=> void
     onMakeTeam: ()=> void
     onCancel: ()=> void
 }
 
-function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged, onMakeTeam, onCancel}: Props){
+function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCancel}: Props){
     const [wordCount, setWordCount] = useState(0);
+    const [isValid, setIsValid] = useState(true);
+    const divRef = useRef<HTMLDivElement | null>(null);
+    
     const testOptions = [
-        {label: 'First Name', value: 'first_name'},
-        {label: 'Last Name', value: 'last_name'},
-        {label: 'Age', value: 'age'},
+        {label: '항목 1', value: 'val_1'},
+        {label: '항목 2', value: 'val_2'},
+        {label: '항목 3', value: 'val_3'},
     ]
 
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
@@ -35,18 +38,23 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
             value = over ? teamInfo!.purpose : value
             setWordCount(pre => over ? pre : value.length);
         }
-        onInputChanged({name, value});
+        onTeamInfoChanged({name, value});
     }
 
     const onSelected = (selected: SelectedCombo | null)=>{
         if(selected){
             const {value, label, name} = selected;
-            onComboboxSelected({value, label, name});
+            onTeamInfoChanged({value, name});
         }
     }
 
     const onClickMakeTeam = ()=>{
-        onMakeTeam();
+        let valid = false;
+        if(validate(divRef.current!)){
+            onMakeTeam();
+            valid = true;
+        }
+        setIsValid(valid);
     }
     
     const onClickCancel = ()=>{
@@ -55,7 +63,6 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
 
     const initValue = ()=>{
         setWordCount(teamInfo.purpose.length);
-
     }
 
     useEffect(()=>{
@@ -63,7 +70,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
     }, []);
 
     return (
-        <div css={style}>
+        <div css={style(isValid)} ref={divRef}>
             <Tab names={['일반']}>
                 <>
                     <div className='img-box'>
@@ -80,34 +87,40 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
             </Tab>
             <div className='sub-tit'>팀 소개</div>
             <div className='intro-box'>
-                <div className='row'>
-                    <div className='field required'>팀명</div>
-                    <div className='val1'>
-                        <span className='txt1'>팀</span> 
-                        <span>{'{'}</span>
-                        <input onChange={onChangeValue} name='teamName' value={teamInfo.teamName}></input>
-                        <span>{'}'}</span>
+                <RedBox>
+                    <div className='row'>
+                        <div className='field red-star'>팀명</div>
+                        <div className='val1'>
+                            <span className='txt1'>팀</span> 
+                            <span>{'{'}</span>
+                            <input onChange={onChangeValue} name='teamName' value={teamInfo.teamName}></input>
+                            <span>{'}'}</span>
+                        </div>
                     </div>
-                </div>
-                <div className='row'>
-                    <div className='field required'>카테고리</div>
-                    <div className='val2'>
-                        <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' styles={{margin: '0 18px'}}></Combobox>
-                        <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' styles={{margin: '0 18px'}}></Combobox>
-                        <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' styles={{margin: '0 18px'}}></Combobox>
+                </RedBox>
+                <RedBox>
+                    <div className='row'>
+                        <div className='field red-star'>카테고리</div>
+                        <div className='val2'>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' styles={{margin: '0 18px'}}></Combobox>
+                        </div>
                     </div>
-                </div>
-                <div className='row'>
-                    <div className='field required'>팀 목적</div>
-                    <div className='val3'>
-                        <span>{'“'}</span>
-                            <div className='purp-box'>
-                                <textarea onChange={onChangeValue} name='purpose' value={teamInfo.purpose}></textarea>
-                                <div className='word-count'>{wordCount}/50자</div>
-                            </div>
-                        <span>{'”'}</span>
+                </RedBox>
+                <RedBox>
+                    <div className='row'>
+                        <div className='field red-star'>팀 목적</div>
+                        <div className='val3'>
+                            <span>{'“'}</span>
+                                <div className='purp-box'>
+                                    <textarea onChange={onChangeValue} name='purpose' value={teamInfo.purpose}></textarea>
+                                    <div className='word-count'>{wordCount}/50자</div>
+                                </div>
+                            <span>{'”'}</span>
+                        </div>
                     </div>
-                </div>
+                </RedBox>
             </div>
             <div className='sub-tit'>
                 팀장 소개
@@ -116,27 +129,32 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
             <div className='intro-box'>
                 <div className='row'>
                     <div className='val4'>
-                        <div className='attribute'>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' styles={{margin: '0 18px'}}></Combobox>
-                        </div>
+                            <div className='attribute'>
+                                <RedBox>
+                                        <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} styles={{margin: '0 18px'}}></Combobox>
+                                </RedBox>
+                            </div>
                         <div className='attribute'>
                             <div className='attr'>별명</div>
-                            <div className='val'>주인장</div>
+                            <div className='val'>{teamLeaderInfo.nickname}</div>
                         </div>
                         <div className='attribute'>
                             <div className='attr'>성별</div>
-                            <div className='val'>남</div>
+                            <div className='val'>{teamLeaderInfo.gender}</div>
                         </div>
                     </div>
                 </div>
                 <div className='row noheight'>
-                    <div className='field required'>성향</div>
+                    <div className='field red-star'>성향</div>
                     <div className='tag-box'>
                         {teamLeaderInfo.propensityList.map(pro => (
                             <Tag key={pro} name={pro} selected={pro === '나익기 알바생'}></Tag>
                         ))}
                     </div>
                 </div>
+            </div>
+            <div className='warn-box'>
+                * 필수 입력 사항을 확인해주세요.
             </div>
             <div className='foot'>
                 <div className='desc-box'>
@@ -152,7 +170,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onComboboxSelected, onInputChanged,
     );
 }
 
-const style = css`
+const style = (isValid: boolean)=> (css`
     width: 905px; 
     .img-box {
         display: flex;
@@ -199,12 +217,12 @@ const style = css`
         }
     }
     .intro-box {
-        border: 1px solid var(--color-gray);
+        border: 1px solid var(--color-dim-gray);
         border-bottom: transparent;
         .row {
             display: flex;
             height: 92px;
-            border-bottom: 1px solid var(--color-gray); 
+            border-bottom: 1px solid var(--color-dim-gray); 
             .field {
                 display: flex;
                 justify-content: flex-start;
@@ -271,7 +289,7 @@ const style = css`
                     justify-content: center;
                     align-items: center;
                     &:not(:last-child) {
-                        border-right: 1px solid var(--color-gray); 
+                        border-right: 1px solid var(--color-dim-gray); 
                     }
                     > div {
                         color: var(--color-gray);
@@ -328,6 +346,14 @@ const style = css`
             }
         }
     }
-`;
+    .warn-box {
+        position: absolute;
+        display: ${isValid ? 'none' : 'flex'};
+        margin-top: 10px;
+        color: #FF0000;
+        font-weight: 500;
+        font-size: 16px;
+    }
+`);
 
 export default MakeTeam;
