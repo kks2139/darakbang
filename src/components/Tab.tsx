@@ -71,7 +71,7 @@ const style = (width: number)=>(css`
             transform: translateY(1px);
         }
         .tab.sel {
-            border-color: var(--color-gray);
+            border-color: var(--color-dim-gray);
             border-bottom: transparent;
             background-color: white;
             color: var(--color-main-text);
@@ -79,7 +79,7 @@ const style = (width: number)=>(css`
         }
     }
     .content {
-        border: 1px solid var(--color-gray);  
+        border: 1px solid var(--color-dim-gray);  
         padding: 20px;
     }
 `);

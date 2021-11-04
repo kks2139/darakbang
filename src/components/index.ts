@@ -7,6 +7,7 @@ import MakeTeam from "./MakeTeam"
 import Combobox from "./Combobox"
 import Tag from "./common/Tag"
 import MakeTeamDone from "./MakeTeamDone"
+import RedBox from "./RedBox"
 
 export {
     GatheringFilter,
@@ -18,4 +19,5 @@ export {
     Combobox,
     Tag,
     MakeTeamDone,
+    RedBox,
 }

@@ -34,20 +34,3 @@ input, textarea {
   border: 0;
   resize: none;
 }
-
-.required {
-  position: relative;
-  &::before {
-    content: '*';
-    color: red;
-    font-size: 18px;
-    font-weight: bold;
-    position: absolute;
-    left: -10px;
-    transform: translateY(-5px);
-  }
-}
-
-.invalid {
-  box-shadow: 0 0 0 3px var(--color-warn);
-}
