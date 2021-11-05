@@ -17,21 +17,23 @@ interface ComboboxItem {
 }
 
 interface Props {
-    selectValue?: string
+    defaultValue?: string
     items: ComboboxItem[]
-    onSelected: (arg: SelectedCombo | null)=> void
+    onSelected?: (arg: SelectedCombo | null)=> void
     placeholder?: string
     name?: string
     required?: boolean
+    readOnly?: boolean
     styles?: Style
 }
 
-function Combobox({selectValue, items, onSelected, placeholder='전체', name='', required=false, styles}: Props){
+function Combobox({defaultValue, items, onSelected, placeholder='전체', name='', required=false, readOnly=false, styles}: Props){
     const [itemHeight, setItemHeight] = useState(0);
     const [selected, setSelected] = useState<ComboboxItem | null>(null);
     const divRef = useRef<HTMLDivElement | null>(null);
 
     const onClickBox = (e: React.MouseEvent<HTMLDivElement>)=>{
+        if(readOnly) return;
         toggleItems();
     }
 
@@ -44,7 +46,9 @@ function Combobox({selectValue, items, onSelected, placeholder='전체', name=''
             const state = value === 'empty' ? null : {value, label, name};
             setSelected(state);
             toggleItems();
-            onSelected(state!);
+            if(onSelected){
+                onSelected(state!);
+            }
         }
     }
 
@@ -58,8 +62,11 @@ function Combobox({selectValue, items, onSelected, placeholder='전체', name=''
         if(item){
             setItemHeight(item.getBoundingClientRect().height * (items.length + 1));
         }
-        if(selectValue){
-            
+        if(defaultValue){
+            const filtered = items.filter(item => item.value === defaultValue);
+            if(filtered.length > 0){
+                setSelected(filtered[0]);
+            }
         }
     }
 
@@ -68,16 +75,18 @@ function Combobox({selectValue, items, onSelected, placeholder='전체', name=''
     }, []);
 
     return (
-        <div css={style(itemHeight, styles)} ref={divRef} data-combo>
+        <div css={style(itemHeight, readOnly, styles)} ref={divRef} data-combo>
             <div className='wrapper'>
                 <div className={`value-box ${required ? 'red-star' : ''}`} onClick={onClickBox}>
                     {selected ? 
                         <div className='value'>{selected.label}</div> :
                         <div className='placehoder'>{placeholder}</div>
                     }
-                    <div className='icon-box'>
-                        <img src='comboDown.png'></img>
-                    </div>
+                    {readOnly ? null :
+                        <div className='icon-box'>
+                            <img src='comboDown.png'></img>
+                        </div>
+                    }
                 </div>
                 <div className='list-box' onClick={onClickItems}>
                     <div className='item empty' data-value='empty'>선택 안함</div>
@@ -91,7 +100,7 @@ function Combobox({selectValue, items, onSelected, placeholder='전체', name=''
     );
 }
 
-const style = (ih: number, st?: Style)=>(css`
+const style = (ih: number, ro: boolean, st?: Style)=>(css`
     width: ${st ? st.width || '120px' : '120px'};
     ${st ? st.margin ? `margin: ${st.margin};` : '' : ''}
     .back {
@@ -112,7 +121,7 @@ const style = (ih: number, st?: Style)=>(css`
         height: ${st ? st.height || '28px' : '28px'};
         .value-box {
             display: flex;
-            justify-content: space-between;
+            justify-content: ${ro ? 'center' : 'space-between'};
             align-items: center;
             width: 100%;
             height: 100%;
@@ -121,9 +130,10 @@ const style = (ih: number, st?: Style)=>(css`
             padding: 0 10px;
             border-radius: 10px;
             background-color: white;
-            cursor: pointer;
+            cursor: ${ro ? '' : 'pointer'};
             .value {
-                color: black;
+                // font-weight: bold;
+                // color: black;
             }
             .placehoder {
                 color: var(--color-gray);

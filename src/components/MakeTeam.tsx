@@ -15,11 +15,12 @@ interface Props {
     teamLeaderInfo: TeamLeaderInfo
     teamInfo: TeamInfo
     onTeamInfoChanged: (param: Param)=> void
+    onTeamLeaderInfoChanged: (param: Param)=> void
     onMakeTeam: ()=> void
     onCancel: ()=> void
 }
 
-function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCancel}: Props){
+function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfoChanged, onMakeTeam, onCancel}: Props){
     const [wordCount, setWordCount] = useState(0);
     const [isValid, setIsValid] = useState(true);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -44,7 +45,11 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCa
     const onSelected = (selected: SelectedCombo | null)=>{
         if(selected){
             const {value, label, name} = selected;
-            onTeamInfoChanged({value, name});
+            if(name === 'career'){
+                onTeamLeaderInfoChanged({value, name});
+            }else{
+                onTeamInfoChanged({value, name});
+            }
         }
     }
 
@@ -71,7 +76,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCa
 
     return (
         <div css={style(isValid)} ref={divRef}>
-            <Tab names={['일반']}>
+            <Tab names={['일반']} subNames={['팀 만들기', '완료']} selectedSubIndex={0}>
                 <>
                     <div className='img-box'>
                         <div className='txt'>팀 만들기</div>
@@ -102,9 +107,9 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCa
                     <div className='row'>
                         <div className='field red-star'>카테고리</div>
                         <div className='val2'>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' styles={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' styles={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' defaultValue={teamInfo.filter_1} styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' defaultValue={teamInfo.filter_2} styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' defaultValue={teamInfo.filter_3} styles={{margin: '0 18px'}}></Combobox>
                         </div>
                     </div>
                 </RedBox>
@@ -131,7 +136,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onMakeTeam, onCa
                     <div className='val4'>
                             <div className='attribute'>
                                 <RedBox>
-                                        <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} styles={{margin: '0 18px'}}></Combobox>
+                                    <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} defaultValue={teamLeaderInfo.career} styles={{margin: '0 18px'}}></Combobox>
                                 </RedBox>
                             </div>
                         <div className='attribute'>
@@ -291,13 +296,14 @@ const style = (isValid: boolean)=> (css`
                     &:not(:last-child) {
                         border-right: 1px solid var(--color-dim-gray); 
                     }
-                    > div {
-                        color: var(--color-gray);
-                    }
                     .attr {
+                        color: var(--color-gray);
                         font-weight: 600;
                         font-size: 24px;
                         margin-bottom: 12px;
+                    }
+                    .val {
+                        color: var(--color-gray);
                     }
                 }
             }
