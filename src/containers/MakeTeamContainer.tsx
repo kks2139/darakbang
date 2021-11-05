@@ -2,7 +2,7 @@ import React from "react";
 import {MakeTeam} from '../components/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../redux-modules/index';
-import {setTeamInfo} from '../redux-modules/makeTeam';
+import {setTeamInfo, setTeamLeaderInfo} from '../redux-modules/makeTeam';
 import {useHistory} from 'react-router-dom';
 
 interface Param {
@@ -24,6 +24,15 @@ function MakeTeamContainers(){
         };
         dispatch(setTeamInfo(obj));
     }
+    
+    const onTeamLeaderInfoChanged = (param: Param)=>{
+        const {value, name} = param;
+        const obj = {
+            ...teamLeaderInfo,
+            [name]: value
+        };
+        dispatch(setTeamLeaderInfo(obj));
+    }
 
     const onMakeTeam = ()=>{
         history.push('/make-team/done');
@@ -38,6 +47,7 @@ function MakeTeamContainers(){
             teamLeaderInfo={teamLeaderInfo}
             teamInfo={teamInfo}
             onTeamInfoChanged={onTeamInfoChanged}
+            onTeamLeaderInfoChanged={onTeamLeaderInfoChanged}
             onMakeTeam={onMakeTeam}
             onCancel={onCancel}/>
     );

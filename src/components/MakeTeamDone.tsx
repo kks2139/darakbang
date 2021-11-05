@@ -2,7 +2,7 @@ import React from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {TeamInfo, TeamLeaderInfo} from '../util/interfaces';
-import {Tab, Tag} from '../components/index';
+import {Tab, Tag, Combobox} from '../components/index';
 
 interface Props {
     teamInfo: TeamInfo
@@ -12,6 +12,12 @@ interface Props {
 }
 
 function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Props){
+    const testOptions = [
+        {label: '항목 1', value: 'val_1'},
+        {label: '항목 2', value: 'val_2'},
+        {label: '항목 3', value: 'val_3'},
+    ]
+
     const onClickDoen = ()=>{
         onOpenActivity();
     }
@@ -22,7 +28,7 @@ function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Prop
 
     return (
         <div css={style}>
-            <Tab names={['일반']}>
+            <Tab names={['일반']} subNames={['팀 만들기', '완료']} selectedSubIndex={1}>
                 <>
                     <div className='team-info-box'>
                         <div className='title'>팀 만들기 완료</div>
@@ -33,10 +39,12 @@ function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Prop
                             </div>
                         </div>
                         <div className='desc-box'>
-                            <div className='filter'>
-                                {teamInfo.filter_1} <span>〉</span>
-                                {teamInfo.filter_2} <span>〉</span>
-                                {teamInfo.filter_3}
+                            <div className='category'>
+                                <Combobox items={testOptions} readOnly={true} defaultValue={teamInfo.filter_1}/>
+                                <span>〉</span>
+                                <Combobox items={testOptions} readOnly={true} defaultValue={teamInfo.filter_2}/>
+                                <span>〉</span>
+                                <Combobox items={testOptions} readOnly={true} defaultValue={teamInfo.filter_3}/>
                             </div>
                             <div className='purpose'>
                                 <span>{'“'}</span>
@@ -69,7 +77,7 @@ function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Prop
                         관련 경력
                     </div>
                     <div className='val'>
-                        {teamLeaderInfo.career}
+                        <Combobox items={testOptions} readOnly={true} defaultValue={teamLeaderInfo.career} styles={{width: '90px'}}/>
                     </div>
                 </div>
                 <div className='block'>
@@ -133,7 +141,8 @@ const style = css`
             display: flex;
             flex-direction: column;
             align-items: center;
-            .filter {
+            .category {
+                display: flex;
                 font-size: 24px;
                 color: var(--color-gray);
                 margin-bottom: 24px;
@@ -171,7 +180,7 @@ const style = css`
             height: 92px;
             border: 1px solid var(--color-dim-gray);
             > div {
-                font-size: 24px;
+                font-size: 22px;
             }
             .attr {
                 font-weight: bold;

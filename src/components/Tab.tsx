@@ -4,14 +4,16 @@ import {css} from '@emotion/react';
 
 interface Props {
     names: string[]
+    subNames?: string[]
     children: JSX.Element
     selectedIndex?: number
+    selectedSubIndex?: number
     onClickTab?: ()=> void
     width?: number
     height?: number
 }
 
-function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: Props){
+function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0, onClickTab, width=0, height=0}: Props){
     const [index, setIndex] = useState(0);
     const divRef = useRef<HTMLDivElement | null>(null);
     const child = children.props.children ? children.props.children : children;
@@ -43,9 +45,16 @@ function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: 
     return (
         <div css={style(width)} ref={divRef}>
             <div className='tabs'>
-                {names.map((n, i) => (
-                    <div key={n} className='tab' data-idx={i} onClick={onClick}>{n}</div>
-                ))}
+                <div className='box'>
+                    {names.map((n, i) => (
+                        <div key={n} className='tab' data-idx={i} onClick={onClick}>{n}</div>
+                    ))}
+                </div>
+                <div className='box'>
+                    {subNames.map((n, i) => (
+                        <div key={n} className={`sub-tab ${selectedSubIndex === i ? 'focus' : ''}`}><span>{n}</span></div>
+                    ))}
+                </div>
             </div>
             <div className='content'>
                 {Array.isArray(child) ? child[index] : child}
@@ -55,27 +64,41 @@ function Tab({names, children, selectedIndex=0, onClickTab, width=0, height=0}: 
 }
 
 const style = (width: number)=>(css`
-    ${width ? `width: ${width}px;` : ''}
+    ${width ? `width: ${width}px;` : 'width: 100%;'}
     .tabs {
         display: flex;
-        .tab {
+        justify-content: space-between;
+        .box {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 32px;
-            width: 64px;
-            color: var(--color-gray);
-            font-size: 16px;
-            border: 1px solid transparent;  
-            cursor: pointer;
-            transform: translateY(1px);
-        }
-        .tab.sel {
-            border-color: var(--color-dim-gray);
-            border-bottom: transparent;
-            background-color: white;
-            color: var(--color-main-text);
-            font-weight: bold;
+            .tab, .sub-tab {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 32px;
+                padding: 0 15px;
+                color: var(--color-gray);
+                font-size: 16px;
+                border: 1px solid transparent;  
+                cursor: pointer;
+                transform: translateY(1px);
+            }
+            .tab.sel, .sub-tab {
+                border-color: var(--color-dim-gray);
+                border-bottom: transparent;
+                background-color: white;
+                color: var(--color-main-text);
+                font-weight: bold;
+            }
+            .sub-tab {
+                border-bottom: 1px solid var(--color-dim-gray);
+                color: var(--color-gray);
+                cursor: unset;
+    
+            }
+            .sub-tab.focus {
+                border-bottom: transparent;
+                color: black;
+            }
         }
     }
     .content {
