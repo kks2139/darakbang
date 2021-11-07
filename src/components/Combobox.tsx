@@ -34,7 +34,7 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
 
     const onClickBox = (e: React.MouseEvent<HTMLDivElement>)=>{
         if(readOnly) return;
-        toggleItems();
+        toggleItems(e);
     }
 
     const onClickItems = (e: React.MouseEvent<HTMLDivElement>)=>{
@@ -45,16 +45,31 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
             let [value, label] = [item.dataset.value!, item.textContent!];
             const state = value === 'empty' ? null : {value, label, name};
             setSelected(state);
-            toggleItems();
+            toggleItems(e);
             if(onSelected){
                 onSelected(state!);
             }
         }
     }
 
-    const toggleItems = ()=>{
-        divRef.current?.querySelector('.list-box')?.classList.toggle('show');
-        divRef.current?.querySelector('.back')?.classList.toggle('show');
+    const toggleItems = (e: React.MouseEvent<HTMLDivElement>)=>{
+        const listBox = divRef.current?.querySelector('.list-box');
+        
+        if(e.currentTarget.dataset.comboValue){
+            collapseAll();
+        }
+        
+        if(listBox?.classList.contains('show')){
+            collapseAll();
+        }else{
+            divRef.current?.querySelector('.back')?.classList.add('show');
+            listBox?.classList.add('show');
+        }
+    }
+    
+    const collapseAll = ()=>{
+        document.querySelectorAll('[data-combo-list-box]').forEach(el => el.classList.remove('show'));
+        document.querySelectorAll('[data-combo-back]').forEach(el => el.classList.remove('show'));
     }
 
     const init = ()=>{
@@ -77,7 +92,7 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
     return (
         <div css={style(itemHeight, readOnly, styles)} ref={divRef} data-combo>
             <div className='wrapper'>
-                <div className={`value-box ${required ? 'red-star' : ''}`} onClick={onClickBox}>
+                <div className={`value-box ${required ? 'red-star' : ''}`} data-combo-value onClick={onClickBox}>
                     {selected ? 
                         <div className='value'>{selected.label}</div> :
                         <div className='placehoder'>{placeholder}</div>
@@ -88,14 +103,14 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
                         </div>
                     }
                 </div>
-                <div className='list-box' onClick={onClickItems}>
+                <div className='list-box' data-combo-list-box onClick={onClickItems}>
                     <div className='item empty' data-value='empty'>선택 안함</div>
                     {items.map(item => (
                         <div key={item.value} className='item' data-value={item.value}>{item.label}</div>
                     ))}
                 </div>
             </div>
-            <div className='back' onClick={()=>{toggleItems()}}></div>
+            <div className='back' data-combo-back onClick={(e)=>{toggleItems(e)}}></div>
         </div>
     );
 }
@@ -105,6 +120,7 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
     ${st ? st.margin ? `margin: ${st.margin};` : '' : ''}
     .back {
         display: none;
+        z-index: 10;
         position : fixed;
         top: 0;
         bottom: 0;
@@ -128,7 +144,6 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
             position: relative;
             z-index: 1;
             padding: 0 10px;
-            border-radius: 10px;
             background-color: white;
             cursor: ${ro ? '' : 'pointer'};
             .value {
@@ -143,19 +158,25 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
         }
         .list-box {
             height: 0px;
-            box-shadow: 0 8px 30px -15px black; 
-            border-radius: 5px;
-            // transform: translateY(-2px);
+            transform: translateY(-3px);
+            border: 1px solid black;
             overflow: hidden;
             transition: height .3s;
             .item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 52px;
                 color: black;
-                padding: 8px 0 5px 7px;
-                font-size: 15px;
+                font-weight: 500;
+                font-size: 16px;
                 background-color: white;
                 transition: .3s;
                 &:hover {
                     background-color: var(--color-light-gray);
+                }
+                &:not(:last-child) {
+                    border-bottom: 1px solid black;
                 }
             }
             .empty {
