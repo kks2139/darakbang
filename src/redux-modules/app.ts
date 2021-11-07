@@ -36,6 +36,9 @@ function app(state: stateType = initState, action: actionType) {
                 backgroundColor: action.payload
             };
         case TOGGLE_CONFIRM_MESSAGE:
+            if(action.payload.show === undefined){
+                action.payload.show = true;
+            }
             return {
                 ...state,
                 confirmMessageInfo: {

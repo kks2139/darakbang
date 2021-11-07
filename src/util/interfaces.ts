@@ -61,6 +61,6 @@ export interface ConfirmMessageInfo {
     subTitle?: string
     msg?: string
     confirmText?: string
-    show: boolean
+    show?: boolean
     confirmCallback?: ()=> void
 }

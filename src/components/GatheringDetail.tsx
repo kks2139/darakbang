@@ -9,9 +9,10 @@ import {FiUpload, FiPocket} from 'react-icons/fi';
 interface Props {
     info: GatheringInfo | null
     onBack: ()=> void
+    onJoin: (arg: React.MouseEvent<HTMLDivElement>)=> void
 }
 
-function GatheringDetail({info, onBack}: Props){
+function GatheringDetail({info, onBack, onJoin}: Props){
     const divRef = useRef<HTMLDivElement | null>(null);
     const nextAct = divDate(info?.nextActiveDate || '');
     const initDate = divDate(info?.initDate || '');
@@ -27,12 +28,7 @@ function GatheringDetail({info, onBack}: Props){
     }
     
     const onClickJoin = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const {type} = e.currentTarget.dataset;
-        if(type === 'once'){
-
-        }else{
-
-        }
+        onJoin(e);
     }
     
     const onClickIcon = (e: React.MouseEvent<HTMLDivElement>)=>{

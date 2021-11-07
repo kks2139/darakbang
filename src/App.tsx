@@ -41,24 +41,8 @@ function App() {
 
   });
 
-  const test = ()=>{
-    dispatch(toggleConfirmMessage({
-      title: `테스트~~~`,
-      // subTitle: '다락방',
-      // msg: `성남시 전체
-      // 한 번 참여
-      // 10월31일 ~~`,
-      confirmText: '팀원 모집하기',
-      confirmCallback: ()=>{
-        console.log('콜백 ~~~~~~');
-      },
-      show: true
-    }));
-  } 
-
   return (
     <div css={style({backgroundColor})}> 
-      <button onClick={test}>TEST</button>
       <Header />
       <div className='body'>
         <SideMenu />
