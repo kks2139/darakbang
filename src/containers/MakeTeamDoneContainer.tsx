@@ -4,6 +4,7 @@ import {} from '../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux-modules/index';
 import {useHistory} from 'react-router-dom';
+import {toggleConfirmMessage} from '../redux-modules/app';
 
 interface Props {
 }
@@ -14,7 +15,10 @@ function MakeTeamDoneContainer({}: Props){
     const {teamInfo, teamLeaderInfo} = useSelector((state: RootState)=> state.makeTeam);
 
     const onOpenActivity = ()=>{
-        history.push('/');
+        dispatch(toggleConfirmMessage({
+            title: '내 팀에 함께 할 팀원을 모집해보세요!',
+            confirmText: '팀원 모집하기'
+        }));
     }
 
     const onCancel = ()=>{
