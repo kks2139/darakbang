@@ -55,3 +55,12 @@ export interface TeamLeaderInfo {
     propensity: string
     propensityList: string[]
 }
+
+export interface ConfirmMessageInfo {
+    title?: string
+    subTitle?: string
+    msg?: string
+    confirmText?: string
+    show: boolean
+    confirmCallback?: ()=> void
+}

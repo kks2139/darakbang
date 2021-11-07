@@ -117,7 +117,7 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
     }
     .wrapper {
         position: relative;
-        z-index: 999;
+        z-index: 99;
         height: ${st ? st.height || '28px' : '28px'};
         .value-box {
             display: flex;

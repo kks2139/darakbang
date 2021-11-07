@@ -8,6 +8,7 @@ import Combobox from "./Combobox"
 import Tag from "./common/Tag"
 import MakeTeamDone from "./MakeTeamDone"
 import RedBox from "./RedBox"
+import ConfirmMessage from "./popup/ConfirmMessage"
 
 export {
     GatheringFilter,
@@ -20,4 +21,5 @@ export {
     Tag,
     MakeTeamDone,
     RedBox,
+    ConfirmMessage,
 }
