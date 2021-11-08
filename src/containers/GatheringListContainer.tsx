@@ -16,7 +16,7 @@ function GatheringListContainers({onGatheringSelected}: Props){
 
     const onClickGathering = (info: GatheringInfo)=>{
         dispatch(setSelectedGathering(info));
-        dispatch(setBackgroundColor('var(--color-light-gray)'));
+        dispatch(setBackgroundColor('var(--color-bg-gray)'));
         onGatheringSelected();
     }
 
