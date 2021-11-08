@@ -75,7 +75,7 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
     const init = ()=>{
         const item = divRef.current?.querySelector('.list-box .item');
         if(item){
-            setItemHeight(item.getBoundingClientRect().height * (items.length + 1));
+            setItemHeight(item.getBoundingClientRect().height * (items.length + 1) + 2);
         }
         if(defaultValue){
             const filtered = items.filter(item => item.value === defaultValue);
@@ -158,10 +158,10 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
         }
         .list-box {
             height: 0px;
-            transform: translateY(-3px);
+            transform: translateY(-5px);
             border: 1px solid black;
             overflow: hidden;
-            transition: height .3s;
+            transition: .2s;
             .item {
                 display: flex;
                 justify-content: center;
@@ -171,9 +171,9 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
                 font-weight: 500;
                 font-size: 16px;
                 background-color: white;
-                transition: .3s;
+                transition: .2s;
                 &:hover {
-                    background-color: var(--color-light-gray);
+                    box-shadow: inset 0 0 0 2px black;
                 }
                 &:not(:last-child) {
                     border-bottom: 1px solid black;
@@ -187,6 +187,7 @@ const style = (ih: number, ro: boolean, st?: Style)=>(css`
             transform: unset;
             cursor: pointer;
             height: ${ih}px;
+            opacity: 1;
         }
     }
 `);
