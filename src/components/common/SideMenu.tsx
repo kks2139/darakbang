@@ -146,6 +146,7 @@ const styles = css`
     .make-team {
         width: 100px;
         height: 100px;
+        margin-top: 64px;
         background-color: #FFF;
         border-radius: 50%;
         border: 2px solid #02BCD6;

@@ -24,6 +24,7 @@ interface Style {
 }
 
 function App() {
+  const divRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const {selectedGathering} = useSelector((state: RootState)=> state.gathering);
@@ -37,15 +38,40 @@ function App() {
     
   }
 
-  useEffect(()=>{
+  const setBodyHeight= ()=>{
+    const header = divRef.current?.querySelector('.header');
+    const footer = divRef.current?.querySelector('.footer');
+    const main = divRef.current?.querySelector('main');
+    const side = divRef.current?.querySelector('.side');
+    const height = window.innerHeight - footer!.getBoundingClientRect().height - header!.getBoundingClientRect().height;
 
-  });
+    main!.style.height = height + 'px';
+    if(side instanceof HTMLDivElement){
+      side!.style.height = height + 'px';
+    }
+    
+  }
+
+  const onResize = ()=>{
+    setBodyHeight();
+  }
+  
+  useEffect(()=>{
+    if(!document.body.onresize){
+      document.body.onresize = onResize;
+      setBodyHeight();
+    }
+  }, []);
 
   return (
-    <div css={style({backgroundColor})}> 
-      <Header />
+    <div css={style({backgroundColor})} ref={divRef}> 
+      <div className='header'>
+        <Header />
+      </div>
       <div className='body'>
-        <SideMenu />
+        <div className='side'>
+          <SideMenu />
+        </div>
         <main className='content-box'>
           <Switch>
             <Route path={['/', '/gatherings']} exact render={()=> (
@@ -71,7 +97,9 @@ function App() {
           </Switch>
         </main>
       </div>
-      <Footer />
+      <div className='footer'>
+        <Footer />
+      </div>
       {confirmMessageInfo.show ? <ConfirmMessageContainer/> : null}
     </div>
   );
@@ -81,22 +109,36 @@ const style = ({backgroundColor}: Style)=>(css`
   min-height: 100vh;
   background-color: ${backgroundColor || 'white'};
 
-  .body {
+  > .header {
+
+  }
+
+  > .body {
     display: flex;
-    .side-menu {
-      width: 125px;
+    justify-content: center;
+  
+    > .side {
+      padding-right: 95px;
+      margin-right: 5px;
+      transition: .3s;
+      overflow: hidden;
+      &:hover {
+        overflow-y: scroll;
+      }
     }
-    .content-box {
-      width: 100%;
-      display: flex;
-      padding: 50px 100px;
-      // justify-content: center;
+    
+    > .content-box {
+      padding: 50px 15px 50px 0;
+      overflow-y: hidden;
+      transition: .3s;
+      &:hover {
+        overflow-y: scroll;
+      }
     }
   }
 
-  > .side-menu {
-    border: 1px solid black;
-    height: 60px;
+  > .footer {
+
   }
 `);
 

@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../util/interfaces';
@@ -50,6 +50,43 @@ function GatheringDetail({info, onBack, onJoin}: Props){
             el.classList.add('sel');
         }
     }
+
+    const setFloatingPosition = (e: Event)=>{
+        e.stopPropagation();
+
+        let scrollTop = 0;
+        const el = e.currentTarget;
+        if(el instanceof HTMLElement){
+            scrollTop = el.scrollTop -2;
+            console.log(scrollTop);
+        }
+        const floatBox = divRef.current?.querySelector('#detailFloating');
+        if(floatBox instanceof HTMLElement){
+            if(scrollTop > 30 && scrollTop < 1600){
+                if(scrollTop < 140) scrollTop = 40;
+                floatBox.style.top = scrollTop + 'px';
+            }
+        }
+    }
+
+    const attachScrollEvent = ()=>{
+        const main = document.body.querySelector('main');
+        if(main && !main.onscroll){
+            main.onscroll = setFloatingPosition;
+        }
+    }
+
+    const removeScrollEvent = ()=>{
+        const main = document.body.querySelector('main');
+        if(main && main.onscroll){
+            main.onscroll = null;
+        }
+    }
+    
+    useEffect(()=>{
+        attachScrollEvent();
+        return ()=> {removeScrollEvent()}
+    }, []);
 
     return (
         !info ? null :
@@ -159,7 +196,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
                     </div>
                 </section>
                 <section className='floating-section'>
-                    <div className='floating-box'>
+                    <div className='floating-box' id='detailFloating'>
                         <div className='title'>팀소개</div>
                         <div className='content'>
                             <div className='interests'>{info.interests}</div>
@@ -214,7 +251,6 @@ function GatheringDetail({info, onBack, onJoin}: Props){
 }
 
 const style = css`
-    width: 616px;
     .back-btn {
         width: 70px;
         text-align: center;
@@ -228,181 +264,186 @@ const style = css`
     }
     .wrapper {
         display: flex;
-        .interests {
-            font-size: 16px;
-            color: var(--color-gray);
-            margin-bottom: 16px;
-        }
-        .header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            .pay {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 62px;
-                height: 32px;
-                font-size: 16px;
-                font-weight: bold;
-                color: var(--color-main-text);
-                background-color: white;
-                border: 1px solid var(--color-main-text); 
-            }
-            .desc {
-                font-size: 24px;
-                font-weight: bold;
-                margin: 0 12px;
-            }
-            .close-soon {
-                width: 60px;
-                font-size: 12px;
-                font-weight: 600;
-                text-align: center;
-                color: white;
-                margin-right: 20px;
-                background-color: red;
-                border: 1px solid white;
-                padding: 1px 0;
-            }
-            .filter {
-                background-color: var(--color-peach);
-            }
-            .title {
-                background-color: var(--color-yellow);
-            }
-            .tag {
-                display: flex;
-                align-items: center;
-                height: 19px;
-                padding: 4px;
-                margin-right: 12px;
-                font-size: 12px;
-                font-weight: 600;
-                border: 1px solid black;
-                border-radius: 10px;
-            }
-        }
-        .main-img {
-            width: 100%;
-            height: 335px;
-            margin-bottom: 24px;
-        }
-        .detail-info {
-            width: 100%;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: white;
-            // border: 1px solid var(--color-gray);
-            margin-bottom: 40px;
-            .row {
-                display: flex;
-                margin-bottom: 20px;
-                .field {
-                    width: 91px;
+        .info-section {
+            width: 616px;
+            .simple-info {
+                .interests {
                     font-size: 16px;
-                    font-weight: bold;
+                    color: var(--color-gray);
+                    margin-bottom: 16px;
                 }
-                .val {
+                .header {
                     display: flex;
-                    font-size: 16px;
-                    .can-apply {
-                        color: var(--color-peach);
-                        border: 1px solid var(--color-peach);
-                        border-radius: 10px;
-                        padding: 0 3px;
-                    }
-                    .gray {
-                        color: var(--color-gray);
-                        margin: 0 8px;
-                    }
-                    .else {
-                        color: var(--color-peach);
-                        margin: 0 5px;
-                    }
-                }
-                .active-list {
-                    .date-box {
+                    align-items: center;
+                    margin-bottom: 20px;
+                    .pay {
                         display: flex;
-                        margin-bottom: 4px;
-                        .dt {
-                            position: relative;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            width: 168px;
-                            height: 40px;
-                            border: 1px solid #D9D9D9;
-                            border-radius: 25px;
-                            cursor: pointer;
-                            img {
-                                display: none;
-                                position: absolute;
-                                right: -20px;
-                            }
-                        }
-                        .dt.sel {
-                            border-color: black;
-                            img {
-                                display: unset;
-                            }
-                        }
-                        .dt.end {
-                            color: #D9D9D9;
-                            cursor: unset;
-                        }
-                        .end-txt {
-                            display: flex;
-                            align-items: center;
-                            color: #D9D9D9;
-                            margin-left: 8px;
-                        }
+                        align-items: center;
+                        justify-content: center;
+                        width: 62px;
+                        height: 32px;
+                        font-size: 16px;
+                        font-weight: bold;
+                        color: var(--color-main-text);
+                        background-color: white;
+                        border: 1px solid var(--color-main-text); 
+                    }
+                    .desc {
+                        font-size: 24px;
+                        font-weight: bold;
+                        margin: 0 12px;
+                    }
+                    .close-soon {
+                        width: 60px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-align: center;
+                        color: white;
+                        margin-right: 20px;
+                        background-color: red;
+                        border: 1px solid white;
+                        padding: 1px 0;
+                    }
+                    .filter {
+                        background-color: var(--color-peach);
+                    }
+                    .title {
+                        background-color: var(--color-yellow);
+                    }
+                    .tag {
+                        display: flex;
+                        align-items: center;
+                        height: 19px;
+                        padding: 4px;
+                        margin-right: 12px;
+                        font-size: 12px;
+                        font-weight: 600;
+                        border: 1px solid black;
+                        border-radius: 10px;
                     }
                 }
+                .main-img {
+                    width: 100%;
+                    height: 335px;
+                    margin-bottom: 24px;
+                }
             }
-        }
-        .active-info {
-            .title {
-                font-weight: bold;
-                font-size: 24px;
-                margin-bottom: 16px;
-            }
-            .content {
+            .detail-info {
                 width: 100%;
                 padding: 20px;
                 border-radius: 10px;
                 background-color: white;
                 // border: 1px solid var(--color-gray);
-                .img-box {
-                    img {
-                        margin-bottom: 24px;
+                margin-bottom: 40px;
+                .row {
+                    display: flex;
+                    margin-bottom: 20px;
+                    .field {
+                        width: 91px;
+                        font-size: 16px;
+                        font-weight: bold;
+                    }
+                    .val {
+                        display: flex;
+                        font-size: 16px;
+                        .can-apply {
+                            color: var(--color-peach);
+                            border: 1px solid var(--color-peach);
+                            border-radius: 10px;
+                            padding: 0 3px;
+                        }
+                        .gray {
+                            color: var(--color-gray);
+                            margin: 0 8px;
+                        }
+                        .else {
+                            color: var(--color-peach);
+                            margin: 0 5px;
+                        }
+                    }
+                    .active-list {
+                        .date-box {
+                            display: flex;
+                            margin-bottom: 4px;
+                            .dt {
+                                position: relative;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                width: 168px;
+                                height: 40px;
+                                border: 1px solid #D9D9D9;
+                                border-radius: 25px;
+                                cursor: pointer;
+                                img {
+                                    display: none;
+                                    position: absolute;
+                                    right: -20px;
+                                }
+                            }
+                            .dt.sel {
+                                border-color: black;
+                                img {
+                                    display: unset;
+                                }
+                            }
+                            .dt.end {
+                                color: #D9D9D9;
+                                cursor: unset;
+                            }
+                            .end-txt {
+                                display: flex;
+                                align-items: center;
+                                color: #D9D9D9;
+                                margin-left: 8px;
+                            }
+                        }
                     }
                 }
-                .desc {
-                    font-size: 16px;
-                    line-height: 26px;
-                    white-space: pre-line
+            }
+            .active-info {
+                .title {
+                    font-weight: bold;
+                    font-size: 24px;
+                    margin-bottom: 16px;
+                }
+                .content {
+                    width: 100%;
+                    padding: 20px;
+                    border-radius: 10px;
+                    background-color: white;
+                    // border: 1px solid var(--color-gray);
+                    .img-box {
+                        img {
+                            margin-bottom: 24px;
+                        }
+                    }
+                    .desc {
+                        font-size: 16px;
+                        line-height: 26px;
+                        white-space: pre-line
+                    }
                 }
             }
-        }
-        .caution-info {
-            width: 100%;
-            margin: 80px 0;
-            .text {
-                white-space: pre-line;
-                color: var(--color-gray);
-                font-size: 16px;
-                span {
-                    color: black;
-                    font-weight: bold;
+            .caution-info {
+                width: 100%;
+                margin: 80px 0;
+                .text {
+                    white-space: pre-line;
+                    color: var(--color-gray);
+                    font-size: 16px;
+                    span {
+                        color: black;
+                        font-weight: bold;
+                    }
                 }
             }
         }
         .floating-section {
-            position: relative;
             .floating-box {
-                position: fixed;
-                top: 150px;
+                position: relative;
+                top: 40px;
+                transition: top .3s;
                 margin-left: 24px;
                 .title {
                     font-weight: bold;
