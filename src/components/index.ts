@@ -9,6 +9,7 @@ import Tag from "./common/Tag"
 import MakeTeamDone from "./MakeTeamDone"
 import RedBox from "./RedBox"
 import ConfirmMessage from "./popup/ConfirmMessage"
+import NotificationList from "./NotificationList"
 
 export {
     GatheringFilter,
@@ -22,4 +23,5 @@ export {
     MakeTeamDone,
     RedBox,
     ConfirmMessage,
+    NotificationList
 }

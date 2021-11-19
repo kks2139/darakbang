@@ -177,6 +177,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
 
 const style = (isValid: boolean)=> (css`
     width: 905px; 
+    position: relative;
     .img-box {
         display: flex;
         flex-direction: column;
