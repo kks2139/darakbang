@@ -3,7 +3,11 @@ import React from 'react';
 import { css } from '@emotion/react';
 import { useHistory } from 'react-router';
 
-const Header = () => {
+interface Props {
+    onClickNoti: ()=> void
+}
+
+const Header = ({onClickNoti}: Props) => {
     const history = useHistory();
 
     const toGathering = () => {
@@ -22,7 +26,11 @@ const Header = () => {
                 </div>
                 <div className="header__nav">
                     <ul>
-                        <li className="gray-16">알림</li>
+                        <li className="gray-16" onClick={onClickNoti}>
+                            알림
+                            <img src='mail-2.png'></img>
+                            <div className='mail-cnt'>{2}</div>
+                        </li>
                         <li className="gray-16">로그인</li>
                         <li className="gray-16">프로필</li>
                         <li className="gray-16">Contact</li>
@@ -81,9 +89,32 @@ const styles = css`
 
             li {
                 margin-right: 16px;
+                cursor: pointer;
             }
             li:first-child {
                 margin-right: 40px;
+                position: relative;
+                > * {
+                    position: absolute;
+                }
+                img {
+                    transform: translate(-10px, -20px);
+                }
+                .mail-cnt {
+                    z-index: 1;
+                    top: 0;
+                    transform: translateX(37px) rotate(15deg);
+                    text-align: center;
+                    line-height: 20px;
+                    font-size: 16px;
+                    font-weight: bold;
+                    color: white;
+                    background-color: var(--color-peach);
+                    width: 24px;
+                    height: 24px;
+                    border: 1px solid black;
+                    border-radius: 50%;
+                }
             }
             li:last-child {
                 margin-right: 0;

@@ -7,9 +7,11 @@ import {
   GatheringDetailContainers,
   MakeTeamContainers,
   MakeTeamDoneContainer,
-  ConfirmMessageContainer
+  ConfirmMessageContainer,
+  HeaderContainer,
+  NotificationListContainer
 } from './containers/index';
-import {Tab} from './components/index';
+import {Tab, NotificationList} from './components/index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from './redux-modules/index';
 import {Route, Switch, useHistory} from 'react-router-dom';
@@ -17,7 +19,6 @@ import Header from './components/common/Header';
 import Footer from './components/common/Footer';
 import SideMenu from './components/common/SideMenu';
 
-import {toggleConfirmMessage} from './redux-modules/app';
 
 interface Style {
   backgroundColor: string
@@ -28,7 +29,7 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   const {selectedGathering} = useSelector((state: RootState)=> state.gathering);
-  const {backgroundColor, confirmMessageInfo} = useSelector((state: RootState)=> state.app);
+  const {backgroundColor, confirmMessageInfo, showNotificationList} = useSelector((state: RootState)=> state.app);
 
   const onGatheringSelected = ()=>{
     
@@ -43,7 +44,7 @@ function App() {
     const footer = divRef.current?.querySelector('.footer');
     const main = divRef.current?.querySelector('main');
     const side = divRef.current?.querySelector('.side');
-    const height = window.innerHeight - footer!.getBoundingClientRect().height - header!.getBoundingClientRect().height;
+    const height = window.innerHeight - footer!.getBoundingClientRect().height - header!.getBoundingClientRect().height - 2;
 
     main!.style.height = height + 'px';
     if(side instanceof HTMLDivElement){
@@ -55,7 +56,7 @@ function App() {
   const onResize = ()=>{
     setBodyHeight();
   }
-  
+
   useEffect(()=>{
     if(!document.body.onresize){
       document.body.onresize = onResize;
@@ -66,7 +67,7 @@ function App() {
   return (
     <div css={style({backgroundColor})} ref={divRef}> 
       <div className='header'>
-        <Header />
+        <HeaderContainer/>
       </div>
       <div className='body'>
         <div className='side'>
@@ -96,6 +97,7 @@ function App() {
             <Route path='/make-team/done' exact render={()=> <MakeTeamDoneContainer/>}/>
           </Switch>
         </main>
+        {showNotificationList ? <NotificationListContainer/> : null}
       </div>
       <div className='footer'>
         <Footer />
@@ -114,6 +116,7 @@ const style = ({backgroundColor}: Style)=>(css`
   }
 
   > .body {
+    position: relative;
     display: flex;
     justify-content: center;
   
@@ -123,7 +126,8 @@ const style = ({backgroundColor}: Style)=>(css`
       transition: .3s;
       overflow: hidden;
       &:hover {
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
     }
     
@@ -132,7 +136,8 @@ const style = ({backgroundColor}: Style)=>(css`
       overflow-y: hidden;
       transition: .3s;
       &:hover {
-        overflow-y: scroll;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
     }
   }

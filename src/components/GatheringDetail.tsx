@@ -92,7 +92,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
         !info ? null :
         <div css={style} ref={divRef}>
             {/* 뒤로가기 임시버튼 */}
-            <div className='back-btn' onClick={onClickBack}>뒤로가기</div>
+            {/* <div className='back-btn' onClick={onClickBack}>뒤로가기</div> */}
             <div className='wrapper'>
                 <section className='info-section'>
                     <div className='simple-info'>

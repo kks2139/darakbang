@@ -66,3 +66,25 @@ export const clearInvalid = (root: HTMLElement)=>{
     });
 }
 
+export const request = async (req: string)=>{
+    let api = '';
+    switch(req){
+        case 'getNotifications':
+            api = '요청 url';
+            break;
+        default:
+            break;
+    }   
+    try{
+        const res = await fetch(api);
+        if(res.status !== 200) {
+            alert('데이터 조회중 문제가 발생하였습니다.');
+        }else{
+            return res.json();
+        }
+    }catch(e){
+        console.error(`Error : ${e}`);
+        alert('문제가 발생하였습니다');
+    }
+}
+

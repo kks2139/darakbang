@@ -64,3 +64,15 @@ export interface ConfirmMessageInfo {
     show?: boolean
     confirmCallback?: ()=> void
 }
+
+export interface Notification {
+    id: number
+    title: string
+    content: string
+    checked: boolean
+    isSecret: boolean
+    receivedDate: string // 20211119131030 -> yyyy MM dd HH mm ss
+    category?: string
+    place?: string
+    // 기타 필요한거 추가
+}
