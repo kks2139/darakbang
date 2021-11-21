@@ -173,6 +173,7 @@ const style = css`
         justify-content: space-between;
         margin-top: 24px;
         .block {
+            background-color: white;
             display: flex;
             justify-content: center;
             align-items: center;

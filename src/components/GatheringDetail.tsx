@@ -325,6 +325,7 @@ const style = css`
                 .main-img {
                     width: 100%;
                     height: 335px;
+                    object-fit: cover;
                     margin-bottom: 24px;
                 }
             }

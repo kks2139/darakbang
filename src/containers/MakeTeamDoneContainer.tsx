@@ -15,10 +15,11 @@ function MakeTeamDoneContainer({}: Props){
     const {teamInfo, teamLeaderInfo} = useSelector((state: RootState)=> state.makeTeam);
 
     const onOpenActivity = ()=>{
-        dispatch(toggleConfirmMessage({
-            title: '내 팀에 함께 할 팀원을 모집해보세요!',
-            confirmText: '팀원 모집하기'
-        }));
+        alert('개발중!');
+        // dispatch(toggleConfirmMessage({
+        //     title: '내 팀에 함께 할 팀원을 모집해보세요!',
+        //     confirmText: '팀원 모집하기'
+        // }));
     }
 
     const onCancel = ()=>{
