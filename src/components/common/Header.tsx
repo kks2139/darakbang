@@ -28,7 +28,7 @@ const Header = ({onClickNoti}: Props) => {
                     <ul>
                         <li className="gray-16" onClick={onClickNoti}>
                             알림
-                            <img src='mail-2.png'></img>
+                            <img src='/mail-2.png'></img>
                             <div className='mail-cnt'>{2}</div>
                         </li>
                         <li className="gray-16">로그인</li>

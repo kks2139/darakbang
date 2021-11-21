@@ -81,6 +81,7 @@ const style = ()=>(css`
         margin-bottom: 16px;
         transition: .3s;
         img {
+            object-fit: cover;
             position: absolute;
             width: 100%;
             height: 100%;

@@ -23,7 +23,7 @@ function NotificationList({onClickClose, list}: Props){
                 {list.map(noti => (
                     <div key={noti.id} className='noti'>
                         <div className={`title ${noti.checked ? 'checked' : ''}`}>
-                            {noti.isSecret ? <img src='mail-1.png'></img> : null}
+                            {noti.isSecret ? <img src='/mail-1.png'></img> : null}
                             {noti.title}
                         </div>
                         <div className='info-box'>
@@ -38,7 +38,8 @@ function NotificationList({onClickClose, list}: Props){
 }
 
 const style = ()=> css`
-    position: fixed;
+    z-index: 200;
+    position: absolute;
     right: 0;
     width: 456px;
     height: 100%;

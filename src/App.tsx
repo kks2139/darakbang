@@ -59,8 +59,8 @@ function App() {
 
   useEffect(()=>{
     if(!document.body.onresize){
-      document.body.onresize = onResize;
-      setBodyHeight();
+      // document.body.onresize = onResize;
+      // setBodyHeight();
     }
   }, []);
 

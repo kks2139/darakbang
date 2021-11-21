@@ -225,6 +225,7 @@ const style = (isValid: boolean)=> (css`
     .intro-box {
         border: 1px solid var(--color-dim-gray);
         border-bottom: transparent;
+        background-color: white;
         .row {
             display: flex;
             height: 92px;

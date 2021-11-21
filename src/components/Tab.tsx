@@ -102,6 +102,7 @@ const style = (width: number)=>(css`
         }
     }
     .content {
+        background-color: white;
         border: 1px solid var(--color-dim-gray);  
         padding: 20px;
     }
