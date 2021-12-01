@@ -98,7 +98,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
                         <div className='val1'>
                             <span className='txt1'>팀</span> 
                             <span>{'{'}</span>
-                            <input onChange={onChangeValue} name='teamName' value={teamInfo.teamName}></input>
+                            <input onChange={onChangeValue} name='teamName' value={teamInfo.teamName} autoComplete='off'></input>
                             <span>{'}'}</span>
                         </div>
                     </div>
