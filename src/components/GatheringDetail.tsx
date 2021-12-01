@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../util/interfaces';
@@ -14,6 +14,8 @@ interface Props {
 
 function GatheringDetail({info, onBack, onJoin}: Props){
     const divRef = useRef<HTMLDivElement | null>(null);
+    const [float, setFloat] = useState(false);
+
     const nextAct = divDate(info?.nextActiveDate || '');
     const initDate = divDate(info?.initDate || '');
     const lastActiveDate = divDate(info?.lastActiveDate || '');
@@ -53,34 +55,21 @@ function GatheringDetail({info, onBack, onJoin}: Props){
 
     const setFloatingPosition = (e: Event)=>{
         e.stopPropagation();
-
-        let scrollTop = 0;
-        const el = e.currentTarget;
-        if(el instanceof HTMLElement){
-            scrollTop = el.scrollTop -2;
-            console.log(scrollTop);
-        }
-        const floatBox = divRef.current?.querySelector('#detailFloating');
-        if(floatBox instanceof HTMLElement){
-            if(scrollTop > 30 && scrollTop < 1600){
-                if(scrollTop < 140) scrollTop = 40;
-                floatBox.style.top = scrollTop + 'px';
-            }
+        const header = divRef.current?.querySelector('.simple-info .header');
+        if(header instanceof HTMLElement){
+            const headerTop = header.getBoundingClientRect().top;
+            setFloat(window.scrollY + 28 > headerTop + window.scrollY);
         }
     }
 
     const attachScrollEvent = ()=>{
-        const main = document.body.querySelector('main');
-        if(main && !main.onscroll){
-            main.onscroll = setFloatingPosition;
+        if(!window.onscroll){
+            window.onscroll = setFloatingPosition;
         }
     }
 
     const removeScrollEvent = ()=>{
-        const main = document.body.querySelector('main');
-        if(main && main.onscroll){
-            main.onscroll = null;
-        }
+        window.onscroll = null;
     }
     
     useEffect(()=>{
@@ -90,9 +79,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
 
     return (
         !info ? null :
-        <div css={style} ref={divRef}>
-            {/* 뒤로가기 임시버튼 */}
-            {/* <div className='back-btn' onClick={onClickBack}>뒤로가기</div> */}
+        <div css={style(float)} ref={divRef}>
             <div className='wrapper'>
                 <section className='info-section'>
                     <div className='simple-info'>
@@ -250,7 +237,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
     );
 }
 
-const style = css`
+const style =(float: boolean)=> (css`
     .back-btn {
         width: 70px;
         text-align: center;
@@ -441,18 +428,19 @@ const style = css`
             }
         }
         .floating-section {
+            position: relative;
+            width: 290px;
+            padding-left: 24px;
             .floating-box {
-                position: relative;
-                top: 40px;
-                transition: top .3s;
-                margin-left: 24px;
+                position: ${float ? 'fixed' : 'relative'};
+                top: ${float ? '20px' : '40px'};
                 .title {
                     font-weight: bold;
                     font-size: 24px;
                     margin-bottom: 16px;
                 }
                 .content {
-                    min-width: 265px;
+                    width: 265px;
                     padding: 12px;
                     border: 1px solid #C4C4C4;
                     border-radius: 10px;
@@ -552,6 +540,6 @@ const style = css`
             }
         }
     }
-`;
+`);
 
 export default GatheringDetail;
