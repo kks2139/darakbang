@@ -14,6 +14,13 @@ const Header = ({onClickNoti}: Props) => {
         history.push('/');
     }
 
+    const onClickMenu = (e: React.MouseEvent<HTMLUListElement>)=>{
+        if(e.target instanceof HTMLElement){
+            const link = e.target.dataset.link || '/';
+            history.push(link);
+        }
+    }
+
     return (
         <header css={styles}>
             <div className="header">
@@ -25,7 +32,7 @@ const Header = ({onClickNoti}: Props) => {
                     <div className="header__gethering__button">게더링</div>
                 </div>
                 <div className="header__nav">
-                    <ul>
+                    <ul onClick={onClickMenu}>
                         <li className="gray-16" onClick={onClickNoti}>
                             알림
                             <img src='/mail-2.png'></img>
@@ -33,6 +40,7 @@ const Header = ({onClickNoti}: Props) => {
                         </li>
                         <li className="gray-16">로그인</li>
                         <li className="gray-16">프로필</li>
+                        <li className="gray-16" data-link='/myteam'>내 팀</li>
                         <li className="gray-16">Contact</li>
                     </ul>
                 </div>

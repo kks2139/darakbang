@@ -10,6 +10,11 @@ import MakeTeamDone from "./MakeTeamDone"
 import RedBox from "./RedBox"
 import ConfirmMessage from "./popup/ConfirmMessage"
 import NotificationList from "./NotificationList"
+import MyTeamPage from "./pages/MyTeamPage"
+import MakeTeamPage from "./pages/MakeTeamPage"
+import GatheringPage from "./pages/GatheringPage"
+import Footer from "./common/Footer"
+import SideMenu from "./common/SideMenu"
 
 export {
     GatheringFilter,
@@ -23,5 +28,10 @@ export {
     MakeTeamDone,
     RedBox,
     ConfirmMessage,
-    NotificationList
+    NotificationList,
+    MyTeamPage,
+    MakeTeamPage,
+    GatheringPage,
+    Footer,
+    SideMenu
 }

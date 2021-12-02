@@ -37,7 +37,7 @@ const initState: stateType = {
             filter: ['한 번 만남'],
             title: ['신규 팀', '인기 팀'],
             bookmark: true,
-            imgUrl: 'sample.png',
+            imgUrl: '/sample.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -63,7 +63,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -78,7 +78,7 @@ const initState: stateType = {
             filter: ['비대면'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample2.png',
+            imgUrl: '/sample2.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -102,7 +102,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -117,7 +117,7 @@ const initState: stateType = {
             filter: ['온라인'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample3.png',
+            imgUrl: '/sample3.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -141,7 +141,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -156,7 +156,7 @@ const initState: stateType = {
             filter: ['한 번 만남'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample.png',
+            imgUrl: '/sample.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -180,7 +180,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -195,7 +195,7 @@ const initState: stateType = {
             filter: ['비대면'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample2.png',
+            imgUrl: '/sample2.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -219,7 +219,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -234,7 +234,7 @@ const initState: stateType = {
             filter: ['온라인'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample3.png',
+            imgUrl: '/sample3.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -258,7 +258,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -272,7 +272,7 @@ const initState: stateType = {
             filter: ['한 번 만남'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample.png',
+            imgUrl: '/sample.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -296,7 +296,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
@@ -311,7 +311,7 @@ const initState: stateType = {
             filter: ['비대면'],
             title: [],
             bookmark: true,
-            imgUrl: 'sample2.png',
+            imgUrl: '/sample2.png',
             name: '다락방',
             likes: 562,
             hates: 45,
@@ -335,7 +335,7 @@ const initState: stateType = {
             membershipFee: 10000,
             activeDateList: ['202110300800','202110310800','202111010800','202111020800'],
             purpose: '사이클링을 너무 사랑하는 사람으로서 많은 분들이 사이클링의 매력을 아셨으면 하는 바람입니다.',
-            subImgUrls: ['sample4.png','sample5.png'],
+            subImgUrls: ['/sample4.png','/sample5.png'],
             detailDescription: `저희는 활동을 가능한 자주 오픈하고 있습니다.
                                 많은 인원이 모이지 않더라도 충분합니다.
                                 실력 차이에 대한 부담을 더실 수 있도록 정규 팀원의 체급도 다양하게 모집 중입니다.
