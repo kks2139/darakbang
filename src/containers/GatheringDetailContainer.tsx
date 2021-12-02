@@ -4,6 +4,12 @@ import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux-modules/index';
 import {setSelectedGathering} from '../redux-modules/gathering';
 import {setBackgroundColor, toggleConfirmMessage} from '../redux-modules/app';
+import { useLocation } from "react-router-dom";
+import {GatheringInfo} from '../util/interfaces';
+
+interface Params {
+    gatheringInfo: GatheringInfo
+}
 
 interface Props {
     onClickBack: ()=> void
@@ -11,7 +17,9 @@ interface Props {
 
 function GatheringDetailContainers({onClickBack}: Props){
     const dispatch = useDispatch();
-    const selected = useSelector((state: RootState)=> state.gathering.selectedGathering);
+    const location = useLocation<Params>();
+    // const selected = useSelector((state: RootState)=> state.gathering.selectedGathering);
+    const {gatheringInfo}: Params = location.state;
 
     const onBack = ()=>{
         dispatch(setSelectedGathering(null));
@@ -27,9 +35,9 @@ function GatheringDetailContainers({onClickBack}: Props){
             마지막으로 확인해 주세요!`,
             subTitle: '다락방',
             msg: `
-                ${selected?.place}
+                ${gatheringInfo?.place}
                 ${type === 'once' ? '한 번 참여' : ''}
-                ${selected?.nextActiveDate}`,
+                ${gatheringInfo?.nextActiveDate}`,
             confirmText: '확인',
             show: true,
             confirmCallback: nextStep
@@ -41,7 +49,7 @@ function GatheringDetailContainers({onClickBack}: Props){
     }
 
     return (
-        <GatheringDetail info={selected} onBack={onBack} onJoin={onJoin}></GatheringDetail>
+        <GatheringDetail info={gatheringInfo} onBack={onBack} onJoin={onJoin}></GatheringDetail>
     );
 }
 

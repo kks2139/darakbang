@@ -15,5 +15,5 @@ export {
     MakeTeamDoneContainer,
     ConfirmMessageContainer,
     HeaderContainer,
-    NotificationListContainer
+    NotificationListContainer,
 }
