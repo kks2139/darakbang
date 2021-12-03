@@ -91,5 +91,16 @@ export interface TeamDetail extends MyTeam {
     girls: number
     averageAge: number
     activeNum: number
+    totalJoinNum: number
+    good: number
+    bad: number
+    activeHistory: ActiveHistory[]
     // 기타 등등..
+}
+
+export interface ActiveHistory {
+    times: number
+    title: string
+    place: string
+    date: string
 }
