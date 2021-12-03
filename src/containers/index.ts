@@ -6,6 +6,8 @@ import MakeTeamDoneContainer from "./MakeTeamDoneContainer"
 import ConfirmMessageContainer from "./ConfirmMessageContainer"
 import HeaderContainer from "./HeaderContainer"
 import NotificationListContainer from "./NotificationListContainer"
+import MyTeamListContainer from "./MyTeamListContainer"
+import TeamRoomContainer from "./TeamRoomContainer"
 
 export {
     GatheringFilterContainers,
@@ -16,4 +18,6 @@ export {
     ConfirmMessageContainer,
     HeaderContainer,
     NotificationListContainer,
+    MyTeamListContainer,
+    TeamRoomContainer
 }

@@ -76,3 +76,20 @@ export interface Notification {
     place?: string
     // 기타 필요한거 추가
 }
+
+export interface MyTeam {
+    id: number
+    teamName: string
+    category: string
+    joinDate: string
+    joinCount: number
+}
+
+export interface TeamDetail extends MyTeam {
+    lastActive: string
+    boys: number
+    girls: number
+    averageAge: number
+    activeNum: number
+    // 기타 등등..
+}

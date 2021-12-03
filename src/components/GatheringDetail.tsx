@@ -58,7 +58,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
         const header = divRef.current?.querySelector('.simple-info .header');
         if(header instanceof HTMLElement){
             const headerTop = header.getBoundingClientRect().top;
-            setFloat(window.scrollY + 28 > headerTop + window.scrollY);
+            setFloat(window.scrollY + 20 > headerTop + window.scrollY);
         }
     }
 

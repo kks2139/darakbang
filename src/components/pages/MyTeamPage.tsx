@@ -1,27 +1,77 @@
-import React from 'react';
+import React, { useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import {useHistory, Switch, Route, Link, RouteComponentProps} from 'react-router-dom';
+import {useHistory, Route, Link, RouteComponentProps} from 'react-router-dom';
+import {MyTeamListContainer} from '../../containers/index';
 
 interface Props {
     routerProps: RouteComponentProps
 }
 
 function MyTeamPage({routerProps}: Props){
+    const divRef = useRef<HTMLDivElement>(null);
     const {match} = routerProps;
     const history = useHistory();
     
+    const onClickMenu = (e: React.MouseEvent<HTMLElement>)=> {
+        const root = divRef.current!;
+        if(e.target instanceof HTMLElement){
+            const targ = e.target.closest('a.link');
+            if(targ && root.contains(e.target)){
+                const links = root.querySelectorAll('a.link')!;
+                if(links?.length > 0){
+                    links.forEach(link => link.classList.remove('sel'));
+                }
+                targ.classList.add('sel');
+            }
+        }
+    }
+
     return (
-        <>
-            <Route path={`${match.path}`} exact render={()=> <div>팀 목록</div>}/>
-            <Route path={`${match.path}/room`} exact render={()=> <div>팀 상세</div>}/>
-        </>
+        <div css={style} ref={divRef}>
+            <div className='side-menu' onClick={onClickMenu}>
+                <div className='tit'>내 팀</div>
+                <Link to={`${match.path}`} className='link'>팀 룸</Link>
+                <Link to={`${match.path}/history`} className='link'>팀 기록</Link>
+            </div>
+            <div className='content'>
+                <Route path={`${match.path}`} exact render={()=> <MyTeamListContainer/>}/>
+                <Route path={`${match.path}/history`} exact render={()=> <MyTeamListContainer/>}/>
+                <Route path={`${match.path}/room`} exact render={()=> <div>팀 상세</div>}/>
+            </div>
+        </div>
     );
 }
 
 const style = css`
     display: flex;
-    flex-direction: column;
+    padding: 20px 0 0 0;
+    > .side-menu {
+        width: 225px;
+        display: flex;
+        flex-direction: column;
+        .tit {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .link {
+            cursor: pointer;
+            font-size: 17px;
+            transition: .2s;
+            margin-bottom: 18px;
+            &:hover {
+                font-weight: bold;
+            }
+            &.sel {
+                font-weight: bold;
+            }
+        }
+    }
+    > .content {
+        width: 910px;
+        height: 500px;
+    }
 `;
 
 export default MyTeamPage;

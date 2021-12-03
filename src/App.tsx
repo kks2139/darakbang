@@ -28,9 +28,9 @@ function App() {
         <HeaderContainer/>
       </div>
       <div className='body'>
-        <div className='side'>
+        {/* <div className='side'>
           <SideMenu />
-        </div>
+        </div> */}
         <main className='content-box'>
           <Switch>
             <Route path='/' exact render={(props)=>  <GatheringPage routerProps={props}/>}/>
@@ -57,7 +57,8 @@ const style = ({backgroundColor}: Style)=>(css`
   background-color: ${backgroundColor || 'white'};
 
   > .header {
-
+    position: relative;
+    z-index: 210;
   }
 
   > .body {

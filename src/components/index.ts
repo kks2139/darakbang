@@ -15,6 +15,9 @@ import MakeTeamPage from "./pages/MakeTeamPage"
 import GatheringPage from "./pages/GatheringPage"
 import Footer from "./common/Footer"
 import SideMenu from "./common/SideMenu"
+import MyTeamList from "./MyTeamList"
+import TeamRow from "./TeamRow"
+import TeamRoom from "./TeamRoom"
 
 export {
     GatheringFilter,
@@ -33,5 +36,8 @@ export {
     MakeTeamPage,
     GatheringPage,
     Footer,
-    SideMenu
+    SideMenu,
+    MyTeamList,
+    TeamRow,
+    TeamRoom
 }
