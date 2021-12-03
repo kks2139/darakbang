@@ -16,8 +16,10 @@ const Header = ({onClickNoti}: Props) => {
 
     const onClickMenu = (e: React.MouseEvent<HTMLUListElement>)=>{
         if(e.target instanceof HTMLElement){
-            const link = e.target.dataset.link || '/';
-            history.push(link);
+            const link = e.target.dataset.link;
+            if(link){
+                history.push(link);
+            }
         }
     }
 

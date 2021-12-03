@@ -45,6 +45,7 @@ const style = ()=> css`
     height: 100%;
     border-left: 1px solid var(--color-dim-gray);
     background-color: white;
+    box-shadow: 0 -5px 10px -3px var(--color-dim-gray);
     animation-name: show;
     animation-duration: .3s;
     animation-timing-function: ease;
