@@ -86,6 +86,7 @@ export interface MyTeam {
 }
 
 export interface TeamDetail extends MyTeam {
+    isMember: boolean // 이 팀에 가입한 멤버인지 여부
     lastActive: string
     boys: number
     girls: number
