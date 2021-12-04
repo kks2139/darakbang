@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import { useLocation } from "react-router-dom";
 import {TeamDetail} from '../util/interfaces';
 import {divDate} from '../util/util';
-
+import {Tag} from './index';
 
 interface Props {
     teamInfo: TeamDetail
@@ -40,18 +40,37 @@ function TeamRoom({teamInfo}: Props){
                                         <div className='female'>여</div>
                                         <div className='male'>남</div>
                                     </div>
+                                    <div className='txt-gray'>
+                                        여{getFemaleRate()}% 남{100 -getFemaleRate()}%
+                                    </div>
                                 </div>
                                 <div className='col'>
                                     <div className='field'>평균 연령</div>
-
+                                    <div className='txt-big'>
+                                        {teamInfo.averageAge}
+                                        <span>세</span>
+                                    </div>
                                 </div>
                                 <div className='col'>
                                     <div className='field'>활동 팀원</div>
-
+                                    <div className='txt-big'>
+                                        {teamInfo.activeNum}
+                                        <span>명</span>
+                                    </div>
+                                    <div className='txt-gray'>
+                                        ( 다녀간 팀원{teamInfo.totalJoinNum}명 )
+                                    </div>
                                 </div>
                             </div>
                             <div className='row'>
+                                <div className='col'>
+                                    <div className='field'>후기</div>
+                                    <Tag name='친' selected/>
+                                </div>
+                                <div className='col'>
+                                    <div className='field'></div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -113,14 +132,28 @@ const style = (FemaleRate: number)=> (css`
                         font-size: 16px;
                         font-weight: bold;
                         margin-bottom: 10px;
+                        text-align: center;
                     }
                     .row {
                         display: flex;
                         justify-content: space-between;
+                        margin-bottom: 12px;
                         .col {
                             .txt-gray {
                                 font-size: 12px;
-                                color: var(--color-dim-gray);
+                                color: var(--color-gray);
+                                margin-top: 8px;
+                            }
+                            .txt-big {
+                                display: flex;
+                                justify-content: center;
+                                align-items: baseline;
+                                font-size: 35px;
+                                line-height: 25px;
+                                span {
+                                    font-size: 16px;
+                                    margin-left: 5px;
+                                }
                             }
                             .rate-bar {
                                 display: flex;
