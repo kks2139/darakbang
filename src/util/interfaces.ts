@@ -86,10 +86,23 @@ export interface MyTeam {
 }
 
 export interface TeamDetail extends MyTeam {
+    isMember: boolean // 이 팀에 가입한 멤버인지 여부
     lastActive: string
     boys: number
     girls: number
     averageAge: number
     activeNum: number
+    totalJoinNum: number
+    good: number
+    bad: number
+    reviewKeyWord: string[]
+    activeHistory: ActiveHistory[]
     // 기타 등등..
+}
+
+export interface ActiveHistory {
+    times: number
+    title: string
+    place: string
+    date: string
 }

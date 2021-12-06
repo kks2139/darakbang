@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, Link, RouteComponentProps} from 'react-router-dom';
-import {MyTeamListContainer} from '../../containers/index';
+import {MyTeamListContainer, TeamRoomContainer} from '../../containers/index';
 
 interface Props {
     routerProps: RouteComponentProps
@@ -37,7 +37,7 @@ function MyTeamPage({routerProps}: Props){
             <div className='content'>
                 <Route path={`${match.path}`} exact render={()=> <MyTeamListContainer/>}/>
                 <Route path={`${match.path}/history`} exact render={()=> <MyTeamListContainer/>}/>
-                <Route path={`${match.path}/room`} exact render={()=> <div>팀 상세</div>}/>
+                <Route path={`${match.path}/room`} exact render={()=> <TeamRoomContainer/>}/>
             </div>
         </div>
     );
