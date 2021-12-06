@@ -95,6 +95,7 @@ export interface TeamDetail extends MyTeam {
     totalJoinNum: number
     good: number
     bad: number
+    reviewKeyWord: string[]
     activeHistory: ActiveHistory[]
     // 기타 등등..
 }

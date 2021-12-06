@@ -37,6 +37,7 @@ const initState: stateType = {
         totalJoinNum: 300,
         good: 240,
         bad: 240,
+        reviewKeyWord: ['친절한','편안한','친구같은','자주만만','다재다능','솔직한'],
         activeHistory: [
             {times: 1, title: '다락방과 함께 재미있는 프로젝트 해볼 사람들~', place: '강남', date: '21111107'}
         ]

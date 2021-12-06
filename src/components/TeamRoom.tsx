@@ -65,7 +65,11 @@ function TeamRoom({teamInfo}: Props){
                             <div className='row'>
                                 <div className='col'>
                                     <div className='field'>후기</div>
-                                    <Tag name='친' selected/>
+                                    <ul>
+                                        {teamInfo.reviewKeyWord.map(word => (
+                                            <Tag key={word} name={word} theme='light'/>
+                                        ))}
+                                    </ul>
                                 </div>
                                 <div className='col'>
                                     <div className='field'></div>
@@ -139,6 +143,9 @@ const style = (FemaleRate: number)=> (css`
                         justify-content: space-between;
                         margin-bottom: 12px;
                         .col {
+                            ul {
+                                display: flex;
+                            }
                             .txt-gray {
                                 font-size: 12px;
                                 color: var(--color-gray);
@@ -153,6 +160,11 @@ const style = (FemaleRate: number)=> (css`
                                 span {
                                     font-size: 16px;
                                     margin-left: 5px;
+                                }
+                            }
+                            &:first-child {
+                                .field {
+                                    text-align: left;
                                 }
                             }
                             .rate-bar {
