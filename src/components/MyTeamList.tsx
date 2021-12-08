@@ -2,7 +2,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {MyTeam} from '../util/interfaces';
-import {TeamRow} from './index';
+import {divDate} from '../util/util';
+import {TeamRow, Grid, GridColumn} from './index';
 import { useHistory } from "react-router-dom";
 
 interface Props {
@@ -13,6 +14,10 @@ function MyTeamList({teamList}: Props){
     const history = useHistory();
     const [title, setTitle] = useState('');
     const {pathname} = window.location;
+    const columnConfig = teamList.map(team => ({
+        width: '100px',
+        headerText: '100px',
+    }));
 
     const onClickRoom = (team: MyTeam)=>{
         history.push({
@@ -23,6 +28,16 @@ function MyTeamList({teamList}: Props){
         })
     }
 
+    const formatDate = (value: string | number)=> {
+        value = value + '';
+        const {yyyy, MM, dd} = divDate(value);
+        return `${yyyy}.${MM}.${dd}`;
+    }
+    
+    const addString = (value: string | number)=>{
+        return value + '회'
+    }
+
     useLayoutEffect(()=>{
         const bool = pathname.indexOf('history') > -1;
         setTitle(bool ? '팀 기록' : '팀 룸');
@@ -30,7 +45,7 @@ function MyTeamList({teamList}: Props){
 
     return (
         <div css={style}>
-            <div className='title'>{title}</div>
+            {/* <div className='title'>{title}</div>
             <div className='table'>
                 <div className='header row'>
                     <div className='col'>팀 명</div>
@@ -40,7 +55,15 @@ function MyTeamList({teamList}: Props){
                 {teamList.map(team => (
                     <TeamRow key={team.id} team={team} onClickRoom={onClickRoom}/>
                 ))}
-            </div>
+            </div> */}
+
+            <Grid<MyTeam> title='타이틀' dataList={teamList}>
+                <GridColumn field='teamName' headerText='팀 명' cellStyle={{fontWeight: 'bold'}}/>
+                <GridColumn field='category' headerText='분류' cellStyle={{color: 'var(--color-gray)'}}/>
+                <GridColumn field='joinDate' headerText='가입 날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>
+                <GridColumn field='joinCount' headerText='' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={addString}/>
+            </Grid>
+
         </div>
     );
 }
@@ -64,15 +87,6 @@ const style = css`
             }
             &:nth-child(4) {
                 flex-grow: 1;
-            }
-        }
-        .header {
-            .col {
-                color: black;
-                font-size: 16px
-            }
-            &:hover {
-                background-color: unset !important;
             }
         }
         .row {

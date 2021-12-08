@@ -32,7 +32,7 @@ const style = (select: boolean, theme: string) => (css`
         display: flex;
         justify-content: center;
         border-radius: 25px;
-        padding: 12px 8px;
+        padding: 10px 8px;
 
         font-size: 16px;
         font-weight: 500;
