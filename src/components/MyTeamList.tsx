@@ -19,7 +19,7 @@ function MyTeamList({teamList}: Props){
         headerText: '100px',
     }));
 
-    const onClickRoom = (team: MyTeam)=>{
+    const onClickRow = (team: MyTeam)=>{
         history.push({
             pathname: '/myteam/room',
             state: {
@@ -45,23 +45,11 @@ function MyTeamList({teamList}: Props){
 
     return (
         <div css={style}>
-            {/* <div className='title'>{title}</div>
-            <div className='table'>
-                <div className='header row'>
-                    <div className='col'>팀 명</div>
-                    <div className='col'>분류</div>
-                    <div className='col'>가입 날짜</div>
-                </div>
-                {teamList.map(team => (
-                    <TeamRow key={team.id} team={team} onClickRoom={onClickRoom}/>
-                ))}
-            </div> */}
-
-            <Grid<MyTeam> title='타이틀' dataList={teamList}>
-                <GridColumn field='teamName' headerText='팀 명' cellStyle={{fontWeight: 'bold'}}/>
-                <GridColumn field='category' headerText='분류' cellStyle={{color: 'var(--color-gray)'}}/>
-                <GridColumn field='joinDate' headerText='가입 날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>
-                <GridColumn field='joinCount' headerText='' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={addString}/>
+            <Grid<MyTeam> title='타이틀' dataList={teamList} onClickRow={onClickRow}>
+                <GridColumn width='180px' field='teamName' headerText='팀 명' cellStyle={{fontWeight: 'bold'}}/>
+                <GridColumn width='330px' field='category' headerText='분류' cellStyle={{color: 'var(--color-gray)'}}/>
+                <GridColumn width='180px' field='joinDate' headerText='가입 날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>
+                <GridColumn field='joinCount' headerText='' cellStyle={{color: 'var(--color-gray)', textAlign: 'center'}} valueFormatFunction={addString}/>
             </Grid>
 
         </div>

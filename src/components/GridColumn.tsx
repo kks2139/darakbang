@@ -9,7 +9,7 @@ export interface GridColumnProps {
     cellStyle?: CSS.Properties
 }
 
-function GridColumn({width, field, headerText, valueFormatFunction, cellStyle}: GridColumnProps){
+function GridColumn({width, field, headerText, valueFormatFunction, cellStyle,}: GridColumnProps){
     return <></>;
 }
 

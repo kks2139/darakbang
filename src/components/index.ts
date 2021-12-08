@@ -21,6 +21,7 @@ import TeamRoom from "./TeamRoom"
 import Grid from "./Grid"
 import GridColumn from "./GridColumn"
 import GridRow from "./GridRow"
+import GridHeader from "./GridHeader"
 
 export {
     GatheringFilter,
@@ -45,5 +46,6 @@ export {
     TeamRoom,
     Grid,
     GridColumn,
-    GridRow
+    GridRow,
+    GridHeader
 }
