@@ -3,6 +3,7 @@ import React from "react";
 import {css} from '@emotion/react';
 import {GridColumnProps} from './GridColumn';
 import {Constraint} from '../util/interfaces';
+import CSS from 'csstype';
 
 interface Props<Data> {
     columnProps: GridColumnProps[]
@@ -15,21 +16,19 @@ function GridRow<Data extends Constraint>({columnProps, data, onClickRow}: Props
         if(onClickRow) onClickRow(data);
     }
 
+    const mergeStyle = (style: CSS.Properties | undefined, width: string)=> ({...style, width})
+
     return (
         <div css={style} onClick={onClick}>
             {columnProps.map(prop => {
-                const {valueFormatFunction, cellStyle, width} = prop;
+                const {valueFormatFunction, cellStyle, width='100px'} = prop;
                 let value = data[prop.field] as string | number;
 
                 if(valueFormatFunction){
                     value = valueFormatFunction(value);
                 }
 
-                if(cellStyle){
-                    // cellStyle.width = width || '80px';
-                }
-
-                return <div className='col' style={cellStyle}>{value}</div>
+                return <div className='col' style={mergeStyle(cellStyle, width)}>{value}</div>
             })}
         </div>
     );
