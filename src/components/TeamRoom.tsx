@@ -72,8 +72,16 @@ function TeamRoom({teamInfo}: Props){
                                     </ul>
                                 </div>
                                 <div className='col'>
-                                    <div className='field'></div>
-
+                                    <div className='img-box'>
+                                        <div>
+                                            <img src='/thumb-up.png'></img>
+                                            <div className='num good'>{teamInfo.good}</div>
+                                        </div>
+                                        <div>
+                                            <img src='/thumb-down.png'></img>
+                                            <div className='num'>{teamInfo.bad}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +104,7 @@ const style = (FemaleRate: number)=> (css`
     display: flex;
     
     .team-info {
-        width: 616px;
+        width: 100%;
         margin-right: 24px;
             .title {
                 font-size: 36px;
@@ -129,8 +137,9 @@ const style = (FemaleRate: number)=> (css`
                 margin-bottom: 24px;
             }
             .team-state {
+                margin-bottom: 76px;
                 .detail-box {
-                    padding: 24px;
+                    padding: 24px 24px 3px 24px;
                     background-color: var(--color-bg-gray);
                     .field {
                         font-size: 16px;
@@ -188,7 +197,21 @@ const style = (FemaleRate: number)=> (css`
                                     background-color: var(--color-yellow);
                                 }
                             }
-
+                            .img-box {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 20px 10px 0 0;
+                                width: 90px;
+                                height: 100%;
+                                .num {
+                                    font-weight: 500;
+                                    margin-top: 5px;
+                                    &.good {
+                                        color: var(--color-main-text);
+                                    }
+                                }
+                            }
                         }
                     }
                 }

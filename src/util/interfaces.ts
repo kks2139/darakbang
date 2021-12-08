@@ -77,7 +77,7 @@ export interface Notification {
     // 기타 필요한거 추가
 }
 
-export interface MyTeam {
+export interface MyTeam  extends Constraint{
     id: number
     teamName: string
     category: string
@@ -105,4 +105,8 @@ export interface ActiveHistory {
     title: string
     place: string
     date: string
+}
+
+export interface Constraint {
+    [key: string]: string | number | boolean | string[] | ActiveHistory[]
 }

@@ -70,7 +70,7 @@ const style = css`
     }
     > .content {
         width: 910px;
-        height: 500px;
+        min-height: 500px;
     }
 `;
 
