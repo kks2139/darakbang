@@ -8,6 +8,7 @@ import HeaderContainer from "./HeaderContainer"
 import NotificationListContainer from "./NotificationListContainer"
 import MyTeamListContainer from "./MyTeamListContainer"
 import TeamRoomContainer from "./TeamRoomContainer"
+import MemberInfoContainer from "./MemberInfoContainer"
 
 export {
     GatheringFilterContainers,
@@ -19,5 +20,6 @@ export {
     HeaderContainer,
     NotificationListContainer,
     MyTeamListContainer,
-    TeamRoomContainer
+    TeamRoomContainer,
+    MemberInfoContainer
 }

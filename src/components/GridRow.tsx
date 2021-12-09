@@ -16,19 +16,33 @@ function GridRow<Data extends Constraint>({columnProps, data, onClickRow}: Props
         if(onClickRow) onClickRow(data);
     }
 
-    const mergeStyle = (style: CSS.Properties | undefined, width: string)=> ({...style, width})
+    const mergeStyle = (style: CSS.Properties | undefined, width: string, ellipsis: boolean)=> {
+        const inlineStyle = {
+            ...style, 
+            width
+        }
+        if(ellipsis){
+            const omit = {
+                whiteSpace: 'nowrap',
+                overflow: 'hidden',
+                textOverflow: 'ellipsis'
+            }
+            Object.assign(inlineStyle, omit);
+        }
+        return (inlineStyle);
+    }
 
     return (
         <div css={style} onClick={onClick}>
             {columnProps.map(prop => {
-                const {valueFormatFunction, cellStyle, width='100px'} = prop;
-                let value = data[prop.field] as string | number;
+                const {valueFormatFunction, cellStyle, width='100px', ellipsis=false} = prop;
+                let value = data[prop.field] as string | number | JSX.Element;
 
-                if(valueFormatFunction){
+                if((typeof value === 'string' || typeof value === 'number') && valueFormatFunction){
                     value = valueFormatFunction(value);
                 }
 
-                return <div className='col' style={mergeStyle(cellStyle, width)}>{value}</div>
+                return <div className='col' style={mergeStyle(cellStyle, width, ellipsis)}>{value}</div>
             })}
         </div>
     );
@@ -36,6 +50,7 @@ function GridRow<Data extends Constraint>({columnProps, data, onClickRow}: Props
 
 const style = css`
     display: flex;
+    align-items: center;
     padding: 18px 15px;
     border-bottom: 1px solid var(--color-light-gray);
     font-size: 20px;
@@ -46,14 +61,7 @@ const style = css`
         background-color: var(--color-bg-gray);
     }
     .col {
-        
-    }
-    .bold {
-        font-weight: bold;
-        color: black;
-    }
-    .center {
-        text-align: center;
+        margin-right: 3px;
     }
 `;
 

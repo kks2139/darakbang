@@ -28,7 +28,6 @@ function GatheringPage({routerProps}: Props){
             </div>
             <Route path={`${match.path}`} exact render={()=> (
                 <Tab names={['유료', '일반']} width={894}>
-                    <>
                     <div>
                         유료 화면 ~~
                     </div>
@@ -36,7 +35,6 @@ function GatheringPage({routerProps}: Props){
                         <GatheringFilterContainers/>
                         <GatheringListContainers onGatheringSelected={onGatheringSelected}/>
                     </div>
-                    </>
                 </Tab>
             )}/>
             <Route path={`${match.path}/detail`} exact render={()=> <GatheringDetailContainers onClickBack={onClickBack}/>}/>

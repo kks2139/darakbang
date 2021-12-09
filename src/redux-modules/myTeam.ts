@@ -1,4 +1,4 @@
-import {MyTeam, TeamDetail} from '../util/interfaces';
+import {MyTeam, TeamDetail, Member} from '../util/interfaces';
 
 const SET_MY_TEAM_LIST = 'app/SET_MY_TEAM_LIST' as const;
 
@@ -13,6 +13,7 @@ type actionType =
 type stateType = {
     myTeamList: MyTeam[]
     selectedTeamRoom: TeamDetail
+    memberList: Member[]
 }
 
 const initState: stateType = {
@@ -39,9 +40,20 @@ const initState: stateType = {
         bad: 240,
         reviewKeyWord: ['친절한','편안한','친구같은','자주만만','다재다능','솔직한'],
         activeHistory: [
-            {times: 1, title: '다락방과 함께 재미있는 프로젝트 해볼 사람들~', place: '강남', date: '21111107'}
+            {times: 1, title: '다락방과 함께 재미있는 프로젝트 해볼 사람들~', place: '강남', date: '202111110700'},
+            {times: 2, title: '다락방과 함께 재미있는 프로젝트 해볼 사람들~', place: '강남', date: '202111160700'},
+            {times: 3, title: '다락방과 함께 재미있는 프로젝트 해볼 사람들~', place: '강남', date: '202111160700'},
         ]
-    }
+    },
+    memberList: [
+        {isLeader: true, nickname: '주인장', avatar: '', activePeriod: 1, joinCount: 15, tag: '이장님'},
+        {isLeader: false, nickname: '팀원1', avatar: '', activePeriod: 15, joinCount: 15, tag: ''},
+        {isLeader: false, nickname: '팀원2', avatar: '', activePeriod: 8, joinCount: 15, tag: ''},
+        {isLeader: false, nickname: '팀원3', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
+        {isLeader: false, nickname: '팀원4', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
+        {isLeader: false, nickname: '팀원5', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
+        {isLeader: false, nickname: '팀원6', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
+    ]
 };
 
 function myTeam(state: stateType = initState, action: actionType) {

@@ -3,7 +3,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {css} from '@emotion/react';
 import {MyTeam} from '../util/interfaces';
 import {divDate} from '../util/util';
-import {TeamRow, Grid, GridColumn} from './index';
+import {Grid, GridColumn} from './index';
 import { useHistory } from "react-router-dom";
 
 interface Props {
@@ -14,10 +14,6 @@ function MyTeamList({teamList}: Props){
     const history = useHistory();
     const [title, setTitle] = useState('');
     const {pathname} = window.location;
-    const columnConfig = teamList.map(team => ({
-        width: '100px',
-        headerText: '100px',
-    }));
 
     const onClickRow = (team: MyTeam)=>{
         history.push({
@@ -45,7 +41,8 @@ function MyTeamList({teamList}: Props){
 
     return (
         <div css={style}>
-            <Grid<MyTeam> title='타이틀' dataList={teamList} onClickRow={onClickRow}>
+            <div className='title'>{title}</div>
+            <Grid<MyTeam> dataList={teamList} onClickRow={onClickRow}>
                 <GridColumn width='180px' field='teamName' headerText='팀 명' cellStyle={{fontWeight: 'bold'}}/>
                 <GridColumn width='330px' field='category' headerText='분류' cellStyle={{color: 'var(--color-gray)'}}/>
                 <GridColumn width='180px' field='joinDate' headerText='가입 날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>
@@ -61,41 +58,6 @@ const style = css`
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 35px;
-    }
-    .table {
-        .col {
-            &:nth-child(1) {
-                width: 180px;
-            }
-            &:nth-child(2) {
-                width: 330px;
-            }
-            &:nth-child(3) {
-                width: 180px;
-            }
-            &:nth-child(4) {
-                flex-grow: 1;
-            }
-        }
-        .row {
-            display: flex;
-            padding: 18px 15px;
-            border-bottom: 1px solid var(--color-light-gray);
-            font-size: 20px;
-            color: var(--color-gray);
-            cursor: pointer;
-            transition: .2s;
-            &:hover {
-                background-color: var(--color-bg-gray);
-            }
-            .bold {
-                font-weight: bold;
-                color: black;
-            }
-            .center {
-                text-align: center;
-            }
-        }
     }
 `;
 
