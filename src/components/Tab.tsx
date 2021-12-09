@@ -5,7 +5,7 @@ import {css} from '@emotion/react';
 interface Props {
     names: string[]
     subNames?: string[]
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[]
     selectedIndex?: number
     selectedSubIndex?: number
     onClickTab?: ()=> void
@@ -16,7 +16,7 @@ interface Props {
 function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0, onClickTab, width=0, height=0}: Props){
     const [index, setIndex] = useState(0);
     const divRef = useRef<HTMLDivElement | null>(null);
-    const child = children.props.children ? children.props.children : children;
+    const childs = Array.isArray(children) ? children : [children];
 
     const onClick = (e: React.MouseEvent<HTMLDivElement>)=>{
         selectChild(e);
@@ -57,7 +57,7 @@ function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0,
                 </div>
             </div>
             <div className='content'>
-                {Array.isArray(child) ? child[index] : child}
+                {childs[index]}
             </div>
         </div>
     );
