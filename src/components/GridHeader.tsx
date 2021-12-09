@@ -16,7 +16,8 @@ function GridHeader({columnProps, onClickHeader}: Props){
     return (
         <div css={style} onClick={onClick}>
             {columnProps.map(prop => {
-                return <div className='col' style={{width: prop.width}}>{prop.headerText}</div>
+                const {width='100px'} = prop;
+                return <div className='col' style={{width}}>{prop.headerText}</div>
             })}
         </div>
     );
@@ -29,7 +30,8 @@ const style = css`
     border-bottom: 1px solid var(--color-light-gray);
     .col {
         color: black;
-        font-size: 16px
+        font-size: 16px;
+        margin-right: 3px;
     }
     &:hover {
     }

@@ -2,18 +2,20 @@ import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import { useLocation } from "react-router-dom";
-import {TeamDetail} from '../util/interfaces';
+import {TeamDetail, ActiveHistory} from '../util/interfaces';
 import {divDate} from '../util/util';
-import {Tag} from './index';
+import {Tag, Grid, GridColumn} from './index';
+import {MemberInfoContainer} from '../containers/index';
 
 interface Props {
     teamInfo: TeamDetail
 }
 
 function TeamRoom({teamInfo}: Props){
-    const formatDate = (str: string)=>{
-        const {yy, MM, dd} = divDate(str);
-        return `${yy}.${MM}.${dd}`;
+
+    const formatDate = (str: string | number)=>{
+        const {yy, MM, dd, HH, mm} = divDate(str + '');
+        return `${yy}.${MM}.${dd} / ${HH}:${mm}`;
     }
 
     const getFemaleRate = ()=> Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)))
@@ -88,11 +90,16 @@ function TeamRoom({teamInfo}: Props){
                     </div>
                     <div className='active-state'>
                         <div className='tit'>활동 현황</div>
-                        
+                        <Grid<ActiveHistory> dataList={teamInfo.activeHistory}>
+                            <GridColumn width='60px' field='times' headerText='회차' cellStyle={{color: 'var(--color-gray)', paddingLeft: '10px'}}/>
+                            <GridColumn width='330px' field='title' headerText='제목' cellStyle={{fontWeight: 500}} ellipsis={true}/>
+                            <GridColumn width='60px' field='place' headerText='지역' cellStyle={{color: 'var(--color-gray)'}}/>
+                            <GridColumn width='' field='date' headerText='날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>
+                        </Grid>
                     </div>
                 </section>
                 <section className='member-info'>
-
+                    <MemberInfoContainer/>
                 </section>
             </div>
         </div>
@@ -104,7 +111,6 @@ const style = (FemaleRate: number)=> (css`
     display: flex;
     
     .team-info {
-        width: 100%;
         margin-right: 24px;
             .title {
                 font-size: 36px;
@@ -201,8 +207,8 @@ const style = (FemaleRate: number)=> (css`
                                 display: flex;
                                 justify-content: space-between;
                                 align-items: center;
-                                padding: 20px 10px 0 0;
-                                width: 90px;
+                                padding: 20px 10px 0 10px;
+                                width: 100px;
                                 height: 100%;
                                 .num {
                                     font-weight: 500;
@@ -222,7 +228,7 @@ const style = (FemaleRate: number)=> (css`
         }
         .member-info {
             width: 264px;
-            border: 1px solid blue;
+            // border: 1px solid blue;
         }
     }
 `);

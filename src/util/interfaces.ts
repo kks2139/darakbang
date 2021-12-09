@@ -77,6 +77,10 @@ export interface Notification {
     // 기타 필요한거 추가
 }
 
+export interface Constraint {
+    [key: string]: undefined | string | number | boolean | string[] | JSX.Element | ActiveHistory | ActiveHistory[]
+}
+
 export interface MyTeam  extends Constraint{
     id: number
     teamName: string
@@ -100,13 +104,19 @@ export interface TeamDetail extends MyTeam {
     // 기타 등등..
 }
 
-export interface ActiveHistory {
+export interface ActiveHistory extends Constraint {
     times: number
     title: string
     place: string
     date: string
 }
 
-export interface Constraint {
-    [key: string]: string | number | boolean | string[] | ActiveHistory[]
+export interface Member extends Constraint{
+    isLeader: boolean
+    nickname: string
+    avatar: string
+    activePeriod: number // ~년차
+    joinCount: number
+    tag?: string
+    el?: JSX.Element
 }

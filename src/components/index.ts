@@ -16,12 +16,13 @@ import GatheringPage from "./pages/GatheringPage"
 import Footer from "./common/Footer"
 import SideMenu from "./common/SideMenu"
 import MyTeamList from "./MyTeamList"
-import TeamRow from "./TeamRow"
 import TeamRoom from "./TeamRoom"
 import Grid from "./Grid"
 import GridColumn from "./GridColumn"
 import GridRow from "./GridRow"
 import GridHeader from "./GridHeader"
+import MemberInfo from "./MemberInfo"
+import Avatar from "./Avatar"
 
 export {
     GatheringFilter,
@@ -42,10 +43,11 @@ export {
     Footer,
     SideMenu,
     MyTeamList,
-    TeamRow,
     TeamRoom,
     Grid,
     GridColumn,
     GridRow,
-    GridHeader
+    GridHeader,
+    MemberInfo,
+    Avatar
 }
