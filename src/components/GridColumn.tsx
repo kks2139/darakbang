@@ -5,7 +5,7 @@ export interface GridColumnProps {
     width?: string
     field: string
     headerText?: string
-    valueFormatFunction?: (param: string | number)=> string | number
+    valueFormatFunction?: (param: string | number)=> string | number | JSX.Element
     cellStyle?: CSS.Properties
     ellipsis?: boolean
 }

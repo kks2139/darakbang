@@ -23,6 +23,7 @@ import GridRow from "./GridRow"
 import GridHeader from "./GridHeader"
 import MemberInfo from "./MemberInfo"
 import Avatar from "./Avatar"
+import Border from "./Border"
 
 export {
     GatheringFilter,
@@ -49,5 +50,6 @@ export {
     GridRow,
     GridHeader,
     MemberInfo,
-    Avatar
+    Avatar,
+    Border
 }
