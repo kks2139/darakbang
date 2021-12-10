@@ -137,13 +137,13 @@ const style = (FemaleRate: number)=> (css`
                     }
                 }
             }
-            .tit {
-                font-size: 24px;
-                font-weight: bold;
-                margin-bottom: 24px;
-            }
             .team-state {
                 margin-bottom: 76px;
+                > .tit {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 24px;
+                }
                 .detail-box {
                     padding: 24px 24px 3px 24px;
                     background-color: var(--color-bg-gray);
@@ -223,11 +223,14 @@ const style = (FemaleRate: number)=> (css`
                 }
             }
             .active-state {
-
+                > .tit {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 24px;
+                }
             }
         }
         .member-info {
-            width: 264px;
             // border: 1px solid blue;
         }
     }
