@@ -18,7 +18,11 @@ function TeamRoom({teamInfo}: Props){
         return `${yy}.${MM}.${dd} / ${HH}:${mm}`;
     }
 
-    const getFemaleRate = ()=> Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)))
+    const getFemaleRate = ()=> Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)));
+
+    const onClickTalk = ()=> {
+
+    }
 
     return (
         <div css={style(getFemaleRate())}>
@@ -29,7 +33,11 @@ function TeamRoom({teamInfo}: Props){
                         <div className='category'>{teamInfo.category}</div>
                         <div className='box'>
                             <div className='last-act'>{formatDate(teamInfo.lastActive)}에 마지막으로 활동한 팀입니다.</div>
-                            <img src='/join-text.png'></img>
+                            <div className='img-wrapper'>
+                                {/* <img src='/join-text.png'></img> */}
+                                <img src='/talk.png' onClick={onClickTalk}></img>
+                                <span>124</span>
+                            </div>
                         </div>
                     </div>
                     <div className='team-state'>
@@ -131,9 +139,18 @@ const style = (FemaleRate: number)=> (css`
                         font-size: 16px;
                         color: var(--color-main-text);
                     }
-                    img {
-                        transform: translateY(-30%);
-                        cursor: pointer;
+                    .img-wrapper {
+                        position: relative;
+                        display: flex;
+                        justify-content: center;
+                        img {
+                            transform: translateY(-30%);
+                            cursor: pointer;
+                        }
+                        span {
+                            position: absolute;
+                            top: -5px;
+                        }
                     }
                 }
             }
