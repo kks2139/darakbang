@@ -90,6 +90,7 @@ export interface MyTeam  extends Constraint{
 }
 
 export interface TeamDetail extends MyTeam {
+    id: number
     isMember: boolean // 이 팀에 가입한 멤버인지 여부
     lastActive: string
     boys: number
@@ -119,4 +120,10 @@ export interface Member extends Constraint{
     joinCount: number
     tag?: string
     el?: JSX.Element
+}
+
+export interface ChattingMessage {
+    userId: string
+    message: string
+    avatar?: string // img url
 }
