@@ -67,17 +67,25 @@ export const clearInvalid = (root: HTMLElement)=>{
     });
 }
 
-export const request = async (req: string)=>{
+export const request = async (req: string, option?: object)=>{
     let api = '';
+    const opt = {
+        method: 'post',
+        body: JSON.stringify(option)
+    };
+
     switch(req){
         case 'getNotifications':
+            api = '요청 url';
+            break;
+        case 'refreshMessage':
             api = '요청 url';
             break;
         default:
             break;
     }   
     try{
-        const res = await fetch(api);
+        const res = await fetch(api, opt);
         if(res.status !== 200) {
             alert('데이터 조회중 문제가 발생하였습니다.');
         }else{

@@ -24,6 +24,11 @@ import GridHeader from "./GridHeader"
 import MemberInfo from "./MemberInfo"
 import Avatar from "./Avatar"
 import Border from "./Border"
+import Chatting from "./Chatting"
+import ChattingList from "./ChattingList"
+import ChattingToolbar from "./ChattingToolbar"
+import ChattingInput from "./ChattingInput"
+
 
 export {
     GatheringFilter,
@@ -51,5 +56,9 @@ export {
     GridHeader,
     MemberInfo,
     Avatar,
-    Border
+    Border,
+    Chatting,
+    ChattingList,
+    ChattingToolbar,
+    ChattingInput
 }

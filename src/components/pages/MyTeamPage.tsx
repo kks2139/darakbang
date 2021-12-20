@@ -3,6 +3,7 @@ import React, { useRef } from 'react';
 import { css } from '@emotion/react';
 import {useHistory, Route, Link, RouteComponentProps} from 'react-router-dom';
 import {MyTeamListContainer, TeamRoomContainer} from '../../containers/index';
+import { Chatting } from '../index';
 
 interface Props {
     routerProps: RouteComponentProps
@@ -38,6 +39,7 @@ function MyTeamPage({routerProps}: Props){
                 <Route path={`${match.path}`} exact render={()=> <MyTeamListContainer/>}/>
                 <Route path={`${match.path}/history`} exact render={()=> <MyTeamListContainer/>}/>
                 <Route path={`${match.path}/room`} exact render={()=> <TeamRoomContainer/>}/>
+                <Route path={`${match.path}/chatting`} exact render={()=> <Chatting/>}/>
             </div>
         </div>
     );

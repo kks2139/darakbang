@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 import {TeamDetail, ActiveHistory} from '../util/interfaces';
 import {divDate} from '../util/util';
 import {Tag, Grid, GridColumn} from './index';
@@ -12,20 +12,24 @@ interface Props {
 }
 
 function TeamRoom({teamInfo}: Props){
-
+    const history = useHistory();
     const formatDate = (str: string | number)=>{
         const {yy, MM, dd, HH, mm} = divDate(str + '');
         return `${yy}.${MM}.${dd} / ${HH}:${mm}`;
     }
 
-    const getFemaleRate = ()=> Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)));
+    const femailRate = Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)));
 
     const onClickTalk = ()=> {
-
+        history.push('chatting', {
+            state: {
+                teamId: teamInfo.id
+            }
+        });
     }
 
     return (
-        <div css={style(getFemaleRate())}>
+        <div css={style(femailRate)}>
             <div className='content'>
                 <section className='team-info'>
                     <div className='title'>{teamInfo.teamName}</div>
@@ -51,7 +55,7 @@ function TeamRoom({teamInfo}: Props){
                                         <div className='male'>남</div>
                                     </div>
                                     <div className='txt-gray'>
-                                        여{getFemaleRate()}% 남{100 -getFemaleRate()}%
+                                        여{femailRate}% 남{100 -femailRate}%
                                     </div>
                                 </div>
                                 <div className='col'>
@@ -143,6 +147,7 @@ const style = (FemaleRate: number)=> (css`
                         position: relative;
                         display: flex;
                         justify-content: center;
+                        cursor: pointer;
                         img {
                             transform: translateY(-30%);
                             cursor: pointer;
