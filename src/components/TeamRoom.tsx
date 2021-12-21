@@ -37,9 +37,9 @@ function TeamRoom({teamInfo}: Props){
                         <div className='category'>{teamInfo.category}</div>
                         <div className='box'>
                             <div className='last-act'>{formatDate(teamInfo.lastActive)}에 마지막으로 활동한 팀입니다.</div>
-                            <div className='img-wrapper'>
+                            <div className='img-wrapper' onClick={onClickTalk}>
                                 {/* <img src='/join-text.png'></img> */}
-                                <img src='/talk.png' onClick={onClickTalk}></img>
+                                <img src='/talk.png'></img>
                                 <span>124</span>
                             </div>
                         </div>

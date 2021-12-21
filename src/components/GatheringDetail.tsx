@@ -144,7 +144,7 @@ function GatheringDetail({info, onBack, onJoin}: Props){
                                         <div key={d} className='date-box'>
                                             <div className={`dt ${end}`} onClick={onClickDate}>
                                                 {`${divDate(d).MM}월 ${divDate(d).dd}일 ${divDate(d).HH} : ${divDate(d).mm} ${divDate(d).ampm}`}
-                                                <img src='man.png'></img>
+                                                <img src='/man.png'></img>
                                             </div>
                                             {end ? <div className='end-txt'>마감</div> : null}
                                         </div>
