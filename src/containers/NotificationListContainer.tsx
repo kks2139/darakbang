@@ -22,7 +22,7 @@ function NotificationListContainer(){
     }
 
     useEffect(()=>{
-        getList();
+        //getList();
     }, []);
 
     return (

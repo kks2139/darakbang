@@ -71,7 +71,7 @@ const style = css`
         }
     }
     > .content {
-        // width: 910px;
+        /* width: 910px; */
         min-height: 500px;
     }
 `;

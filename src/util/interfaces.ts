@@ -124,6 +124,8 @@ export interface Member extends Constraint{
 
 export interface ChattingMessage {
     userId: string
+    userName: string
     message: string
     avatar?: string // img url
+    time: string // yyyyMMddHHmmss
 }

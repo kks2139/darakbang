@@ -28,7 +28,8 @@ import Chatting from "./Chatting"
 import ChattingList from "./ChattingList"
 import ChattingToolbar from "./ChattingToolbar"
 import ChattingInput from "./ChattingInput"
-
+import ChatArea from "./ChatArea"
+import TextBox from "./TextBox"
 
 export {
     GatheringFilter,
@@ -60,5 +61,7 @@ export {
     Chatting,
     ChattingList,
     ChattingToolbar,
-    ChattingInput
+    ChattingInput,
+    ChatArea,
+    TextBox
 }
