@@ -22,12 +22,12 @@ function Chatting(){
         {userId: 'b', userName: '감자', time:'20211221222930', message: '고생요~'},
     ]);
     const location = useLocation<Params>();
-    const {teamId} = location.state;
+    // const {teamId} = location.state;
 
     const onSendMessage = (msg: string)=>{
         // 1. 입력한 메시지 서버로 전송
         // 2. ChattingList 에서 api 조회로 리렌더링
-        
+
         // 테스트 데이터 set
         const dt = new Date();
         const time = dt.getFullYear() + dt.getMonth() + dt.getDate() + dt.getHours() + dt.getMinutes() + dt.getSeconds() + '';

@@ -30,7 +30,8 @@ function ChattingInput({text='', onSendMessage}: Props){
         if(msg.trim()){
             onSendMessage(msg);
         }
-        setMsg(pre => '');
+        setMsg('');
+        setDisabled(true);
     }
 
     const style = css`
@@ -57,7 +58,9 @@ function ChattingInput({text='', onSendMessage}: Props){
             background-color: white;
             cursor: pointer;
             &:disabled {
-                opacity: .3;
+                border-color: var(--color-light-gray);
+                background-color: var(--color-bg-gray);
+                color: var(--color-light-gray);
             }
         }
     `;
