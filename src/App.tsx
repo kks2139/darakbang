@@ -24,9 +24,6 @@ function App() {
 
   return (
     <div css={style({backgroundColor})} ref={divRef}> 
-      <form>
-        <button>test</button>
-      </form>
       <div className='header'>
         <HeaderContainer/>
       </div>
