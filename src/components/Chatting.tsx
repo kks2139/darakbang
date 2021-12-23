@@ -2,11 +2,26 @@ import React, { useState } from "react";
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 import { useLocation } from "react-router-dom";
-import {ChattingList, ChattingToolbar, ChattingInput} from './index';
+import {ChattingList, ChattingToolbar, ChattingInput, Form, FormRow, CheckBox} from './index';
 import {ChattingMessage} from '../util/interfaces';
 
 interface Params {
     teamId: number
+}
+
+interface Visible {
+    showForm: boolean
+    showMap: boolean
+    showPicture: boolean
+    overTop: number
+}
+
+interface Inputs {
+    isOnline: boolean
+    nextDate: string[]
+    pay: number
+    place: string
+    description: string
 }
 
 function Chatting(){
@@ -22,7 +37,21 @@ function Chatting(){
         {userId: 'b', userName: '감자', time:'20211221222930', message: '고생요~'},
     ]);
     const location = useLocation<Params>();
-    // const {teamId} = location.state;
+    const {teamId} = location.state;
+    const [visible, setVisible] = useState<Visible>({
+        showForm: false,
+        showMap: false,
+        showPicture: false,
+        overTop: 0
+    });
+    const [inputs, setInputs] = useState<Inputs>({
+        isOnline: false,
+        nextDate: [''],
+        pay: 0,
+        place: '',
+        description: ''
+    });
+
 
     const onSendMessage = (msg: string)=>{
         // 1. 입력한 메시지 서버로 전송
@@ -35,6 +64,22 @@ function Chatting(){
         setTestData(testData.concat(newTestData));
     }
 
+    const onToolbarClicked = (type: string, overTop: number)=>{
+        setVisible({
+            showForm: type === 'calendar',
+            showMap: type === 'spot',
+            showPicture: type === 'camera',
+            overTop
+        });
+    }
+
+    const onCheckChanged = (check: boolean)=>{
+        setInputs({
+            ...inputs,
+            isOnline: check
+        });
+    }
+
     const style = css`
         width: 848px;
         .title {
@@ -43,8 +88,19 @@ function Chatting(){
             margin-bottom: 24px;
         }
         .wrapper {
+            position: relative;
             border: 1px solid var(--color-dim-gray);
             border-radius: 5px;
+            .form-box {
+                position: absolute;
+                top: ${visible.overTop}px;
+                left: 0;
+                transform: translateY(calc(-100% + 1px));
+                width: 100%;
+            }
+            .modal {
+
+            }
         }
     `;
 
@@ -53,8 +109,25 @@ function Chatting(){
             <div className="title">팀 채팅</div>
             <div className='wrapper'>
                 <ChattingList testData={testData}/>
-                <ChattingToolbar/>
+                <ChattingToolbar onToolbarClicked={onToolbarClicked}/>
                 <ChattingInput onSendMessage={onSendMessage}/>
+                {visible.showForm && 
+                    <div className='form-box'>
+                        <Form>
+                            <FormRow title='온/오프라인' required={true}>
+                                <div>
+                                    <CheckBox value={inputs.isOnline} label='온라인' name='online' onCheckChanged={onCheckChanged}/>
+                                </div>
+                            </FormRow>
+                            <FormRow title='모임 날짜' required={true}>
+                                <div>test</div>
+                            </FormRow>
+                            <FormRow title='회비' required={true}>
+                                <div>test</div>
+                            </FormRow>
+                        </Form>
+                    </div>
+                }
             </div>
         </div>
     );
