@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {SelectedCombo} from '../util/interfaces';
+import {SelectedCombo, ComboboxItem} from '../util/interfaces';
 
 interface Style {
     width?: string
@@ -9,11 +9,6 @@ interface Style {
     margin?: string
     border?: string
     transform?: string
-}
-
-interface ComboboxItem {
-    label: string
-    value: string
 }
 
 interface Props {
@@ -99,7 +94,7 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
                     }
                     {readOnly ? null :
                         <div className='icon-box'>
-                            <img src='comboDown.png'></img>
+                            <img src='/comboDown.png'></img>
                         </div>
                     }
                 </div>

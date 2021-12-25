@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {css} from '@emotion/react';
 import { useLocation } from 'react-router-dom';
 import {ChattingList, ChattingToolbar, ChattingInput, Form, FormRow, CheckBox, Combobox} from './index';
-import {ChattingMessage} from '../util/interfaces';
+import {ChattingMessage, ComboboxItem} from '../util/interfaces';
 
 interface Params {
     teamId: number
@@ -51,8 +51,8 @@ function Chatting(){
         place: '',
         description: ''
     });
-    const months = new Array(12).fill(0).map((a,i) => i+1);
-    const dates = new Array(31).fill(0).map((a,i) => i+1);
+    const months = new Array(12).fill(0).map((a,i) => ({label: i+1+'', value: i+1}));
+    const dates = new Array(31).fill(0).map((a,i) => ({label: i+1+'', value: i+1}));
 
 
     const onSendMessage = (msg: string)=>{
@@ -89,7 +89,7 @@ function Chatting(){
             font-size: 24px;
             margin-bottom: 24px;
         }
-        .wrapper {
+        > .wrapper {
             position: relative;
             border: 1px solid var(--color-dim-gray);
             border-radius: 5px;
@@ -142,7 +142,7 @@ function Chatting(){
                             <FormRow title='모임 날짜' required={true}>
                                 <div className='flex-box'>
                                     <span className='font-gray'>{new Date().getFullYear()}</span>
-                                    {/* <Combobox items={months}/> */}
+                                    <Combobox items={months}/>
                                 </div>
                             </FormRow>
                             <FormRow title='회비' required={true}>
