@@ -9,22 +9,12 @@ interface Props {
 }
 
 function ChattingToolbar({onToolbarClicked}: Props){
-    const [showForm, setShowForm] = useState(false);
     const divRef = useRef<HTMLDivElement | null>(null);
 
     const onClick = (e: React.MouseEvent<HTMLElement>)=>{
         const targ = e.target;
         if(targ instanceof HTMLImageElement && targ.closest('[data-imgbox]')){
             const {name} = targ.dataset;
-            switch(name) {
-                case 'camera':
-                    break;
-                case 'spot':
-                    break;
-                case 'calendar':
-                    setShowForm(true);
-                    break;
-            }
             if(onToolbarClicked) onToolbarClicked(name || '', divRef.current!.offsetTop);
         }
     }

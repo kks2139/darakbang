@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { useLocation } from "react-router-dom";
-import {ChattingList, ChattingToolbar, ChattingInput, Form, FormRow, CheckBox} from './index';
+import { useLocation } from 'react-router-dom';
+import {ChattingList, ChattingToolbar, ChattingInput, Form, FormRow, CheckBox, Combobox} from './index';
 import {ChattingMessage} from '../util/interfaces';
 
 interface Params {
@@ -51,6 +51,8 @@ function Chatting(){
         place: '',
         description: ''
     });
+    const months = new Array(12).fill(0).map((a,i) => i+1);
+    const dates = new Array(31).fill(0).map((a,i) => i+1);
 
 
     const onSendMessage = (msg: string)=>{
@@ -66,9 +68,9 @@ function Chatting(){
 
     const onToolbarClicked = (type: string, overTop: number)=>{
         setVisible({
-            showForm: type === 'calendar',
-            showMap: type === 'spot',
-            showPicture: type === 'camera',
+            showForm: type === 'calendar' && !visible.showForm,
+            showMap: type === 'spot' && !visible.showMap,
+            showPicture: type === 'camera' && !visible.showPicture,
             overTop
         });
     }
@@ -91,6 +93,7 @@ function Chatting(){
             position: relative;
             border: 1px solid var(--color-dim-gray);
             border-radius: 5px;
+            overflow: hidden;
             .form-box {
                 position: absolute;
                 top: ${visible.overTop}px;
@@ -99,7 +102,22 @@ function Chatting(){
                 width: 100%;
             }
             .modal {
-
+                position: absolute;
+                background-color: rgb(0,0,0,0.4);
+                transform: translateY(calc(-100%));
+                top: ${visible.overTop}px;
+                width: 100%;
+                height: 100%;
+            }
+            .flex-box {
+                display: flex;
+                justify-content: space-evenly;
+                width: calc(100% - 250px);
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .font-gray {
+                color: var(--color-gray);
             }
         }
     `;
@@ -111,16 +129,21 @@ function Chatting(){
                 <ChattingList testData={testData}/>
                 <ChattingToolbar onToolbarClicked={onToolbarClicked}/>
                 <ChattingInput onSendMessage={onSendMessage}/>
+                {visible.showForm || visible.showMap || visible.showPicture ? <div className='modal'></div> : null}
                 {visible.showForm && 
                     <div className='form-box'>
                         <Form>
                             <FormRow title='온/오프라인' required={true}>
-                                <div>
+                                <div className='flex-box'>
                                     <CheckBox value={inputs.isOnline} label='온라인' name='online' onCheckChanged={onCheckChanged}/>
+                                    <CheckBox value={!inputs.isOnline} label='오프라인' name='offline' onCheckChanged={onCheckChanged}/>
                                 </div>
                             </FormRow>
                             <FormRow title='모임 날짜' required={true}>
-                                <div>test</div>
+                                <div className='flex-box'>
+                                    <span className='font-gray'>{new Date().getFullYear()}</span>
+                                    {/* <Combobox items={months}/> */}
+                                </div>
                             </FormRow>
                             <FormRow title='회비' required={true}>
                                 <div>test</div>
