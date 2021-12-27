@@ -38,8 +38,8 @@ function CheckBox({value=false, label='', name, onCheckChanged}: Props){
 
     return (
         <div css={style}>
-            <div className='box' onClick={onClick}></div>
-            <div className='label' onClick={onClick}>{label}</div>
+            <input type='button' className='box' id='checkbox' onClick={onClick}/>
+            <label className='label' htmlFor='checkbox'>{label}</label>
         </div>
     );
 }

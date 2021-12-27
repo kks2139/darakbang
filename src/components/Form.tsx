@@ -7,15 +7,13 @@ interface Props {
 }
 
 function Form({children}: Props){
-    const childs = Array.isArray(children) ? children : [children];
-
     const style = css`
         width: 100%;
     `;
 
     return (
         <form css={style}>
-            {childs}
+            {children}
         </form>
     );
 }

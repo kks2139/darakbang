@@ -32,8 +32,8 @@ function Grid<Data extends Constraint>({
         <div css={style(border)} style={gridStyle}>
             {title ? <div className='title'>{title}</div> : null}
             {hideHeader ? null : <GridHeader columnProps={columnProps}/>}
-            {dataList.map(data => (
-                <GridRow<Data> columnProps={columnProps} data={data} onClickRow={onClickRow}/>
+            {dataList.map((data, i) => (
+                <GridRow<Data> key={i} columnProps={columnProps} data={data} onClickRow={onClickRow}/>
             ))}
         </div>
     );

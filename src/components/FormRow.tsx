@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 
 interface Props {
     title: string
-    children: JSX.Element
+    children: JSX.Element | JSX.Element[] 
     required?: boolean
     titleWidth?: number
 }
@@ -13,11 +13,13 @@ function FormRow({title, children, required=false, titleWidth=150}: Props){
 
     const style = css`
         display: flex;
+        align-items: center;
         padding: 20px 20px 20px 25px;
         border-bottom: 1px solid var(--color-dim-gray);
         background-color: white;
         width: 100%;
         .title {
+            display: flex;
             position: relative;
             font-size: 24px;
             font-weight: bold;

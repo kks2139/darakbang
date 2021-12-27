@@ -129,3 +129,8 @@ export interface ChattingMessage {
     avatar?: string // img url
     time: string // yyyyMMddHHmmss
 }
+
+export interface ComboboxItem {
+    label: string
+    value: string | number
+}

@@ -77,7 +77,7 @@ function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Prop
                         관련 경력
                     </div>
                     <div className='val'>
-                        <Combobox items={testOptions} readOnly={true} defaultValue={teamLeaderInfo.career} styles={{width: '90px'}}/>
+                        <Combobox items={testOptions} readOnly={true} defaultValue={teamLeaderInfo.career} comboboxStyle={{width: '90px'}}/>
                     </div>
                 </div>
                 <div className='block'>

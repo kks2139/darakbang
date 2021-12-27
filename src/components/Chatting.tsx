@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { useLocation } from "react-router-dom";
-import {ChattingList, ChattingToolbar, ChattingInput} from './index';
-import {ChattingMessage} from '../util/interfaces';
+import { useLocation } from 'react-router-dom';
+import {ChattingList, ChattingToolbar, ChattingInput, Form, FormRow, CheckBox, Combobox} from './index';
+import {ChattingMessage, ComboboxItem} from '../util/interfaces';
 
 interface Params {
     teamId: number
+}
+
+interface Visible {
+    showForm: boolean
+    showMap: boolean
+    showPicture: boolean
+    overTop: number
+}
+
+interface Inputs {
+    isOnline: boolean
+    nextDate: string[]
+    pay: number
+    place: string
+    description: string
 }
 
 function Chatting(){
@@ -22,7 +37,23 @@ function Chatting(){
         {userId: 'b', userName: '감자', time:'20211221222930', message: '고생요~'},
     ]);
     const location = useLocation<Params>();
-    // const {teamId} = location.state;
+    const {teamId} = location.state;
+    const [visible, setVisible] = useState<Visible>({
+        showForm: false,
+        showMap: false,
+        showPicture: false,
+        overTop: 0
+    });
+    const [inputs, setInputs] = useState<Inputs>({
+        isOnline: false,
+        nextDate: [''],
+        pay: 0,
+        place: '',
+        description: ''
+    });
+    const months = new Array(12).fill(0).map((a,i) => ({label: i+1+'', value: i+1}));
+    const dates = new Array(31).fill(0).map((a,i) => ({label: i+1+'', value: i+1}));
+
 
     const onSendMessage = (msg: string)=>{
         // 1. 입력한 메시지 서버로 전송
@@ -35,6 +66,22 @@ function Chatting(){
         setTestData(testData.concat(newTestData));
     }
 
+    const onToolbarClicked = (type: string, overTop: number)=>{
+        setVisible({
+            showForm: type === 'calendar' && !visible.showForm,
+            showMap: type === 'spot' && !visible.showMap,
+            showPicture: type === 'camera' && !visible.showPicture,
+            overTop
+        });
+    }
+
+    const onCheckChanged = (check: boolean)=>{
+        setInputs({
+            ...inputs,
+            isOnline: check
+        });
+    }
+
     const style = css`
         width: 848px;
         .title {
@@ -42,9 +89,36 @@ function Chatting(){
             font-size: 24px;
             margin-bottom: 24px;
         }
-        .wrapper {
+        > .wrapper {
+            position: relative;
             border: 1px solid var(--color-dim-gray);
             border-radius: 5px;
+            overflow: hidden;
+            .form-box {
+                position: absolute;
+                top: ${visible.overTop}px;
+                left: 0;
+                transform: translateY(calc(-100% + 1px));
+                width: 100%;
+            }
+            .modal {
+                position: absolute;
+                background-color: rgb(0,0,0,0.4);
+                transform: translateY(calc(-100%));
+                top: ${visible.overTop}px;
+                width: 100%;
+                height: 100%;
+            }
+            .flex-box {
+                display: flex;
+                justify-content: space-evenly;
+                width: calc(100% - 250px);
+                font-size: 18px;
+                font-weight: bold;
+            }
+            .font-gray {
+                color: var(--color-gray);
+            }
         }
     `;
 
@@ -53,8 +127,30 @@ function Chatting(){
             <div className="title">팀 채팅</div>
             <div className='wrapper'>
                 <ChattingList testData={testData}/>
-                <ChattingToolbar/>
+                <ChattingToolbar onToolbarClicked={onToolbarClicked}/>
                 <ChattingInput onSendMessage={onSendMessage}/>
+                {visible.showForm || visible.showMap || visible.showPicture ? <div className='modal'></div> : null}
+                {visible.showForm && 
+                    <div className='form-box'>
+                        <Form>
+                            <FormRow title='온/오프라인' required={true}>
+                                <div className='flex-box'>
+                                    <CheckBox value={inputs.isOnline} label='온라인' name='online' onCheckChanged={onCheckChanged}/>
+                                    <CheckBox value={!inputs.isOnline} label='오프라인' name='offline' onCheckChanged={onCheckChanged}/>
+                                </div>
+                            </FormRow>
+                            <FormRow title='모임 날짜' required={true}>
+                                <div className='flex-box'>
+                                    <span className='font-gray'>{new Date().getFullYear()}</span>
+                                    <Combobox items={months} itemStyle={{textAlign: 'center'}}/>
+                                </div>
+                            </FormRow>
+                            <FormRow title='회비' required={true}>
+                                <div>test</div>
+                            </FormRow>
+                        </Form>
+                    </div>
+                }
             </div>
         </div>
     );
