@@ -107,9 +107,9 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
                     <div className='row'>
                         <div className='field red-star'>카테고리</div>
                         <div className='val2'>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' defaultValue={teamInfo.filter_1} styles={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' defaultValue={teamInfo.filter_2} styles={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' defaultValue={teamInfo.filter_3} styles={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' defaultValue={teamInfo.filter_1} comboboxStyle={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' defaultValue={teamInfo.filter_2} comboboxStyle={{margin: '0 18px'}}></Combobox>
+                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' defaultValue={teamInfo.filter_3} comboboxStyle={{margin: '0 18px'}}></Combobox>
                         </div>
                     </div>
                 </RedBox>
@@ -136,7 +136,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
                     <div className='val4'>
                             <div className='attribute'>
                                 <RedBox>
-                                    <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} defaultValue={teamLeaderInfo.career} styles={{margin: '0 18px'}}></Combobox>
+                                    <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} defaultValue={teamLeaderInfo.career} comboboxStyle={{margin: '0 18px'}}></Combobox>
                                 </RedBox>
                             </div>
                         <div className='attribute'>

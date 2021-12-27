@@ -142,7 +142,7 @@ function Chatting(){
                             <FormRow title='모임 날짜' required={true}>
                                 <div className='flex-box'>
                                     <span className='font-gray'>{new Date().getFullYear()}</span>
-                                    <Combobox items={months}/>
+                                    <Combobox items={months} itemStyle={{textAlign: 'center'}}/>
                                 </div>
                             </FormRow>
                             <FormRow title='회비' required={true}>

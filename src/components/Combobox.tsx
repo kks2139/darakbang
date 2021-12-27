@@ -2,13 +2,13 @@ import React, {useState, useRef, useEffect} from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {SelectedCombo, ComboboxItem} from '../util/interfaces';
+import CSS from 'csstype';
+import {ComboValue, ComboItems, ComboItem, Overlay} from './index';
+import ReactDom from 'react-dom';
 
-interface Style {
-    width?: string
-    height?: string
-    margin?: string
-    border?: string
-    transform?: string
+interface Param {
+    value: string | number
+    label: string
 }
 
 interface Props {
@@ -19,172 +19,62 @@ interface Props {
     name?: string
     required?: boolean
     readOnly?: boolean
-    styles?: Style
+    comboboxStyle?: CSS.Properties
+    itemStyle?: CSS.Properties
 }
 
-function Combobox({defaultValue, items, onSelected, placeholder='전체', name='', required=false, readOnly=false, styles}: Props){
-    const [itemHeight, setItemHeight] = useState(0);
+function Combobox({defaultValue, items, onSelected, placeholder='전체', name='', required=false, readOnly=false, comboboxStyle, itemStyle}: Props){
+    const [showItems, setShowItems] = useState(false);
     const [selected, setSelected] = useState<ComboboxItem | null>(null);
+    const defaultItem: ComboboxItem[] = [{value: 'none', label: '선택 안함'}];
+    const itemList = defaultItem.concat(items);
     const divRef = useRef<HTMLDivElement | null>(null);
+    const pos = {
+        top: divRef.current ? divRef.current.getBoundingClientRect().top + window.scrollY : 0,
+        left: divRef.current ? divRef.current.getBoundingClientRect().left + window.scrollX : 0
+    }
 
-    const onClickBox = (e: React.MouseEvent<HTMLDivElement>)=>{
+    const onClickValue = ()=>{
         if(readOnly) return;
-        toggleItems(e);
+        setShowItems(!showItems);
     }
 
-    const onClickItems = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const box = e.currentTarget;
-        const item = e.target;
-
-        if(item instanceof HTMLDivElement && item.classList.contains('item')){
-            let [value, label] = [item.dataset.value!, item.textContent!];
-            const state = value === 'empty' ? null : {value, label, name};
-            setSelected(state);
-            toggleItems(e);
-            if(onSelected){
-                onSelected(state!);
-            }
-        }
+    const onClickComboItem = (arg: Param)=>{
+        const selectedValue = arg.value === 'none' ? null : arg
+        setSelected(selectedValue);
+        setShowItems(false);
     }
 
-    const toggleItems = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const listBox = divRef.current?.querySelector('.list-box');
-        
-        if(e.currentTarget.dataset.comboValue){
-            collapseAll();
+    const style = css`
+        width: 120px;
+        .wrapper {
+            z-index: 99;
+            height: 28px;
         }
-        
-        if(listBox?.classList.contains('show')){
-            collapseAll();
-        }else{
-            divRef.current?.querySelector('.back')?.classList.add('show');
-            listBox?.classList.add('show');
-        }
-    }
-    
-    const collapseAll = ()=>{
-        document.querySelectorAll('[data-combo-list-box]').forEach(el => el.classList.remove('show'));
-        document.querySelectorAll('[data-combo-back]').forEach(el => el.classList.remove('show'));
-    }
-
-    const init = ()=>{
-        const item = divRef.current?.querySelector('.list-box .item');
-        if(item){
-            setItemHeight(item.getBoundingClientRect().height * (items.length + 1) + 2);
-        }
-        if(defaultValue){
-            const filtered = items.filter(item => item.value === defaultValue);
-            if(filtered.length > 0){
-                setSelected(filtered[0]);
-            }
-        }
-    }
-
-    useEffect(()=>{
-        init();
-    }, []);
+    `;
 
     return (
-        <div css={style(itemHeight, readOnly, styles)} ref={divRef} data-combo>
+        <div css={style} style={comboboxStyle} ref={divRef} data-combo>
             <div className='wrapper'>
-                <div className={`value-box ${required ? 'red-star' : ''}`} data-combo-value onClick={onClickBox}>
-                    {selected ? 
-                        <div className='value'>{selected.label}</div> :
-                        <div className='placehoder'>{placeholder}</div>
-                    }
-                    {readOnly ? null :
-                        <div className='icon-box'>
-                            <img src='/comboDown.png'></img>
-                        </div>
-                    }
-                </div>
-                <div className='list-box' data-combo-list-box onClick={onClickItems}>
-                    <div className='item empty' data-value='empty'>선택 안함</div>
-                    {items.map(item => (
-                        <div key={item.value} className='item' data-value={item.value}>{item.label}</div>
-                    ))}
-                </div>
+                <ComboValue itemStyle={itemStyle} required={required} readOnly={readOnly} placeholder={placeholder} selected={selected} onClickValue={onClickValue}/>
             </div>
-            <div className='back' data-combo-back onClick={(e)=>{toggleItems(e)}}></div>
+            {ReactDom.createPortal(
+                <Overlay show={showItems} onClickOverlay={()=> setShowItems(false)}/>, 
+                document.querySelector('#modal-root')!
+            )}
+            {ReactDom.createPortal(
+                <>
+                    {showItems &&
+                    <ComboItems width={120} top={pos.top} left={pos.left} show={showItems}>
+                        {itemList.map(item => (
+                            <ComboItem key={item.value} value={item.value} label={item.label} onClickComboItem={onClickComboItem}/>
+                        ))}
+                    </ComboItems>} 
+                </>,
+                document.querySelector('#modal-root')!
+            )}
         </div>
     );
 }
-
-const style = (ih: number, ro: boolean, st?: Style)=>(css`
-    width: ${st ? st.width || '120px' : '120px'};
-    ${st ? st.margin ? `margin: ${st.margin};` : '' : ''}
-    .back {
-        display: none;
-        z-index: 10;
-        position : fixed;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        // background-color: rgb(0,0,0,0.5);
-    }
-    .back.show {
-        display: unset;
-    }
-    .wrapper {
-        position: relative;
-        z-index: 99;
-        height: ${st ? st.height || '28px' : '28px'};
-        .value-box {
-            display: flex;
-            justify-content: ${ro ? 'center' : 'space-between'};
-            align-items: center;
-            width: 100%;
-            height: 100%;
-            position: relative;
-            z-index: 1;
-            padding: 0 10px;
-            background-color: white;
-            cursor: ${ro ? '' : 'pointer'};
-            .value {
-                // font-weight: bold;
-                // color: black;
-            }
-            .placehoder {
-                color: var(--color-gray);
-                font-weight: 600;
-                font-size: 18px;
-            }
-        }
-        .list-box {
-            height: 0px;
-            transform: translateY(-5px);
-            border: 1px solid black;
-            overflow: hidden;
-            transition: .2s;
-            .item {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 52px;
-                color: black;
-                font-weight: 500;
-                font-size: 16px;
-                background-color: white;
-                transition: .2s;
-                &:hover {
-                    box-shadow: inset 0 0 0 2px black;
-                }
-                &:not(:last-child) {
-                    border-bottom: 1px solid black;
-                }
-            }
-            .empty {
-                color: var(--color-gray);
-            }
-        }
-        .list-box.show {
-            transform: unset;
-            cursor: pointer;
-            height: ${ih}px;
-            opacity: 1;
-        }
-    }
-`);
 
 export default Combobox;

@@ -13,7 +13,6 @@ function ChattingInput({text='', onSendMessage}: Props){
     const [disabled, setDisabled] = useState(true);
 
     const onChange = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
-
         const {value} = e.currentTarget;
         setMsg(value);
         setDisabled(value.trim() ? false : true);
