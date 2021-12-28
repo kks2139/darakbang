@@ -34,7 +34,7 @@ function GridRow<Data extends Constraint>({columnProps, data, onClickRow}: Props
 
     return (
         <div css={style} onClick={onClick}>
-            {columnProps.map(prop => {
+            {columnProps.map((prop, i) => {
                 const {valueFormatFunction, cellStyle, width='100px', ellipsis=false} = prop;
                 let value = data[prop.field] as string | number | JSX.Element;
 
@@ -42,7 +42,7 @@ function GridRow<Data extends Constraint>({columnProps, data, onClickRow}: Props
                     value = valueFormatFunction(value);
                 }
 
-                return <div className='col' style={mergeStyle(cellStyle, width, ellipsis)}>{value}</div>
+                return <div key={i} className='col' style={mergeStyle(cellStyle, width, ellipsis)}>{value}</div>
             })}
         </div>
     );

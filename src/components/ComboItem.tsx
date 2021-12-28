@@ -37,7 +37,7 @@ function ComboItem({value, label, onClickComboItem}: Props){
     `;
 
     return (
-        <li css={style} className='item' onClick={onClick}>{label}</li>
+        <li css={style} className='item' onClick={onClick} tabIndex={-1} data-combo-item>{label}</li>
     );
 }
 

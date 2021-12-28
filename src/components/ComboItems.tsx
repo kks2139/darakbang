@@ -11,18 +11,17 @@ interface Props {
     defaultValue?: string
     show: boolean
     children: JSX.Element | JSX.Element[]
+    visibleItemSize: number
 }
 
-function ComboItems({width, top, left, defaultValue, show, children}: Props){
+function ComboItems({width, top, left, defaultValue, show, children, visibleItemSize}: Props){
     const divRef = useRef<HTMLUListElement | null>(null);
     const [itemHeight, setItemHeight] = useState(0);
 
     const HeightSetting = ()=>{
         const length = Array.isArray(children) ? children.length : 1;
-        setItemHeight(52 * (length) + 2);
-        if(defaultValue){
-
-        }
+        const size = visibleItemSize <= length ? visibleItemSize : length;
+        setItemHeight(52 * (size) + 2);
     }
 
     useEffect(()=>{
@@ -36,7 +35,7 @@ function ComboItems({width, top, left, defaultValue, show, children}: Props){
         top: ${top}px;
         left: ${left}px;
         height: 0px;
-        overflow: hidden;
+        overflow: auto;
         transform: translateY(15px);
         border: 1px solid black;
         transition: .2s;

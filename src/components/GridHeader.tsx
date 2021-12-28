@@ -15,9 +15,9 @@ function GridHeader({columnProps, onClickHeader}: Props){
 
     return (
         <div css={style} onClick={onClick}>
-            {columnProps.map(prop => {
+            {columnProps.map((prop, i) => {
                 const {width='100px'} = prop;
-                return <div className='col' style={{width}}>{prop.headerText}</div>
+                return <div key={i} className='col' style={{width}}>{prop.headerText}</div>
             })}
         </div>
     );
