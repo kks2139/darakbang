@@ -37,9 +37,9 @@ function CheckBox({value=false, label='', name, onCheckChanged}: Props){
     `;
 
     return (
-        <div css={style}>
-            <input type='button' className='box' id='checkbox' onClick={onClick}/>
-            <label className='label' htmlFor='checkbox'>{label}</label>
+        <div css={style} onClick={onClick}>
+            <input type='button' className='box'/>
+            <div className='label'>{label}</div>
         </div>
     );
 }

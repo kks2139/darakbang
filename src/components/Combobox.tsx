@@ -16,14 +16,30 @@ interface Props {
     items: ComboboxItem[]
     onSelected?: (arg: SelectedCombo | null)=> void
     placeholder?: string
+    width?: number
     name?: string
+    text?: string
     required?: boolean
     readOnly?: boolean
     comboboxStyle?: CSS.Properties
     itemStyle?: CSS.Properties
+    visibleItemSize?: number
 }
 
-function Combobox({defaultValue, items, onSelected, placeholder='전체', name='', required=false, readOnly=false, comboboxStyle, itemStyle}: Props){
+function Combobox({
+    defaultValue, 
+    items,
+    onSelected,
+    placeholder='',
+    width=120,
+    name='',
+    text='',
+    required=false,
+    readOnly=false,
+    comboboxStyle,
+    itemStyle,
+    visibleItemSize=6
+}: Props){
     const [showItems, setShowItems] = useState(false);
     const [selected, setSelected] = useState<ComboboxItem | null>(null);
     const defaultItem: ComboboxItem[] = [{value: 'none', label: '선택 안함'}];
@@ -39,8 +55,9 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
         setShowItems(true);
     }
     
-    const onBlur = ()=>{
+    const onBlur = (e: React.FocusEvent<HTMLElement>)=>{
         if(readOnly) return;
+        if(e.relatedTarget && e.relatedTarget instanceof HTMLLIElement && e.relatedTarget.dataset.comboItem) return;
         setShowItems(false);
     }
 
@@ -51,7 +68,7 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
     }
 
     const style = css`
-        width: 120px;
+        width: ${width}px;
         .wrapper {
             z-index: 99;
             height: 28px;
@@ -68,12 +85,13 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
                     placeholder={placeholder} 
                     selected={selected} 
                     onFocus={onFocus}
-                    onBlur={onBlur}/>
+                    onBlur={onBlur}
+                    text={text}/>
             </div>
             {ReactDom.createPortal(
                 <>
                     {showItems &&
-                    <ComboItems width={120} top={pos.top} left={pos.left} show={showItems}>
+                    <ComboItems width={width} top={pos.top} left={pos.left} show={showItems} visibleItemSize={visibleItemSize}>
                         {itemList.map(item => (
                             <ComboItem key={item.value} value={item.value} label={item.label} onClickComboItem={onClickComboItem}/>
                         ))}

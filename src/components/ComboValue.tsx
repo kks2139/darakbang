@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
+import React, {useState, useRef, useEffect} from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {ComboboxItem} from '../util/interfaces';
@@ -10,11 +10,12 @@ interface Props {
     readOnly?: boolean
     placeholder?: string
     onFocus: ()=> void
-    onBlur: ()=> void
+    onBlur: (param: React.FocusEvent<HTMLElement>)=> void
     itemStyle?: CSS.Properties
+    text?: string
 }
 
-function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur, itemStyle}: Props){
+function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur, itemStyle, text=''}: Props){
     const style = css`
         display: flex;
         justify-content: ${readOnly ? 'center' : 'space-between'};
@@ -34,6 +35,9 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
             font-weight: 600;
             font-size: 18px;
         }
+        .text {
+            margin-left: 5px;
+        }
     `;
 
     return (
@@ -43,17 +47,20 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
             style={itemStyle} 
             tabIndex={-1} 
             onFocus={onFocus} 
-            onBlur={onBlur} 
+            onBlur={(e: React.FocusEvent<HTMLElement>)=> {onBlur(e)}} 
             data-combo-value>
             {selected ? 
                 <div className='value'>{selected.label}</div> :
                 <div className='placehoder'>{placeholder}</div>
             }
-            {readOnly ? null :
+            {(selected || readOnly) ? null :
                 <div className='icon-box'>
                     <img src='/comboDown.png'></img>
                 </div>
             }
+            <span className='text'>
+                {text}
+            </span>
         </div>
     );
 }
