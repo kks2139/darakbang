@@ -9,12 +9,12 @@ interface Props {
     required?: boolean
     readOnly?: boolean
     placeholder?: string
-    onClickValue: ()=> void
+    onFocus: ()=> void
+    onBlur: ()=> void
     itemStyle?: CSS.Properties
 }
 
-function ComboValue({selected, required, readOnly, placeholder, onClickValue, itemStyle}: Props){
-
+function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur, itemStyle}: Props){
     const style = css`
         display: flex;
         justify-content: ${readOnly ? 'center' : 'space-between'};
@@ -37,7 +37,14 @@ function ComboValue({selected, required, readOnly, placeholder, onClickValue, it
     `;
 
     return (
-        <div css={style} className={`${required ? 'red-star' : ''}`} style={itemStyle} data-combo-value onClick={onClickValue}>
+        <div 
+            css={style} 
+            className={`${required ? 'red-star' : ''}`} 
+            style={itemStyle} 
+            tabIndex={-1} 
+            onFocus={onFocus} 
+            onBlur={onBlur} 
+            data-combo-value>
             {selected ? 
                 <div className='value'>{selected.label}</div> :
                 <div className='placehoder'>{placeholder}</div>

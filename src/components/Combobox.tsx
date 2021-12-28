@@ -34,9 +34,14 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
         left: divRef.current ? divRef.current.getBoundingClientRect().left + window.scrollX : 0
     }
 
-    const onClickValue = ()=>{
+    const onFocus = ()=>{
         if(readOnly) return;
-        setShowItems(!showItems);
+        setShowItems(true);
+    }
+    
+    const onBlur = ()=>{
+        if(readOnly) return;
+        setShowItems(false);
     }
 
     const onClickComboItem = (arg: Param)=>{
@@ -56,12 +61,15 @@ function Combobox({defaultValue, items, onSelected, placeholder='전체', name='
     return (
         <div css={style} style={comboboxStyle} ref={divRef} data-combo>
             <div className='wrapper'>
-                <ComboValue itemStyle={itemStyle} required={required} readOnly={readOnly} placeholder={placeholder} selected={selected} onClickValue={onClickValue}/>
+                <ComboValue 
+                    itemStyle={itemStyle} 
+                    required={required} 
+                    readOnly={readOnly} 
+                    placeholder={placeholder} 
+                    selected={selected} 
+                    onFocus={onFocus}
+                    onBlur={onBlur}/>
             </div>
-            {ReactDom.createPortal(
-                <Overlay show={showItems} onClickOverlay={()=> setShowItems(false)}/>, 
-                document.querySelector('#modal-root')!
-            )}
             {ReactDom.createPortal(
                 <>
                     {showItems &&
