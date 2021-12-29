@@ -28,6 +28,7 @@ import Chatting from "./Chatting"
 import ChattingList from "./ChattingList"
 import ChattingToolbar from "./ChattingToolbar"
 import ChattingInput from "./ChattingInput"
+import ChattingSchedule from "./ChattingSchedule"
 import ChatArea from "./ChatArea"
 import TextBox from "./TextBox"
 import Form from "./Form"
@@ -69,6 +70,7 @@ export {
     ChattingList,
     ChattingToolbar,
     ChattingInput,
+    ChattingSchedule,
     ChatArea,
     TextBox,
     Form,
