@@ -5,10 +5,10 @@ import CSS from 'csstype'
 
 interface Props {
     text: string
-    customStyle?: CSS.Properties
+    textStyle?: CSS.Properties
 }
 
-function TextBox({text, customStyle}: Props){
+function TextBox({text, textStyle}: Props){
     const style = css`
         font-size: 16px;
         font-weight: 500;
@@ -16,10 +16,11 @@ function TextBox({text, customStyle}: Props){
         border-radius: 5px;
         padding: 8px 18px;
         margin-bottom: 12px;
+        white-space: break-spaces;
     `;
 
     return (
-        <div css={style} style={customStyle}>
+        <div css={style} style={textStyle}>
             {text}
         </div>
     );

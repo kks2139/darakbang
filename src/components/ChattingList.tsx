@@ -67,7 +67,7 @@ function ChattingList({testData}: Props){
                 return (
                     <div key={i} className={`chat-box ${isMe ? 'right' : 'left'}`}>
                         <ChatArea userName={data.userName} text={data.message} showUser={!isMe && overOneMinuite}>
-                            <TextBox text={data.message} customStyle={{backgroundColor: isMe ? 'var(--color-yellow)' : ''}}/>
+                            <TextBox text={data.message} textStyle={{backgroundColor: isMe ? 'var(--color-yellow)' : ''}}/>
                         </ChatArea>
                     </div>
                 )

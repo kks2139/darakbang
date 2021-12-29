@@ -44,7 +44,7 @@ export interface TeamInfo {
 
 export interface SelectedCombo {
     label: string
-    value: string
+    value: string | number
     name: string
 }
 
@@ -133,4 +133,15 @@ export interface ChattingMessage {
 export interface ComboboxItem {
     label: string
     value: string | number
+}
+
+export interface ChattingScheduleInputs extends Constraint {
+    isOnline: boolean
+    fee: number
+    place: string
+    description: string
+    isFree: boolean
+    month?: number
+    date?: number
+    time?: number
 }

@@ -5,10 +5,11 @@ import { useLocation } from 'react-router-dom';
 
 interface Props {
     text?: string
+    readOnly?: boolean
     onSendMessage: (param: string)=>void
 }
 
-function ChattingInput({text='', onSendMessage}: Props){
+function ChattingInput({text='', readOnly=false, onSendMessage}: Props){
     const [msg, setMsg] = useState(text);
     const [disabled, setDisabled] = useState(true);
 
@@ -19,7 +20,7 @@ function ChattingInput({text='', onSendMessage}: Props){
     }
 
     const onKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>)=>{
-        if(e.code === 'Enter'){
+        if(e.code === 'Enter' && !e.shiftKey){
             e.preventDefault();
             handleSendMessage();
         }
@@ -66,8 +67,8 @@ function ChattingInput({text='', onSendMessage}: Props){
 
     return (
         <div css={style}>
-            <textarea value={msg} onKeyPress={onKeyPress} onChange={onChange}/>
-            <button className='send-btn' disabled={disabled} onClick={handleSendMessage}>전송</button>
+            <textarea value={msg} disabled={readOnly} onKeyPress={onKeyPress} onChange={onChange}/>
+            <button className='send-btn' disabled={readOnly || disabled} onClick={handleSendMessage}>전송</button>
         </div>
     );
 }

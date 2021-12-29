@@ -14,7 +14,7 @@ interface Param {
 interface Props {
     defaultValue?: string
     items: ComboboxItem[]
-    onSelected?: (arg: SelectedCombo | null)=> void
+    onSelected?: (param: SelectedCombo | null)=> void
     placeholder?: string
     width?: number
     name?: string
@@ -61,10 +61,15 @@ function Combobox({
         setShowItems(false);
     }
 
-    const onClickComboItem = (arg: Param)=>{
-        const selectedValue = arg.value === 'none' ? null : arg
+    const onClickComboItem = (item: Param)=>{
+        const selectedValue = item.value === 'none' ? null : item
+        const param = selectedValue ? {...selectedValue, name} : null;
+
         setSelected(selectedValue);
         setShowItems(false);
+        if(onSelected) {
+            onSelected(param);
+        }
     }
 
     const style = css`

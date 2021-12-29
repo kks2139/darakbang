@@ -7,7 +7,7 @@ import {toggleConfirmMessage} from '../redux-modules/app';
 import {useHistory} from 'react-router-dom';
 
 interface Param {
-    value: string
+    value: string | number
     label?: string
     name: string
 }

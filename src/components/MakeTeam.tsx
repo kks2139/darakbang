@@ -6,7 +6,7 @@ import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../util/interfaces';
 import {validate} from '../util/util';
 
 interface Param {
-    value: string
+    value: string | number
     label?: string
     name: string
 }
