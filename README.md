@@ -1,21 +1,33 @@
-### 프로젝트 폴더 구성
+### 프로젝트 구조
 
-* components - 컴포넌트 정의
-* containers - 컨테이너 컴포넌트 정의
-* pages - 페이지 컴포넌트 정의
-* redux-modules - 리듀서와 액션을 정의해놓은 파일들
-* util - 공통 기능이나 타입들을 정의해놓은 파일들
-
-### 그 외
-
-* Common.scss - 공통으로 쓰는 클래스나 값 정의
-* 각 폴더별 index.ts 파일들 - 여기에 모두 import 후 export 합니다
+```
+ 📦src
+ ┣ 📂components      // 모든 컴포넌트 모음
+ ┃ ┣ 📂Gathering     // gathering 도메인과 관련된 컴포넌트 모음 
+ ┃ ┃ ┣ ...
+ ┃ ┣ 📂MakeTeam      // makeTeam 도메인과 관련된 컴포넌트
+ ┃ ┃ ┣ ...           // 도메인과 엮이지 않은 재사용 가능한 컴포넌트 or 전제 레이아웃을 잡는 컴포넌트 모음
+ ┃ ┣ 📜index.ts
+ ┣ 📂hooks          // 커스텀훅 
+ ┃ ┣ ...
+ ┃ ┗ 📜index.ts
+ ┣ 📂redux-modules  // 도메인 기준으로 나눈 리듀서 모음
+ ┃ ┣ ...
+ ┃ ┣ 📜index.ts
+ ┣ 📂util           // 유틸성 기능들 모음
+ ┃ ┣ ...
+ ┃ ┣ 📜interfaces.ts
+ ┃ ┗ 📜util.ts
+ ┣ 📜App.tsx
+ ┣ 📜Common.scss    // 공통 클래스, 속성값 등 관리 
+ ┣ 📜index.tsx
+ ┣ ...
+```
 
 ### 기술스택
 
 * React Hooks
-* Typescript
-* React-router-dom
 * Redux
+* Typescript
 * emotion / SCSS
  
