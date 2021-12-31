@@ -1,8 +1,8 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {Member} from '../util/interfaces';
-import {Avatar, Grid, GridColumn, Border, Tag} from './index';
+import {Member} from '../../util/interfaces';
+import {Avatar, Grid, GridColumn, Border, Tag} from '../index';
 
 interface Props {
     memberList: Member[]

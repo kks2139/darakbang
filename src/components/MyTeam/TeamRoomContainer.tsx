@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
-import {TeamRoom} from '../components/index';
+import {RootState} from '../../redux-modules/index';
+import {TeamRoom} from '../../components/index';
 import {useLocation} from 'react-router-dom';
-import {TeamDetail} from '../util/interfaces';
+import {TeamDetail} from '../../util/interfaces';
 
 interface Params {
     team: TeamDetail

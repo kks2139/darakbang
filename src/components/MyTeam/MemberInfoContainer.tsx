@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
-import {MemberInfo} from '../components/index';
-import {TeamDetail} from '../util/interfaces';
+import {RootState} from '../../redux-modules/index';
+import {MemberInfo} from '../index';
+import {TeamDetail} from '../../util/interfaces';
 
 interface Params {
     team: TeamDetail

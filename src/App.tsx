@@ -1,12 +1,7 @@
 import React, { useEffect, useRef} from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import { 
-  ConfirmMessageContainer,
-  HeaderContainer,
-  NotificationListContainer,
-} from './containers/index';
-import {Tab, MyTeamPage, MakeTeamPage, GatheringPage, Footer, SideMenu} from './components/index';
+import {Tab, MyTeamPage, MakeTeamPage, GatheringPage, Footer, SideMenu, ConfirmMessageContainer, HeaderContainer, NotificationListContainer} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
 import {Route, Switch, useHistory} from 'react-router-dom';

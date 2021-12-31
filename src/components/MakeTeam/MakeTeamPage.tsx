@@ -2,8 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, RouteComponentProps} from 'react-router-dom';
-import {MakeTeamContainers, MakeTeamDoneContainer} from '../../containers';
-import {SideMenu} from '../index';
+import {SideMenu, MakeTeamContainers, MakeTeamDoneContainer} from '../index';
 
 interface Props {
     routerProps: RouteComponentProps

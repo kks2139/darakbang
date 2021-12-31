@@ -2,8 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, RouteComponentProps} from 'react-router-dom';
-import {GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers} from '../../containers/index';
-import {Tab, SideMenu} from '../index';
+import {Tab, SideMenu, GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers} from '../index';
 
 interface Props {
     routerProps: RouteComponentProps

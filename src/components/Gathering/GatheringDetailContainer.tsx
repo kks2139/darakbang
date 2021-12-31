@@ -1,11 +1,11 @@
 import React from "react";
-import {GatheringDetail} from '../components/index';
+import {GatheringDetail} from '../index';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
-import {setSelectedGathering} from '../redux-modules/gathering';
-import {setBackgroundColor, toggleConfirmMessage} from '../redux-modules/app';
+import {RootState} from '../../redux-modules/index';
+import {setSelectedGathering} from '../../redux-modules/gathering';
+import {setBackgroundColor, toggleConfirmMessage} from '../../redux-modules/app';
 import { useLocation } from "react-router-dom";
-import {GatheringInfo} from '../util/interfaces';
+import {GatheringInfo} from '../../util/interfaces';
 
 interface Params {
     gatheringInfo: GatheringInfo

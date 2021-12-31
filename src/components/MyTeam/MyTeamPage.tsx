@@ -2,8 +2,7 @@ import React, { useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, Link, RouteComponentProps} from 'react-router-dom';
-import {MyTeamListContainer, TeamRoomContainer} from '../../containers/index';
-import { Chatting } from '../index';
+import { Chatting, MyTeamListContainer, TeamRoomContainer } from '../index';
 
 interface Props {
     routerProps: RouteComponentProps

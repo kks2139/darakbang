@@ -1,5 +1,5 @@
 import React from "react";
-import {ConfirmMessage} from '../components/index';
+import {ConfirmMessage} from './index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux-modules/index';
 import {toggleConfirmMessage} from '../redux-modules/app';

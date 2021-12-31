@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {GatheringInfo} from '../util/interfaces';
-import {divDate} from '../util/util';
+import {GatheringInfo} from '../../util/interfaces';
+import {divDate} from '../../util/util';
 
 interface Props {
     info: GatheringInfo

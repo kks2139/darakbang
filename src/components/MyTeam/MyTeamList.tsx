@@ -1,9 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {MyTeam} from '../util/interfaces';
-import {divDate} from '../util/util';
-import {Grid, GridColumn} from './index';
+import {MyTeam} from '../../util/interfaces';
+import {divDate} from '../../util/util';
+import {Grid, GridColumn} from '../index';
 import { useHistory } from "react-router-dom";
 
 interface Props {
