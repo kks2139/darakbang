@@ -1,5 +1,8 @@
-### 프로젝트 구조
+## 다락방
+취미, 동아리, 모임 등의 서비스를 제공하는 웹페이지를 구축하는 프로젝트 입니다.
 
+
+#### 프로젝트 구조
 ```
  📦src
  ┣ 📂components      // 모든 컴포넌트 모음
@@ -24,10 +27,16 @@
  ┣ ...
 ```
 
-### 기술스택
-
+#### 기술스택
 * React Hooks
 * Redux
 * Typescript
 * emotion / SCSS
  
+ 
+#### 협업 툴
+* Slack
+* Figma
+* Notion
+* Github
+
