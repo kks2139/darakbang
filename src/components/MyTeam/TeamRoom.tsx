@@ -2,10 +2,9 @@ import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import { useLocation, useHistory } from "react-router-dom";
-import {TeamDetail, ActiveHistory} from '../util/interfaces';
-import {divDate} from '../util/util';
-import {Tag, Grid, GridColumn} from './index';
-import {MemberInfoContainer} from '../containers/index';
+import {TeamDetail, ActiveHistory} from '../../util/interfaces';
+import {divDate} from '../../util/util';
+import {Tag, Grid, GridColumn, MemberInfoContainer} from '../index';
 
 interface Props {
     teamInfo: TeamDetail

@@ -1,6 +1,6 @@
 import React from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import Header from "../components/common/Header";
+import {Header} from "./index";
 import {RootState} from '../redux-modules/index';
 import {toggleNotification} from '../redux-modules/app';
 

@@ -1,8 +1,8 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {TeamInfo, TeamLeaderInfo} from '../util/interfaces';
-import {Tab, Tag, Combobox} from '../components/index';
+import {TeamInfo, TeamLeaderInfo} from '../../util/interfaces';
+import {Tab, Tag, Combobox} from '../index';
 
 interface Props {
     teamInfo: TeamInfo

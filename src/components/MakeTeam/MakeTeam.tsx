@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab, Combobox, Tag, RedBox} from '../components/index';
-import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../util/interfaces';
-import {validate} from '../util/util';
+import {Tab, Combobox, Tag, RedBox} from '../index';
+import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../../util/interfaces';
+import {validate} from '../../util/util';
 
 interface Param {
     value: string | number

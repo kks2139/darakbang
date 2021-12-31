@@ -1,10 +1,10 @@
 import React from "react";
-import {MakeTeamDone} from '../components/index';
-import {} from '../util/interfaces';
+import {MakeTeamDone} from '../index';
+import {} from '../../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
+import {RootState} from '../../redux-modules/index';
 import {useHistory} from 'react-router-dom';
-import {toggleConfirmMessage} from '../redux-modules/app';
+import {toggleConfirmMessage} from '../../redux-modules/app';
 
 interface Props {
 }

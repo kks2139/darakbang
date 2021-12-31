@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {GatheringInfo} from '../util/interfaces';
-import {divDate} from '../util/util';
+import {GatheringInfo} from '../../util/interfaces';
+import {divDate} from '../../util/util';
 import {GoThumbsup, GoThumbsdown} from 'react-icons/go';
 import {FiUpload, FiPocket} from 'react-icons/fi';
 

@@ -1,10 +1,10 @@
 import React from "react";
-import {GatheringList} from '../components/index';
-import {GatheringInfo} from '../util/interfaces';
+import {GatheringList} from '../index';
+import {GatheringInfo} from '../../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
-import {setSelectedGathering} from '../redux-modules/gathering';
-import {setBackgroundColor} from '../redux-modules/app';
+import {RootState} from '../../redux-modules/index';
+import {setSelectedGathering} from '../../redux-modules/gathering';
+import {setBackgroundColor} from '../../redux-modules/app';
 import { useHistory } from "react-router-dom";
 
 
