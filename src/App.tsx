@@ -1,7 +1,7 @@
 import React, { useEffect, useRef} from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {Tab, MyTeamPage, MakeTeamPage, GatheringPage, Footer, SideMenu, ConfirmMessageContainer, HeaderContainer, NotificationListContainer} from './components/index';
+import {MyTeamPage, MakeTeamPage, GatheringPage, Footer, ConfirmMessageContainer, HeaderContainer, NotificationListContainer, Login} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
 import {Route, Switch, useHistory} from 'react-router-dom';
@@ -23,13 +23,10 @@ function App() {
         <HeaderContainer/>
       </div>
       <div className='body'>
-        {/* <div className='side'>
-          <SideMenu />
-        </div> */}
         <main className='content-box'>
           <Switch>
-            <Route path='/' exact render={(props)=>  <GatheringPage routerProps={props}/>}/>
-            <Route path='/gathering' render={(props)=>  <GatheringPage routerProps={props}/>}/>
+            <Route path={['/', '/login']} render={()=> <Login/>}/>
+            <Route path='/gathering' exact render={(props)=>  <GatheringPage routerProps={props}/>}/>
             <Route path='/make-team' render={(props)=> <MakeTeamPage routerProps={props}/>}/>
             <Route path='/myteam' render={(props)=> <MyTeamPage routerProps={props}/>}/>
           </Switch>
