@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
+import CSS from 'csstype';
 
 interface Props {
     value?: boolean 
     label?: string 
     name?: string
+    labelStyle?: CSS.Properties
+    boxStyle?: CSS.Properties
     onCheckChanged: (p1: boolean, p2: string | undefined)=> void
 }
 
-function CheckBox({value=false, label='', name, onCheckChanged}: Props){
+function CheckBox({value=false, label='', name, boxStyle, labelStyle, onCheckChanged}: Props){
     const onClick = ()=>{
         onCheckChanged(!value, name);
     }
@@ -38,8 +41,8 @@ function CheckBox({value=false, label='', name, onCheckChanged}: Props){
 
     return (
         <div css={style} onClick={onClick}>
-            <input type='button' className='box'/>
-            <div className='label'>{label}</div>
+            <div className='box' style={boxStyle}></div>
+            <div className='label' style={labelStyle}>{label}</div>
         </div>
     );
 }

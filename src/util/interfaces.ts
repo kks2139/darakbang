@@ -145,3 +145,9 @@ export interface ChattingScheduleInputs extends Constraint {
     date?: number
     time?: number
 }
+
+export interface LoginInput {
+    id: string
+    pw: string
+    memoId: boolean
+}

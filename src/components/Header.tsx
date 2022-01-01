@@ -40,10 +40,10 @@ const Header = ({onClickNoti}: Props) => {
                             <img src='/mail-2.png'></img>
                             <div className='mail-cnt'>{2}</div>
                         </li>
-                        <li className="gray-16">로그인</li>
-                        <li className="gray-16">프로필</li>
                         <li className="gray-16" data-link='/myteam'>내 팀</li>
                         <li className="gray-16">Contact</li>
+                        <li className="gray-16 btn-type-1">로그인</li>
+                        <li className="gray-16 btn-type-2">회원가입</li>
                     </ul>
                 </div>
             </div>
@@ -95,6 +95,7 @@ const styles = css`
     .header__nav {
         > ul {
             display: flex;
+            align-items: center;
             list-style: none;
 
             li {
@@ -135,6 +136,18 @@ const styles = css`
     .gray-16 {
         font-size: 16px;
         color: #B4B4B4;
+    }
+
+    [class*=btn-type] {
+        padding: 13px 14px;
+        margin: 0 10px;
+    }
+    .btn-type-1 {
+        color: black;
+        background-color: var(--color-main-text);
+    }
+    .btn-type-2 {
+        border: 1px solid var(--color-main-text);
     }
 `;
 
