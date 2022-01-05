@@ -151,3 +151,8 @@ export interface LoginInput {
     pw: string
     memoId: boolean
 }
+
+export interface ToastMessage {
+    text: string
+    show: boolean
+}
