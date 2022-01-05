@@ -5,7 +5,7 @@ import {LoginForm} from '../index';
 import {LoginInput} from '../../util/interfaces';
 
 function Login(){
-    const onSubmit = (inputs: LoginInput)=>{
+    const onLogin = (inputs: LoginInput)=>{
         
     }
 
@@ -27,13 +27,6 @@ function Login(){
             font-size: 36px;
             font-weight: bold;
             margin-bottom: 100px;
-        }
-        .wrapper {
-            display: flex;
-            .right-box {
-                display: flex;
-                flex-direction: column;
-            }
         }
         .login-btn {
             width: 120px;
@@ -63,15 +56,7 @@ function Login(){
     return (
         <div css={style}>
             <div className='title'>다락방 로그인</div>
-            <div className='wrapper'>
-                <LoginForm onSubmit={onSubmit} onFindId={onFindId} onFindPw={onFindPw}/>
-                <div className='right-box'>
-                    <button className='login-btn'>로그인</button>
-                    <div className='foot center'>
-                        <button className='gray'>회원가입</button>
-                    </div>
-                </div>
-            </div>
+            <LoginForm onLogin={onLogin} onFindId={onFindId} onFindPw={onFindPw}/>
         </div>
     );
 }

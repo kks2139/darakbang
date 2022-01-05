@@ -1,9 +1,10 @@
-import {ConfirmMessageInfo, Notification} from '../util/interfaces';
+import {ConfirmMessageInfo, Notification, ToastMessage} from '../util/interfaces';
 
 const SET_BAKCGROUND_COLOR = 'app/SET_BAKCGROUND_COLOR' as const;
 const TOGGLE_CONFIRM_MESSAGE = 'app/TOGGLE_CONFIRM_MESSAGE' as const;
 const TOGGLE_NOTIFICATION = 'app/TOGGLE_NOTIFICATION' as const;
 const SET_NOTIFICATIONS = 'app/SET_NOTIFICATIONS' as const;
+const TOGGLE_TOASTMESSAGE = 'app/TOGGLE_TOASTMESSAGE' as const;
 
 export const setBackgroundColor = (arg: string)=> ({ 
     type : SET_BAKCGROUND_COLOR,
@@ -21,18 +22,24 @@ export const setNotifications = (arg: Notification[])=> ({
     type : SET_NOTIFICATIONS,
     payload : arg
 });
+export const toggleToastMessage = (arg: ToastMessage)=> ({ 
+    type : TOGGLE_TOASTMESSAGE,
+    payload : arg
+});
 
 type actionType = 
     | ReturnType<typeof setBackgroundColor>
     | ReturnType<typeof toggleConfirmMessage>
     | ReturnType<typeof toggleNotification>
     | ReturnType<typeof setNotifications>
+    | ReturnType<typeof toggleToastMessage>
 
 type stateType = {
     backgroundColor: string
     confirmMessageInfo: ConfirmMessageInfo
     showNotificationList: boolean
     notifications: Notification[]
+    toastMessage: ToastMessage
 }
 
 const initState: stateType = {
@@ -70,7 +77,11 @@ const initState: stateType = {
             category: '다락방 > 사이클링',
             place: '강남' 
         }
-    ]
+    ],
+    toastMessage: {
+        text: '',
+        show: false
+    }
 };
 
 function app(state: stateType = initState, action: actionType) {
@@ -99,6 +110,11 @@ function app(state: stateType = initState, action: actionType) {
             return {
                 ...state,
                 notifications: action.payload.slice().map(noti => noti)
+            };
+        case TOGGLE_TOASTMESSAGE:
+            return {
+                ...state,
+                toastMessage: {...action.payload}
             };
         default:
             return state;

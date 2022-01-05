@@ -3,14 +3,17 @@ import React, { useState } from 'react';
 import {css} from '@emotion/react';
 import {CheckBox} from '../index';
 import {LoginInput} from '../../util/interfaces';
+import {useDispatch} from 'react-redux';
+import {toggleToastMessage} from '../../redux-modules/app';
 
 interface Props{
-    onSubmit: (param: LoginInput)=> void
+    onLogin: (param: LoginInput)=> void
     onFindId: ()=> void
     onFindPw: ()=> void
 }
 
-function LoginForm({onSubmit}: Props){
+function LoginForm({onLogin, onFindId, onFindPw}: Props){
+    const dispatch = useDispatch();
     const [inputs, setInputs] = useState({
         id: '',
         pw: '',
@@ -33,12 +36,35 @@ function LoginForm({onSubmit}: Props){
     }
     
     const validate = ()=>{
+        let result = true;
+        if(!inputs.id.trim()){
+            
+        }
+        if(!inputs.pw.trim()){
 
+        }
+        return [];
+    }
+    
+    const onClickLogin = ()=>{
+
+        dispatch(toggleToastMessage({
+            text: '테스트 ~~~~~~',
+            show: true
+        }));
     }
 
     const style = css`
-        width: 360px;
         margin: 0 24px 0 0;
+        display: flex;
+        .left-box {
+            width: 360px;
+            margin-right: 24px;
+        }
+        .right-box {
+            display: flex;
+            flex-direction: column;
+        }
         .inputs {
             & > input:first-child {
                 margin-bottom: 16px;
@@ -79,17 +105,25 @@ function LoginForm({onSubmit}: Props){
 
     return(
         <div css={style}>
-            <div className='inputs'>
-                <input placeholder='ID' value={inputs.id} name='id' onChange={onChange}/>
-                <input placeholder='Password' value={inputs.pw} name='pw' onChange={onChange}/>
-            </div>
-            <div className='foot'>
-                <div className='button-box'>
-                    <button className='gray'>ID 찾기</button>
-                    <div className='col'></div>
-                    <button className='gray'>Password 찾기</button>
+            <div className='left-box'>
+                <div className='inputs'>
+                    <input placeholder='ID' value={inputs.id} name='id' autoComplete='off' onChange={onChange}/>
+                    <input placeholder='Password' type='password' value={inputs.pw} name='pw' autoComplete='off' onChange={onChange}/>
                 </div>
-                <CheckBox label='ID 기억하기' value={inputs.memoId} onCheckChanged={onCheckChanged} labelStyle={{fontWeight: 'normal', fontSize: '16px', color: 'var(--color-gray)'}}/>
+                <div className='foot'>
+                    <div className='button-box'>
+                        <button className='gray'>ID 찾기</button>
+                        <div className='col'></div>
+                        <button className='gray'>Password 찾기</button>
+                    </div>
+                    <CheckBox label='ID 기억하기' value={inputs.memoId} onCheckChanged={onCheckChanged} labelStyle={{fontWeight: 'normal', fontSize: '16px', color: 'var(--color-gray)'}}/>
+                </div>
+            </div>
+            <div className='right-box'>
+                <button className='login-btn' onClick={onClickLogin}>로그인</button>
+                <div className='foot center'>
+                    <button className='gray'>회원가입</button>
+                </div>
             </div>
         </div>
     );

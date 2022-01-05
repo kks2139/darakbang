@@ -1,10 +1,10 @@
 import React, { useEffect, useRef} from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {MyTeamPage, MakeTeamPage, GatheringPage, Footer, ConfirmMessageContainer, HeaderContainer, NotificationListContainer, Login} from './components/index';
+import {MyTeamPage, MakeTeamPage, GatheringPage, Footer, ConfirmMessageContainer, HeaderContainer, NotificationListContainer, Login, ToastMessageContainer} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './redux-modules/index';
-import {Route, Switch, useHistory} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 interface Style {
   backgroundColor: string
@@ -12,7 +12,12 @@ interface Style {
 
 function App() {
   const divRef = useRef<HTMLDivElement | null>(null);
-  const {backgroundColor, confirmMessageInfo, showNotificationList} = useSelector((state: RootState)=> state.app);
+  const {
+    backgroundColor, 
+    confirmMessageInfo, 
+    showNotificationList,
+    toastMessage
+  } = useSelector((state: RootState)=> state.app);
 
   useEffect(()=>{
   }, []);
@@ -26,20 +31,18 @@ function App() {
         <main className='content-box'>
           <Switch>
             <Route path={['/', '/login']} render={()=> <Login/>}/>
-            <Route path='/gathering' exact render={(props)=>  <GatheringPage routerProps={props}/>}/>
+            <Route path='/gathering' exact render={(props)=> <GatheringPage routerProps={props}/>}/>
             <Route path='/make-team' render={(props)=> <MakeTeamPage routerProps={props}/>}/>
             <Route path='/myteam' render={(props)=> <MyTeamPage routerProps={props}/>}/>
           </Switch>
         </main>
-        {showNotificationList ? <NotificationListContainer/> : null}
+        {showNotificationList && <NotificationListContainer/>}
       </div>
       <div className='footer'>
         <Footer />
       </div>
-      {confirmMessageInfo.show ? <ConfirmMessageContainer/> : null}
-      <ul>
-
-      </ul>
+      {confirmMessageInfo.show && <ConfirmMessageContainer/>}
+      {toastMessage.show && <ToastMessageContainer/>}
     </div>
   );
 }

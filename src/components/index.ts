@@ -52,6 +52,8 @@ import ComboItem from "./ComboItem"
 import Overlay from "./Overlay"
 import Login from "./Login/Login"
 import LoginForm from "./Login/LoginForm"
+import ToastMessage from "./ToastMessage"
+import ToastMessageContainer from "./ToastMessageContainer"
 
 export {
     GatheringFilterContainers,
@@ -107,5 +109,7 @@ export {
     ComboItem,
     Overlay,
     Login,
-    LoginForm
+    LoginForm,
+    ToastMessage,
+    ToastMessageContainer
 }
