@@ -1,7 +1,7 @@
 import React from "react";
 import {GatheringFilter} from '../index';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../redux-modules/index';
+import {RootState} from '../../store/index';
 
 function GatheringFilterContainers(){
     const filters = useSelector((state: RootState)=> state.gathering.filters);

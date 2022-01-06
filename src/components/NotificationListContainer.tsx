@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../redux-modules/index';
-import {appActions} from '../redux-modules/app';
+import {RootState} from '../store/index';
+import {appActions} from '../store/app';
 import {NotificationList} from '../components/index';
 import {request} from '../util/util';
 import {Notification} from '../util/interfaces';

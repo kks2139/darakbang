@@ -1,9 +1,9 @@
 import React from "react";
 import {GatheringDetail} from '../index';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../redux-modules/index';
-import {gatheringActions} from '../../redux-modules/gathering';
-import {appActions} from '../../redux-modules/app';
+import {RootState} from '../../store/index';
+import {gatheringActions} from '../../store/gathering';
+import {appActions} from '../../store/app';
 import { useLocation } from "react-router-dom";
 import {GatheringInfo} from '../../util/interfaces';
 

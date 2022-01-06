@@ -2,9 +2,9 @@ import React from "react";
 import {GatheringList} from '../index';
 import {GatheringInfo} from '../../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../redux-modules/index';
-import {gatheringActions} from '../../redux-modules/gathering';
-import {appActions} from '../../redux-modules/app';
+import {RootState} from '../../store/index';
+import {gatheringActions} from '../../store/gathering';
+import {appActions} from '../../store/app';
 import { useHistory } from "react-router-dom";
 
 

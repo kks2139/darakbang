@@ -1,9 +1,9 @@
 import React from "react";
 import {MakeTeam} from '../index';
 import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../../redux-modules/index';
-import {makeTeamActions} from '../../redux-modules/makeTeam';
-import {appActions} from '../../redux-modules/app';
+import {RootState} from '../../store/index';
+import {makeTeamActions} from '../../store/makeTeam';
+import {appActions} from '../../store/app';
 import {useHistory} from 'react-router-dom';
 
 interface Param {

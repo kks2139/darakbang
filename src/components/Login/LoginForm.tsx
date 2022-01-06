@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import {CheckBox} from '../index';
 import {LoginInput} from '../../util/interfaces';
 import {useDispatch} from 'react-redux';
-import {appActions} from '../../redux-modules/app';
+import {appActions} from '../../store/app';
 
 interface Props{
     onLogin: (param: LoginInput)=> void
