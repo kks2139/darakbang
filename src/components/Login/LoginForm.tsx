@@ -47,7 +47,6 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
     }
     
     const onClickLogin = ()=>{
-
         dispatch(toggleToastMessage({
             text: '테스트 ~~~~~~',
             show: true

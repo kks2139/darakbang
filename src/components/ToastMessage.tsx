@@ -5,7 +5,7 @@ import {css} from '@emotion/react';
 
 interface Props {
     text: string
-    resetToastMessage?: ()=> void
+    resetToastMessage: ()=> void
 }
 
 function ToastMessage({text, resetToastMessage}: Props){
@@ -13,8 +13,8 @@ function ToastMessage({text, resetToastMessage}: Props){
     
     useEffect(()=>{
         timerId.current = window.setInterval(()=>{
-            if(resetToastMessage) resetToastMessage();
-        }, 3000);
+            resetToastMessage();
+        }, 2400);
         return ()=> {
             clearInterval(timerId.current);
         }
@@ -32,18 +32,26 @@ function ToastMessage({text, resetToastMessage}: Props){
         padding: 26px 40px;
         font-size: 16px;
         background-color: white;
-        animation-name: show-up;
-        animation-duration: .5s;
+        animation-name: toggle;
+        animation-duration: 2.5s;
         animation-timing-function: ease;
         
-        @keyframes show-up {
-            from {
+        @keyframes toggle {
+            0% {
                 transform: translate(-50%, -30px);
                 opacity: 0;
             }
-            to {
+            20% {
                 transform: translate(-50%, 0);
                 opacity: 1;
+            }
+            80% {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -30px);
+                opacity: 0;
             }
         }
     `;
