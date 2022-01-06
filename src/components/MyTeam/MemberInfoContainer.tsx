@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../redux-modules/index';
+import {RootState} from '../../store/index';
 import {MemberInfo} from '../index';
 import {TeamDetail} from '../../util/interfaces';
 

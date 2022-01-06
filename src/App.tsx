@@ -3,7 +3,7 @@ import React, { useEffect, useRef} from 'react';
 import {css} from '@emotion/react';
 import {MyTeamPage, MakeTeamPage, GatheringPage, Footer, ConfirmMessageContainer, HeaderContainer, NotificationListContainer, Login, ToastMessageContainer} from './components/index';
 import {useSelector} from 'react-redux';
-import {RootState} from './redux-modules/index';
+import {RootState} from './store/index';
 import {Route, Switch} from 'react-router-dom';
 
 interface Style {
