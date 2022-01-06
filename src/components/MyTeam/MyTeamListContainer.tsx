@@ -1,7 +1,7 @@
 import React from "react";
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux-modules/index';
-import {toggleNotification} from '../../redux-modules/app';
+import {appActions} from '../../redux-modules/app';
 import {MyTeamList} from '../index';
 
 function MyTeamListContainer(){

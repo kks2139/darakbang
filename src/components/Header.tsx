@@ -42,7 +42,7 @@ const Header = ({onClickNoti}: Props) => {
                         </li>
                         <li className="gray-16" data-link='/myteam'>내 팀</li>
                         <li className="gray-16">Contact</li>
-                        <li className="gray-16 btn-type-1">로그인</li>
+                        <li className="gray-16 btn-type-1" data-link='/login'>로그인</li>
                         <li className="gray-16 btn-type-2">회원가입</li>
                     </ul>
                 </div>

@@ -11,12 +11,10 @@ interface Props {
 function MemberInfo({memberList}: Props){
     const leader = memberList.filter(member => member.isLeader)[0];
 
-    const modifyList = ()=> {
-        return memberList.map(member => {
-            member.el = <Avatar imgUrl={member.avatar} style={{width: '42px', height: '42px'}}/>
-            return member;
-        });
-    } 
+    const modifyList = memberList.map(member => {
+        // member.el = <Avatar imgUrl={member.avatar} style={{width: '42px', height: '42px'}}/>
+        return member;
+    });
 
     const addText = (value: string | number)=>{
         return value + '년 차';
@@ -55,7 +53,7 @@ function MemberInfo({memberList}: Props){
                     <Tag name='ISTJ'/>
                 </div>
                 <div className='grid-box'>
-                    <Grid<Member> dataList={modifyList()} hideHeader={true} border={true}>
+                    <Grid<Member> dataList={modifyList} hideHeader={true} border={true}>
                         <GridColumn width='' field='el'/>
                         <GridColumn width='80px' field='nickname' cellStyle={{fontSize: '16px', fontWeight: 'bold', paddingLeft: '7px'}}/>
                         <GridColumn width='70px' field='activePeriod' cellStyle={{fontSize: '16px'}} valueFormatFunction={addText}/>

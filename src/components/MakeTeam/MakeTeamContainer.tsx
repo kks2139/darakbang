@@ -2,8 +2,8 @@ import React from "react";
 import {MakeTeam} from '../index';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '../../redux-modules/index';
-import {setTeamInfo, setTeamLeaderInfo} from '../../redux-modules/makeTeam';
-import {toggleConfirmMessage} from '../../redux-modules/app';
+import {makeTeamActions} from '../../redux-modules/makeTeam';
+import {appActions} from '../../redux-modules/app';
 import {useHistory} from 'react-router-dom';
 
 interface Param {
@@ -23,7 +23,7 @@ function MakeTeamContainers(){
             ...teamInfo,
             [name]: value
         };
-        dispatch(setTeamInfo(obj));
+        dispatch(makeTeamActions.setTeamInfo(obj));
     }
     
     const onTeamLeaderInfoChanged = (param: Param)=>{
@@ -32,11 +32,11 @@ function MakeTeamContainers(){
             ...teamLeaderInfo,
             [name]: value
         };
-        dispatch(setTeamLeaderInfo(obj));
+        dispatch(makeTeamActions.setTeamLeaderInfo(obj));
     }
 
     const onMakeTeam = ()=>{
-        dispatch(toggleConfirmMessage({
+        dispatch(appActions.toggleConfirmMessage({
             title: '내 팀에 함께 할 팀원을 모집해보세요!',
             confirmText: '팀원 모집하기',
             confirmCallback: ()=>{

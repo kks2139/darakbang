@@ -1,14 +1,5 @@
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {MyTeam, TeamDetail, Member} from '../util/interfaces';
-
-const SET_MY_TEAM_LIST = 'app/SET_MY_TEAM_LIST' as const;
-
-export const setMyTeamList = (arg: MyTeam[])=> ({ 
-    type : SET_MY_TEAM_LIST,
-    payload : arg
-});
-
-type actionType = 
-    | ReturnType<typeof setMyTeamList>
 
 type stateType = {
     myTeamList: MyTeam[]
@@ -16,7 +7,7 @@ type stateType = {
     memberList: Member[]
 }
 
-const initState: stateType = {
+const initialState: stateType = {
     myTeamList: [
         {id: 1, teamName: '다락방', category: '일반 > 취업 > 디자이너', joinDate: '20211212', joinCount: 30},
         {id: 2, teamName: '정원방', category: '일반 > 커리어 > 사이드프로젝트', joinDate: '20210608', joinCount: 5},
@@ -54,18 +45,17 @@ const initState: stateType = {
         {isLeader: false, nickname: '팀원5', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
         {isLeader: false, nickname: '팀원6', avatar: '', activePeriod: 1, joinCount: 15, tag: ''},
     ]
-};
-
-function myTeam(state: stateType = initState, action: actionType) {
-    switch (action.type) {
-        case SET_MY_TEAM_LIST:
-            return {
-                ...state,
-                myTeamList: action.payload.slice()
-            };
-        default:
-            return state;
-  }
 }
 
-export default myTeam;
+const myTeamSlice = createSlice({
+    name: 'myTeam',
+    initialState,
+    reducers: {
+        setMyTeamList: (state, action: PayloadAction<MyTeam[]>)=>{
+            state.myTeamList = action.payload
+        },
+    }
+});
+
+export const myTeamActions = myTeamSlice.actions;
+export default myTeamSlice.reducer;

@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import {CheckBox} from '../index';
 import {LoginInput} from '../../util/interfaces';
 import {useDispatch} from 'react-redux';
-import {toggleToastMessage} from '../../redux-modules/app';
+import {appActions} from '../../redux-modules/app';
 
 interface Props{
     onLogin: (param: LoginInput)=> void
@@ -48,7 +48,7 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
     
     const onClickLogin = ()=>{
 
-        dispatch(toggleToastMessage({
+        dispatch(appActions.toggleToastMessage({
             text: '테스트 ~~~~~~',
             show: true
         }));

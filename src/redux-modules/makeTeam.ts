@@ -1,27 +1,12 @@
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {TeamInfo, TeamLeaderInfo} from '../util/interfaces';
-
-const SET_TEAM_INFO = 'makeTeam/SET_TEAM_INFO' as const;
-const SET_TEAMLEADER_INFO = 'makeTeam/SET_TEAMLEADER_INFO' as const;
-
-export const setTeamInfo = (arg: TeamInfo)=> ({ 
-    type : SET_TEAM_INFO,
-    payload : arg
-});
-export const setTeamLeaderInfo = (arg: TeamLeaderInfo)=> ({ 
-    type : SET_TEAMLEADER_INFO,
-    payload : arg
-});
-
-type actionType = 
-    | ReturnType<typeof setTeamInfo>
-    | ReturnType<typeof setTeamLeaderInfo>
 
 type stateType = {
     teamInfo: TeamInfo
     teamLeaderInfo: TeamLeaderInfo
 }
 
-const initState: stateType = {
+const initialState: stateType = {
     teamInfo: {
         teamName: '',
         category: '',
@@ -41,27 +26,20 @@ const initState: stateType = {
             ,'러씨 알바생','올영 알바생','수련회 교관'
         ],
     }
-};
-
-function makeTeam(state: stateType = initState, action: actionType) {
-    switch (action.type) {
-        case SET_TEAM_INFO:
-            return {
-                ...state,
-                teamInfo:  {
-                    ...action.payload
-                }
-            };
-        case SET_TEAMLEADER_INFO:
-            return {
-                ...state,
-                teamLeaderInfo: {
-                    ...action.payload
-                }
-            };
-        default:
-            return state;
-  }
 }
 
-export default makeTeam;
+const makeTeamSlice = createSlice({
+    name: 'makeTeam',
+    initialState,
+    reducers: {
+        setTeamInfo: (state, action: PayloadAction<TeamInfo>)=>{
+            state.teamInfo = action.payload
+        },
+        setTeamLeaderInfo: (state, action: PayloadAction<TeamLeaderInfo>)=>{
+            state.teamLeaderInfo = action.payload
+        },
+    }
+});
+
+export const makeTeamActions = makeTeamSlice.actions;
+export default makeTeamSlice.reducer;
