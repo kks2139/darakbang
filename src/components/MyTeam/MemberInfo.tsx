@@ -9,11 +9,12 @@ interface Props {
 }
 
 function MemberInfo({memberList}: Props){
-    const leader = memberList.filter(member => member.isLeader)[0];
+    const leader = memberList.find(member => member.isLeader);
 
     const modifyList = memberList.map(member => {
-        // member.el = <Avatar imgUrl={member.avatar} style={{width: '42px', height: '42px'}}/>
-        return member;
+        const tempMember = {...member};
+        tempMember.el = <Avatar imgUrl={member.avatar} style={{width: '42px', height: '42px'}}/>
+        return tempMember;
     });
 
     const addText = (value: string | number)=>{
