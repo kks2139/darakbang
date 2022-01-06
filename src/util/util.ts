@@ -98,3 +98,30 @@ export const request = async (req: string, option?: object)=>{
     }
 }
 
+interface ObserverParams {
+    root: HTMLElement | null 
+    dom: HTMLElement | HTMLElement[]
+    threshold?: number
+    intersectionCallback: (p1: Element, p2: boolean)=> void
+}
+
+export const setIntersectionObserver = ({root, dom, threshold=0, intersectionCallback}: ObserverParams)=>{
+    const elements = Array.isArray(dom) ? dom : [dom];
+
+    const callback: IntersectionObserverCallback = (entries, observer)=> {
+        entries.forEach(entry => {
+            const {target, isIntersecting} = entry;
+            intersectionCallback(target, isIntersecting);
+        });
+    }
+    const option = {
+        root,
+        rootMargin: '0px',
+        threshold,
+    };
+    const observer = new IntersectionObserver(callback, option);
+
+    elements.forEach(el => {
+        observer.observe(el);
+    });
+}
