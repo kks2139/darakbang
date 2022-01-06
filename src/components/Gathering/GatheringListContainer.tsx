@@ -3,8 +3,8 @@ import {GatheringList} from '../index';
 import {GatheringInfo} from '../../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux-modules/index';
-import {setSelectedGathering} from '../../redux-modules/gathering';
-import {setBackgroundColor} from '../../redux-modules/app';
+import {gatheringActions} from '../../redux-modules/gathering';
+import {appActions} from '../../redux-modules/app';
 import { useHistory } from "react-router-dom";
 
 
@@ -19,7 +19,7 @@ function GatheringListContainers({onGatheringSelected}: Props){
 
     const onClickGathering = (info: GatheringInfo)=>{
         // dispatch(setSelectedGathering(info));
-        dispatch(setBackgroundColor('var(--color-bg-gray)'));
+        dispatch(appActions.setBackgroundColor('var(--color-bg-gray)'));
 
         history.push({
             pathname: '/gathering/detail',

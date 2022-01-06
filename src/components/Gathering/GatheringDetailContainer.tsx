@@ -2,8 +2,8 @@ import React from "react";
 import {GatheringDetail} from '../index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux-modules/index';
-import {setSelectedGathering} from '../../redux-modules/gathering';
-import {setBackgroundColor, toggleConfirmMessage} from '../../redux-modules/app';
+import {gatheringActions} from '../../redux-modules/gathering';
+import {appActions} from '../../redux-modules/app';
 import { useLocation } from "react-router-dom";
 import {GatheringInfo} from '../../util/interfaces';
 
@@ -22,15 +22,15 @@ function GatheringDetailContainers({onClickBack}: Props){
     const {gatheringInfo}: Params = location.state;
 
     const onBack = ()=>{
-        dispatch(setSelectedGathering(null));
-        dispatch(setBackgroundColor('white'));
+        dispatch(gatheringActions.setSelectedGathering(null));
+        dispatch(appActions.setBackgroundColor('white'));
         onClickBack();
     }
     
     const onJoin = (e: React.MouseEvent<HTMLDivElement>)=>{
         const {type} = e.currentTarget.dataset;
 
-        dispatch(toggleConfirmMessage({
+        dispatch(appActions.toggleConfirmMessage({
             title: `참여 하시려는 활동의 내용이 맞는지
             마지막으로 확인해 주세요!`,
             subTitle: '다락방',

@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import {SelectedCombo, ComboboxItem} from '../util/interfaces';
 import CSS from 'csstype';
 import {ComboValue, ComboItems, ComboItem, Overlay} from './index';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 
 interface Param {
     value: string | number
@@ -93,7 +93,7 @@ function Combobox({
                     onBlur={onBlur}
                     text={text}/>
             </div>
-            {ReactDom.createPortal(
+            {ReactDOM.createPortal(
                 <>
                     {showItems &&
                     <ComboItems width={width} top={pos.top} left={pos.left} show={showItems} visibleItemSize={visibleItemSize}>

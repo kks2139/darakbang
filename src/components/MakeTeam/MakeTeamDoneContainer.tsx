@@ -4,7 +4,7 @@ import {} from '../../util/interfaces';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../redux-modules/index';
 import {useHistory} from 'react-router-dom';
-import {toggleConfirmMessage} from '../../redux-modules/app';
+import {appActions} from '../../redux-modules/app';
 
 interface Props {
 }

@@ -1,26 +1,5 @@
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {GatheringInfo} from '../util/interfaces';
-
-const SET_FILTERS = 'gathering/SET_FILTERS' as const;
-const SET_GATHERING_LIST = 'gathering/SET_GATHERING_LIST' as const;
-const SET_SELECTED_GATHERING = 'gathering/SET_SELECTED_GATHERING' as const;
-
-export const setFilters = (arg: string[])=> ({ 
-    type : SET_FILTERS,
-    payload : arg
-});
-export const setGatheringList = (arg: GatheringInfo[])=> ({ 
-    type : SET_GATHERING_LIST,
-    payload : arg
-});
-export const setSelectedGathering = (arg: GatheringInfo | null)=> ({ 
-    type : SET_SELECTED_GATHERING,
-    payload : arg
-});
-
-type actionType = 
-    | ReturnType<typeof setFilters>
-    | ReturnType<typeof setGatheringList>
-    | ReturnType<typeof setSelectedGathering>
 
 type stateType = {
     filters: string[]
@@ -28,7 +7,7 @@ type stateType = {
     selectedGathering: GatheringInfo | null
 }
 
-const initState: stateType = {
+const initialState: stateType = {
     filters: ['한 번 만남', '비대면', '온라인', '오프라인', '지역', '성비 균등', '다락방 주최'],
     selectedGathering: null,
     gatheringList: [
@@ -346,41 +325,23 @@ const initState: stateType = {
                                 화이팅 아자아자~!`
         },
     ]
-};
-
-function gathering(state: stateType = initState, action: actionType) {
-    switch (action.type) {
-        case SET_FILTERS:
-            return {
-                ...state,
-                filters: action.payload.slice()
-            };
-        case SET_GATHERING_LIST:
-            return {
-                ...state,
-                gatheringList: action.payload.map(d => ({...d}))
-            };
-        case SET_SELECTED_GATHERING:
-            if(!action.payload) {
-                return {
-                    ...state,
-                    selectedGathering : null
-                };
-            }
-            const {filter, title, activeDateList, subImgUrls} = action.payload
-            return {
-                ...state,
-                selectedGathering: {
-                    ...action.payload,
-                    filter: filter.slice(),
-                    title: title.slice(),
-                    activeDateList: activeDateList.slice(),
-                    subImgUrls: subImgUrls.slice(),
-                }
-            };
-        default:
-            return state;
-  }
 }
 
-export default gathering;
+const gatheringSlice = createSlice({
+    name: 'ghtering',
+    initialState,
+    reducers: {
+        setFilters: (state, action: PayloadAction<string[]>)=>{
+            state.filters = action.payload
+        },
+        setGatheringList: (state, action: PayloadAction<GatheringInfo[]>)=>{
+            state.gatheringList = action.payload
+        },
+        setSelectedGathering: (state, action: PayloadAction<GatheringInfo | null>)=>{
+            state.selectedGathering = action.payload
+        },
+    }
+});
+
+export const gatheringActions = gatheringSlice.actions;
+export default gatheringSlice.reducer;

@@ -1,38 +1,5 @@
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {ConfirmMessageInfo, Notification, ToastMessage} from '../util/interfaces';
-
-const SET_BAKCGROUND_COLOR = 'app/SET_BAKCGROUND_COLOR' as const;
-const TOGGLE_CONFIRM_MESSAGE = 'app/TOGGLE_CONFIRM_MESSAGE' as const;
-const TOGGLE_NOTIFICATION = 'app/TOGGLE_NOTIFICATION' as const;
-const SET_NOTIFICATIONS = 'app/SET_NOTIFICATIONS' as const;
-const TOGGLE_TOASTMESSAGE = 'app/TOGGLE_TOASTMESSAGE' as const;
-
-export const setBackgroundColor = (arg: string)=> ({ 
-    type : SET_BAKCGROUND_COLOR,
-    payload : arg
-});
-export const toggleConfirmMessage = (arg: ConfirmMessageInfo)=> ({ 
-    type : TOGGLE_CONFIRM_MESSAGE,
-    payload : arg
-});
-export const toggleNotification = (arg: boolean)=> ({ 
-    type : TOGGLE_NOTIFICATION,
-    payload : arg
-});
-export const setNotifications = (arg: Notification[])=> ({ 
-    type : SET_NOTIFICATIONS,
-    payload : arg
-});
-export const toggleToastMessage = (arg: ToastMessage)=> ({ 
-    type : TOGGLE_TOASTMESSAGE,
-    payload : arg
-});
-
-type actionType = 
-    | ReturnType<typeof setBackgroundColor>
-    | ReturnType<typeof toggleConfirmMessage>
-    | ReturnType<typeof toggleNotification>
-    | ReturnType<typeof setNotifications>
-    | ReturnType<typeof toggleToastMessage>
 
 type stateType = {
     backgroundColor: string
@@ -42,7 +9,7 @@ type stateType = {
     toastMessage: ToastMessage
 }
 
-const initState: stateType = {
+const initialState: stateType = {
     backgroundColor: '',
     confirmMessageInfo: {
         show: false
@@ -82,43 +49,30 @@ const initState: stateType = {
         text: '',
         show: false
     }
-};
-
-function app(state: stateType = initState, action: actionType) {
-    switch (action.type) {
-        case SET_BAKCGROUND_COLOR:
-            return {
-                ...state,
-                backgroundColor: action.payload
-            };
-        case TOGGLE_CONFIRM_MESSAGE:
-            if(action.payload.show === undefined){
-                action.payload.show = true;
-            }
-            return {
-                ...state,
-                confirmMessageInfo: {
-                    ...action.payload
-                }
-            };
-        case TOGGLE_NOTIFICATION:
-            return {
-                ...state,
-                showNotificationList: action.payload
-            };
-        case SET_NOTIFICATIONS:
-            return {
-                ...state,
-                notifications: action.payload.slice().map(noti => noti)
-            };
-        case TOGGLE_TOASTMESSAGE:
-            return {
-                ...state,
-                toastMessage: {...action.payload}
-            };
-        default:
-            return state;
-  }
 }
 
-export default app;
+const appSlice = createSlice({
+    name: 'app',
+    initialState,
+    reducers: {
+        setBackgroundColor: (state, action: PayloadAction<string>)=>{
+            state.backgroundColor = action.payload
+        },
+        toggleConfirmMessage: (state, action: PayloadAction<ConfirmMessageInfo>)=>{
+            if(action.payload.show === undefined) action.payload.show = true;
+            state.confirmMessageInfo = action.payload
+        },
+        toggleNotification: (state, action: PayloadAction<boolean>)=>{
+            state.showNotificationList = action.payload
+        },
+        setNotifications: (state, action: PayloadAction<Notification[]>)=>{
+            state.notifications = action.payload
+        },
+        toggleToastMessage: (state, action: PayloadAction<ToastMessage>)=>{
+            state.toastMessage = action.payload
+        },
+    }
+});
+
+export const appActions = appSlice.actions
+export default appSlice.reducer;

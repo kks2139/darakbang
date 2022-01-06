@@ -1,15 +1,17 @@
-import { combineReducers } from "redux";
-import app from './app';
-import gathering from "./gathering";
-import makeTeam from "./makeTeam";
-import myTeam from "./myTeam";
+import { configureStore } from "@reduxjs/toolkit";
+import appReducer from './app';
+import gatheringReducer from "./gathering";
+import makeTeamReducer from "./makeTeam";
+import myTeamReducer from "./myTeam";
 
-const rootReducer = combineReducers({
-    app,
-    gathering,
-    makeTeam,
-    myTeam
+const store = configureStore({
+    reducer: {
+        app: appReducer,
+        gathering: gatheringReducer,
+        makeTeam: makeTeamReducer,
+        myTeam: myTeamReducer,
+    }
 });
 
-export default rootReducer;
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
+export default store;

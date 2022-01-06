@@ -2,7 +2,7 @@ import React from "react";
 import {ToastMessage} from './index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux-modules/index';
-import {toggleToastMessage} from '../redux-modules/app';
+import {appActions} from '../redux-modules/app';
 
 interface Props {
 }
@@ -12,7 +12,7 @@ function ToastMessageContainer({}: Props){
     const {toastMessage} = useSelector((state: RootState)=> state.app);
 
     const resetToastMessage = ()=>{
-        dispatch(toggleToastMessage({
+        dispatch(appActions.toggleToastMessage({
             text: '',
             show: false
         }));

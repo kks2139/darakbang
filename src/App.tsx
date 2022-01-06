@@ -30,8 +30,8 @@ function App() {
       <div className='body'>
         <main className='content-box'>
           <Switch>
-            <Route path={['/', '/login']} render={()=> <Login/>}/>
-            <Route path='/gathering' exact render={(props)=> <GatheringPage routerProps={props}/>}/>
+            <Route path={['/', '/login']} exact render={()=> <Login/>}/>
+            <Route path='/gathering' render={(props)=> <GatheringPage routerProps={props}/>}/>
             <Route path='/make-team' render={(props)=> <MakeTeamPage routerProps={props}/>}/>
             <Route path='/myteam' render={(props)=> <MyTeamPage routerProps={props}/>}/>
           </Switch>

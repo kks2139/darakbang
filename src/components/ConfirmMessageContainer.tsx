@@ -2,7 +2,7 @@ import React from "react";
 import {ConfirmMessage} from './index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../redux-modules/index';
-import {toggleConfirmMessage} from '../redux-modules/app';
+import {appActions} from '../redux-modules/app';
 
 interface Props {
 }
@@ -18,7 +18,7 @@ function ConfirmMessageContainer({}: Props){
                 confirmCallback();                    
             }
         }
-        dispatch(toggleConfirmMessage({
+        dispatch(appActions.toggleConfirmMessage({
             show: false
         }));
     }
