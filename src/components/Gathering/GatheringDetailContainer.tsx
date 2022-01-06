@@ -18,38 +18,10 @@ interface Props {
 function GatheringDetailContainers({onClickBack}: Props){
     const dispatch = useDispatch();
     const location = useLocation<Params>();
-    // const selected = useSelector((state: RootState)=> state.gathering.selectedGathering);
     const {gatheringInfo}: Params = location.state;
 
-    const onBack = ()=>{
-        dispatch(gatheringActions.setSelectedGathering(null));
-        dispatch(appActions.setBackgroundColor('white'));
-        onClickBack();
-    }
-    
-    const onJoin = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const {type} = e.currentTarget.dataset;
-
-        dispatch(appActions.toggleConfirmMessage({
-            title: `참여 하시려는 활동의 내용이 맞는지
-            마지막으로 확인해 주세요!`,
-            subTitle: '다락방',
-            msg: `
-                ${gatheringInfo?.place}
-                ${type === 'once' ? '한 번 참여' : ''}
-                ${gatheringInfo?.nextActiveDate}`,
-            confirmText: '확인',
-            show: true,
-            confirmCallback: nextStep
-        }));
-    }
-
-    const nextStep = ()=>{
-
-    }
-
     return (
-        <GatheringDetail info={gatheringInfo} onBack={onBack} onJoin={onJoin}></GatheringDetail>
+        <GatheringDetail info={gatheringInfo}></GatheringDetail>
     );
 }
 

@@ -14,6 +14,7 @@ import GatheringList from "./Gathering/GatheringList"
 import GatheringCard from "./Gathering/GatheringCard"
 import Tab from "./Tab"
 import GatheringDetail from "./Gathering/GatheringDetail"
+import GatheringFloatingBox from "./Gathering/GatheringFloatingBox"
 import MakeTeam from "./MakeTeam/MakeTeam"
 import Combobox from "./Combobox"
 import Tag from "./Tag"
@@ -72,6 +73,7 @@ export {
     GatheringCard,
     Tab,
     GatheringDetail,
+    GatheringFloatingBox,
     MakeTeam,
     Combobox,
     Tag,
