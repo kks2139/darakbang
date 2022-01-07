@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../../util/interfaces';
 import {divDate, setIntersectionObserver} from '../../util/util';
-import {GatheringFloatingBox, DateButtonList} from '../index';
+import {GatheringFloatingBox, DateButtonList, ModifyDate} from '../index';
 import {useLocation} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../../store/app';
@@ -26,7 +26,7 @@ function GatheringDetail(){
         dispatch(appActions.togglePopup({
             show: true,
             children: (
-                <div>123</div>
+                <ModifyDate gatheringInfo={info}/>
             )
         }));
     }
