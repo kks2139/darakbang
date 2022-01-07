@@ -1,28 +1,31 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store/index';
+import {appActions} from '../store/app';
 
-interface Props {
-    title?: string
-    subTitle?: string
-    msg?: string
-    confirmText?: string
-    onClickButton: (arg: React.MouseEvent<HTMLDivElement>)=> void
-}
+function ConfirmMessage(){
+    const dispatch = useDispatch();
+    const {title, subTitle, msg, confirmText, confirmCallback} = useSelector((state: RootState)=> state.app.confirmMessageInfo);
 
-function ConfirmMessage({title='알림', subTitle='', msg='', confirmText='확인', onClickButton}: Props){
-    const onClick = (e: React.MouseEvent<HTMLDivElement>)=>{
-        onClickButton(e);
+    const onClickButton = (e: React.MouseEvent<HTMLDivElement>)=>{
+        const {type} = e.currentTarget.dataset;
+        if(type === 'confirm'){
+            if(confirmCallback){
+                confirmCallback();                    
+            }
+        }
+        dispatch(appActions.toggleConfirmMessage({
+            show: false
+        }));
     }
 
     return (
         <div css={style}>
             <div className='wrapper'>
                 <div className='header'>
-                    <div className='close' data-type='close' onClick={onClick}>
-                        <div className='line-1'></div>
-                        <div className='line-2'></div>
-                    </div>
+                    <img className='close' src='/close.png' alt='닫기' onClick={onClickButton}></img>
                 </div>
                 <div className='title-box'>
                     {title}
@@ -38,7 +41,7 @@ function ConfirmMessage({title='알림', subTitle='', msg='', confirmText='확�
                     </div>
                 : null}  
                 <div className='button-box'>
-                    <div className='btn' data-type='confirm' onClick={onClick}>{confirmText}</div>
+                    <div className='btn' data-type='confirm' onClick={onClickButton}>{confirmText}</div>
                 </div>
             </div>
             <div className='modal'></div>
@@ -72,27 +75,11 @@ const style = css`
             justify-content: flex-end;
             align-items: center;
             height: 100px;
+            padding: 0 40px;
             .close {
-                position: relative;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 40px;
-                height: 40px;
-                margin-right: 35px;
+                width: 25px;
+                height: 25px;
                 cursor: pointer;
-                [class*='line'] {
-                    position: absolute;
-                    width: 33px;
-                    height: 1px;
-                    background-color: black;
-                }
-                .line-1 {
-                    transform: rotate(45deg);
-                }
-                .line-2 {
-                    transform: rotate(-45deg);
-                }
             }
         }
         .title-box {

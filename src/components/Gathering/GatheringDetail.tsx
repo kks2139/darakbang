@@ -3,36 +3,32 @@ import React, { useState, useEffect, useRef } from "react";
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../../util/interfaces';
 import {divDate, setIntersectionObserver} from '../../util/util';
-import {GatheringFloatingBox} from '../index';
+import {GatheringFloatingBox, DateButtonList} from '../index';
+import {useLocation} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {appActions} from '../../store/app';
 
-interface Props {
-    info: GatheringInfo | null
+interface Params {
+    gatheringInfo: GatheringInfo
 }
 
-function GatheringDetail({info}: Props){
+function GatheringDetail(){
+    const dispatch = useDispatch();
+    const location = useLocation<Params>();
     const divRef = useRef<HTMLDivElement | null>(null);
     const headerRef = useRef<HTMLDivElement | null>(null);
+    const info = location.state.gatheringInfo;
     const [isFloat, setIsFloat] = useState(false);
     const nextAct = divDate(info?.nextActiveDate || '');
 
-    const onClickDate = (e: React.MouseEvent<HTMLDivElement>)=>{
-        selectDate(e);
-    }
-    
-    const selectDate = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const el = e.currentTarget;
-        if(!el.classList.contains('end')){
-            const selected = divRef.current?.querySelector('.date-box .sel');
-            if(selected){
-                selected.classList.remove('sel');
-            }
-            el.classList.add('sel');
-        }
-    }
-
     const onClickModify = (e: React.MouseEvent<HTMLButtonElement>)=>{
         const {name} = e.currentTarget;
-
+        dispatch(appActions.togglePopup({
+            show: true,
+            children: (
+                <div>123</div>
+            )
+        }));
     }
 
     const setFloating = ()=>{
@@ -112,20 +108,7 @@ function GatheringDetail({info}: Props){
                         </div>
                         <div className='row'>
                             <div className='field'></div>
-                            <div className='active-list'>
-                                {info.activeDateList.map(d => {
-                                    const end = info.nextActiveDate === d ? 'end' : '';
-                                    return (
-                                        <div key={d} className='date-box'>
-                                            <div className={`dt ${end}`} onClick={onClickDate}>
-                                                {`${divDate(d).MM}월 ${divDate(d).dd}일 ${divDate(d).HH} : ${divDate(d).mm} ${divDate(d).ampm}`}
-                                                <img src='/man.png'></img>
-                                            </div>
-                                            {end ? <div className='end-txt'>마감</div> : null}
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                            <DateButtonList activeDateList={info.activeDateList} nextActiveDate={info.nextActiveDate}/>
                         </div>
                         <div className='row'>
                             <div className='field'>목적</div>
@@ -287,44 +270,6 @@ const style = css`
                         .else {
                             color: var(--color-peach);
                             margin: 0 5px;
-                        }
-                    }
-                    .active-list {
-                        .date-box {
-                            display: flex;
-                            margin-bottom: 4px;
-                            .dt {
-                                position: relative;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                                width: 168px;
-                                height: 40px;
-                                border: 1px solid #D9D9D9;
-                                border-radius: 25px;
-                                cursor: pointer;
-                                img {
-                                    display: none;
-                                    position: absolute;
-                                    right: -20px;
-                                }
-                            }
-                            .dt.sel {
-                                border-color: black;
-                                img {
-                                    display: unset;
-                                }
-                            }
-                            .dt.end {
-                                color: #D9D9D9;
-                                cursor: unset;
-                            }
-                            .end-txt {
-                                display: flex;
-                                align-items: center;
-                                color: #D9D9D9;
-                                margin-left: 8px;
-                            }
                         }
                     }
                 }

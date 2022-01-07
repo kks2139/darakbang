@@ -9,7 +9,7 @@ interface Props {
     name?: string
     labelStyle?: CSS.Properties
     boxStyle?: CSS.Properties
-    onCheckChanged: (p1: boolean, p2: string | undefined)=> void
+    onCheckChanged: (value: boolean, name: string | undefined)=> void
 }
 
 function CheckBox({value=false, label='', name, boxStyle, labelStyle, onCheckChanged}: Props){

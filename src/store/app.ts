@@ -1,5 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {ConfirmMessageInfo, Notification, ToastMessage} from '../util/interfaces';
+import {ConfirmMessageInfo, Notification, ToastMessage, Popup} from '../util/interfaces';
 
 type stateType = {
     backgroundColor: string
@@ -7,6 +7,7 @@ type stateType = {
     showNotificationList: boolean
     notifications: Notification[]
     toastMessage: ToastMessage
+    popupInfo: Popup
 }
 
 const initialState: stateType = {
@@ -48,6 +49,9 @@ const initialState: stateType = {
     toastMessage: {
         text: '',
         show: false
+    },
+    popupInfo: {
+        show: false
     }
 }
 
@@ -70,6 +74,11 @@ const appSlice = createSlice({
         },
         toggleToastMessage: (state, action: PayloadAction<ToastMessage>)=>{
             state.toastMessage = action.payload
+        },
+        togglePopup: (state, action: PayloadAction<Popup>)=>{
+            const children = action.payload.show ? action.payload.children : undefined;
+            state.popupInfo.show = action.payload.show;
+            state.popupInfo.children = children;
         },
     }
 });

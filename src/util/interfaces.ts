@@ -156,3 +156,8 @@ export interface ToastMessage {
     text: string
     show: boolean
 }
+
+export interface Popup {
+    children?: JSX.Element | JSX.Element[]
+    show: boolean
+}

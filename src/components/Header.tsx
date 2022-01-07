@@ -2,12 +2,13 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useHistory } from 'react-router';
+import {useDispatch, useSelector} from 'react-redux';
+import {appActions} from '../store/app';
+import { RootState } from '../store/index';
 
-interface Props {
-    onClickNoti: ()=> void
-}
-
-const Header = ({onClickNoti}: Props) => {
+const Header = () => {
+    const {showNotificationList} = useSelector((state: RootState)=> state.app);
+    const dispatch = useDispatch();
     const history = useHistory();
 
     const toGathering = () => {
@@ -21,6 +22,10 @@ const Header = ({onClickNoti}: Props) => {
                 history.push(link);
             }
         }
+    }
+
+    const onClickNoti = ()=>{
+        dispatch(appActions.toggleNotification(!showNotificationList));
     }
 
     return (
@@ -52,6 +57,7 @@ const Header = ({onClickNoti}: Props) => {
 };
 
 const styles = css`
+    position: relative;
     width: 100%;
     height: 128px;
     background-color: #FFF;

@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, RouteComponentProps} from 'react-router-dom';
-import {Tab, SideMenu, GatheringFilterContainers, GatheringListContainers, GatheringDetailContainers} from '../index';
+import {Tab, SideMenu, GatheringFilter, GatheringList, GatheringDetail} from '../index';
 
 interface Props {
     routerProps: RouteComponentProps
@@ -25,18 +25,20 @@ function GatheringPage({routerProps}: Props){
             <div className='side'>
                 <SideMenu />
             </div>
-            <Route path={`${match.path}`} exact render={()=> (
+            <Route path={`${match.path}`} exact>
                 <Tab names={['유료', '일반']} width={894}>
                     <div>
-                        유료 화면 ~~
+                        유료 화면 !
                     </div>
                     <div>
-                        <GatheringFilterContainers/>
-                        <GatheringListContainers onGatheringSelected={onGatheringSelected}/>
+                        <GatheringFilter/>
+                        <GatheringList onGatheringSelected={onGatheringSelected}/>
                     </div>
                 </Tab>
-            )}/>
-            <Route path={`${match.path}/detail`} exact render={()=> <GatheringDetailContainers onClickBack={onClickBack}/>}/>
+            </Route>
+            <Route path={`${match.path}/detail`} exact>
+                <GatheringDetail/>
+            </Route>
         </div>
     );
 }
