@@ -2,14 +2,18 @@ import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import { Notification } from "../util/interfaces";
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../store/index';
+import {appActions} from '../store/app';
 
-interface Props {
-    onClickClose: ()=> void
-    list: Notification[] 
-}
-
-function NotificationList({onClickClose, list}: Props){
+function NotificationList(){
+    const dispatch = useDispatch();
+    const {showNotificationList, notifications} = useSelector((state: RootState)=> state.app);
     const divRef = useRef<HTMLDivElement | null>(null);
+
+    const onClickClose = ()=>{
+        dispatch(appActions.toggleNotification(!showNotificationList));
+    }
 
     return (
         <div css={style} ref={divRef}>
@@ -20,7 +24,7 @@ function NotificationList({onClickClose, list}: Props){
                 </div>
             </div>
             <div className='notification-list-box'>
-                {list.map(noti => (
+                {notifications.map(noti => (
                     <div key={noti.id} className='noti'>
                         <div className={`title ${noti.checked ? 'checked' : ''}`}>
                             {noti.isSecret ? <img src='/mail-1.png'></img> : null}
@@ -45,7 +49,8 @@ const style = ()=> css`
     height: 100%;
     border-left: 1px solid var(--color-dim-gray);
     background-color: white;
-    box-shadow: 0 -5px 10px -3px var(--color-dim-gray);
+    box-shadow: 0 3px 10px -5px var(--color-dim-gray);
+
     animation-name: show;
     animation-duration: .3s;
     animation-timing-function: ease;

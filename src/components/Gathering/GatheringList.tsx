@@ -2,31 +2,48 @@ import React, { useEffect, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../../util/interfaces';
-import {GatheringCard} from '../index';
+import {GatheringCard, CheckBox} from '../index';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../store/index';
+import {appActions} from '../../store/app';
+import { useHistory } from "react-router-dom";
 
 interface Props {
-    list: GatheringInfo[]
-    onClickGathering: (param: GatheringInfo)=> void
+    onGatheringSelected: ()=> void
 }
 
-function GatheringList({list, onClickGathering}: Props){
+function GatheringList({onGatheringSelected}: Props){
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const gatheringList = useSelector((state: RootState)=> state.gathering.gatheringList);
     const [filteredList, setFilteredList] = useState<GatheringInfo[]>([]);
     const [hideClosed, setHideClosed] = useState(false);
 
-    const onCheckChanged = (e: React.ChangeEvent<HTMLInputElement>)=>{
+    const onCheckChanged = ()=>{
         setHideClosed(pre => !pre);
     }
 
+    const onClickGathering = (info: GatheringInfo)=>{
+        dispatch(appActions.setBackgroundColor('var(--color-bg-gray)'));
+        history.push({
+            pathname: '/gathering/detail',
+            state: {
+                gatheringInfo: info
+            }
+        });
+
+        onGatheringSelected();
+    }
+
     useEffect(()=>{
-        const filtered = list.filter(d => !hideClosed || (hideClosed && d.id !== '6'));
+        const filtered = gatheringList.filter(data => !hideClosed || (hideClosed && data.id !== '6'));
         setFilteredList(filtered);
-    }, [hideClosed]);
+    }, [hideClosed, gatheringList]);
 
     return (
         <div css={style}>
             <div className='filter-check'>
-                <input type='checkbox' id='endYn' onChange={onCheckChanged} checked={hideClosed}></input>
-                <label htmlFor='endYn'>마감 팀 안보기</label>
+                <CheckBox value={hideClosed} onCheckChanged={onCheckChanged} label='마감 팀 안보기'/>
             </div>
             <div className='list-box'>
                 {filteredList.map((info, i) => (

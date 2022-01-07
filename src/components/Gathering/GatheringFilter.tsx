@@ -1,13 +1,16 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/index';
 
-interface Props {
-    filters: string[]
-    onClickFilter: ()=> void;
-}
+function GatheringFilter(){
+    const filters = useSelector((state: RootState)=> state.gathering.filters);
 
-function GatheringFilter({filters, onClickFilter}: Props){
+    const onClickFilter = ()=>{
+        
+    }
+
     const onClick = (e: React.MouseEvent<HTMLDivElement>)=>{
         e.currentTarget.classList.toggle('sel');
         onClickFilter();

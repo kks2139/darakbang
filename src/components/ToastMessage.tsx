@@ -2,14 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '../store/index';
+import {appActions} from '../store/app';
 
-interface Props {
-    text: string
-    resetToastMessage: ()=> void
-}
-
-function ToastMessage({text, resetToastMessage}: Props){
+function ToastMessage(){
+    const dispatch = useDispatch();
+    const {text} = useSelector((state: RootState)=> state.app.toastMessage);
     const timerId = useRef(0);
+
+    const resetToastMessage = ()=>{
+        dispatch(appActions.toggleToastMessage({
+            text: '',
+            show: false
+        }));
+    }
     
     useEffect(()=>{
         timerId.current = window.setInterval(()=>{

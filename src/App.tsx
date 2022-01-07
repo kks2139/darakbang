@@ -1,7 +1,18 @@
 import React, { useEffect, useRef} from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {MyTeamPage, MakeTeamPage, GatheringPage, Footer, ConfirmMessageContainer, HeaderContainer, NotificationListContainer, Login, ToastMessageContainer} from './components/index';
+import {
+  MyTeamPage, 
+  MakeTeamPage, 
+  GatheringPage, 
+  Footer, 
+  ConfirmMessage, 
+  Header, 
+  NotificationList, 
+  Login, 
+  ToastMessage,
+  Popup
+} from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
 import {Route, Switch} from 'react-router-dom';
@@ -16,7 +27,8 @@ function App() {
     backgroundColor, 
     confirmMessageInfo, 
     showNotificationList,
-    toastMessage
+    toastMessage,
+    popupInfo
   } = useSelector((state: RootState)=> state.app);
 
   useEffect(()=>{
@@ -24,9 +36,7 @@ function App() {
 
   return (
     <div css={style({backgroundColor})} ref={divRef}> 
-      <div className='header'>
-        <HeaderContainer/>
-      </div>
+      <Header/>
       <div className='body'>
         <main className='content-box'>
           <Switch>
@@ -37,13 +47,12 @@ function App() {
             <Route path='/myteam' render={(props)=> <MyTeamPage routerProps={props}/>}/>
           </Switch>
         </main>
-        {showNotificationList && <NotificationListContainer/>}
+        {showNotificationList && <NotificationList/>}
       </div>
-      <div className='footer'>
-        <Footer />
-      </div>
-      {confirmMessageInfo.show && <ConfirmMessageContainer/>}
-      {toastMessage.show && <ToastMessageContainer/>}
+      <Footer />
+      {confirmMessageInfo.show && <ConfirmMessage/>}
+      {toastMessage.show && <ToastMessage/>}
+      {popupInfo.show && <Popup>{popupInfo.children}</Popup>}
     </div>
   );
 }
@@ -51,11 +60,6 @@ function App() {
 const style = ({backgroundColor}: Style)=>(css`
   min-height: 100vh;
   background-color: ${backgroundColor || 'white'};
-
-  > .header {
-    position: relative;
-    z-index: 210;
-  }
 
   > .body {
     position: relative;
@@ -82,10 +86,6 @@ const style = ({backgroundColor}: Style)=>(css`
         overflow-x: hidden;
       }
     }
-  }
-
-  > .footer {
-
   }
 `);
 
