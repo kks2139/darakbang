@@ -7,14 +7,13 @@ interface Props {
     activeDate: string
     isEnd: boolean
     isActive: boolean
+    readOnly: boolean
     onClickDate: (date: string)=> void
 }
 
-function DateButton({activeDate, isEnd, isActive, onClickDate}: Props){
+function DateButton({activeDate, isEnd, isActive, readOnly, onClickDate}: Props){
     const end = isEnd ? 'end' : '';
     const {MM, dd, HH, mm, ampm} = divDate(activeDate);
-
-    const divRef = useRef<HTMLDivElement | null>(null);
 
     const onClick = ()=>{
         onClickDate(activeDate);
@@ -55,9 +54,9 @@ function DateButton({activeDate, isEnd, isActive, onClickDate}: Props){
         <div css={style}>
             <div className={`date ${end}`} onClick={onClick}>
                 {`${MM}월 ${dd}일 ${HH} : ${mm} ${ampm}`}
-                <img src='/man.png'></img>
+                {!readOnly && <img src='/man.png'></img>}
             </div>
-            {end ? <div className='end-txt'>마감</div> : null}
+            {(!readOnly && end) && <div className='end-txt'>마감</div>}
         </div>
     );
 }

@@ -6,9 +6,10 @@ import {DateButton} from '../index';
 interface Props {
     activeDateList: string[]
     nextActiveDate: string
+    readOnly?: boolean
 }
 
-function DateButtonList({activeDateList, nextActiveDate}: Props){
+function DateButtonList({activeDateList, nextActiveDate, readOnly=false}: Props){
     const [nowActive, setNowActive] = useState('');
 
     const onClickDate = (date: string)=>{
@@ -22,11 +23,7 @@ function DateButtonList({activeDateList, nextActiveDate}: Props){
         <div css={style}>
             {activeDateList.map(date => {
                 const isEnd = nextActiveDate === date;
-                return (
-                    <>
-                        <DateButton activeDate={date} isEnd={isEnd} isActive={!isEnd && nowActive === date} onClickDate={onClickDate}/>
-                    </>
-                )
+                return  <DateButton activeDate={date} isEnd={isEnd} isActive={!isEnd && nowActive === date} onClickDate={onClickDate} readOnly={readOnly}/>
             })}
         </div>
     );
