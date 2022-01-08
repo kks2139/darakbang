@@ -90,10 +90,15 @@ const styles = css`
 
     .header__gethering {
         &__button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             padding: 8px 10px;
-            background-color: #000;
-            color: #FFF;
-            font-size: 16px;
+            background-color: white;
+            color: var(--color-main-text);
+            border: 1px solid var(--color-main-text);
+            font-size: 32px;
             font-weight: bold;
         }
     }

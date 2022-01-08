@@ -10,7 +10,6 @@ import {
   Header, 
   NotificationList, 
   Login, 
-  ToastMessage,
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
@@ -26,11 +25,8 @@ function App() {
     backgroundColor, 
     confirmMessageInfo, 
     showNotificationList,
-    toastMessage,
+    toastMessageList
   } = useSelector((state: RootState)=> state.app);
-
-  useEffect(()=>{
-  }, []);
 
   return (
     <div css={style({backgroundColor})} ref={divRef}> 
@@ -49,7 +45,7 @@ function App() {
       </div>
       <Footer />
       {confirmMessageInfo.show && <ConfirmMessage/>}
-      {toastMessage.show && <ToastMessage/>}
+      {toastMessageList}
     </div>
   );
 }

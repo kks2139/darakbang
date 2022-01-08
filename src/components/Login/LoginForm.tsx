@@ -5,12 +5,22 @@ import {CheckBox} from '../index';
 import {LoginInput} from '../../util/interfaces';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../../store/app';
+import {ToastMessage} from '../index';
 
 interface Props{
     onLogin: (param: LoginInput)=> void
     onFindId: ()=> void
     onFindPw: ()=> void
 }
+
+const getSeq = ()=>{
+    let num = 0;
+    return ()=>{
+        return num++;
+    }
+}
+
+const count = getSeq();
 
 function LoginForm({onLogin, onFindId, onFindPw}: Props){
     const dispatch = useDispatch();
@@ -47,10 +57,13 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
     }
     
     const onClickLogin = ()=>{
-        dispatch(appActions.toggleToastMessage({
-            text: '테스트 ~~~~~~',
-            show: true
-        }));
+        // dispatch(appActions.toggleToastMessage({
+        //     text: `ID 혹은 Password가 올바르지 않습니다.
+        //     다시 시도해주세요.`,
+        //     show: true
+        // }));
+
+        dispatch(appActions.addToastMessage(<ToastMessage key={count()} msg='TEST 12213'/>));
     }
 
     const style = css`
