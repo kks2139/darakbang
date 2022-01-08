@@ -14,7 +14,7 @@
  ┣ 📂hooks          // 커스텀훅 
  ┃ ┣ ...
  ┃ ┗ 📜index.ts
- ┣ 📂redux-modules  // 도메인 기준으로 나눈 리듀서 모음
+ ┣ 📂store          // 도메인 기준으로 나눈 리듀서 모음
  ┃ ┣ ...
  ┃ ┣ 📜index.ts
  ┣ 📂util           // 유틸성 기능들 모음
