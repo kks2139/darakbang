@@ -150,9 +150,9 @@ function ChattingSchedule({overTop, onInputComplete}: Props){
                         {new Array(addCount).fill(1).map((_, i, arr) => (
                             <div key={i} className='dates'>
                                 <span className='font-gray'>{new Date().getFullYear()}</span>
-                                <Combobox items={months} text='월' width={100} itemStyle={{textAlign: 'right'}} name='month' onSelected={onSelected}/>
-                                <Combobox items={dates} text='일' width={100} itemStyle={{textAlign: 'right'}} name='date' onSelected={onSelected}/>
-                                <Combobox items={dates} text='분' width={100} itemStyle={{textAlign: 'right'}} name='time' onSelected={onSelected}/>
+                                <Combobox items={months} width={100} itemStyle={{textAlign: 'right'}} name='month' onSelected={onSelected}/>월
+                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} name='date' onSelected={onSelected}/>일
+                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} name='time' onSelected={onSelected}/>분
                                 {arr.length === i + 1 && <img className='add' src='/add.png' alt='add' onClick={onAddClick}></img>}
                             </div>
                         ))}

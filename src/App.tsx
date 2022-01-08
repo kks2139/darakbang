@@ -11,7 +11,6 @@ import {
   NotificationList, 
   Login, 
   ToastMessage,
-  Popup
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
@@ -28,7 +27,6 @@ function App() {
     confirmMessageInfo, 
     showNotificationList,
     toastMessage,
-    popupInfo
   } = useSelector((state: RootState)=> state.app);
 
   useEffect(()=>{
@@ -52,7 +50,6 @@ function App() {
       <Footer />
       {confirmMessageInfo.show && <ConfirmMessage/>}
       {toastMessage.show && <ToastMessage/>}
-      {popupInfo.show && <Popup>{popupInfo.children}</Popup>}
     </div>
   );
 }
