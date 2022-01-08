@@ -3,19 +3,17 @@ import React, { useState, useEffect, useRef } from 'react';
 import {css} from '@emotion/react';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../store/app';
+import ReactDOM from 'react-dom';
 
 interface Props {
     children?: JSX.Element | JSX.Element[]
+    name?: string
+    onPopupClose: (name: string)=> void
 }
 
-function Popup({children}: Props){
+function Popup({children, name='', onPopupClose}: Props){
     const dispatch = useDispatch();
-
-    const onClickClose = ()=>{
-        dispatch(appActions.togglePopup({
-            show: false
-        }));
-    }
+    const divRef = useRef<HTMLDivElement | null>(null);
 
     const style = css`
         z-index: 100;
@@ -29,7 +27,7 @@ function Popup({children}: Props){
         justify-content: center;
         align-items: center;
 
-        .wrapper {
+        > .popup-wrapper {
             border: 1px solid red;
             z-index: 101;
             position: fixed;
@@ -37,7 +35,7 @@ function Popup({children}: Props){
             border-radius: 10px;
             background-color: white;
             padding: 10px;
-            .header {
+            > .header {
                 display: flex;
                 justify-content: flex-end;
                 align-items: center;
@@ -49,7 +47,7 @@ function Popup({children}: Props){
                     cursor: pointer;
                 }
             }
-            .content {
+            > .content {
                 min-height: 100px;
                 min-width: 300px;
             }
@@ -57,10 +55,10 @@ function Popup({children}: Props){
     `;
 
     return (
-        <div css={style}>
-            <div className='wrapper'>
+        <div css={style} ref={divRef}>
+            <div className='popup-wrapper'>
                 <div className='header'>
-                    <img className='close' src='/close.png' alt='닫기' onClick={onClickClose}></img>
+                    <img className='close' src='/close.png' alt='닫기' onClick={()=> onPopupClose(name)}></img>
                 </div>
                 <div className='content'>
                     {children}

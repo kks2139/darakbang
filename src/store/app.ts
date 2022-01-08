@@ -7,7 +7,6 @@ type stateType = {
     showNotificationList: boolean
     notifications: Notification[]
     toastMessage: ToastMessage
-    popupInfo: Popup
 }
 
 const initialState: stateType = {
@@ -50,9 +49,6 @@ const initialState: stateType = {
         text: '',
         show: false
     },
-    popupInfo: {
-        show: false
-    }
 }
 
 const appSlice = createSlice({
@@ -74,11 +70,6 @@ const appSlice = createSlice({
         },
         toggleToastMessage: (state, action: PayloadAction<ToastMessage>)=>{
             state.toastMessage = action.payload
-        },
-        togglePopup: (state, action: PayloadAction<Popup>)=>{
-            const children = action.payload.show ? action.payload.children : undefined;
-            state.popupInfo.show = action.payload.show;
-            state.popupInfo.children = children;
         },
     }
 });

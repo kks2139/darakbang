@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {DateButtonList} from '../index';
+import {DateButtonList, Popup, AddDate} from '../index';
 import {GatheringInfo} from '../../util/interfaces';
 
 interface Props {
@@ -10,8 +10,17 @@ interface Props {
 
 function ModifyDate({gatheringInfo}: Props){
     const {activeDateList, nextActiveDate} = gatheringInfo;
+    const [showPopup, setShowPopup] = useState(false);
 
+    const onPopupClose = ()=>{
+        setShowPopup(false);
+    }
+    
     const onClickImg = ()=>{
+        setShowPopup(true);
+    }
+    
+    const onAddDate = ()=>{
 
     }
 
@@ -26,7 +35,7 @@ function ModifyDate({gatheringInfo}: Props){
             font-weight: bold;
             margin-bottom: 30px;
         }
-        .content {
+        > .content {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -78,6 +87,11 @@ function ModifyDate({gatheringInfo}: Props){
                     * 새로운 날짜에 추가 일정을 등록할 수 있습니다.
                 </div>
             </div>
+            {showPopup && 
+                <Popup onPopupClose={onPopupClose}>
+                    <AddDate onAddDate={onAddDate}/>
+                </Popup>
+            }
         </div>
     );
 }

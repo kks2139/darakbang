@@ -3,32 +3,38 @@ import React, { useState, useEffect, useRef } from "react";
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../../util/interfaces';
 import {divDate, setIntersectionObserver} from '../../util/util';
-import {GatheringFloatingBox, DateButtonList, ModifyDate} from '../index';
+import {GatheringFloatingBox, DateButtonList, ModifyDate, ModifyTeam, Popup} from '../index';
 import {useLocation} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {appActions} from '../../store/app';
 
 interface Params {
     gatheringInfo: GatheringInfo
 }
 
 function GatheringDetail(){
-    const dispatch = useDispatch();
     const location = useLocation<Params>();
-    const divRef = useRef<HTMLDivElement | null>(null);
-    const headerRef = useRef<HTMLDivElement | null>(null);
     const info = location.state.gatheringInfo;
     const [isFloat, setIsFloat] = useState(false);
+    const [showPopup, setShowPopup] = useState({
+        modifyDate: false,
+        modifyTeam: false
+    });
+    const divRef = useRef<HTMLDivElement | null>(null);
+    const headerRef = useRef<HTMLDivElement | null>(null);
     const nextAct = divDate(info?.nextActiveDate || '');
+
+    const onPopupClose = (name: string)=>{
+        setShowPopup({
+            ...showPopup,
+            [name]: false
+        });
+    }
 
     const onClickModify = (e: React.MouseEvent<HTMLButtonElement>)=>{
         const {name} = e.currentTarget;
-        dispatch(appActions.togglePopup({
-            show: true,
-            children: (
-                <ModifyDate gatheringInfo={info}/>
-            )
-        }));
+        setShowPopup({
+            ...showPopup,
+            [name]: true
+        });
     }
 
     const setFloating = ()=>{
@@ -45,7 +51,7 @@ function GatheringDetail(){
     useEffect(()=>{
         setFloating();
     }, []);
-    
+
     return (
         !info ? null :
         <div css={style} ref={divRef}>
@@ -87,7 +93,7 @@ function GatheringDetail(){
                                 <div className='gray'>{`(여 팀원${info.girl} 남 팀원${2})`}</div>
                                 <div className='can-apply'>신청가능</div>
                                 <div className='gray'>{`여${(info.girl || 0) - (info.currGirl || 0)} 남${(info.boy || 0) - (info.currBoy || 0)} `}</div>
-                                <button className='modify-btn' onClick={onClickModify}>수정</button>
+                                <button className='modify-btn' name='modifyDate' onClick={onClickModify}>수정</button>
                             </div>
                         </div>
                         <div className='row'>
@@ -103,7 +109,7 @@ function GatheringDetail(){
                             <div className='val'>
                                 {`${nextAct.MM}월 ${nextAct.dd}일 ${nextAct.HH} : ${nextAct.mm} ${nextAct.ampm}`} 
                                 <div className='else'>외 {info.activeDateList.length - 1}</div>
-                                <button className='modify-btn' onClick={onClickModify}>수정</button>
+                                <button className='modify-btn' name='modifyTeam' onClick={onClickModify}>수정</button>
                             </div>
                         </div>
                         <div className='row'>
@@ -143,8 +149,17 @@ function GatheringDetail(){
                 <section className='floating-section'>
                     <GatheringFloatingBox info={info} isFloat={isFloat}/>
                 </section>
-
             </div>
+            {showPopup.modifyDate && 
+                <Popup name='modifyDate' onPopupClose={onPopupClose}>
+                    <ModifyDate gatheringInfo={info}/>
+                </Popup>
+            }
+            {showPopup.modifyTeam && 
+                <Popup name='modifyTeam' onPopupClose={onPopupClose}>
+                    <ModifyTeam />
+                </Popup>
+            }
         </div>
     );
 }

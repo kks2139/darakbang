@@ -74,9 +74,10 @@ function Combobox({
 
     const style = css`
         width: ${width}px;
+        border-bottom: 1px solid var(--color-gray);
         .wrapper {
             z-index: 99;
-            height: 28px;
+            height: 30px;
         }
     `;
 

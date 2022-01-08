@@ -29,7 +29,7 @@ function ComboItems({width, top, left, defaultValue, show, children, visibleItem
     }, []);
 
     const style = css`
-        z-index: 2;
+        z-index: 999;
         position: absolute;
         width: ${width}px;
         top: ${top}px;

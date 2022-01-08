@@ -52,6 +52,8 @@ import Popup from "./Popup"
 import DateButtonList from "./Gathering/DateButtonList"
 import DateButton from "./Gathering/DateButton"
 import ModifyDate from "./Gathering/ModifyDate"
+import ModifyTeam from "./Gathering/ModifyTeam"
+import AddDate from "./Gathering/AddDate"
 
 export {
     MakeTeamContainers,
@@ -107,5 +109,7 @@ export {
     Popup,
     DateButtonList,
     DateButton,
-    ModifyDate
+    ModifyDate,
+    ModifyTeam,
+    AddDate
 }

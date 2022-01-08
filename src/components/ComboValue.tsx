@@ -27,6 +27,7 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
         padding: 0 10px;
         background-color: white;
         cursor: ${readOnly ? '' : 'pointer'};
+
         .value {
             width: 100%;
         }
@@ -34,6 +35,10 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
             color: var(--color-gray);
             font-weight: 600;
             font-size: 18px;
+        }
+        .icon-box {
+            position: absolute;
+            right: 5px;
         }
         .text {
             margin-left: 5px;
