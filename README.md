@@ -28,6 +28,7 @@
 ```
 
 #### 기술스택
+* Javascript
 * React Hooks
 * Redux
 * Typescript
