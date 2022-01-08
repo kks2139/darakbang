@@ -1,12 +1,12 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {ConfirmMessageInfo, Notification, ToastMessage, Popup} from '../util/interfaces';
+import {createSlice, PayloadAction, Dispatch} from '@reduxjs/toolkit';
+import {ConfirmMessageInfo, Notification, ToastMessage} from '../util/interfaces';
 
 type stateType = {
     backgroundColor: string
     confirmMessageInfo: ConfirmMessageInfo
     showNotificationList: boolean
     notifications: Notification[]
-    toastMessage: ToastMessage
+    toastMessageList: JSX.Element[]
 }
 
 const initialState: stateType = {
@@ -45,10 +45,7 @@ const initialState: stateType = {
             place: '강남' 
         }
     ],
-    toastMessage: {
-        text: '',
-        show: false
-    },
+    toastMessageList: [],
 }
 
 const appSlice = createSlice({
@@ -68,11 +65,26 @@ const appSlice = createSlice({
         setNotifications: (state, action: PayloadAction<Notification[]>)=>{
             state.notifications = action.payload
         },
-        toggleToastMessage: (state, action: PayloadAction<ToastMessage>)=>{
-            state.toastMessage = action.payload
+        addToastMessage: (state, action: PayloadAction<JSX.Element>)=>{
+            state.toastMessageList.push(action.payload);
         },
+        removeToastMessage: (state)=>{
+            state.toastMessageList.shift();
+        }
     }
 });
 
 export const appActions = appSlice.actions
 export default appSlice.reducer;
+
+// thunk
+export const popToast = ()=>{
+    return async (dispath: Dispatch)=> {
+        await new Promise<void>((resolve) => {
+            setTimeout(()=>{
+                resolve();
+            }, 2400);
+        });
+        dispath(appActions.removeToastMessage());
+    }
+}

@@ -24,7 +24,7 @@ function GatheringList({onGatheringSelected}: Props){
     }
 
     const onClickGathering = (info: GatheringInfo)=>{
-        dispatch(appActions.setBackgroundColor('var(--color-bg-gray)'));
+        // dispatch(appActions.setBackgroundColor('var(--color-bg-gray)'));
         history.push({
             pathname: '/gathering/detail',
             state: {

@@ -1,30 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '../store/index';
-import {appActions} from '../store/app';
+import {useDispatch} from 'react-redux';
+import {popToast} from '../store/app';
 
-function ToastMessage(){
+interface Props {
+    msg: string
+}
+
+function ToastMessage({msg=''}: Props){
     const dispatch = useDispatch();
-    const {text} = useSelector((state: RootState)=> state.app.toastMessage);
-    const timerId = useRef(0);
-
-    const resetToastMessage = ()=>{
-        dispatch(appActions.toggleToastMessage({
-            text: '',
-            show: false
-        }));
-    }
     
     useEffect(()=>{
-        timerId.current = window.setInterval(()=>{
-            resetToastMessage();
-        }, 2400);
-        return ()=> {
-            clearInterval(timerId.current);
-        }
+        dispatch(popToast());
     }, []);
 
     const style = css`
@@ -32,13 +20,17 @@ function ToastMessage(){
         position: fixed;
         top: 150px;
         left: 50%;
+        /* opacity: 0; */
         transform: translateX(-50%);
         color: var(--color-peach);
         border: 2px solid var(--color-peach);
         border-radius: 5px;
         padding: 26px 40px;
         font-size: 16px;
+        line-height: 25px;
         background-color: white;
+        white-space: break-spaces;
+
         animation-name: toggle;
         animation-duration: 2.5s;
         animation-timing-function: ease;
@@ -65,7 +57,7 @@ function ToastMessage(){
 
     return (
         <div css={style} className='text'>
-            {text}
+            {msg}
         </div>
     );
 }
