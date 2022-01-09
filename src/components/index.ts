@@ -54,6 +54,7 @@ import DateButton from "./Gathering/DateButton"
 import ModifyDate from "./Gathering/ModifyDate"
 import ModifyTeam from "./Gathering/ModifyTeam"
 import AddDate from "./Gathering/AddDate"
+import NotFound from "./NotFound/NotFound"
 
 export {
     MakeTeamContainers,
@@ -111,5 +112,6 @@ export {
     DateButton,
     ModifyDate,
     ModifyTeam,
-    AddDate
+    AddDate,
+    NotFound
 }

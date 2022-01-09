@@ -1,16 +1,12 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import {useHistory, Route, RouteComponentProps} from 'react-router-dom';
+import {useHistory, Route, useRouteMatch} from 'react-router-dom';
 import {SideMenu, MakeTeamContainers, MakeTeamDoneContainer} from '../index';
 
-interface Props {
-    routerProps: RouteComponentProps
-}
-
-function MakeTeamPage({routerProps}: Props){
+function MakeTeamPage(){
     const history = useHistory();
-    const {match} = routerProps;
+    const match = useRouteMatch();
     
     return (
         <div css={style}>

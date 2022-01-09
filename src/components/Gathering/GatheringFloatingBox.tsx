@@ -50,8 +50,8 @@ function GatheringFloatingBox({info, isFloat}: Props){
 
     const style = css`
         position: ${isFloat ? 'fixed' : 'relative'};
-        top: ${isFloat ? '60px' : '40px'};
-        transition: .3s;
+        top: 40px;
+        /* transition: .3s; */
         .title {
             font-weight: bold;
             font-size: 24px;

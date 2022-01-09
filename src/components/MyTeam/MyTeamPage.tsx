@@ -1,16 +1,12 @@
 import React, { useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import {useHistory, Route, Link, RouteComponentProps} from 'react-router-dom';
+import {useHistory, Route, Link, useRouteMatch} from 'react-router-dom';
 import { Chatting, MyTeamListContainer, TeamRoomContainer } from '../index';
 
-interface Props {
-    routerProps: RouteComponentProps
-}
-
-function MyTeamPage({routerProps}: Props){
+function MyTeamPage(){
     const divRef = useRef<HTMLDivElement>(null);
-    const {match} = routerProps;
+    const match = useRouteMatch();
     const history = useHistory();
     
     const onClickMenu = (e: React.MouseEvent<HTMLElement>)=> {
