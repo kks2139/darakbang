@@ -129,17 +129,33 @@ const SideMenu = () => {
 };
 
 const styles = css`
+    width: 270px;
+    /* border: 1px solid red; */
+
     div {
         padding: 8px 0;
         font-size: 16px;
     }
     
+    [class*='-category'] {
+        width: 100%;
+    }
+
     .large-category {
-        padding: 16px 0;
+        padding: 16px 0 16px 30px;
         font-weight: 600;
 
         :not(:first-of-type) {
             border-top: 1px solid #E5E5E5
+        }
+    }
+
+    .medium-category {
+        padding-left: 45px; 
+        cursor: pointer;
+        transition: .2s;
+        &:hover {
+            background-color: var(--color-bg-gray);
         }
     }
 
@@ -157,7 +173,7 @@ const styles = css`
         cursor: pointer;
 
         > span {
-            padding-bottm: 8px;
+            padding-bottom: 8px;
             font-size: 24px;
             font-weight: 600;
             color: #02BCD6;

@@ -19,7 +19,7 @@ function GatheringDetail(){
         modifyTeam: false
     });
     const divRef = useRef<HTMLDivElement | null>(null);
-    const headerRef = useRef<HTMLDivElement | null>(null);
+    const topRef = useRef<HTMLDivElement | null>(null);
     const nextAct = divDate(info?.nextActiveDate || '');
 
     const onPopupClose = (name: string)=>{
@@ -40,7 +40,7 @@ function GatheringDetail(){
     const setFloating = ()=>{
         setIntersectionObserver({
             root: null,
-            dom: headerRef.current!,
+            dom: topRef.current!,
             threshold: 1,
             intersectionCallback: (el: Element, isIntersecting: boolean)=>{
                 setIsFloat(!isIntersecting);
@@ -57,11 +57,11 @@ function GatheringDetail(){
         <div css={style} ref={divRef}>
             <div className='wrapper'>
                 <section className='info-section'>
-                    <div className='simple-info'>
+                    <div className='simple-info' ref={topRef}>
                         <div className='interests'>
                             {info.interests}
                         </div>
-                        <div className='header' ref={headerRef}>
+                        <div className='header'>
                             <div className='pay'>{info.payYn === 'Y' ? '유료' : '일반'}</div>
                             <div className='desc'>{info.description}</div>
                             {info.closeSoon === 'Y' ? 
@@ -165,6 +165,7 @@ function GatheringDetail(){
 }
 
 const style = css`
+    width: 100%;
     .back-btn {
         width: 70px;
         text-align: center;
@@ -185,7 +186,9 @@ const style = css`
         border: 1px solid black;
     }
     .wrapper {
+        width: 100%;
         display: flex;
+        justify-content: center;
         .info-section {
             width: 616px;
             .simple-info {

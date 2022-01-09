@@ -10,10 +10,12 @@ import {
   Header, 
   NotificationList, 
   Login, 
+  NotFound,
+  SideMenu
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
-import {Route, Switch} from 'react-router-dom';
+import {Route, Switch, Redirect} from 'react-router-dom';
 
 interface Style {
   backgroundColor: string
@@ -31,18 +33,32 @@ function App() {
   return (
     <div css={style({backgroundColor})} ref={divRef}> 
       <Header/>
-      <div className='body'>
-        <main className='content-box'>
+      <main>
+        <SideMenu />
+        <div className='content-box'>
           <Switch>
-            <Route path='/' exact render={(props)=> <GatheringPage routerProps={props}/>}/>
-            <Route path='/gathering' render={(props)=> <GatheringPage routerProps={props}/>}/>
-            <Route path='/login' render={()=> <Login/>}/>
-            <Route path='/make-team' render={(props)=> <MakeTeamPage routerProps={props}/>}/>
-            <Route path='/myteam' render={(props)=> <MyTeamPage routerProps={props}/>}/>
+            <Route path='/' exact>
+              <Redirect to='/gathering'/>
+            </Route>
+            <Route path='/gathering'>
+              <GatheringPage/>
+            </Route>
+            <Route path='/login'>
+              <Login/>
+            </Route>
+            <Route path='/make-team'>
+              <MakeTeamPage/>
+            </Route>
+            <Route path='/myteam'>
+              <MyTeamPage/>
+            </Route>
+            <Route path='*'>
+              <NotFound/>
+            </Route>
           </Switch>
-        </main>
+        </div>
         {showNotificationList && <NotificationList/>}
-      </div>
+      </main>
       <Footer />
       {confirmMessageInfo.show && <ConfirmMessage/>}
       {toastMessageList}
@@ -54,23 +70,22 @@ const style = ({backgroundColor}: Style)=>(css`
   min-height: 100vh;
   background-color: ${backgroundColor || 'white'};
 
-  > .body {
+  main {
     position: relative;
     display: flex;
-    justify-content: center;
-  
+    
     > .side {
-      padding-right: 95px;
-      margin-right: 5px;
+      width: 200px;
       transition: .3s;
       overflow: hidden;
       &:hover {
         overflow-y: auto;
-        overflow-x: hidden;
+          overflow-x: hidden;
+        }
       }
-    }
-    
+        
     > .content-box {
+      width: 100%;
       padding: 50px 15px 50px 0;
       overflow-y: hidden;
       transition: .3s;
