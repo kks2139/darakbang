@@ -1,4 +1,4 @@
-import React, { useEffect, useRef} from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 import {
@@ -13,6 +13,7 @@ import {
   NotFound,
   SideMenu
 } from './components/index';
+import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
 import {Route, Switch, Redirect} from 'react-router-dom';
@@ -22,7 +23,9 @@ interface Style {
 }
 
 function App() {
-  const divRef = useRef<HTMLDivElement | null>(null);
+  const location = useLocation();
+  const {pathname} = location;
+  const [showSideMenu, setShowSideMenu] = useState(false);
   const {
     backgroundColor, 
     confirmMessageInfo, 
@@ -30,11 +33,18 @@ function App() {
     toastMessageList
   } = useSelector((state: RootState)=> state.app);
 
+  useLayoutEffect(()=>{
+    setShowSideMenu(
+      pathname.includes('gathering') || 
+      pathname.includes('make-team')
+    );
+  }, [pathname]);
+
   return (
-    <div css={style({backgroundColor})} ref={divRef}> 
+    <div css={style({backgroundColor})}> 
       <Header/>
       <main>
-        <SideMenu />
+        {showSideMenu && <SideMenu />}
         <div className='content-box'>
           <Switch>
             <Route path='/' exact>
@@ -49,7 +59,7 @@ function App() {
             <Route path='/make-team'>
               <MakeTeamPage/>
             </Route>
-            <Route path='/myteam'>
+            <Route path='/my-team'>
               <MyTeamPage/>
             </Route>
             <Route path='*'>

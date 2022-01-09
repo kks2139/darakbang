@@ -4,20 +4,20 @@ import {css} from '@emotion/react';
 import {MyTeam} from '../../util/interfaces';
 import {divDate} from '../../util/util';
 import {Grid, GridColumn} from '../index';
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/index';
 
-interface Props {
-    teamList: MyTeam[]
-}
-
-function MyTeamList({teamList}: Props){
+function MyTeamList(){
     const history = useHistory();
+    const match = useRouteMatch();
+    const {myTeamList} = useSelector((state: RootState) => state.myTeam);
     const [title, setTitle] = useState('');
     const {pathname} = window.location;
 
     const onClickRow = (team: MyTeam)=>{
         history.push({
-            pathname: '/myteam/room',
+            pathname: `/my-team/room`,
             state: {
                 team
             }
@@ -42,7 +42,7 @@ function MyTeamList({teamList}: Props){
     return (
         <div css={style}>
             <div className='title'>{title}</div>
-            <Grid<MyTeam> dataList={teamList} onClickRow={onClickRow}>
+            <Grid<MyTeam> dataList={myTeamList} onClickRow={onClickRow}>
                 <GridColumn width='180px' field='teamName' headerText='팀 명' cellStyle={{fontWeight: 'bold'}}/>
                 <GridColumn width='330px' field='category' headerText='분류' cellStyle={{color: 'var(--color-gray)'}}/>
                 <GridColumn width='180px' field='joinDate' headerText='가입 날짜' cellStyle={{color: 'var(--color-gray)'}} valueFormatFunction={formatDate}/>

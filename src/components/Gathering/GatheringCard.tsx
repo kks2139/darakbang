@@ -211,12 +211,12 @@ const style = ()=>(css`
 
     transition: .3s;
     &:hover {
-        transform: translateY(-10px);
+        transform: translateY(-5px);
         .preview {
-            box-shadow : 0 0 10px -3px black;
+            box-shadow : 0 2px 20px -14px black;
         }
         .detail {
-            box-shadow : 0 0 10px -3px black;
+            box-shadow : 0 2px 20px -14px black;
         }
     }
 `);

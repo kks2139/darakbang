@@ -1,13 +1,12 @@
 import React, { useRef } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import {useHistory, Route, Link, useRouteMatch} from 'react-router-dom';
-import { Chatting, MyTeamListContainer, TeamRoomContainer } from '../index';
+import {Route, Link, useRouteMatch} from 'react-router-dom';
+import { Chatting, MyTeamList, TeamRoom } from '../index';
 
 function MyTeamPage(){
     const divRef = useRef<HTMLDivElement>(null);
     const match = useRouteMatch();
-    const history = useHistory();
     
     const onClickMenu = (e: React.MouseEvent<HTMLElement>)=> {
         const root = divRef.current!;
@@ -31,10 +30,18 @@ function MyTeamPage(){
                 <Link to={`${match.path}/history`} className='link'>팀 기록</Link>
             </div>
             <div className='content'>
-                <Route path={`${match.path}`} exact render={()=> <MyTeamListContainer/>}/>
-                <Route path={`${match.path}/history`} exact render={()=> <MyTeamListContainer/>}/>
-                <Route path={`${match.path}/room`} exact render={()=> <TeamRoomContainer/>}/>
-                <Route path={`${match.path}/chatting`} exact render={()=> <Chatting/>}/>
+                <Route path={`${match.path}`} exact>
+                    <MyTeamList/>
+                </Route>
+                <Route path={`${match.path}/history`} exact>
+                    <MyTeamList/>
+                </Route>
+                <Route path={`${match.path}/room`} exact>
+                    <TeamRoom/>
+                </Route>
+                <Route path={`${match.path}/chatting`} exact>
+                    <Chatting/>
+                </Route>
             </div>
         </div>
     );
@@ -43,16 +50,21 @@ function MyTeamPage(){
 const style = css`
     display: flex;
     padding: 20px 0 0 0;
+    
+
     > .side-menu {
-        width: 225px;
+        width: 250px;
         display: flex;
         flex-direction: column;
+        margin-left: 50px;
         .tit {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
+            padding-left: 30px;
         }
         .link {
+            padding-left: 40px;
             cursor: pointer;
             font-size: 17px;
             transition: .2s;
@@ -66,8 +78,10 @@ const style = css`
         }
     }
     > .content {
-        /* width: 910px; */
+        width: 100%;
         min-height: 500px;
+        display: flex;
+        justify-content: center;
     }
 `;
 

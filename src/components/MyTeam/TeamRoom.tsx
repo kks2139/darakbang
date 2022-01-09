@@ -1,28 +1,32 @@
 import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import { useLocation, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import {TeamDetail, ActiveHistory} from '../../util/interfaces';
 import {divDate} from '../../util/util';
 import {Tag, Grid, GridColumn, MemberInfoContainer} from '../index';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../store/index';
 
-interface Props {
-    teamInfo: TeamDetail
+interface Params {
+    team: TeamDetail
 }
 
-function TeamRoom({teamInfo}: Props){
+function TeamRoom(){
     const history = useHistory();
+    const {selectedTeamRoom} = useSelector((state: RootState)=> state.myTeam);
+
     const formatDate = (str: string | number)=>{
         const {yy, MM, dd, HH, mm} = divDate(str + '');
         return `${yy}.${MM}.${dd} / ${HH}:${mm}`;
     }
 
-    const femailRate = Math.floor(100 * (teamInfo.girls / (teamInfo.girls + teamInfo.boys)));
+    const femailRate = Math.floor(100 * (selectedTeamRoom.girls / (selectedTeamRoom.girls + selectedTeamRoom.boys)));
 
     const onClickTalk = ()=> {
         history.push('chatting', {
             state: {
-                teamId: teamInfo.id
+                teamId: selectedTeamRoom.id
             }
         });
     }
@@ -31,11 +35,11 @@ function TeamRoom({teamInfo}: Props){
         <div css={style(femailRate)}>
             <div className='content'>
                 <section className='team-info'>
-                    <div className='title'>{teamInfo.teamName}</div>
+                    <div className='title'>{selectedTeamRoom.teamName}</div>
                     <div className='header'>
-                        <div className='category'>{teamInfo.category}</div>
+                        <div className='category'>{selectedTeamRoom.category}</div>
                         <div className='box'>
-                            <div className='last-act'>{formatDate(teamInfo.lastActive)}에 마지막으로 활동한 팀입니다.</div>
+                            <div className='last-act'>{formatDate(selectedTeamRoom.lastActive)}에 마지막으로 활동한 팀입니다.</div>
                             <div className='img-wrapper' onClick={onClickTalk}>
                                 {/* <img src='/join-text.png'></img> */}
                                 <img src='/talk.png'></img>
@@ -60,18 +64,18 @@ function TeamRoom({teamInfo}: Props){
                                 <div className='col'>
                                     <div className='field'>평균 연령</div>
                                     <div className='txt-big'>
-                                        {teamInfo.averageAge}
+                                        {selectedTeamRoom.averageAge}
                                         <span>세</span>
                                     </div>
                                 </div>
                                 <div className='col'>
                                     <div className='field'>활동 팀원</div>
                                     <div className='txt-big'>
-                                        {teamInfo.activeNum}
+                                        {selectedTeamRoom.activeNum}
                                         <span>명</span>
                                     </div>
                                     <div className='txt-gray'>
-                                        ( 다녀간 팀원{teamInfo.totalJoinNum}명 )
+                                        ( 다녀간 팀원{selectedTeamRoom.totalJoinNum}명 )
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +83,7 @@ function TeamRoom({teamInfo}: Props){
                                 <div className='col'>
                                     <div className='field'>후기</div>
                                     <ul>
-                                        {teamInfo.reviewKeyWord.map(word => (
+                                        {selectedTeamRoom.reviewKeyWord.map(word => (
                                             <Tag key={word} name={word} theme='light'/>
                                         ))}
                                     </ul>
@@ -88,11 +92,11 @@ function TeamRoom({teamInfo}: Props){
                                     <div className='img-box'>
                                         <div>
                                             <img src='/thumb-up.png'></img>
-                                            <div className='num good'>{teamInfo.good}</div>
+                                            <div className='num good'>{selectedTeamRoom.good}</div>
                                         </div>
                                         <div>
                                             <img src='/thumb-down.png'></img>
-                                            <div className='num'>{teamInfo.bad}</div>
+                                            <div className='num'>{selectedTeamRoom.bad}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -101,7 +105,7 @@ function TeamRoom({teamInfo}: Props){
                     </div>
                     <div className='active-state'>
                         <div className='tit'>활동 현황</div>
-                        <Grid<ActiveHistory> dataList={teamInfo.activeHistory}>
+                        <Grid<ActiveHistory> dataList={selectedTeamRoom.activeHistory}>
                             <GridColumn width='60px' field='times' headerText='회차' cellStyle={{color: 'var(--color-gray)', paddingLeft: '10px'}}/>
                             <GridColumn width='330px' field='title' headerText='제목' cellStyle={{fontWeight: 500}} ellipsis={true}/>
                             <GridColumn width='60px' field='place' headerText='지역' cellStyle={{color: 'var(--color-gray)'}}/>

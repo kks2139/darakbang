@@ -1,7 +1,5 @@
 import MakeTeamContainers from "./MakeTeam/MakeTeamContainer"
 import MakeTeamDoneContainer from "./MakeTeam/MakeTeamDoneContainer"
-import MyTeamListContainer from "./MyTeam/MyTeamListContainer"
-import TeamRoomContainer from "./MyTeam/TeamRoomContainer"
 import MemberInfoContainer from "./MyTeam/MemberInfoContainer"
 import GatheringFilter from "./Gathering/GatheringFilter"
 import GatheringList from "./Gathering/GatheringList"
@@ -59,8 +57,6 @@ import NotFound from "./NotFound/NotFound"
 export {
     MakeTeamContainers,
     MakeTeamDoneContainer,
-    MyTeamListContainer,
-    TeamRoomContainer,
     MemberInfoContainer,
     GatheringFilter,
     GatheringList,

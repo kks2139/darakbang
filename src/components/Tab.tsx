@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
+import CSS from 'csstype';
 
 interface Props {
     names: string[]
@@ -11,9 +12,10 @@ interface Props {
     onClickTab?: ()=> void
     width?: number
     height?: number
+    tabStyle?: CSS.Properties
 }
 
-function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0, onClickTab, width=0, height=0}: Props){
+function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0, onClickTab, width=0, height=0, tabStyle}: Props){
     const [index, setIndex] = useState(0);
     const divRef = useRef<HTMLDivElement | null>(null);
     const childs = Array.isArray(children) ? children : [children];
@@ -43,7 +45,7 @@ function Tab({names, subNames=[], children, selectedIndex=0, selectedSubIndex=0,
     }, []);
 
     return (
-        <div css={style(width)} ref={divRef}>
+        <div css={style(width)} ref={divRef} style={tabStyle}>
             <div className='tabs'>
                 <div className='box'>
                     {names.map((n, i) => (
