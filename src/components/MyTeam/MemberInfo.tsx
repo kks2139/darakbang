@@ -101,7 +101,7 @@ const style = css`
         .grid-box {
             height: 480px;
             overflow: auto;
-            box-shadow: 0 0 20px -19px black;
+            box-shadow: 0 2px 20px -20px black;
         }
     }
 `;

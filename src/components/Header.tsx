@@ -1,28 +1,14 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { useHistory } from 'react-router';
 import {useDispatch, useSelector} from 'react-redux';
 import {appActions} from '../store/app';
 import { RootState } from '../store/index';
+import {NavLink} from 'react-router-dom';
 
 const Header = () => {
     const {showNotificationList} = useSelector((state: RootState)=> state.app);
     const dispatch = useDispatch();
-    const history = useHistory();
-
-    const toGathering = () => {
-        history.push('/');
-    }
-
-    const onClickMenu = (e: React.MouseEvent<HTMLUListElement>)=>{
-        if(e.target instanceof HTMLElement){
-            const link = e.target.dataset.link;
-            if(link){
-                history.push(link);
-            }
-        }
-    }
 
     const onClickNoti = ()=>{
         dispatch(appActions.toggleNotification(!showNotificationList));
@@ -32,23 +18,35 @@ const Header = () => {
         <header css={styles}>
             <div className="header">
                 <div className="header__logo">
-                    <div className="header__logo__logo" onClick={toGathering}>다락방</div>
-                    <div className="header__logo__about gray-16">About</div>
+                    <NavLink to='/' className='header__logo__logo'>
+                        다락방
+                    </NavLink>
+                    <NavLink to='' className='header__logo__about gray-16'>
+                        About
+                    </NavLink>
                 </div>
                 <div className="header__gethering">
                     <div className="header__gethering__button">게더링</div>
                 </div>
                 <div className="header__nav">
-                    <ul onClick={onClickMenu}>
+                    <ul>
                         <li className="gray-16" onClick={onClickNoti}>
                             알림
                             <img src='/mail-2.png'></img>
                             <div className='mail-cnt'>{2}</div>
                         </li>
-                        <li className="gray-16" data-link='/myteam'>내 팀</li>
-                        <li className="gray-16">Contact</li>
-                        <li className="gray-16 btn-type-1" data-link='/login'>로그인</li>
-                        <li className="gray-16 btn-type-2">회원가입</li>
+                        <li className="gray-16">
+                            <NavLink to='/my-team'>내 팀</NavLink>
+                        </li>
+                        <li className="gray-16">
+                            <NavLink to='/contact'>Contact</NavLink>
+                        </li>
+                        <li className="gray-16 btn-type-1">
+                            <NavLink to='/login'>로그인</NavLink>
+                        </li>
+                        <li className="gray-16 btn-type-2">
+                            <NavLink to='/join'>회원가입</NavLink>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -83,7 +81,7 @@ const styles = css`
             color: #000;
         }
 
-        > div + div {
+        > a + a {
             margin-left: 40px;
         }
     }
@@ -154,11 +152,18 @@ const styles = css`
         margin: 0 10px;
     }
     .btn-type-1 {
-        color: black;
         background-color: var(--color-main-text);
+        a {
+            color: white;
+            font-weight: bold;
+        }
     }
     .btn-type-2 {
         border: 1px solid var(--color-main-text);
+        a {
+            color: var(--color-gray);
+            font-weight: bold;
+        }
     }
 `;
 
