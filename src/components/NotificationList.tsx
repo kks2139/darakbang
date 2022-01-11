@@ -16,7 +16,7 @@ function NotificationList(){
     }
 
     return (
-        <div css={style} ref={divRef}>
+        <div css={style} className='fade-in' ref={divRef}>
             <div className='header-box'>
                 <div className='close' data-type='close' onClick={onClickClose}>
                     <div className='line-1'></div>
@@ -50,10 +50,6 @@ const style = ()=> css`
     border-left: 1px solid var(--color-dim-gray);
     background-color: white;
     box-shadow: 0 3px 10px -5px var(--color-dim-gray);
-
-    animation-name: show;
-    animation-duration: .3s;
-    animation-timing-function: ease;
 
     .header-box {
         display: flex;
@@ -120,9 +116,30 @@ const style = ()=> css`
         }
     }
 
-    @keyframes show {
-        from {transform: translateX(100%);}
-        to {transform: translateX(0);}
+    &.fade-in {
+        animation-name: fade-in;
+        animation-duration: .5s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+    }
+
+    &.fade-out {
+        animation-name: fade-out;
+        animation-duration: .5s;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes fade-in {
+        0% {transform: translateX(100%);}
+        70% {transform: translateX(-5%);}
+        100% {transform: translateX(0)}
+    }
+    
+    @keyframes fade-out {
+        0% {transform: translateX(0);}
+        30% {transform: translateX(-5%);}
+        100% {transform: translateX(100%);}
     }
 `;
 

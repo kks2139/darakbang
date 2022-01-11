@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
+import {CSSTransition} from 'react-transition-group';
 import {
   MyTeamPage, 
   MakeTeamPage, 
@@ -67,7 +68,16 @@ function App() {
             </Route>
           </Switch>
         </div>
-        {showNotificationList && <NotificationList/>}
+        <CSSTransition
+          in={showNotificationList}
+          unmountOnExit
+          timeout={500}
+          classNames={{
+            enterActive: 'fade-in',
+            exitActive: 'fade-out'
+          }}>
+          <NotificationList/>
+        </CSSTransition>
       </main>
       <Footer />
       {confirmMessageInfo.show && <ConfirmMessage/>}
