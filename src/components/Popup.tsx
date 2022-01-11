@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {useDispatch} from 'react-redux';
-import {appActions} from '../store/app';
-import ReactDOM from 'react-dom';
 
 interface Props {
     children?: JSX.Element | JSX.Element[]
@@ -12,8 +9,14 @@ interface Props {
 }
 
 function Popup({children, name='', onPopupClose}: Props){
-    const dispatch = useDispatch();
     const divRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(()=>{
+        document.documentElement.style.overflow = 'hidden';
+        return ()=>{
+            document.documentElement.style.overflow = 'auto';
+        }
+    });
 
     const style = css`
         z-index: 100;
