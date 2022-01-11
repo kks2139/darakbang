@@ -83,7 +83,7 @@ export const popToast = ()=>{
         await new Promise<void>((resolve) => {
             setTimeout(()=>{
                 resolve();
-            }, 2400);
+            }, 2500);
         });
         dispath(appActions.removeToastMessage());
     }

@@ -68,6 +68,7 @@ function App() {
             </Route>
           </Switch>
         </div>
+        {/* timeout: react는 css에 정의된 애니메이션 지속 시간을 모르기 때문에 이를 명시적으로 알려준다. */}
         <CSSTransition
           in={showNotificationList}
           unmountOnExit
