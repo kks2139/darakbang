@@ -13,7 +13,8 @@ import Tag from "./Tag"
 import MakeTeamDone from "./MakeTeam/MakeTeamDone"
 import RedBox from "./RedBox"
 import ConfirmMessage from "./ConfirmMessage"
-import NotificationList from "./NotificationList"
+import NotificationList from "./Notification/NotificationList"
+import NotificationItem from "./Notification/NotificationItem"
 import MyTeamPage from "./MyTeam/MyTeamPage"
 import MakeTeamPage from "./MakeTeam/MakeTeamPage"
 import GatheringPage from "./Gathering/GatheringPage"
@@ -53,6 +54,7 @@ import ModifyDate from "./Gathering/ModifyDate"
 import ModifyTeam from "./Gathering/ModifyTeam"
 import AddDate from "./Gathering/AddDate"
 import NotFound from "./NotFound/NotFound"
+import NotificationDetail from "./Notification/NotificationDetail"
 
 export {
     MakeTeamContainers,
@@ -109,5 +111,7 @@ export {
     ModifyDate,
     ModifyTeam,
     AddDate,
-    NotFound
+    NotFound,
+    NotificationItem,
+    NotificationDetail
 }

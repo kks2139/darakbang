@@ -9,7 +9,7 @@ interface Props {
     msg: string
 }
 
-function ToastMessage({msg=''}: Props){
+function ToastMessage({msg=''}){
     const dispatch = useDispatch();
     const [show, setShow] = useState(false);
     

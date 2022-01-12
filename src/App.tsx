@@ -12,7 +12,8 @@ import {
   NotificationList, 
   Login, 
   NotFound,
-  SideMenu
+  SideMenu,
+  NotificationDetail
 } from './components/index';
 import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
@@ -63,6 +64,9 @@ function App() {
             <Route path='/my-team'>
               <MyTeamPage/>
             </Route>
+            <Route path='/notification'>
+              <NotificationDetail/>
+            </Route>
             <Route path='*'>
               <NotFound/>
             </Route>
@@ -72,7 +76,7 @@ function App() {
         <CSSTransition
           in={showNotificationList}
           unmountOnExit
-          timeout={500}
+          timeout={600}
           classNames={{
             enterActive: 'fade-in',
             exitActive: 'fade-out'
