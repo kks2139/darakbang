@@ -1,20 +1,17 @@
 import React, {useState, useRef, useEffect} from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {ComboboxItem} from '../util/interfaces';
-import {ComboItem} from './index';
 
 interface Props {
     width: number
     top: number
     left: number
     defaultValue?: string
-    show: boolean
     children: JSX.Element | JSX.Element[]
     visibleItemSize: number
 }
 
-function ComboItems({width, top, left, defaultValue, show, children, visibleItemSize}: Props){
+function ComboItems({width, top, left, defaultValue, children, visibleItemSize}: Props){
     const divRef = useRef<HTMLUListElement | null>(null);
     const [itemHeight, setItemHeight] = useState(0);
 
@@ -34,24 +31,29 @@ function ComboItems({width, top, left, defaultValue, show, children, visibleItem
         width: ${width}px;
         top: ${top}px;
         left: ${left}px;
-        height: 0px;
+        height: 0;
         overflow: auto;
         transform: translateY(15px);
         border: 1px solid black;
-        transition: .2s;
+        transition: height .2s ease;
+        cursor: pointer;
+
         .empty {
             color: var(--color-gray);
         }
-        ${show ? `
-            cursor: pointer;
-            // transform: translateY(-16px);
+        
+
+        &.show {
             height: ${itemHeight}px;
-            opacity: 1;
-        ` : ''}
+        }
+
+        &.hide {
+            height: 0;
+        }
     `;
 
     return (
-        <ul ref={divRef} css={style} data-combo-items data-show={show}>
+        <ul ref={divRef} css={style} data-combo-items>
             {children}
         </ul>
     );

@@ -22,12 +22,13 @@ function Login(){
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        min-height: 600px;
+
         .title {
             font-size: 36px;
             font-weight: bold;
             margin-bottom: 100px;
         }
+
         .login-btn {
             width: 120px;
             height: 120px;
@@ -36,6 +37,7 @@ function Login(){
             font-weight: bold;
             background-color: var(--color-main-text);
         }
+        
         .foot {
             display: flex;
             justify-content: space-between;

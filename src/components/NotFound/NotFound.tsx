@@ -7,7 +7,6 @@ function NotFound(){
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 600px;
         font-size: 40px;
         font-weight: bold;
         color: var(--color-main-text);

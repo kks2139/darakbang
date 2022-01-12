@@ -1,18 +1,28 @@
 import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import { Notification } from "../util/interfaces";
+import { Notification } from "../../util/interfaces";
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../store/index';
-import {appActions} from '../store/app';
+import {RootState} from '../../store/index';
+import {appActions} from '../../store/app';
+import {NotificationItem} from '../index';
+import { useHistory } from "react-router-dom";
 
 function NotificationList(){
+    const history = useHistory();
     const dispatch = useDispatch();
     const {showNotificationList, notifications} = useSelector((state: RootState)=> state.app);
     const divRef = useRef<HTMLDivElement | null>(null);
 
     const onClickClose = ()=>{
         dispatch(appActions.toggleNotification(!showNotificationList));
+    }
+    
+    const onClickItem = (info: Notification)=>{
+        history.push('/notification', {
+            notification: info
+        });
+        onClickClose();
     }
 
     return (
@@ -23,20 +33,9 @@ function NotificationList(){
                     <div className='line-2'></div>
                 </div>
             </div>
-            <div className='notification-list-box'>
-                {notifications.map(noti => (
-                    <div key={noti.id} className='noti'>
-                        <div className={`title ${noti.checked ? 'checked' : ''}`}>
-                            {noti.isSecret ? <img src='/mail-1.png'></img> : null}
-                            {noti.title}
-                        </div>
-                        <div className='info-box'>
-                            <div>1분 전</div>
-                            <div>{noti.checked ? '읽음' : '안 읽음'}</div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            {notifications.map(noti => (
+                <NotificationItem key={noti.id} notification={noti} onClickItem={onClickItem}/>
+            ))}
         </div>
     );
 }
@@ -73,45 +72,6 @@ const style = ()=> css`
             }
             .line-2 {
                 transform: rotate(-45deg);
-            }
-        }
-    }
-    .notification-list-box {
-        margin-top: 40px;
-        .noti {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 84px;
-            border-bottom: 1px solid var(--color-dim-gray);
-            padding: 0 48px;
-            transition: .1s;
-            cursor: pointer;
-            &:hover {
-                background-color: #F3F3F3;
-            }
-            .title {
-                display: flex;
-                width: 100%;
-                font-size: 20px;
-                font-weight: bold;
-                &.checked {
-                    color: var(--color-dim-gray);
-                }
-                img {
-                    object-fit: contain;
-                    margin-right: 3px;
-                }
-            }
-            .info-box {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                margin-top: 4px;
-                font-weight: bold;
-                font-size: 12px;
-                color: var(--color-dim-gray);
             }
         }
     }

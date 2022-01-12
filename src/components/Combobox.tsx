@@ -5,6 +5,7 @@ import {SelectedCombo, ComboboxItem} from '../util/interfaces';
 import CSS from 'csstype';
 import {ComboValue, ComboItems, ComboItem, Overlay} from './index';
 import ReactDOM from 'react-dom';
+import {CSSTransition} from 'react-transition-group';
 
 interface Param {
     value: string | number
@@ -95,14 +96,21 @@ function Combobox({
                     text={text}/>
             </div>
             {ReactDOM.createPortal(
-                <>
-                    {showItems &&
-                    <ComboItems width={width} top={pos.top} left={pos.left} show={showItems} visibleItemSize={visibleItemSize}>
+                <CSSTransition
+                    in={showItems}
+                    unmountOnExit
+                    timeout={200}
+                    classNames={{
+                        enterActive: 'show',
+                        enterDone: 'show',
+                        exitActive: 'hide'
+                    }}>
+                    <ComboItems width={width} top={pos.top} left={pos.left} visibleItemSize={visibleItemSize}>
                         {itemList.map(item => (
                             <ComboItem key={item.value} value={item.value} label={item.label} onClickComboItem={onClickComboItem}/>
                         ))}
-                    </ComboItems>} 
-                </>,
+                    </ComboItems> 
+                </CSSTransition>,
                 document.querySelector('#modal-root')!
             )}
         </div>
