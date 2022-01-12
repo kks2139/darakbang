@@ -22,7 +22,6 @@ function NotificationDetail(){
     }, []);
 
     const style = css`
-        min-height: 600px;
     `;
 
     return (
