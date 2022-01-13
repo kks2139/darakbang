@@ -56,6 +56,7 @@ import AddDate from "./Gathering/AddDate"
 import NotFound from "./NotFound/NotFound"
 import NotificationDetail from "./Notification/NotificationDetail"
 import LoadingMark from "./LoadingMark"
+import LoadingSpinner from "./LoadingSpinner"
 
 export {
     MakeTeamContainers,
@@ -115,5 +116,6 @@ export {
     NotFound,
     NotificationItem,
     NotificationDetail,
-    LoadingMark
+    LoadingMark,
+    LoadingSpinner
 }

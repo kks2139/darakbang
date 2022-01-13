@@ -14,7 +14,8 @@ import {
   NotFound,
   SideMenu,
   NotificationDetail,
-  LoadingMark
+  LoadingMark,
+  LoadingSpinner
 } from './components/index';
 import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
@@ -53,7 +54,7 @@ function App() {
       <main>
         {showSideMenu && <SideMenu />}
         <div className='content-box'>
-          <Suspense fallback={<LoadingMark/>}>
+          <Suspense fallback={<LoadingSpinner/>}>
             <Switch>
               <Route path='/' exact>
                 <Redirect to='/gathering'/>
