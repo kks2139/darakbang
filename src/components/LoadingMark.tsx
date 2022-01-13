@@ -4,34 +4,40 @@ import {css} from '@emotion/react';
 
 function LoadingMark(){
     const style = css`
-        width: 150px;
-        height: 50px;
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: auto;
-        /* border: 1px solid red; */
+        
+        .wrapper {
+            position: absolute;
+            display: flex;
 
-        [class*='dot'] {
-            position: relative;
-            width: 18px;
-            height: 18px;
-            background-color: var(--color-main-text);
-            border-radius: 50%;
-            box-shadow: 0 3px 20px -14px var(--color-main-text);
-            margin: 0 6px;
-            transform: translateY(-50%);
-            animation-name: floating;
-            animation-timing-function: ease;
-            animation-iteration-count: infinite;
-            animation-duration: 1.3s;
-        }
-
-        .dot-1 {
-            animation-delay: .2s;
-        }
-        .dot-2 {
-            animation-delay: .4s;
+            div {
+                position: absolute;
+                width: 18px;
+                height: 18px;
+                background-color: var(--color-main-text);
+                border-radius: 50%;
+                box-shadow: 0 3px 20px -14px var(--color-main-text);
+                margin: 0 6px;
+                animation-name: floating;
+                animation-timing-function: ease;
+                animation-iteration-count: infinite;
+                animation-duration: 1s;
+    
+                &:nth-child(1){
+                    left: -25px;
+                }
+                &:nth-child(2){
+                    animation-delay: -0.2s;
+                }
+                &:nth-child(3){
+                    left: 25px;
+                    animation-delay: -0.4s;
+                }
+            }
         }
 
         @keyframes floating {
@@ -46,14 +52,15 @@ function LoadingMark(){
                 transform: translateY(-50%);
             }
         }
-
     `;
 
     return (
         <div css={style}>
-            <div className='dot'></div>
-            <div className='dot-1'></div>
-            <div className='dot-2'></div>
+            <div className='wrapper'>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
         </div>
     );
 }
