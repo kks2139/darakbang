@@ -165,7 +165,6 @@ function GatheringDetail(){
 }
 
 const style = css`
-    width: 100%;
     .back-btn {
         width: 70px;
         text-align: center;

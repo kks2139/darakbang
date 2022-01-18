@@ -1,6 +1,7 @@
 import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { footerHeight } from '../util/style';
 
 const Footer = () => {
     return (
@@ -31,7 +32,7 @@ const Footer = () => {
 
 const styles = css`
     width: 100%;
-    height: 117px;
+    height: ${footerHeight}px;
     
     background-color: #FFF;
     border-top: 1px solid #000;

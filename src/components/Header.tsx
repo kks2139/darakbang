@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {appActions} from '../store/app';
 import { RootState } from '../store/index';
 import {NavLink} from 'react-router-dom';
+import { headerHeight } from '../util/style';
 
 const Header = () => {
     const {showNotificationList} = useSelector((state: RootState)=> state.app);
@@ -41,11 +42,11 @@ const Header = () => {
                         <li className="gray-16">
                             <NavLink to='/contact'>Contact</NavLink>
                         </li>
-                        <li className="gray-16 btn-type-1">
-                            <NavLink to='/login'>로그인</NavLink>
+                        <li>
+                            <NavLink to='/login' className='btn-type-1'>로그인</NavLink>
                         </li>
-                        <li className="gray-16 btn-type-2">
-                            <NavLink to='/join'>회원가입</NavLink>
+                        <li>
+                            <NavLink to='/join' className='btn-type-2'>회원가입</NavLink>
                         </li>
                     </ul>
                 </div>
@@ -57,7 +58,7 @@ const Header = () => {
 const styles = css`
     position: relative;
     width: 100%;
-    height: 128px;
+    height: ${headerHeight}px;
     background-color: #FFF;
     border-bottom: 1px solid #C4C4C4;
 
@@ -149,7 +150,7 @@ const styles = css`
 
     [class*=btn-type] {
         padding: 13px 14px;
-        margin: 0 10px;
+        margin-left: 10px;
     }
     .btn-type-1 {
         background-color: var(--color-main-text);

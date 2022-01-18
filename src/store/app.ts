@@ -53,17 +53,17 @@ const appSlice = createSlice({
     initialState,
     reducers: {
         setBackgroundColor: (state, action: PayloadAction<string>)=>{
-            state.backgroundColor = action.payload
+            state.backgroundColor = action.payload || 'white';
         },
         toggleConfirmMessage: (state, action: PayloadAction<ConfirmMessageInfo>)=>{
             if(action.payload.show === undefined) action.payload.show = true;
-            state.confirmMessageInfo = action.payload
+            state.confirmMessageInfo = action.payload;
         },
         toggleNotification: (state, action: PayloadAction<boolean>)=>{
-            state.showNotificationList = action.payload
+            state.showNotificationList = action.payload;
         },
         setNotifications: (state, action: PayloadAction<Notification[]>)=>{
-            state.notifications = action.payload
+            state.notifications = action.payload;
         },
         addToastMessage: (state, action: PayloadAction<JSX.Element>)=>{
             state.toastMessageList.push(action.payload);

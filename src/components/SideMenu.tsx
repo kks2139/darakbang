@@ -98,22 +98,20 @@ const SideMenu = () => {
             {
                 sideMenuMock.map((large, i) => {
                     return (
-                        <>
-                            <div className="large-category">
+                        <ul key={i}>
+                            <li className="large-category">
                                 { large.largeCategory }
-                            </div>
+                            </li>
                             {
-                                    large.items.map((medium, i) => {
-                                        return (
-                                            <>
-                                                <div className="medium-category">
-                                                    { medium.mediumCategory }
-                                                </div>
-                                            </>
-                                        )
-                                    })
-                                }
-                        </>
+                                large.items.map((medium, i) => {
+                                    return (
+                                        <li key={i} className="medium-category">
+                                            { medium.mediumCategory }
+                                        </li>
+                                    )
+                                })
+                            }
+                        </ul>
                     )
                 })
             }
@@ -129,29 +127,31 @@ const SideMenu = () => {
 };
 
 const styles = css`
-    width: 270px;
-    /* border: 1px solid red; */
+    width: 125px;
+    margin-right: 100px;
 
     div {
         padding: 8px 0;
         font-size: 16px;
     }
-    
-    [class*='-category'] {
-        width: 100%;
-    }
 
-    .large-category {
-        padding: 16px 0 16px 30px;
-        font-weight: 600;
-
-        :not(:first-of-type) {
-            border-top: 1px solid #E5E5E5
+    ul {
+        &:not(:last-of-type){
+            padding-bottom: 20px;
+            border-bottom: 1px solid #E5E5E5;
         }
+    }
+    
+    .large-category {
+        padding: 16px 0 16px 5px;
+        font-weight: 600;
     }
 
     .medium-category {
-        padding-left: 45px; 
+        display: flex;
+        align-items: center;
+        height: 35px;
+        padding-left: 5px;
         cursor: pointer;
         transition: .2s;
         &:hover {
