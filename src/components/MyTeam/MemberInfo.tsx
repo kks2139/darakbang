@@ -3,12 +3,12 @@ import React from 'react';
 import {css} from '@emotion/react';
 import {Member} from '../../util/interfaces';
 import {Avatar, Grid, GridColumn, Border, Tag} from '../index';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../store/index';
 
-interface Props {
-    memberList: Member[]
-}
-
-function MemberInfo({memberList}: Props){
+function MemberInfo(){
+    const dispatch = useDispatch();
+    const {memberList} = useSelector((state: RootState)=> state.myTeam);
     const leader = memberList.find(member => member.isLeader);
 
     const modifyList = memberList.map(member => {

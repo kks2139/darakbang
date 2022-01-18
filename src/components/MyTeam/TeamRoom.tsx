@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import { useHistory } from "react-router-dom";
 import {TeamDetail, ActiveHistory} from '../../util/interfaces';
 import {divDate} from '../../util/util';
-import {Tag, Grid, GridColumn, MemberInfoContainer} from '../index';
+import {Tag, Grid, GridColumn, MemberInfo} from '../index';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../store/index';
 
@@ -114,7 +114,7 @@ function TeamRoom(){
                     </div>
                 </section>
                 <section className='member-info'>
-                    <MemberInfoContainer/>
+                    <MemberInfo/>
                 </section>
             </div>
         </div>

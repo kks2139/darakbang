@@ -4,6 +4,11 @@ import {css} from '@emotion/react';
 import {Tab, Combobox, Tag, RedBox} from '../index';
 import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../../util/interfaces';
 import {validate} from '../../util/util';
+import {useHistory} from 'react-router-dom';
+import {useDispatch, useSelector} from 'react-redux';
+import {makeTeamActions} from '../../store/makeTeam';
+import {appActions} from '../../store/app';
+import {RootState} from '../../store/index';
 
 interface Param {
     value: string | number
@@ -11,16 +16,10 @@ interface Param {
     name: string
 }
 
-interface Props {
-    teamLeaderInfo: TeamLeaderInfo
-    teamInfo: TeamInfo
-    onTeamInfoChanged: (param: Param)=> void
-    onTeamLeaderInfoChanged: (param: Param)=> void
-    onMakeTeam: ()=> void
-    onCancel: ()=> void
-}
-
-function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfoChanged, onMakeTeam, onCancel}: Props){
+function MakeTeam(){
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const {teamLeaderInfo, teamInfo} = useSelector((state: RootState)=> state.makeTeam);
     const [wordCount, setWordCount] = useState(0);
     const [isValid, setIsValid] = useState(true);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -30,6 +29,38 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
         {label: '항목 2', value: 'val_2'},
         {label: '항목 3', value: 'val_3'},
     ]
+
+    const onCancel = ()=>{
+        history.goBack();
+    }
+
+    const onTeamInfoChanged = (param: Param)=>{
+        const {value, name} = param;
+        const obj = {
+            ...teamInfo,
+            [name]: value
+        };
+        dispatch(makeTeamActions.setTeamInfo(obj));
+    }
+
+    const onTeamLeaderInfoChanged = (param: Param)=>{
+        const {value, name} = param;
+        const obj = {
+            ...teamLeaderInfo,
+            [name]: value
+        };
+        dispatch(makeTeamActions.setTeamLeaderInfo(obj));
+    }
+
+    const onMakeTeam = ()=>{
+        dispatch(appActions.toggleConfirmMessage({
+            title: '내 팀에 함께 할 팀원을 모집해보세요!',
+            confirmText: '팀원 모집하기',
+            confirmCallback: ()=>{
+                history.push('/make-team/done');
+            }
+        }));
+    }
 
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
         let {name, value} = e.currentTarget;
@@ -62,10 +93,6 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
         setIsValid(valid);
     }
     
-    const onClickCancel = ()=>{
-        onCancel();
-    }
-
     const initValue = ()=>{
         setWordCount(teamInfo.purpose.length);
     }
@@ -168,7 +195,7 @@ function MakeTeam({teamLeaderInfo, teamInfo, onTeamInfoChanged, onTeamLeaderInfo
                 </div>
                 <div className='btn-box'>
                     <div className='btn-done' onClick={onClickMakeTeam}>이렇게 팀 만들기</div>
-                    <div className='btn-quit' onClick={onClickCancel}>오늘은 안 만들게요</div>
+                    <div className='btn-quit' onClick={onCancel}>오늘은 안 만들게요</div>
                 </div>
             </div>
         </div>
