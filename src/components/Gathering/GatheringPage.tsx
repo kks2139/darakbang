@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {Route, useRouteMatch} from 'react-router-dom';
-import {Tab, GatheringFilter, GatheringList, GatheringDetail} from '../index';
+import {Tab, GatheringFilter, GatheringList, GatheringDetail, SideMenu, LoadingSpinner, LoadingMark} from '../index';
 import useRequest from '../../hooks/useRequest';
-import {LoadingSpinner, LoadingMark} from '../index';
 
 interface TestData {
     id: string
@@ -37,9 +36,9 @@ function GatheringPage(){
 
     return (
         <div css={style}>
+            <SideMenu/>
             <Route path={`${match.path}`} exact>
-                <div className='list-box'>
-                    <Tab names={['유료', '일반']} width={894} tabStyle={{margin: '0 auto'}}>
+                    <Tab names={['유료', '일반']} width={894}>
                         <div>
                             <button onClick={fetchData}>TEST</button>
                             {!error && isLoading && 
@@ -57,7 +56,6 @@ function GatheringPage(){
                             <GatheringList onGatheringSelected={onGatheringSelected}/>
                         </div>
                     </Tab>
-                </div>
             </Route>
             <Route path={`${match.path}/detail`}>
                 <GatheringDetail/>
@@ -67,10 +65,8 @@ function GatheringPage(){
 }
 
 const style = css`
-    width: 100%;
-    .list-box {
-        width: 100%;
-    }
+    display: flex;
+    justify-content: center;
 `;
 
 export default GatheringPage;

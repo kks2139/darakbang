@@ -7,6 +7,7 @@ import {RootState} from '../../store/index';
 import {appActions} from '../../store/app';
 import {NotificationItem} from '../index';
 import { useHistory } from "react-router-dom";
+import { headerHeight, footerHeight } from "../../util/style";
 
 function NotificationList(){
     const history = useHistory();
@@ -45,7 +46,7 @@ const style = ()=> css`
     position: absolute;
     right: 0;
     width: 456px;
-    height: 100%;
+    height: calc(100vh - ${(headerHeight + footerHeight)}px);
     border-left: 1px solid var(--color-dim-gray);
     background-color: white;
     box-shadow: 0 3px 10px -5px var(--color-dim-gray);

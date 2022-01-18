@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {useHistory, Route, useRouteMatch} from 'react-router-dom';
-import { MakeTeam, MakeTeamDone} from '../index';
+import { MakeTeam, MakeTeamDone, SideMenu} from '../index';
 
 function MakeTeamPage(){
     const history = useHistory();
@@ -10,6 +10,7 @@ function MakeTeamPage(){
     
     return (
         <div css={style}>
+            <SideMenu/>
             <Route path={`${match.path}`} exact render={()=> <MakeTeam/>}/>
             <Route path={`${match.path}/done`} exact render={()=> <MakeTeamDone/>}/>
         </div>
