@@ -1,31 +1,36 @@
 import React from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {TeamInfo, TeamLeaderInfo} from '../../util/interfaces';
 import {Tab, Tag, Combobox} from '../index';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../store/index';
+import {useHistory} from 'react-router-dom';
 
-interface Props {
-    teamInfo: TeamInfo
-    teamLeaderInfo: TeamLeaderInfo
-    onOpenActivity: ()=> void
-    onCancel: ()=> void
-}
-
-function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Props){
+function MakeTeamDone(){
+    const history = useHistory();
+    const {teamInfo, teamLeaderInfo} = useSelector((state: RootState)=> state.makeTeam);
     const testOptions = [
         {label: '항목 1', value: 'val_1'},
         {label: '항목 2', value: 'val_2'},
         {label: '항목 3', value: 'val_3'},
     ]
 
+    const onOpenActivity = ()=>{
+        alert('개발중!');
+        // dispatch(toggleConfirmMessage({
+        //     title: '내 팀에 함께 할 팀원을 모집해보세요!',
+        //     confirmText: '팀원 모집하기'
+        // }));
+    }
+
+    const onCancel = ()=>{
+        history.goBack();
+    }
+
     const onClickDoen = ()=>{
         onOpenActivity();
     }
     
-    const onClickCancel = ()=>{
-        onCancel();
-    }
-
     return (
         <div css={style}>
             <Tab names={['일반']} subNames={['팀 만들기', '완료']} selectedSubIndex={1}>
@@ -96,7 +101,7 @@ function MakeTeamDone({teamInfo, teamLeaderInfo, onOpenActivity, onCancel}: Prop
                 </div>
                 <div className='btn-box'>
                     <div className='btn-done' onClick={onClickDoen}>팀원 모집하기</div>
-                    <div className='btn-quit' onClick={onClickCancel}>오늘은 안 만들게요</div>
+                    <div className='btn-quit' onClick={onCancel}>오늘은 안 만들게요</div>
                 </div>
             </div>
         </div>
