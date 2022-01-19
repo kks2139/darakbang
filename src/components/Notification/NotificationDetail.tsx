@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import { Notification } from "../../util/interfaces";
-import {useLocation, useRouteMatch, Link} from 'react-router-dom';
+import {useLocation, useRouteMatch} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-import {appActions} from '../../store/app';
+import {Overlay} from '../index';
 
 interface Params {
     notification: Notification
@@ -22,10 +22,6 @@ function NotificationDetail(){
 
     useEffect(()=>{
         // notification id로 상세내용 조회
-        dispatch(appActions.setBackgroundColor('rgb(0.5,0.5,0.5,0.3)'));
-        return ()=> {
-            // dispatch(appActions.setBackgroundColor('white'));
-        }
     }, []);
 
     const style = css`
@@ -35,15 +31,31 @@ function NotificationDetail(){
         align-items: center;
         width: 100%;
 
-        .title {
-            font-size: 36px;
-            margin-bottom: 16px;
+        .title-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 80px;
+            img {
+                margin: 0 15px;
+            }
         }
+        
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            h2 {
+                font-size: 30px;
+                line-height: 30px;
 
-        .subtitlt {
+            }
+        }
+        
+        .subtitle {
             color: white;
-            font-size: 14px;
-            margin-bottom: 125px;
+            font-size: 20px;
+            margin-top: 10px;
         }
 
         .content-box {
@@ -60,13 +72,20 @@ function NotificationDetail(){
     return (
         <div css={style}>
             {/* {notification.title} */}
-            <h2 className='title'>비밀 초대장</h2>
-            <span className='subtitle'>다락방에서 초대장이 도착하였습니다.</span>
+            <div className='title-box'>
+                <div className='title'>
+                    <img src='/mail-1.png'></img>
+                    <h2>비밀 초대장</h2>
+                    <img src='/tooltip.png'></img>
+                </div>
+                <span className='subtitle'>다락방에서 초대장이 도착하였습니다.</span>
+            </div>
             <div className='content-box'>
                 <div className='content'>
 
                 </div>
             </div>
+            <Overlay show={true} zIndex={-1} opacity={0.4}/>
         </div>
     );
 }
