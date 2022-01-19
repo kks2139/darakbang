@@ -29,7 +29,7 @@ function Popup({children, name='', onPopupClose}: Props){
         display: flex;
         justify-content: center;
         align-items: center;
-
+        
         > .popup-wrapper {
             border: 1px solid red;
             z-index: 101;
@@ -38,6 +38,9 @@ function Popup({children, name='', onPopupClose}: Props){
             border-radius: 10px;
             background-color: white;
             padding: 10px;
+
+            animation: show-up 0.4s forwards;
+
             > .header {
                 display: flex;
                 justify-content: flex-end;
@@ -50,9 +53,25 @@ function Popup({children, name='', onPopupClose}: Props){
                     cursor: pointer;
                 }
             }
+
             > .content {
                 min-height: 100px;
                 min-width: 300px;
+            }
+        }
+
+        @keyframes show-up {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            /* 70% {
+                opacity: 1;
+                transform: translateY(20px);
+            } */
+            100% {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     `;
