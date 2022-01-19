@@ -49,22 +49,20 @@ function MyTeamPage(){
 
 const style = css`
     display: flex;
+    justify-content: center;
     padding: 20px 0 0 0;
     
-
     > .side-menu {
-        width: 250px;
         display: flex;
         flex-direction: column;
-        margin-left: 50px;
+        width: 220px;
+        padding: 20px;
         .tit {
             font-size: 20px;
             font-weight: bold;
             margin-bottom: 20px;
-            padding-left: 30px;
         }
         .link {
-            padding-left: 40px;
             cursor: pointer;
             font-size: 17px;
             transition: .2s;
@@ -78,10 +76,10 @@ const style = css`
         }
     }
     > .content {
-        width: 100%;
+        width: 1000px;
         min-height: 500px;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
     }
 `;
 
