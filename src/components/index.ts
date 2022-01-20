@@ -20,6 +20,7 @@ import Footer from "./Footer"
 import SideMenu from "./SideMenu"
 import MyTeamList from "./MyTeam/MyTeamList"
 import TeamRoom from "./MyTeam/TeamRoom"
+import TeamState from "./MyTeam/TeamState"
 import Grid from "./Grid"
 import GridColumn from "./GridColumn"
 import GridRow from "./GridRow"
@@ -77,6 +78,7 @@ export {
     SideMenu,
     MyTeamList,
     TeamRoom,
+    TeamState,
     Grid,
     GridColumn,
     GridRow,
