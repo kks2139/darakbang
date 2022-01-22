@@ -7,6 +7,7 @@ import {GoThumbsup, GoThumbsdown} from 'react-icons/go';
 import {divDate} from '../../util/util';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../../store/app';
+import {Button} from '../index';
 
 interface Props {
     info: GatheringInfo
@@ -19,15 +20,14 @@ function GatheringFloatingBox({info, isFloat}: Props){
     const lastActiveDate = divDate(info?.lastActiveDate || '');
     const isOnce = info?.filter.includes('한 번 만남');
 
-    const onClickJoin = (e: React.MouseEvent<HTMLDivElement>)=>{
-        const {type} = e.currentTarget.dataset;
+    const onClickJoin = ({name}: {name: string})=>{
         dispatch(appActions.toggleConfirmMessage({
             title: `참여 하시려는 활동의 내용이 맞는지
             마지막으로 확인해 주세요!`,
             subTitle: '다락방',
             msg: `
                 ${info?.place}
-                ${type === 'once' ? '한 번 참여' : ''}
+                ${name === 'once' ? '한 번 참여' : ''}
                 ${info?.nextActiveDate}`,
             confirmText: '확인',
             show: true,
@@ -129,25 +129,10 @@ function GatheringFloatingBox({info, isFloat}: Props){
                 }
             }
         }
-        .btn {
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 240px;
-            height: 56px;
-            line-height: 54px;
-            font-size: 24px;
-            font-weight: 500;
-            text-align: center;
-            border: 1px solid black;
-            border-radius: 25px;
-            background-color: var(--color-yellow);
-            cursor: pointer;
-        }
-        .btn.once {
-            background-color: var(--color-peach);
-        }
         .once-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             .txt {
                 text-align: center;
                 font-size: 8px;
@@ -187,11 +172,11 @@ function GatheringFloatingBox({info, isFloat}: Props){
                         <div>{info.hates}</div>
                     </div>
                 </div>
-                <div className='btn' onClick={onClickJoin}>이 팀에 합류하기</div>
+                <Button text='이 팀에 합류하기' theme='yellow' onClick={onClickJoin}/>
             </div>
             {isOnce ? 
                 <div className='once-box'>
-                    <div className='btn once' data-type='once' onClick={onClickJoin}>한 번 참여하기</div>
+                    <Button text='한 번 참여하기' theme='pink' name='once' onClick={onClickJoin}/>
                     <div className='txt'>• 한 번 만남이 가능한 게시물입니다.</div>
                 </div>
             : null}
