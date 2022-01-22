@@ -55,6 +55,7 @@ import NotFound from "./NotFound/NotFound"
 import NotificationDetail from "./Notification/NotificationDetail"
 import LoadingMark from "./LoadingMark"
 import LoadingSpinner from "./LoadingSpinner"
+import Button from "./Button"
 
 export {
     GatheringFilter,
@@ -113,5 +114,6 @@ export {
     NotificationItem,
     NotificationDetail,
     LoadingMark,
-    LoadingSpinner
+    LoadingSpinner,
+    Button
 }
