@@ -38,7 +38,7 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
         }
         .icon-box {
             position: absolute;
-            right: 5px;
+            right: 8px;
         }
         .text {
             margin-left: 5px;

@@ -56,6 +56,10 @@ import NotificationDetail from "./Notification/NotificationDetail"
 import LoadingMark from "./LoadingMark"
 import LoadingSpinner from "./LoadingSpinner"
 import Button from "./Button"
+import Input from "./Input"
+import SignUp from "./SignUp/SignUp"
+import SignUpFormInputs from "./SignUp/SignUpFormInputs"
+import Space from "./Space"
 
 export {
     GatheringFilter,
@@ -115,5 +119,9 @@ export {
     NotificationDetail,
     LoadingMark,
     LoadingSpinner,
-    Button
+    Button,
+    Input,
+    SignUp,
+    SignUpFormInputs,
+    Space
 }

@@ -32,8 +32,6 @@ function Button({text, onClick, name='', theme='blue', styles}: Props){
 
     const style = css`
         position: relative;
-        /* left: 50%;
-        transform: translateX(-50%); */
         width: 240px;
         height: 56px;
         line-height: 54px;

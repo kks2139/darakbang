@@ -3,7 +3,7 @@ import React, {useState, useRef, useEffect} from "react";
 import {css} from '@emotion/react';
 import {SelectedCombo, ComboboxItem} from '../util/interfaces';
 import CSS from 'csstype';
-import {ComboValue, ComboItems, ComboItem, Overlay} from './index';
+import {ComboValue, ComboItems, ComboItem} from './index';
 import ReactDOM from 'react-dom';
 import {CSSTransition} from 'react-transition-group';
 
@@ -18,6 +18,7 @@ interface Props {
     onSelected?: (param: SelectedCombo | null)=> void
     placeholder?: string
     width?: number
+    height?: number
     name?: string
     text?: string
     required?: boolean
@@ -33,6 +34,7 @@ function Combobox({
     onSelected,
     placeholder='',
     width=120,
+    height=30,
     name='',
     text='',
     required=false,
@@ -47,7 +49,7 @@ function Combobox({
     const itemList = defaultItem.concat(items);
     const divRef = useRef<HTMLDivElement | null>(null);
     const pos = {
-        top: divRef.current ? divRef.current.getBoundingClientRect().top + window.scrollY : 0,
+        top: divRef.current ? divRef.current.getBoundingClientRect().top + window.scrollY + (height - 32) : 0,
         left: divRef.current ? divRef.current.getBoundingClientRect().left + window.scrollX : 0
     }
 
@@ -74,27 +76,24 @@ function Combobox({
     }
 
     const style = css`
+        display: flex;
+        align-items: center;
+        border: 1px solid var(--color-gray);
         width: ${width}px;
-        /* border-bottom: 1px solid var(--color-gray); */
-        .wrapper {
-            z-index: 99;
-            height: 30px;
-        }
+        height: ${height}px;
     `;
 
     return (
         <div css={style} style={comboboxStyle} ref={divRef} data-combo>
-            <div className='wrapper'>
-                <ComboValue 
-                    itemStyle={itemStyle} 
-                    required={required} 
-                    readOnly={readOnly} 
-                    placeholder={placeholder} 
-                    selected={selected} 
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    text={text}/>
-            </div>
+            <ComboValue 
+                itemStyle={itemStyle} 
+                required={required} 
+                readOnly={readOnly} 
+                placeholder={placeholder} 
+                selected={selected} 
+                onFocus={onFocus}
+                onBlur={onBlur}
+                text={text}/>
             {ReactDOM.createPortal(
                 <CSSTransition
                     in={showItems}

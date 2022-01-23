@@ -46,7 +46,7 @@ const Header = () => {
                             <NavLink to='/login' className='btn-type-1'>로그인</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/join' className='btn-type-2'>회원가입</NavLink>
+                            <NavLink to='/sign-up' className='btn-type-2'>회원가입</NavLink>
                         </li>
                     </ul>
                 </div>
