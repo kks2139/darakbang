@@ -4,11 +4,12 @@ import {css} from '@emotion/react';
 
 interface Props {
     children: JSX.Element | JSX.Element[]
+    width?: string
 }
 
-function Form({children}: Props){
+function Form({children, width='100%'}: Props){
     const style = css`
-        width: 100%;
+        width: ${width};
     `;
 
     return (

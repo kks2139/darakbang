@@ -14,7 +14,9 @@ import {
   NotFound,
   NotificationDetail,
   LoadingMark,
-  LoadingSpinner
+  LoadingSpinner,
+  SignUp
+
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
@@ -23,10 +25,6 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 const GatheringPage = React.lazy(()=> import('./components/Gathering/GatheringPage'));
 const MakeTeamPage = React.lazy(()=> import('./components/MakeTeam/MakeTeamPage'));
 const MyTeamPage = React.lazy(()=> import('./components/MyTeam/MyTeamPage'));
-
-interface Style {
-  backgroundColor: string
-}
 
 function App() {
   const {
@@ -72,11 +70,14 @@ function App() {
                 <Route path='/' exact>
                   <Redirect to='/gathering'/>
                 </Route>
-                <Route path='/gathering'>
-                  <GatheringPage/>
-                </Route>
                 <Route path='/login'>
                   <Login/>
+                </Route>
+                <Route path='/sign-up'>
+                  <SignUp/>
+                </Route>
+                <Route path='/gathering'>
+                  <GatheringPage/>
                 </Route>
                 <Route path='/make-team'>
                   <MakeTeamPage/>
