@@ -27,6 +27,7 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
         padding: 0 10px;
         background-color: white;
         cursor: ${readOnly ? '' : 'pointer'};
+        text-align: center;
 
         .value {
             width: 100%;
