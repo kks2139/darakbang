@@ -36,6 +36,7 @@ function SignUpFormInputs({field, fieldWidth=100, children, required}: Props){
         .inputs {
             display: flex;
             align-items: center;
+            width: 100%;
         }
     `;
 

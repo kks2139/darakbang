@@ -4,7 +4,7 @@ import {css} from '@emotion/react';
 import CSS from 'csstype';
 
 interface Props {
-    onChange: (event: React.ChangeEvent)=>void
+    onChange: (event: React.ChangeEvent<HTMLInputElement>, name?: string)=>void
     value: string
     placeholder?: string
     name?: string
@@ -28,7 +28,8 @@ function Input({onChange, value, placeholder, name, width='100%', customStyle}: 
             name={name}
             placeholder={placeholder}
             value={value}
-            onChange={()=> onChange}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>)=> onChange(event, name)}
+            autoComplete='off'
         />
     );
 }

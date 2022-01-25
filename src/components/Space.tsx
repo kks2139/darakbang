@@ -4,15 +4,20 @@ import {css} from '@emotion/react';
 
 interface Props {
     space: string
+    children?: string | JSX.Element | JSX.Element[]
 }
 
-function Space({space}: Props){
+function Space({space, children}: Props){
     const style = css`
+        display: flex;
+        justify-content: center;
         width: ${space};
     `;
 
     return (
-        <div css={style}></div>
+        <div css={style}>
+            {children}
+        </div>
     )
 }
 
