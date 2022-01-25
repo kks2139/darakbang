@@ -8,8 +8,25 @@ const testComboItems = [
     {label: 'Test', value: ''},
     {label: 'Test', value: ''},
 ]
-
+3
 function SignUp(){
+    const [userInput, setUserInput] = useState({
+        name: '',
+        nickname: '',
+        id: '',
+        pw: '',
+        pwConfirm: '',
+        gender: '',
+        age: '',
+        place: '',
+        email: '',
+        add1: '',
+        add2: '',
+        add3: '',
+        phone: '',
+    });
+
+
     const onChange = ()=>{
 
     }
@@ -29,6 +46,10 @@ function SignUp(){
     const onAuthenticate = ()=>{
 
     }
+    
+    const onClickSignUp = ()=>{
+
+    }
 
     const style = css`
         display: flex;
@@ -41,6 +62,23 @@ function SignUp(){
         .space {
             margin: 0 20px;
         }
+        .btn {
+            height: 51px;
+            text-align: center;
+            border: 1px solid var(--color-main-text);
+            font-size: 16px;
+            padding: 0 35px;
+            background-color: white;
+        }
+        .gray {
+            color: var(--color-gray);
+        }
+        .underline {
+            font-size: 16px;
+            text-decoration: underline;
+            margin-left: 10px;
+            cursor: pointer;
+        }
     `;
 
     return (
@@ -52,6 +90,7 @@ function SignUp(){
                 </Row>
                 <Row fieldWidth={192} field='아이디' required={true}>
                     <Input value='123' onChange={onChange}/>
+                    <span className='gray underline'>중복확인</span>
                 </Row>
                 <Row fieldWidth={192} field='비밀번호' required={true}>
                     <Input value='123' onChange={onChange}/>
@@ -77,7 +116,7 @@ function SignUp(){
                 <Row fieldWidth={192} field='주소' required={true}>
                     <Input value='123' width='160px' onChange={onChange}/>
                     <Space space='24px'/>
-                    <button onClick={onSearchAddress}>우편번호 검색</button>
+                    <button className='btn' onClick={onSearchAddress}>우편번호 검색</button>
                 </Row>
                 <Row fieldWidth={192} field=''>
                     <Input value='123' onChange={onChange}/>
@@ -86,11 +125,15 @@ function SignUp(){
                     <Input value='123' onChange={onChange}/>
                 </Row>
                 <Row fieldWidth={192} field='전화번호' required={true}>
-                    <span>010</span>
-                    <Input value='123' onChange={onChange}/>
-                    <button onClick={onAuthenticate}>우편번호 검색</button>
+                    <span className='gray'>010 - </span>
+                    <Input value='123' width='160px' onChange={onChange} customStyle={{margin: '0 24px'}}/>
+                    <button className='btn' onClick={onAuthenticate}>인증</button>
                 </Row>
             </Form>
+            <div className='warn-box'>
+
+            </div>
+            <button onClick={onClickSignUp}>가입하기</button>
         </div>
     );
 }
