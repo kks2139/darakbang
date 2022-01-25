@@ -65,7 +65,7 @@ function App() {
         <Header/>
         <main>
           <div className='content-box'>
-            <Suspense fallback={<LoadingSpinner/>}>
+            <Suspense fallback={<LoadingMark/>}>
               <Switch>
                 <Route path='/' exact>
                   <Redirect to='/gathering'/>

@@ -18,10 +18,6 @@ function RedBox({children}: Props){
 
 const style = css`
     transition: .3s;
-    &.invalid {
-        position: relative;
-        box-shadow: 0 0 0 2px var(--color-warn);
-    }
     .red-star {
         position: relative;
         &::before {

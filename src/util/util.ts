@@ -11,6 +11,26 @@ export const divDate = (date: string)=>{
     return {yyyy, yy, MM, dd, HH, mm, ss, ampm};
 }
 
+export const validateInputs = (rootElement: HTMLElement)=>{
+    let isValid = true;
+    let invalidCount = 0;
+    const requiredNodes = rootElement.querySelectorAll('[data-required]');
+
+    requiredNodes.forEach(node => {
+        if(node instanceof HTMLInputElement || node instanceof HTMLTextAreaElement){
+            if(!node.value.trim()){
+                invalidCount++;
+                node.classList.add('invalid');
+            }else{
+                node.classList.remove('invalid');
+            }
+        }
+    });
+    isValid = invalidCount > 0;
+    
+    return isValid;
+}
+
 export const validate = (root: HTMLElement)=>{
     let result = true;
     const els = root.querySelectorAll('[data-redbox]');
