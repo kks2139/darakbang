@@ -20,7 +20,7 @@ function GatheringFloatingBox({info, isFloat}: Props){
     const lastActiveDate = divDate(info?.lastActiveDate || '');
     const isOnce = info?.filter.includes('한 번 만남');
 
-    const onClickJoin = ({name}: {name: string})=>{
+    const onClickJoin = (_: React.MouseEvent, name: string)=>{
         dispatch(appActions.toggleConfirmMessage({
             title: `참여 하시려는 활동의 내용이 맞는지
             마지막으로 확인해 주세요!`,

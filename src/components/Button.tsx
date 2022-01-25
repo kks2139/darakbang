@@ -5,51 +5,47 @@ import CSS from 'csstype';
 
 interface Props {
     text: string
-    onClick: ({event, name}: {event: React.MouseEvent<HTMLElement | HTMLButtonElement>, name: string})=>void
+    onClick: (event: React.MouseEvent<HTMLElement | HTMLButtonElement>, name: string)=>void
     name?: string
-    theme?: 'blue' | 'yellow' | 'pink' | 'white'
+    theme?: 'blue' | 'yellow' | 'pink' | 'white' | 'blue_2'
     styles?: CSS.Properties
 }
 
 function Button({text, onClick, name='', theme='blue', styles}: Props){
-    const backgroundColor = 
-        theme === 'blue' ? '--color-main-text' :
-        theme === 'yellow' ? '--color-yellow' :
-        theme === 'pink' ? '--color-peach' :
-        'white';
-
-    const borderColor = 
-        theme === 'blue' ? 'black' : 
-        theme === 'yellow' ? 'black' :
-        theme === 'pink' ? 'black' :
-        '--color-main-text';
-
-    const fontColor = 
-        theme === 'blue' ? 'white' : 
-        theme === 'yellow' ? 'black' :
-        theme === 'pink' ? 'black' :
-        '--color-main-text';
-
     const style = css`
         position: relative;
         width: 240px;
         height: 56px;
         line-height: 54px;
         font-size: 24px;
-        font-weight: 500;
-        color: var(${fontColor});
+        font-weight: bold;
         text-align: center;
-        border: 1px solid;
-        border-color: var(${borderColor});
-        border-radius: 25px;
-        background-color: var(${backgroundColor});
+        border: 1px solid black;
+        border-radius: 50px;
         cursor: pointer;
+
+        ${theme === 'blue' ? `
+            background-color: var(--color-main-text);
+            border-color: white;
+            ` : ''}
+        ${theme === 'yellow' ? `
+            background-color: var(--color-yellow);
+        ` : ''}
+        ${theme === 'pink' ? `
+            background-color: var(--color-peach);
+        ` : ''}
+        ${theme === 'blue_2' ? `
+            background-color: var(--color-main-text);
+            border: 0;
+            border-radius: 0;
+            color: white;
+        ` : ''}
     `;
 
     return(
         <button 
             css={style}
-            onClick={(event: React.MouseEvent<HTMLElement | HTMLButtonElement>)=> onClick({event, name})} 
+            onClick={(event: React.MouseEvent<HTMLElement | HTMLButtonElement>)=> onClick(event, name)} 
             style={styles}>
                 {text}
         </button>

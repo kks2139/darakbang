@@ -15,7 +15,17 @@ interface Props {
     text?: string
 }
 
-function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur, itemStyle, text=''}: Props){
+function ComboValue({selected, required=false, readOnly, placeholder, onFocus, onBlur, itemStyle, text=''}: Props){
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    useEffect(()=>{
+        if(required){
+            inputRef.current!.dataset.required = '';
+        }else{
+            delete inputRef.current!.dataset.required;
+        }
+    }, [required]);
+
     const style = css`
         display: flex;
         justify-content: ${readOnly ? 'center' : 'space-between'};
@@ -27,7 +37,6 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
         padding: 0 10px;
         background-color: white;
         cursor: ${readOnly ? '' : 'pointer'};
-        text-align: center;
 
         .value {
             width: 100%;
@@ -44,11 +53,19 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
         .text {
             margin-left: 5px;
         }
+        input {
+            text-align: center;
+            font-size: 15px;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
     `;
 
     return (
         <div 
             css={style} 
+            ref={inputRef}
             className={`${required ? 'red-star' : ''}`} 
             style={itemStyle} 
             tabIndex={-1} 
@@ -56,7 +73,7 @@ function ComboValue({selected, required, readOnly, placeholder, onFocus, onBlur,
             onBlur={(e: React.FocusEvent<HTMLElement>)=> {onBlur(e)}} 
             data-combo-value>
             {selected ? 
-                <div className='value'>{selected.label}</div> :
+                <input className='value' readOnly value={selected.label}/> :
                 <div className='placehoder'>{placeholder}</div>
             }
             {(selected || readOnly) ? null :
