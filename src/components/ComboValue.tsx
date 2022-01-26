@@ -3,6 +3,7 @@ import React, {useState, useRef, useEffect} from 'react';
 import {css} from '@emotion/react';
 import {ComboboxItem} from '../util/interfaces';
 import CSS from 'csstype';
+import {clearInvalid} from '../util/util';
 
 interface Props {
     selected?: ComboboxItem | null
@@ -12,11 +13,15 @@ interface Props {
     onFocus: ()=> void
     onBlur: (param: React.FocusEvent<HTMLElement>)=> void
     itemStyle?: CSS.Properties
-    text?: string
 }
 
-function ComboValue({selected, required=false, readOnly, placeholder, onFocus, onBlur, itemStyle, text=''}: Props){
+function ComboValue({selected, required=false, readOnly, placeholder, onFocus, onBlur, itemStyle}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
+    const value = selected ? selected.label : '';
+
+    useEffect(()=>{
+        clearInvalid(inputRef.current!);
+    }, [value]);
 
     useEffect(()=>{
         if(required){
@@ -24,7 +29,7 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
         }else{
             delete inputRef.current!.dataset.required;
         }
-    }, [required]);
+    }, [required, value]);
 
     const style = css`
         display: flex;
@@ -34,7 +39,6 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
         height: 100%;
         position: relative;
         z-index: 1;
-        padding: 0 10px;
         background-color: white;
         cursor: ${readOnly ? '' : 'pointer'};
 
@@ -50,40 +54,37 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
             position: absolute;
             right: 8px;
         }
-        .text {
-            margin-left: 5px;
-        }
         input {
             text-align: center;
             font-size: 15px;
             width: 100%;
             height: 100%;
             cursor: pointer;
+            transition: .3s;
+        }
+
+        input.invalid {
+            position: relative;
+            box-shadow: 0 0 7px 0px var(--color-warn);
         }
     `;
 
     return (
         <div 
             css={style} 
-            ref={inputRef}
             className={`${required ? 'red-star' : ''}`} 
             style={itemStyle} 
             tabIndex={-1} 
             onFocus={onFocus} 
             onBlur={(e: React.FocusEvent<HTMLElement>)=> {onBlur(e)}} 
             data-combo-value>
-            {selected ? 
-                <input className='value' readOnly value={selected.label}/> :
-                <div className='placehoder'>{placeholder}</div>
-            }
+            <input className='value' ref={inputRef} value={value} readOnly/>
+            {!selected && <div className='placehoder'>{placeholder}</div>}
             {(selected || readOnly) ? null :
                 <div className='icon-box'>
                     <img src='/comboDown.png'></img>
                 </div>
             }
-            <span className='text'>
-                {text}
-            </span>
         </div>
     );
 }

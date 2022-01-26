@@ -12,7 +12,7 @@ export const divDate = (date: string)=>{
 }
 
 export const validateInputs = (rootElement: HTMLElement)=>{
-    let isValid = true;
+    let valid = true;
     let invalidCount = 0;
     const requiredNodes = rootElement.querySelectorAll('[data-required]');
 
@@ -26,9 +26,9 @@ export const validateInputs = (rootElement: HTMLElement)=>{
             }
         }
     });
-    isValid = invalidCount > 0;
+    valid = invalidCount == 0;
     
-    return isValid;
+    return valid;
 }
 
 export const validate = (root: HTMLElement)=>{
@@ -82,6 +82,9 @@ export const validate = (root: HTMLElement)=>{
 }
 
 export const clearInvalid = (root: HTMLElement)=>{
+    if(root.classList.contains('invalid')){
+        root.classList.remove('invalid');
+    }
     const els = root.querySelectorAll('.invalid');
     els.forEach(el => {
         el.classList.remove('invalid');

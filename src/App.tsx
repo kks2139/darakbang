@@ -25,6 +25,7 @@ import {Route, Switch, Redirect} from 'react-router-dom';
 const GatheringPage = React.lazy(()=> import('./components/Gathering/GatheringPage'));
 const MakeTeamPage = React.lazy(()=> import('./components/MakeTeam/MakeTeamPage'));
 const MyTeamPage = React.lazy(()=> import('./components/MyTeam/MyTeamPage'));
+const Welcome = React.lazy(()=> import('./components/Welcome/Welcome'));
 
 function App() {
   const {
@@ -75,6 +76,9 @@ function App() {
                 </Route>
                 <Route path='/sign-up'>
                   <SignUp/>
+                </Route>
+                <Route path='/welcome'>
+                  <Welcome/>
                 </Route>
                 <Route path='/gathering'>
                   <GatheringPage/>
