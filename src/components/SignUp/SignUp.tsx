@@ -3,6 +3,7 @@ import React, { useRef, useState } from 'react';
 import {css} from '@emotion/react';
 import {Input, Form, SignUpFormInputs as Row, CheckBox, Space, Combobox, Button} from '../index';
 import {validateInputs} from '../../util/util';
+import {useHistory} from 'react-router-dom';
 
 const test_age = [
     {label: '25', value: 'a1'},
@@ -12,7 +13,7 @@ const test_age = [
 const test_place = [
     {label: '강남', value: 'p1'},
     {label: '강북', value: 'p2'},
-    {label: '강동', value: 'p2'},
+    {label: '강동', value: 'p3'},
 ];
 const test_mail = [
     {label: 'naver.com', value: 'm1'},
@@ -20,6 +21,7 @@ const test_mail = [
 ];
 
 function SignUp(){
+    const history = useHistory();
     const divRef = useRef<HTMLDivElement>(null);
     const [userInput, setUserInput] = useState({
         name: '',
@@ -28,7 +30,7 @@ function SignUp(){
         pw: '',
         pwConfirm: '',
         male: false,
-        female: false,
+        female: true,
         age: '',
         place: '',
         email: '',
@@ -67,7 +69,7 @@ function SignUp(){
     
     const onClickSignUp = (e: React.MouseEvent)=>{
         if(!validateInputs(divRef.current!)) return;
-        
+        history.push('/welcome');
     }
 
     const style = css`
@@ -87,7 +89,7 @@ function SignUp(){
             box-shadow: inset 0 0 0 2px var(--color-main-text);
             font-size: 16px;
             font-weight: bold;
-            padding: 0 35px;
+            padding: 0 25px;
             background-color: white;
         }
         .gray {
@@ -139,17 +141,17 @@ function SignUp(){
                 <Row fieldWidth={192} field='주소' required>
                     <Input name='addr1' value={userInput.addr1} width='160px' onChange={onChange} required/>
                     <Space space='24px'/>
-                    <button className='btn' onClick={onSearchAddress}>우편번호 검색</button>
+                    <button className='btn' onClick={onSearchAddress} style={{width: '160px'}}>우편번호 검색</button>
                 </Row>
                 <Row fieldWidth={192} field=''>
-                    <Input name='addr2' value={userInput.addr2} width='350px' onChange={onChange} required/>
+                    <Input name='addr2' value={userInput.addr2} width='345px' onChange={onChange}/>
                 </Row>
                 <Row fieldWidth={192} field=''>
-                    <Input name='addr3' value={userInput.addr3} width='350px' onChange={onChange} required/>
+                    <Input name='addr3' value={userInput.addr3} width='345px' onChange={onChange}/>
                 </Row>
                 <Row fieldWidth={192} field='전화번호' required>
                     <span className='gray'>010 - </span>
-                    <Input name='phone' value={userInput.phone} width='160px' onChange={onChange} required customStyle={{margin: '0 24px'}}/>
+                    <Input name='phone' value={userInput.phone} width='187px' onChange={onChange} required customStyle={{margin: '0 20px'}}/>
                     <button className='btn' onClick={onAuthenticate}>인증</button>
                 </Row>
             </Form>

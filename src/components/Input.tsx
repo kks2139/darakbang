@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 import CSS from 'csstype';
+import {clearInvalid} from '../util/util';
 
 interface Props {
     onChange: (event: React.ChangeEvent<HTMLInputElement>, name?: string)=>void
@@ -17,8 +18,8 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
     const inputRef = useRef<HTMLInputElement>(null);
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>)=>{
-
         onChange(e, name);
+        clearInvalid(inputRef.current!);
     }
 
     useEffect(()=>{

@@ -20,7 +20,6 @@ interface Props {
     width?: number
     height?: number
     name?: string
-    text?: string
     required?: boolean
     readOnly?: boolean
     comboboxStyle?: CSS.Properties
@@ -36,7 +35,6 @@ function Combobox({
     width=120,
     height=30,
     name='',
-    text='',
     required=false,
     readOnly=false,
     comboboxStyle,
@@ -92,8 +90,7 @@ function Combobox({
                 placeholder={placeholder} 
                 selected={selected} 
                 onFocus={onFocus}
-                onBlur={onBlur}
-                text={text}/>
+                onBlur={onBlur}/>
             {ReactDOM.createPortal(
                 <CSSTransition
                     in={showItems}

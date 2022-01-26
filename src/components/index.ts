@@ -123,5 +123,5 @@ export {
     Input,
     SignUp,
     SignUpFormInputs,
-    Space
+    Space,
 }
