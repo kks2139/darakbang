@@ -5,13 +5,17 @@ import CSS from 'csstype';
 
 interface Props {
     text: string
-    onClick: (event: React.MouseEvent<HTMLElement | HTMLButtonElement>, name: string)=>void
+    onClick?: (event: React.MouseEvent<HTMLElement | HTMLButtonElement>, name: string)=>void
     name?: string
     theme?: 'blue' | 'yellow' | 'pink' | 'white' | 'blue_2'
     styles?: CSS.Properties
 }
 
 function Button({text, onClick, name='', theme='blue', styles}: Props){
+    const clickHandler = (e: React.MouseEvent<HTMLElement | HTMLButtonElement>)=>{
+        if(onClick) onClick(e, name);
+    }
+
     const style = css`
         position: relative;
         width: 240px;
@@ -26,8 +30,8 @@ function Button({text, onClick, name='', theme='blue', styles}: Props){
 
         ${theme === 'blue' ? `
             background-color: var(--color-main-text);
-            border-color: white;
-            ` : ''}
+            color: white;
+        ` : ''}
         ${theme === 'yellow' ? `
             background-color: var(--color-yellow);
         ` : ''}
@@ -45,7 +49,7 @@ function Button({text, onClick, name='', theme='blue', styles}: Props){
     return(
         <button 
             css={style}
-            onClick={(event: React.MouseEvent<HTMLElement | HTMLButtonElement>)=> onClick(event, name)} 
+            onClick={clickHandler} 
             style={styles}>
                 {text}
         </button>
