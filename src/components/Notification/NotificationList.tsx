@@ -28,6 +28,7 @@ function NotificationList(){
 
     return (
         <div css={style} className='fade-in' ref={divRef}>
+            <div className='tri'></div>
             <div className='header-box'>
                 <div className='close' data-type='close' onClick={onClickClose}>
                     <div className='line-1'></div>
@@ -44,12 +45,24 @@ function NotificationList(){
 const style = ()=> css`
     z-index: 200;
     position: absolute;
-    right: 0;
+    top: ${headerHeight + 10}px;
     width: 456px;
-    height: calc(100vh - ${(headerHeight + footerHeight)}px);
-    border-left: 1px solid var(--color-dim-gray);
+    height: 500px;
     background-color: white;
-    box-shadow: 0 3px 10px -5px var(--color-dim-gray);
+    box-shadow: 0 0 15px -3px var(--color-dim-gray);
+    border-radius: 10px;
+    
+    .tri {
+        position: absolute;
+        top: 0;
+        left: 0;
+        /* border: 1px solid red; */
+        width: 20px;
+        height: 20px;
+        background-color: white;
+        box-shadow: -5px -5px 10px -5px var(--color-dim-gray);
+        transform: translate(130%, -50%) rotate(45deg);
+    }
 
     .header-box {
         display: flex;
@@ -92,15 +105,33 @@ const style = ()=> css`
     }
 
     @keyframes fade-in {
-        0% {transform: translateX(100%);}
-        70% {transform: translateX(-5%);}
-        100% {transform: translateX(0)}
+        0% {
+            transform: translateY(-10%);
+            opacity: 0;
+        }
+        70% {
+            transform: translateY(5%);
+            opacity: 0.7;
+        }
+        100% {
+            transform: translateY(0);
+            opacity: 1;
+        }
     }
     
     @keyframes fade-out {
-        0% {transform: translateX(0);}
-        30% {transform: translateX(-5%);}
-        100% {transform: translateX(100%);}
+        0% {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        30% {
+            transform: translateY(5%);
+            opacity: 3;
+        }
+        100% {
+            transform: translateY(-10%);
+            opacity: 0;
+        }
     }
 `;
 

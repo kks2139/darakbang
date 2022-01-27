@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {CSSTransition} from 'react-transition-group';
 import {
   // MyTeamPage, 
   // MakeTeamPage, 
@@ -99,16 +98,6 @@ function App() {
             </Suspense>
           </div>
           {/* timeout: react는 css에 정의된 애니메이션 지속 시간을 모르기 때문에 이를 명시적으로 알려준다. */}
-          <CSSTransition
-            in={showNotificationList}
-            unmountOnExit
-            timeout={600}
-            classNames={{
-              enterActive: 'fade-in',
-              exitActive: 'fade-out'
-            }}>
-            <NotificationList/>
-          </CSSTransition>
         </main>
       </div>
       <Footer />

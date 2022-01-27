@@ -6,6 +6,8 @@ import {appActions} from '../store/app';
 import { RootState } from '../store/index';
 import {NavLink} from 'react-router-dom';
 import { headerHeight } from '../util/style';
+import {NotificationList} from './index';
+import {CSSTransition} from 'react-transition-group';
 
 const Header = () => {
     const {showNotificationList} = useSelector((state: RootState)=> state.app);
@@ -31,7 +33,7 @@ const Header = () => {
                 </div>
                 <div className="header__nav">
                     <ul>
-                        <li className="gray-16" onClick={onClickNoti}>
+                        <li className="noti-box gray-16" onClick={onClickNoti}>
                             알림
                             <img src='/mail-2.png'></img>
                             <div className='mail-cnt'>{2}</div>
@@ -49,6 +51,16 @@ const Header = () => {
                             <NavLink to='/sign-up' className='btn-type-2'>회원가입</NavLink>
                         </li>
                     </ul>
+                    <CSSTransition
+                        in={showNotificationList}
+                        unmountOnExit
+                        timeout={600}
+                        classNames={{
+                            enterActive: 'fade-in',
+                            exitActive: 'fade-out'
+                        }}>
+                        <NotificationList/>
+                    </CSSTransition>
                 </div>
             </div>
         </header>
@@ -108,6 +120,10 @@ const styles = css`
             align-items: center;
             list-style: none;
 
+            .noti-box {
+                position: relative;
+            }
+
             li {
                 margin-right: 16px;
                 cursor: pointer;
@@ -118,7 +134,7 @@ const styles = css`
                 > * {
                     position: absolute;
                 }
-                img {
+                > img {
                     transform: translate(-10px, -20px);
                 }
                 .mail-cnt {
