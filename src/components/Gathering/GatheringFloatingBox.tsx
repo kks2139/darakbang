@@ -12,9 +12,10 @@ import {Button} from '../index';
 interface Props {
     info: GatheringInfo
     isFloat: boolean
+    top?: number
 }
 
-function GatheringFloatingBox({info, isFloat}: Props){
+function GatheringFloatingBox({info, isFloat, top}: Props){
     const dispatch = useDispatch();
     const initDate = divDate(info?.initDate || '');
     const lastActiveDate = divDate(info?.lastActiveDate || '');
@@ -49,9 +50,14 @@ function GatheringFloatingBox({info, isFloat}: Props){
     }
 
     const style = css`
-        position: ${isFloat ? 'fixed' : 'relative'};
-        top: 40px;
-        /* transition: .3s; */
+        ${isFloat ? `
+            position: fixed;
+        ` : `
+            position: absolute;
+            top: ${top}px;
+            transform: translateY(-100%);
+        `}
+
         .title {
             font-weight: bold;
             font-size: 24px;
