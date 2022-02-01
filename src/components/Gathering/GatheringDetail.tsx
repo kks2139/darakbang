@@ -13,13 +13,16 @@ interface Params {
 function GatheringDetail(){
     const location = useLocation<Params>();
     const info = location.state.gatheringInfo;
-    const [isFloat, setIsFloat] = useState(false);
+    const [floatBox, setFloatBox] = useState({
+        isFloat: false,
+        floatingBoxTop: 0
+    });
     const [showPopup, setShowPopup] = useState({
         modifyDate: false,
         modifyTeam: false
     });
     const divRef = useRef<HTMLDivElement | null>(null);
-    const topRef = useRef<HTMLDivElement | null>(null);
+    const bottomDef = useRef<HTMLDivElement | null>(null);
     const nextAct = divDate(info?.nextActiveDate || '');
 
     const onPopupClose = (name: string)=>{
@@ -40,10 +43,13 @@ function GatheringDetail(){
     const setFloating = ()=>{
         setIntersectionObserver({
             root: null,
-            dom: topRef.current!,
+            dom: bottomDef.current!,
             threshold: 1,
-            intersectionCallback: (el: Element, isIntersecting: boolean)=>{
-                setIsFloat(!isIntersecting);
+            intersectionCallback: (targ: Element, isIntersecting: boolean, rect: DOMRectReadOnly)=>{
+                setFloatBox({
+                    isFloat: !isIntersecting,
+                    floatingBoxTop: rect.top + document.documentElement.scrollTop
+                });
             }
         });
     } 
@@ -57,7 +63,7 @@ function GatheringDetail(){
         <div css={style} ref={divRef}>
             <div className='wrapper'>
                 <section className='info-section'>
-                    <div className='simple-info' ref={topRef}>
+                    <div className='simple-info'>
                         <div className='interests'>
                             {info.interests}
                         </div>
@@ -129,7 +135,7 @@ function GatheringDetail(){
                                     <img key={d} src={d}></img>
                                 ))}
                             </div>
-                            <div className='desc'>
+                            <div className='desc' ref={bottomDef}>
                                 {info.detailDescription}
                             </div>
                         </div>
@@ -147,7 +153,7 @@ function GatheringDetail(){
                     </div>
                 </section>
                 <section className='floating-section'>
-                    <GatheringFloatingBox info={info} isFloat={isFloat}/>
+                    <GatheringFloatingBox info={info} isFloat={floatBox.isFloat} top={floatBox.floatingBoxTop}/>
                 </section>
             </div>
             {showPopup.modifyDate && 

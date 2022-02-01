@@ -125,7 +125,7 @@ interface ObserverParams {
     root: HTMLElement | null 
     dom: HTMLElement | HTMLElement[]
     threshold?: number
-    intersectionCallback: (p1: Element, p2: boolean)=> void
+    intersectionCallback: (target: Element, isIntersecting: boolean, rect: DOMRectReadOnly)=> void
 }
 
 export const setIntersectionObserver = ({root, dom, threshold=0, intersectionCallback}: ObserverParams)=>{
@@ -133,8 +133,8 @@ export const setIntersectionObserver = ({root, dom, threshold=0, intersectionCal
 
     const callback: IntersectionObserverCallback = (entries, observer)=> {
         entries.forEach(entry => {
-            const {target, isIntersecting} = entry;
-            intersectionCallback(target, isIntersecting);
+            const {target, isIntersecting, boundingClientRect} = entry;
+            intersectionCallback(target, isIntersecting, boundingClientRect);
         });
     }
     const option = {
