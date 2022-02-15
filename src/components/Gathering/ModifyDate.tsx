@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {DateButtonList, Popup, AddDate} from '../index';
+import {DateButtonList, Popup, AddDate, Button} from '../index';
 import {GatheringInfo} from '../../util/interfaces';
 
 interface Props {
@@ -75,7 +75,7 @@ function ModifyDate({gatheringInfo}: Props){
             <div className='content'>
                 <DateButtonList activeDateList={activeDateList} nextActiveDate={nextActiveDate} readOnly={true}/>
                 <img className='add' src='/add.png' alt='추가' onClick={onClickImg}></img>
-                <button className='btn'>완료</button>
+                <Button text='완료'/>
                 <div className='foot'>
                     * 정원 달성 후 마감 된 모임은 마감을 해지할 수 없습니다.<br/>
                     &nbsp;&nbsp;&nbsp;해당 날짜에 추가 인원을 모집하고 싶을 경우 새로운 모집글을 업로드 하시거나,<br/>

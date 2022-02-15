@@ -32,25 +32,28 @@ const style = css`
     .filter {
         display: flex;
         font-size: 16px;
+
         > div {
             display: flex;
             align-items: center;
             height: 32px;
             cursor: pointer;
         }
+
         .normal {
             color: #B4B4B4;
             border: 1px solid transparent;  
             padding: 8px;  
             margin-right: 16px;
             font-weight: 500;
-        }
-        .normal.sel {
-            border-color: black;
-            background-color: var(--color-peach);
-            color: black;
-            border-radius: 10px;
-            font-weight: 600;
+
+            &.sel {
+                border-color: black;
+                background-color: var(--color-peach);
+                color: black;
+                border-radius: 25px;
+                font-weight: 600;
+            }
         }
     }
 `;

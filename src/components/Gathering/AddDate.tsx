@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Combobox} from '../index';
+import {Combobox, Button} from '../index';
 import {SelectedCombo} from '../../util/interfaces';
 import CSS from 'csstype';
 
@@ -34,20 +34,6 @@ function AddDate({onAddDate}: Props){
             align-items: center;
             justify-content: center;
         }
-        .btn {
-            padding: 16px 30px;
-            border: 1px solid black;
-            border-radius: 25px;
-            background-color: var(--color-main-text);
-            color: white;
-            font-size: 24px;
-            margin: 30px 0;
-            transition: .2s;
-            cursor: pointer;
-            &:hover {
-                box-shadow: 0 0 0 1px black;
-            }
-        }
     `;
 
     return (
@@ -57,7 +43,7 @@ function AddDate({onAddDate}: Props){
                 <Combobox items={items} onSelected={onSelected} itemStyle={itemStyle}/>일
                 <Combobox items={items} onSelected={onSelected} itemStyle={itemStyle}/>분
             </div>
-            <button className='btn'>추가</button>
+            <Button text='추가' styles={{margin: '20px 0'}}/>
         </div>
     );
 }

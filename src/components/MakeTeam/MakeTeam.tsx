@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab, Combobox, Tag, RedBox} from '../index';
-import {SelectedCombo, TeamLeaderInfo, TeamInfo} from '../../util/interfaces';
+import {Tab, Combobox, Tag, RedBox, Button} from '../index';
+import {SelectedCombo} from '../../util/interfaces';
 import {validate} from '../../util/util';
 import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -194,7 +194,7 @@ function MakeTeam(){
                     <div className='desc'>• 팀명은 최초 개설 후 1회 변경 가능합니다.</div>
                 </div>
                 <div className='btn-box'>
-                    <div className='btn-done' onClick={onClickMakeTeam}>이렇게 팀 만들기</div>
+                    <Button text="이렇게 팀 만들기" onClick={onClickMakeTeam} styles={{marginBottom: '10px'}}/>
                     <div className='btn-quit' onClick={onCancel}>오늘은 안 만들게요</div>
                 </div>
             </div>
@@ -363,20 +363,10 @@ const style = (isValid: boolean)=> (css`
             display: flex;
             flex-direction: column;
             align-items: center;
-            .btn-done {
-                font-size: 24px;
-                font-weight: 500;
-                padding: 16px 36px;
-                background-color: var(--color-yellow);
-                border: 1px solid black;
-                border-radius: 50px;
-                margin-bottom: 8px;
-                cursor: pointer;
-            }
             .btn-quit {
                 font-size: 16px;
                 font-weight: bold;
-                color: var(--color-dim-gray);
+                color: var(--color-gray);
                 cursor: pointer;
             }
         }

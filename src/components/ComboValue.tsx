@@ -15,7 +15,7 @@ interface Props {
     itemStyle?: CSS.Properties
 }
 
-function ComboValue({selected, required=false, readOnly, placeholder, onFocus, onBlur, itemStyle}: Props){
+function ComboValue({selected, required=false, readOnly, placeholder='', onFocus, onBlur, itemStyle}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
     const value = selected ? selected.label : '';
 
@@ -45,11 +45,6 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
         .value {
             width: 100%;
         }
-        .placehoder {
-            color: var(--color-gray);
-            font-weight: 600;
-            font-size: 18px;
-        }
         .icon-box {
             position: absolute;
             right: 8px;
@@ -61,6 +56,11 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
             height: 100%;
             cursor: pointer;
             transition: .3s;
+            &::placeholder {
+                color: var(--color-gray);
+                font-weight: 600;
+                font-size: 15px;
+            }
         }
 
         input.invalid {
@@ -78,8 +78,7 @@ function ComboValue({selected, required=false, readOnly, placeholder, onFocus, o
             onFocus={onFocus} 
             onBlur={(e: React.FocusEvent<HTMLElement>)=> {onBlur(e)}} 
             data-combo-value>
-            <input className='value' ref={inputRef} value={value} readOnly/>
-            {!selected && <div className='placehoder'>{placeholder}</div>}
+            <input className='value' ref={inputRef} value={value} placeholder={!selected ? placeholder : ''} readOnly/>
             {(selected || readOnly) ? null :
                 <div className='icon-box'>
                     <img src='/comboDown.png'></img>
