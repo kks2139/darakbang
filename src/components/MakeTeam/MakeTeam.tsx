@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {Tab, Combobox, Tag, RedBox, Button} from '../index';
+import {Tab, Combobox, Tag, RedBox, Button, Input, Textarea, Popup} from '../index';
 import {SelectedCombo} from '../../util/interfaces';
-import {validate} from '../../util/util';
+import {validateInputs} from '../../util/util';
 import {useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {makeTeamActions} from '../../store/makeTeam';
@@ -22,7 +22,7 @@ function MakeTeam(){
     const {teamLeaderInfo, teamInfo} = useSelector((state: RootState)=> state.makeTeam);
     const [wordCount, setWordCount] = useState(0);
     const [isValid, setIsValid] = useState(true);
-    const divRef = useRef<HTMLDivElement | null>(null);
+    const formRef = useRef<HTMLFormElement>(null);
     
     const testOptions = [
         {label: '항목 1', value: 'val_1'},
@@ -53,13 +53,7 @@ function MakeTeam(){
     }
 
     const onMakeTeam = ()=>{
-        dispatch(appActions.toggleConfirmMessage({
-            title: '내 팀에 함께 할 팀원을 모집해보세요!',
-            confirmText: '팀원 모집하기',
-            confirmCallback: ()=>{
-                history.push('/make-team/done');
-            }
-        }));
+        history.push('/make-team/done');
     }
 
     const onChangeValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>{
@@ -84,9 +78,10 @@ function MakeTeam(){
         }
     }
 
-    const onClickMakeTeam = ()=>{
+    const onClickMakeTeam = (e: React.MouseEvent)=>{
+        e.preventDefault();
         let valid = false;
-        if(validate(divRef.current!)){
+        if(validateInputs(formRef.current!)){
             onMakeTeam();
             valid = true;
         }
@@ -102,69 +97,59 @@ function MakeTeam(){
     }, []);
 
     return (
-        <div css={style(isValid)} ref={divRef}>
+        <form css={style(isValid)} ref={formRef}>
             <Tab names={['일반']} subNames={['팀 만들기', '완료']} selectedSubIndex={0}>
-                <>
-                    <div className='img-box'>
-                        <div className='txt'>팀 만들기</div>
-                        <label htmlFor='fileOpen'>
-                            <div className='add-btn'>
-                                <div className='hori'></div>
-                                <div className='vert'></div>
-                            </div>
-                        </label>
-                        <input id='fileOpen' type='file' hidden={true}></input>
-                    </div>
-                </>
+                <div className='img-box'>
+                    <h2 className='txt'>팀 만들기</h2>
+                    <label htmlFor='fileOpen'>
+                        <div className='add-btn'>
+                            <div className='hori'></div>
+                            <div className='vert'></div>
+                        </div>
+                    </label>
+                    <input id='fileOpen' type='file' hidden={true}></input>
+                </div>
             </Tab>
-            <div className='sub-tit'>팀 소개</div>
+            <h3 className='sub-tit'>팀 소개</h3>
             <div className='intro-box'>
-                <RedBox>
-                    <div className='row'>
-                        <div className='field red-star'>팀명</div>
-                        <div className='val1'>
-                            <span className='txt1'>팀</span> 
-                            <span>{'{'}</span>
-                            <input onChange={onChangeValue} name='teamName' value={teamInfo.teamName} autoComplete='off'></input>
-                            <span>{'}'}</span>
-                        </div>
+                <div className='row'>
+                    <div className='field red-star'>팀명</div>
+                    <div className='val1'>
+                        <span className='txt1'>팀</span> 
+                        <span>{'{'}</span>
+                        <Input onChange={onChangeValue} name='teamName' value={teamInfo.teamName} required noBorder={true}/>
+                        <span>{'}'}</span>
                     </div>
-                </RedBox>
-                <RedBox>
-                    <div className='row'>
-                        <div className='field red-star'>카테고리</div>
-                        <div className='val2'>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' defaultValue={teamInfo.filter_1} comboboxStyle={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' defaultValue={teamInfo.filter_2} comboboxStyle={{margin: '0 18px'}}></Combobox>
-                            <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' defaultValue={teamInfo.filter_3} comboboxStyle={{margin: '0 18px'}}></Combobox>
-                        </div>
+                </div>
+                <div className='row'>
+                    <div className='field red-star'>카테고리</div>
+                    <div className='val2'>
+                        <Combobox items={testOptions} onSelected={onSelected} placeholder='1차 분류' name='filter_1' required comboboxStyle={{margin: '0 18px'}}></Combobox>
+                        <Combobox items={testOptions} onSelected={onSelected} placeholder='2차 분류' name='filter_2' required comboboxStyle={{margin: '0 18px'}}></Combobox>
+                        <Combobox items={testOptions} onSelected={onSelected} placeholder='3차 분류' name='filter_3' required comboboxStyle={{margin: '0 18px'}}></Combobox>
                     </div>
-                </RedBox>
-                <RedBox>
-                    <div className='row'>
-                        <div className='field red-star'>팀 목적</div>
-                        <div className='val3'>
-                            <span>{'“'}</span>
-                                <div className='purp-box'>
-                                    <textarea onChange={onChangeValue} name='purpose' value={teamInfo.purpose}></textarea>
-                                    <div className='word-count'>{wordCount}/50자</div>
-                                </div>
-                            <span>{'”'}</span>
-                        </div>
+                </div>
+                <div className='row'>
+                    <div className='field red-star'>팀 목적</div>
+                    <div className='val3'>
+                        <span>{'“'}</span>
+                            <div className='purp-box'>
+                                <Textarea onChange={onChangeValue} name='purpose' required value={teamInfo.purpose}/>
+                                <div className='word-count'>{wordCount}/50자</div>
+                            </div>
+                        <span>{'”'}</span>
                     </div>
-                </RedBox>
+                </div>
             </div>
-            <div className='sub-tit'>
+            <h3 className='sub-tit'>
                 팀장 소개
                 <span>팀장의 기본정보는 자동으로 등록됩니다.</span>
-            </div>
+            </h3>
             <div className='intro-box'>
                 <div className='row'>
                     <div className='val4'>
                             <div className='attribute'>
-                                <RedBox>
-                                    <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} defaultValue={teamLeaderInfo.career} comboboxStyle={{margin: '0 18px'}}></Combobox>
-                                </RedBox>
+                                <Combobox items={testOptions} onSelected={onSelected} placeholder='관련 경력' name='career' required={true} defaultValue={teamLeaderInfo.career} comboboxStyle={{margin: '0 18px'}}></Combobox>
                             </div>
                         <div className='attribute'>
                             <div className='attr'>별명</div>
@@ -198,7 +183,7 @@ function MakeTeam(){
                     <div className='btn-quit' onClick={onCancel}>오늘은 안 만들게요</div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 }
 
@@ -376,7 +361,7 @@ const style = (isValid: boolean)=> (css`
         display: ${isValid ? 'none' : 'flex'};
         margin-top: 10px;
         color: #FF0000;
-        font-weight: 500;
+        font-weight: bold;
         font-size: 16px;
     }
 `);

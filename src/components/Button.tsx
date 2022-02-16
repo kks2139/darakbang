@@ -14,6 +14,11 @@ interface Props {
 }
 
 function Button({text, onClick, name='', theme='blue', width, scale, styles}: Props){
+    const mainColor = theme === 'blue' ? 'var(--color-main-text)' :
+                    theme === 'yellow' ? 'var(--color-yellow)' :
+                    theme === 'pink' ? 'var(--color-peach)' :
+                    theme === 'blue_2' ? 'var(--color-main-text)' : '';
+
     const clickHandler = (e: React.MouseEvent<HTMLElement>)=>{
         if(onClick) onClick(e, name);
     }
@@ -28,30 +33,30 @@ function Button({text, onClick, name='', theme='blue', width, scale, styles}: Pr
         font-size: 24px;
         font-weight: bold;
         text-align: center;
-        border: 1px solid black;
         border-radius: 50px;
         transition: .3s;
         cursor: pointer;
 
         ${theme === 'blue' ? `
-            background-color: var(--color-main-text);
+            background-color: ${mainColor};
             color: white;
         ` : ''}
         ${theme === 'yellow' ? `
-            background-color: var(--color-yellow);
+            background-color: ${mainColor};
         ` : ''}
         ${theme === 'pink' ? `
-            background-color: var(--color-peach);
+            background-color: ${mainColor};
         ` : ''}
         ${theme === 'blue_2' ? `
-            background-color: var(--color-main-text);
+            background-color: ${mainColor};
             border: 0;
             border-radius: 0;
             color: white;
         ` : ''}
 
         &:hover {
-            box-shadow: 0 0 0 2px black;
+            box-shadow: 0 0 10px -5px ${mainColor};
+            transform: translateY(-2px);
         }
     `;
 

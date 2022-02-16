@@ -60,6 +60,7 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
                 color: var(--color-gray);
                 font-weight: 600;
                 font-size: 15px;
+                padding-right: 10px;
             }
         }
 

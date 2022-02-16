@@ -17,42 +17,48 @@ function Tag({name, selected=false, onSelect, theme='dark'}: Props){
         if(onSelect) onSelect(!select);
     }
 
+    const style = css`
+        margin: 4px;
+        .tag {
+            display: flex;
+            justify-content: center;
+            border-radius: 25px;
+            padding: 10px 10px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #000000;
+            transition: .2s;
+
+            box-shadow: 6px 6px 15px -14px black;
+
+            cursor: pointer;
+            
+            ${theme === 'dark' ? `
+                ${select ? `
+                    background-color: var(--color-main-text); 
+                    color: white;
+                ` : `
+                    background-color: var(--color-yellow); 
+                `}
+            ` : `
+                ${select ? `
+                    background-color: var(--color-main-text); 
+                    color: white;
+                ` : `
+                    background-color: white; 
+                `}
+            `}
+
+        }
+    `;
+
     return (
-        <div css={style(select, theme)} onClick={onClick}>
+        <div css={style} onClick={onClick}>
             <div className="tag">
                 { name }
             </div>
         </div>
     );
 }
-
-const style = (select: boolean, theme: string) => (css`
-    margin: 4px;
-    .tag {
-        display: flex;
-        justify-content: center;
-        border-radius: 25px;
-        padding: 10px 8px;
-
-        font-size: 16px;
-        font-weight: 500;
-        color: #000000;
-        
-        cursor: pointer;
-        
-        ${theme === 'dark' ? `
-            ${select ? 
-                'background-color: var(--color-main-text); border: 2px solid #000000;'
-                : 'background-color: var(--color-yellow); border: 2px solid #000000;'
-            }
-        ` : `
-            ${select ? 
-                'background-color: var(--color-main-text); border: 2px solid #000000;'
-                : 'background-color: white; border: 2px solid var(--color-main-text);'
-            }
-        `}
-
-    }
-`);
 
 export default Tag;
