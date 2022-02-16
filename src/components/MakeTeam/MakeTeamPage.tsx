@@ -11,8 +11,10 @@ function MakeTeamPage(){
     return (
         <div css={style}>
             <SideMenu/>
-            <Route path={`${match.path}`} exact render={()=> <MakeTeam/>}/>
-            <Route path={`${match.path}/done`} exact render={()=> <MakeTeamDone/>}/>
+            <section className='content'>
+                <Route path={`${match.path}`} exact render={()=> <MakeTeam/>}/>
+                <Route path={`${match.path}/done`} exact render={()=> <MakeTeamDone/>}/>
+            </section>
         </div>
     );
 }
@@ -21,6 +23,9 @@ const style = css`
     display: flex;
     width: 100%;
     justify-content: center;
+    > .content {
+        width: 1000px;
+    }
 `;
 
 export default MakeTeamPage;

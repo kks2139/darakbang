@@ -109,7 +109,7 @@ function MakeTeamDone(){
 }
 
 const style = css`
-    width: 905px; 
+    width: 100%; 
     .team-info-box {
         display: flex;
         flex-direction: column;

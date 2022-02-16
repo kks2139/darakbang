@@ -170,8 +170,8 @@ function GatheringDetail(){
 }
 
 const style = css`
+    width: 100%;
     .wrapper {
-        width: 100%;
         display: flex;
         justify-content: center;
         .info-section {
