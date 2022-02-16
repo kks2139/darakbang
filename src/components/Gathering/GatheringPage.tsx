@@ -42,8 +42,8 @@ function GatheringPage(){
                         <div>
                             <button onClick={fetchData}>TEST</button>
                             {!error && isLoading && 
-                                <LoadingSpinner/> 
-                                // <LoadingMark/>
+                                // <LoadingSpinner/> 
+                                <LoadingMark/>
                             }      
                             <div>
                                 {testData && testData.map(data => (

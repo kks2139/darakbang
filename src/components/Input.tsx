@@ -11,10 +11,11 @@ interface Props {
     name?: string
     width?: string
     required?: boolean
+    noBorder?: boolean
     customStyle?: CSS.Properties
 }
 
-function Input({onChange, value, placeholder, name, width='100%', required=false, customStyle}: Props){
+function Input({onChange, value, placeholder, name, width='100%', required=false, noBorder=false, customStyle}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>)=>{
@@ -37,7 +38,7 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
         font-size: 16px;
         border: 1px solid var(--color-gray);
         transition: .3s;
-
+        
         &::placeholder {
             font-size: 15px;
             color: var(--color-gray);
@@ -46,7 +47,7 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
         &.invalid {
             position: relative;
             box-shadow: 0 0 7px -2px var(--color-warn);
-            border-color: var(--color-warn);
+            border-color: var(--color-warn) !important;
         }
     `;
 

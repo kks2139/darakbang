@@ -5,17 +5,17 @@ import {Input, Form, SignUpFormInputs as Row, CheckBox, Space, Combobox, Button}
 import {validateInputs} from '../../util/util';
 import {useHistory} from 'react-router-dom';
 
-const test_age = [
+const TEST_AGE = [
     {label: '25', value: 'a1'},
     {label: '26', value: 'a2'},
     {label: '27', value: 'a3'},
 ];
-const test_place = [
+const TEST_PLACE = [
     {label: '강남', value: 'p1'},
     {label: '강북', value: 'p2'},
     {label: '강동', value: 'p3'},
 ];
-const test_mail = [
+const TEST_EMAIL = [
     {label: 'naver.com', value: 'm1'},
     {label: 'gmail.com', value: 'm2'},
 ];
@@ -129,14 +129,14 @@ function SignUp(){
                     <CheckBox label='남성' value={userInput.male} name='male' onCheckChanged={onCheckChanged} labelStyle={{fontSize: '16px'}}/>
                 </Row>
                 <Row fieldWidth={192} field='나이 / 선호지역' required>
-                    <Combobox items={test_age} onSelected={onSelected} name='age' height={50} width={160} required/>
+                    <Combobox items={TEST_AGE} onSelected={onSelected} name='age' height={50} width={160} required/>
                     <Space space='24px'/>
-                    <Combobox items={test_place} onSelected={onSelected} name='place' height={50} width={160} required/>
+                    <Combobox items={TEST_PLACE} onSelected={onSelected} name='place' height={50} width={160} required/>
                 </Row>
                 <Row fieldWidth={192} field='E-mail' required>
                     <Input name='email' value={userInput.email} width='160px' onChange={onChange} required/>
                     <Space space='24px'>@</Space>
-                    <Combobox items={test_mail} onSelected={onSelected} name='mail' height={50} width={160} required/>
+                    <Combobox items={TEST_EMAIL} onSelected={onSelected} name='mail' height={50} width={160} required/>
                 </Row>
                 <Row fieldWidth={192} field='주소' required>
                     <Input name='addr1' value={userInput.addr1} width='160px' onChange={onChange} required/>

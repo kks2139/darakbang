@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import {css} from '@emotion/react';
 import {GatheringInfo} from '../../util/interfaces';
 import {divDate, setIntersectionObserver} from '../../util/util';
-import {GatheringFloatingBox, DateButtonList, ModifyDate, ModifyTeam, Popup} from '../index';
+import {GatheringFloatingBox, DateButtonList, ModifyDate, ModifyTeam, Popup, Button} from '../index';
 import {useLocation} from 'react-router-dom';
 
 interface Params {
@@ -32,8 +32,7 @@ function GatheringDetail(){
         });
     }
 
-    const onClickModify = (e: React.MouseEvent<HTMLButtonElement>)=>{
-        const {name} = e.currentTarget;
+    const onClickModify = (e: React.MouseEvent<HTMLElement>, name: string)=>{
         setShowPopup({
             ...showPopup,
             [name]: true
@@ -99,7 +98,7 @@ function GatheringDetail(){
                                 <div className='gray'>{`(여 팀원${info.girl} 남 팀원${2})`}</div>
                                 <div className='can-apply'>신청가능</div>
                                 <div className='gray'>{`여${(info.girl || 0) - (info.currGirl || 0)} 남${(info.boy || 0) - (info.currBoy || 0)} `}</div>
-                                <button className='modify-btn' name='modifyDate' onClick={onClickModify}>수정</button>
+                                <Button text="수정" theme="yellow" name='modifyDate' scale={0.7} onClick={onClickModify}/>
                             </div>
                         </div>
                         <div className='row'>
@@ -115,7 +114,7 @@ function GatheringDetail(){
                             <div className='val'>
                                 {`${nextAct.MM}월 ${nextAct.dd}일 ${nextAct.HH} : ${nextAct.mm} ${nextAct.ampm}`} 
                                 <div className='else'>외 {info.activeDateList.length - 1}</div>
-                                <button className='modify-btn' name='modifyTeam' onClick={onClickModify}>수정</button>
+                                <Button text="수정" theme="yellow" name="modifyTeam" scale={0.7} onClick={onClickModify}/>
                             </div>
                         </div>
                         <div className='row'>
@@ -171,25 +170,6 @@ function GatheringDetail(){
 }
 
 const style = css`
-    .back-btn {
-        width: 70px;
-        text-align: center;
-        cursor: pointer;
-        border: 1px solid var(--color-main-text);
-        border-radius: 5px;
-        background-color: white;
-        color: var(--color-main-text);
-        font-weight: bold;
-        margin: 10px 0;
-    }
-    .modify-btn {
-        padding: 4px 8px;
-        font-size: 16px;
-        color: black;
-        background-color: var(--color-yellow);
-        margin: 0 20px;
-        border: 1px solid black;
-    }
     .wrapper {
         width: 100%;
         display: flex;

@@ -70,6 +70,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
             border-radius: 10px;
             background-color: white;
             margin-bottom: 12px;
+
             .interests {
                 color: var(--color-gray);
                 font-size: 16px;
@@ -178,11 +179,11 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
                         <div>{info.hates}</div>
                     </div>
                 </div>
-                <Button text='이 팀에 합류하기' theme='yellow' onClick={onClickJoin}/>
+                <Button text='이 팀에 합류하기' theme='yellow' width={240} onClick={onClickJoin}/>
             </div>
             {isOnce ? 
                 <div className='once-box'>
-                    <Button text='한 번 참여하기' theme='pink' name='once' onClick={onClickJoin}/>
+                    <Button text='한 번 참여하기' theme='pink' width={240} name='once' onClick={onClickJoin}/>
                     <div className='txt'>• 한 번 만남이 가능한 게시물입니다.</div>
                 </div>
             : null}

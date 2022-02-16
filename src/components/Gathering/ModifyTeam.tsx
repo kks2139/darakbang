@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import {CheckBox, Combobox} from '../index';
+import {CheckBox, Combobox, Button} from '../index';
 import {SelectedCombo} from '../../util/interfaces';
 import CSS from 'csstype';
 
@@ -30,6 +30,9 @@ function ModifyTeam(){
         {value: 4, label: '4'},
         {value: 5, label: '5'},
     ];
+    const comboboxStyle: CSS.Properties = {
+        marginRight: '20px',
+    };
     const itemStyle: CSS.Properties = {
         fontWeight: 'bold',
         textAlign: 'center'
@@ -42,11 +45,10 @@ function ModifyTeam(){
         });
     }
     
-    const onSelected = (selected: SelectedCombo | null)=>{
-        const {name, value} = selected!;
+    const onSelected = (selected: SelectedCombo | null, name: string)=>{
         setInputs({
             ...inputs,
-            [name]: value
+            [name]: selected ? selected.value : 0
         });
     }
 
@@ -108,13 +110,14 @@ function ModifyTeam(){
             <div className='content'>
                 <div className='inputs'>
                     <CheckBox label='여성' name='female' value={inputs.female} onCheckChanged={onCheckChanged}/>
-                    <Combobox name='femaleNum' items={items} onSelected={onSelected} itemStyle={itemStyle}/>
+                    <Combobox name='femaleNum' items={items} onSelected={onSelected} itemStyle={itemStyle} width={60} comboboxStyle={comboboxStyle}/>
                     <CheckBox label='남성' name='male' value={inputs.male} onCheckChanged={onCheckChanged}/>
-                    <Combobox name='maleNum' items={items} onSelected={onSelected} itemStyle={itemStyle}/>
+                    <Combobox name='maleNum' items={items} onSelected={onSelected} itemStyle={itemStyle} width={60} comboboxStyle={comboboxStyle}/>
                     <CheckBox label='무관' name='none' value={inputs.none} onCheckChanged={onCheckChanged}/>
-                    <Combobox name='noneNum' items={items} onSelected={onSelected} itemStyle={itemStyle}/>
+                    <Combobox name='noneNum' items={items} onSelected={onSelected} itemStyle={itemStyle} width={60} comboboxStyle={comboboxStyle}/>
                 </div>
-                <button className='btn' onClick={onClickButton}>완료</button>
+                <Button text='완료' onClick={onClickButton} styles={{marginTop: '30px'}}/>
+
                 <div className='foot'>
                     * 희망 정원이 변경 시 모든 일정에 반영됩니다.<br/>
                     &nbsp;&nbsp;&nbsp;특정 날짜에 추가모집을 원하시는 경우, 새로운 팀원 모집글을 업로드 해주세요. 
