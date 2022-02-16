@@ -37,29 +37,31 @@ function GatheringPage(){
     return (
         <div css={style}>
             <SideMenu/>
-            <Route path={`${match.path}`} exact>
-                    <Tab names={['유료', '일반']} width={894}>
-                        <div>
-                            <button onClick={fetchData}>TEST</button>
-                            {!error && isLoading && 
-                                // <LoadingSpinner/> 
-                                <LoadingMark/>
-                            }      
+            <section className='content'>
+                <Route path={`${match.path}`} exact>
+                        <Tab names={['유료', '일반']}>
                             <div>
-                                {testData && testData.map(data => (
-                                    <div key={data.id}>{data.first_name}</div>
-                                ))}
+                                <button onClick={fetchData}>TEST</button>
+                                {!error && isLoading && 
+                                    // <LoadingSpinner/> 
+                                    <LoadingMark/>
+                                }      
+                                <div>
+                                    {testData && testData.map(data => (
+                                        <div key={data.id}>{data.first_name}</div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <GatheringFilter/>
-                            <GatheringList onGatheringSelected={onGatheringSelected}/>
-                        </div>
-                    </Tab>
-            </Route>
-            <Route path={`${match.path}/detail`}>
-                <GatheringDetail/>
-            </Route>
+                            <div>
+                                <GatheringFilter/>
+                                <GatheringList onGatheringSelected={onGatheringSelected}/>
+                            </div>
+                        </Tab>
+                </Route>
+                <Route path={`${match.path}/detail`}>
+                    <GatheringDetail/>
+                </Route>
+            </section>
         </div>
     );
 }
@@ -67,6 +69,10 @@ function GatheringPage(){
 const style = css`
     display: flex;
     justify-content: center;
+    > .content {
+        width: 1000px;
+        /* border: 1px solid blue; */
+    }
 `;
 
 export default GatheringPage;

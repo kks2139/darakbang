@@ -28,7 +28,7 @@ function GatheringFilter(){
 }
 
 const style = css`
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     .filter {
         display: flex;
         font-size: 16px;
@@ -42,16 +42,17 @@ const style = css`
 
         .normal {
             color: #B4B4B4;
-            border: 1px solid transparent;  
-            padding: 8px;  
-            margin-right: 16px;
+            /* border: 1px solid transparent;   */
+            padding: 8px 12px;  
+            margin-right: 15px;
             font-weight: 500;
+            transition: .2s;
+            border-radius: 25px;
 
             &.sel {
                 border-color: black;
                 background-color: var(--color-peach);
                 color: black;
-                border-radius: 25px;
                 font-weight: 600;
             }
         }

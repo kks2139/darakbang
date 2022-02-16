@@ -127,7 +127,7 @@ const SideMenu = () => {
 };
 
 const styles = css`
-    width: 125px;
+    width: 160px;
     margin-right: 100px;
 
     div {
@@ -154,6 +154,8 @@ const styles = css`
         padding-left: 5px;
         cursor: pointer;
         transition: .2s;
+        border-radius: 5px;
+        padding-left: 20px;
         &:hover {
             background-color: var(--color-bg-gray);
         }

@@ -55,8 +55,8 @@ function Button({text, onClick, name='', theme='blue', width, scale, styles}: Pr
         ` : ''}
 
         &:hover {
-            box-shadow: 0 0 10px -5px ${mainColor};
-            transform: translateY(-2px);
+            box-shadow: 0 2px 10px -5px black;
+            transform: translateY(-2px) ${scale ? `scale(${scale});` : ''};
         }
     `;
 

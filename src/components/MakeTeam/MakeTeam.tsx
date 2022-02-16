@@ -188,7 +188,7 @@ function MakeTeam(){
 }
 
 const style = (isValid: boolean)=> (css`
-    width: 905px; 
+    width: 100%; 
     position: relative;
     .img-box {
         display: flex;

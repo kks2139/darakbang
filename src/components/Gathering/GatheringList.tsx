@@ -58,6 +58,10 @@ function GatheringList({onGatheringSelected}: Props){
 }
 
 const style = css`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     .filter-check {
         display: flex;
         justify-content: flex-end;
