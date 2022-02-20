@@ -31,6 +31,7 @@ export interface GatheringInfo {
     purpose: string
     subImgUrls: string[]
     detailDescription: string
+    once?: boolean
 }
 
 export interface TeamInfo {

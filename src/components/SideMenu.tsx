@@ -95,32 +95,34 @@ const SideMenu = () => {
 
     return (
         <div css={styles}>
-            {
-                sideMenuMock.map((large, i) => {
-                    return (
-                        <ul key={i}>
-                            <li className="large-category">
-                                { large.largeCategory }
-                            </li>
-                            {
-                                large.items.map((medium, i) => {
-                                    return (
-                                        <li key={i} className="medium-category">
-                                            { medium.mediumCategory }
-                                        </li>
-                                    )
-                                })
-                            }
-                        </ul>
-                    )
-                })
-            }
+            <div className='wrapper'>
+                {
+                    sideMenuMock.map((large, i) => {
+                        return (
+                            <ul key={i}>
+                                <li className="large-category">
+                                    { large.largeCategory }
+                                </li>
+                                {
+                                    large.items.map((medium, i) => {
+                                        return (
+                                            <li key={i} className="medium-category">
+                                                { medium.mediumCategory }
+                                            </li>
+                                        )
+                                    })
+                                }
+                            </ul>
+                        )
+                    })
+                }
 
-            <div className="make-team" onClick={onClickMakeTeam}>
-                <span>
-                    팀<br />
-                    만들기
-                </span>
+                <div className="make-team" onClick={onClickMakeTeam}>
+                    <span>
+                        팀<br />
+                        만들기
+                    </span>
+                </div>
             </div>
         </div>
     );
@@ -129,6 +131,11 @@ const SideMenu = () => {
 const styles = css`
     width: 160px;
     margin-right: 100px;
+    position: relative;
+
+    .wrapper {
+        /* position: fixed; */
+    }
 
     div {
         padding: 8px 0;
@@ -154,7 +161,6 @@ const styles = css`
         padding-left: 5px;
         cursor: pointer;
         transition: .2s;
-        border-radius: 5px;
         padding-left: 20px;
         &:hover {
             background-color: var(--color-bg-gray);
@@ -167,18 +173,24 @@ const styles = css`
         margin: 64px auto;
         background-color: #FFF;
         border-radius: 50%;
-        border: 2px solid #02BCD6;
+        border: 2px solid var(--color-main-text);
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        transition: .2s;
         cursor: pointer;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 10px -5px black;
+        }
 
         > span {
             padding-bottom: 8px;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 600;
-            color: #02BCD6;
+            color: var(--color-main-text);
         }
     }
 `;

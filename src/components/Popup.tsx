@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
+import ReactDOM from 'react-dom';
 
 interface Props {
     children?: JSX.Element | JSX.Element[]
@@ -31,11 +32,9 @@ function Popup({children, name='', onPopupClose}: Props){
         align-items: center;
         
         > .popup-wrapper {
-            border: 1px solid red;
             z-index: 101;
             position: fixed;
             border: 1px solid black;
-            border-radius: 10px;
             background-color: white;
             padding: 10px;
 
@@ -77,16 +76,21 @@ function Popup({children, name='', onPopupClose}: Props){
     `;
 
     return (
-        <div css={style} ref={divRef}>
-            <div className='popup-wrapper'>
-                <div className='header'>
-                    <img className='close' src='/close.png' alt='닫기' onClick={()=> onPopupClose(name)}></img>
-                </div>
-                <div className='content'>
-                    {children}
-                </div>
-            </div>
-        </div>
+        <>
+            {ReactDOM.createPortal(
+                <div css={style} ref={divRef}>
+                    <div className='popup-wrapper'>
+                        <div className='header'>
+                            <img className='close' src='/close.png' alt='닫기' onClick={()=> onPopupClose(name)}></img>
+                        </div>
+                        <div className='content'>
+                            {children}
+                        </div>
+                    </div>
+                </div>,
+                document.querySelector('#modal-root')!
+            )}
+        </>
     );
 }
 

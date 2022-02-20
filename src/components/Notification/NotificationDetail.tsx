@@ -22,7 +22,7 @@ function NotificationDetail(){
     const dispatch = useDispatch();
     const match = useRouteMatch();
     const location = useLocation<Params>();
-    const {notification} = location.state;
+    // const {notification} = location.state;
 
     const onClickMenu = ()=>{
 

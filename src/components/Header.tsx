@@ -17,6 +17,8 @@ const Header = () => {
         dispatch(appActions.toggleNotification(!showNotificationList));
     }
 
+    
+
     return (
         <header css={styles}>
             <div className="header">
@@ -38,11 +40,11 @@ const Header = () => {
                             <img src='/mail-2.png'></img>
                             <div className='mail-cnt'>{2}</div>
                         </li>
-                        <li className="gray-16">
-                            <NavLink to='/my-team'>내 팀</NavLink>
+                        <li>
+                            <NavLink to='/my-team' className="gray-16">내 팀</NavLink>
                         </li>
-                        <li className="gray-16">
-                            <NavLink to='/contact'>Contact</NavLink>
+                        <li>
+                            <NavLink to='/contact' className="gray-16">Contact</NavLink>
                         </li>
                         <li>
                             <NavLink to='/login' className='btn-type-1'>로그인</NavLink>
@@ -89,7 +91,7 @@ const styles = css`
         align-items: center;
 
         &__logo {
-            font-size: 24px;
+            font-size: 27px;
             font-weight: bold;
             color: #000;
         }
@@ -170,17 +172,13 @@ const styles = css`
     }
     .btn-type-1 {
         background-color: var(--color-main-text);
-        a {
-            color: white;
-            font-weight: bold;
-        }
+        color: white;
+        font-weight: bold;
     }
     .btn-type-2 {
         border: 1px solid var(--color-main-text);
-        a {
-            color: var(--color-gray);
-            font-weight: bold;
-        }
+        color: var(--color-gray);
+        font-weight: bold;
     }
 `;
 

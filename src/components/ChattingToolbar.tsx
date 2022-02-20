@@ -46,7 +46,7 @@ function ChattingToolbar({onToolbarClicked}: Props){
     return (
         <div css={style} ref={divRef} onClick={onClick}>
             <div className='img-box' data-imgbox>
-                <img src='/camera.png' data-name='camera'></img>
+                {/* <img src='/camera.png' data-name='camera'></img> */}
                 <img src='/spot.png' data-name='spot'></img>
             </div>
             <div className='img-box' data-imgbox>

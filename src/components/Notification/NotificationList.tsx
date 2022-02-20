@@ -50,7 +50,6 @@ const style = ()=> css`
     height: 500px;
     background-color: white;
     box-shadow: 0 0 15px -3px var(--color-dim-gray);
-    border-radius: 10px;
     
     .tri {
         position: absolute;

@@ -46,7 +46,7 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
 
         &.invalid {
             position: relative;
-            box-shadow: 0 0 7px -2px var(--color-warn);
+            /* box-shadow: 0 0 7px -2px var(--color-warn); */
             border-color: var(--color-warn) !important;
         }
     `;
