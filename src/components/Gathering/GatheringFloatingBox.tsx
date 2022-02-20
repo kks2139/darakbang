@@ -6,8 +6,9 @@ import {FiUpload, FiPocket} from 'react-icons/fi';
 import {GoThumbsup, GoThumbsdown} from 'react-icons/go';
 import {divDate} from '../../util/util';
 import {useDispatch} from 'react-redux';
-import {appActions} from '../../store/app';
-import {Button} from '../index';
+import {Button, ConfirmJoin} from '../index';
+import {Link} from 'react-router-dom';
+import Popup from '../Popup';
 
 interface Props {
     info: GatheringInfo
@@ -17,23 +18,39 @@ interface Props {
 
 function GatheringFloatingBox({info, isFloat, top}: Props){
     const dispatch = useDispatch();
+    const [showPopup, setShowPopup] = useState(false);
     const initDate = divDate(info?.initDate || '');
     const lastActiveDate = divDate(info?.lastActiveDate || '');
     const isOnce = info?.filter.includes('한 번 만남');
 
     const onClickJoin = (_: React.MouseEvent, name: string)=>{
-        dispatch(appActions.toggleConfirmMessage({
-            title: `참여 하시려는 활동의 내용이 맞는지
-            마지막으로 확인해 주세요!`,
-            subTitle: '다락방',
-            msg: `
-                ${info?.place}
-                ${name === 'once' ? '한 번 참여' : ''}
-                ${info?.nextActiveDate}`,
-            confirmText: '확인',
-            show: true,
-            confirmCallback: nextStep
-        }));
+        // dispatch(appActions.toggleConfirmMessage({
+        //     title: `참여 하시려는 활동의 내용이 맞는지
+        //     마지막으로 확인해 주세요!`,
+        //     subTitle: '다락방',
+        //     msg: `
+        //         ${info?.place}
+        //         ${name === 'once' ? '한 번 참여' : ''}
+        //         ${info?.nextActiveDate}`,
+        //     confirmText: '확인',
+        //     show: true,
+        //     confirmCallback: nextStep
+        // }));
+
+        if(name === 'once' ? '한 번 참여' : ''){
+            info.once = false;
+        }
+
+        setShowPopup(true);
+    }
+
+    const onPopupClose = ()=>{
+        setShowPopup(false);
+    }
+    
+    const onConfirmJoin = ()=>{
+        setShowPopup(false);
+
     }
 
     const nextStep = ()=>{
@@ -154,7 +171,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
             <div className='title'>팀소개</div>
             <div className='content'>
                 <div className='interests'>{info.interests}</div>
-                <div className='name'>{info.name}</div>
+                <Link to='/my-team/room' className='name'>{info.name}</Link>
                 <div className='line1'></div>
                 <div className='row'>
                     <div className='txt1'>{`${initDate.MM}월 ${initDate.dd}일 개설`}</div>
@@ -197,6 +214,11 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
                     <div className='txt'>주머니 담기</div>
                 </div>
             </div>
+            {showPopup && 
+                <Popup onPopupClose={onPopupClose}>
+                    <ConfirmJoin info={info} onConfirmJoin={onConfirmJoin}/>
+                </Popup>
+            }
         </div>
     );
 }

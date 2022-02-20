@@ -76,7 +76,6 @@ function Combobox({
     const style = css`
         display: flex;
         align-items: center;
-        border: 1px solid var(--color-gray);
         width: ${width}px;
         height: ${height}px;
     `;

@@ -33,7 +33,7 @@ function Button({text, onClick, name='', theme='blue', width, scale, styles}: Pr
         font-size: 24px;
         font-weight: bold;
         text-align: center;
-        border-radius: 50px;
+        /* border-radius: 50px; */
         transition: .3s;
         cursor: pointer;
 

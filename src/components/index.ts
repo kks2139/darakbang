@@ -61,6 +61,7 @@ import SignUp from "./SignUp/SignUp"
 import SignUpFormInputs from "./SignUp/SignUpFormInputs"
 import Space from "./Space"
 import Textarea from "./Textarea"
+import ConfirmJoin from "./Gathering/ConfirmJoin"
 
 export {
     GatheringFilter,
@@ -126,4 +127,5 @@ export {
     SignUpFormInputs,
     Space,
     Textarea,
+    ConfirmJoin
 }

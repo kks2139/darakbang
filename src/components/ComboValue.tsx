@@ -54,6 +54,7 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
             font-size: 15px;
             width: 100%;
             height: 100%;
+            border: 1px solid var(--color-gray);
             cursor: pointer;
             transition: .3s;
             &::placeholder {
@@ -66,7 +67,7 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
 
         input.invalid {
             position: relative;
-            box-shadow: 0 0 7px 0px var(--color-warn);
+            border-color: var(--color-warn) !important;
         }
     `;
 
