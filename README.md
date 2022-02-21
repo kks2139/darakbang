@@ -43,6 +43,6 @@
     
     
 
-#### 개발 URL : [https://app.netlify.com/sites/sharp-goldstine-03b926/overview](https://app.netlify.com/sites/sharp-goldstine-03b926/overview)    
+#### 개발 URL : [https://sharp-goldstine-03b926.netlify.app/](https://sharp-goldstine-03b926.netlify.app/)    
 
 
