@@ -2,7 +2,7 @@ import React from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
 import {Member} from '../../util/interfaces';
-import {Avatar, Grid, GridColumn, Border, Tag} from '../index';
+import {Avatar, Grid, GridColumn, Border, Tag, Tooltip} from '../index';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../store/index';
 
@@ -42,7 +42,9 @@ function MemberInfo(){
                             <Border content={leader.joinCount + ' 회 참여'}/>
                         </li>
                         <li>
-                            {leader.tag ? <Tag theme='light' name={leader.tag}/> : null}
+                            <Tooltip text={`${leader.nickname}님은 ${leader.tag} 성향입니다.`}>
+                                {leader.tag ? <Tag theme='light' name={leader.tag}/> : <></>}
+                            </Tooltip>
                         </li>
                     </ul>
                 </div>
