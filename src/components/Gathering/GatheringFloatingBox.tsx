@@ -72,7 +72,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
         ` : `
             position: absolute;
             top: ${top}px;
-            transform: translateY(-100%);
+            transform: translateY(-90%);
         `}
 
         .title {
