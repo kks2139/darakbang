@@ -5,21 +5,42 @@ import CSS from 'csstype';
 import {clearInvalid} from '../util/util';
 
 interface Props {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>, name?: string)=>void
-    value: string
+    onChange: (event: React.ChangeEvent<HTMLInputElement>, name: string)=>void
+    value: string | number
     placeholder?: string
     name?: string
     width?: string
+    type?: 'number'
+    maxValue?: number
+    minValue?: number
     required?: boolean
+    disabled?: boolean
     noBorder?: boolean
     customStyle?: CSS.Properties
 }
 
-function Input({onChange, value, placeholder, name, width='100%', required=false, noBorder=false, customStyle}: Props){
+function Input({
+    onChange, 
+    value, 
+    placeholder, 
+    name, 
+    width='100%', 
+    type, 
+    maxValue, 
+    minValue, 
+    required=false, 
+    disabled=false, 
+    noBorder=false, 
+    customStyle}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
 
     const changeHandler = (e: React.ChangeEvent<HTMLInputElement>)=>{
-        onChange(e, name);
+        if(type === 'number'){
+            const value = +e.currentTarget.value;
+            if(isNaN(value)) return;
+            if(minValue && minValue > value || maxValue && maxValue < value) return;
+        }
+        onChange(e, name || '');
         clearInvalid(inputRef.current!);
     }
 
@@ -38,6 +59,10 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
         font-size: 16px;
         border: 1px solid var(--color-gray);
         transition: .3s;
+
+        &:disabled {
+            background-color: var(--color-light-gray);
+        }
         
         &::placeholder {
             font-size: 15px;
@@ -60,6 +85,7 @@ function Input({onChange, value, placeholder, name, width='100%', required=false
             placeholder={placeholder}
             value={value}
             onChange={changeHandler}
+            disabled={disabled}
             autoComplete='off'
         />
     );
