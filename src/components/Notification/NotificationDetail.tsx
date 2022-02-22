@@ -1,16 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
 import { Notification } from "../../util/interfaces";
-import {useLocation, useRouteMatch} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {Overlay} from '../index';
+import {useHistory} from 'react-router-dom';
+import {Overlay, Popup, Button} from '../index';
 
 interface Params {
     notification: Notification
 }
 
-const testData = {
+const TEST_DATA = {
     teamName: '다락방',
     activeDate: '21.11.11 07:00',
     msg: `안녕하세요, 유빈님
@@ -19,13 +18,24 @@ const testData = {
 }
 
 function NotificationDetail(){
-    const dispatch = useDispatch();
-    const match = useRouteMatch();
-    const location = useLocation<Params>();
-    // const {notification} = location.state;
+    const history = useHistory();
+    const [showPopup, setShowPopup] = useState(false);
 
-    const onClickMenu = ()=>{
+    const onClickButton = (e: React.MouseEvent<HTMLButtonElement>)=>{
+        if(e.currentTarget.name === 'ok'){
+            setShowPopup(true);
+        }else{
+            history.goBack();
+        }
+    }
 
+    const onClickCheckMyTeam = ()=>{
+        history.push('/my-team');
+    }
+    
+    const onPopupClose = ()=>{
+        history.goBack();
+        setShowPopup(false);
     }
 
     useEffect(()=>{
@@ -120,7 +130,6 @@ function NotificationDetail(){
                 cursor: pointer;
             }
         }
-
     `;
 
     return (
@@ -135,24 +144,52 @@ function NotificationDetail(){
             </div>
             <div className='content-box'>
                 <div className='message'>
-                    {testData.msg.split('\n').map(line => (
+                    {TEST_DATA.msg.split('\n').map(line => (
                         <div className='line'>{line}</div>
                     ))}
                     <div className='line'/>
-                    <div className='line last'>- {testData.teamName} -</div>
+                    <div className='line last'>- {TEST_DATA.teamName} -</div>
                     <div className='line'/>
                     <div className='line last date'>
-                        {testData.activeDate} 일자 활동 후 보내진 편지입니다.
+                    {TEST_DATA.activeDate} 일자 활동 후 보내진 편지입니다.
                         <img src='/report.png' alt='신고'></img>
                     </div>
                 </div>
             </div>
             <div className='btn-box'>
                 <div className='text'>초대를 수락 하시겠어요?</div>
-                <button className='btn'>예</button>
-                <button className='btn'>아니요</button>
+                <button className='btn' onClick={onClickButton} name='ok'>예</button>
+                <button className='btn' onClick={onClickButton}>아니요</button>
             </div>
-            <Overlay show={true} zIndex={-1} opacity={0.4}/>
+            {showPopup &&
+                <Popup onPopupClose={onPopupClose}>
+                    <ConfirmPopup onClickCheckMyTeam={onClickCheckMyTeam}/>
+                </Popup>
+            }
+            <Overlay show={true} zIndex={-1} opacity={0.3}/>
+        </div>
+    );
+}
+
+interface PopupProps {
+    onClickCheckMyTeam: ()=>void
+}
+
+function ConfirmPopup({onClickCheckMyTeam}: PopupProps){
+    const style = css`
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 100px 20px 100px;
+        h2 {
+            margin: 20px 0 30px 0;
+        }
+    `;
+
+    return (
+        <div css={style}>
+            <h2>요청을 수락하셨습니다!</h2>
+            <Button text='내팀 보러가기' onClick={onClickCheckMyTeam}/>
         </div>
     );
 }

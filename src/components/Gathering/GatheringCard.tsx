@@ -124,7 +124,7 @@ const style = ()=>(css`
                     font-size: 12px;
                     font-weight: 600;
                     border: 1px solid black;
-                    border-radius: 10px;
+                    /* border-radius: 10px; */
                     margin-bottom: 5px;
                 }
                 .filter {
@@ -141,7 +141,7 @@ const style = ()=>(css`
         flex-direction: column;
         padding: 12px;
         border: 1px solid #F3F3F3;
-        border-radius: 10px;
+        /* border-radius: 10px; */
         transform: translateY(-22px);
         background-color: white;
         transition: .3s;
