@@ -27,6 +27,9 @@ function ChattingSchedule({overTop, onInputComplete}: Props){
         {value: '0', label: '강서구'},
         {value: '0', label: '강남구'},
     ];
+    const comboStyle = {
+        margin: '0 20px 0 5px'
+    }
 
     const onCheckChanged = (check: boolean, name: string = '')=>{
         setInputs({
@@ -150,10 +153,10 @@ function ChattingSchedule({overTop, onInputComplete}: Props){
                         {new Array(addCount).fill(1).map((_, i, arr) => (
                             <div key={i} className='dates'>
                                 <span className='font-gray'>{new Date().getFullYear()}</span>
-                                <Combobox items={months} width={100} itemStyle={{textAlign: 'right'}} name='month' onSelected={onSelected}/>월
-                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} name='date' onSelected={onSelected}/>일
-                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} name='time' onSelected={onSelected}/>분
-                                {arr.length === i + 1 && <img className='add' src='/add.png' alt='add' onClick={onAddClick}></img>}
+                                <Combobox items={months} width={100} itemStyle={{textAlign: 'right'}} comboboxStyle={comboStyle} name='month' onSelected={onSelected}/>월
+                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} comboboxStyle={comboStyle} name='date' onSelected={onSelected}/>일
+                                <Combobox items={dates} width={100} itemStyle={{textAlign: 'right'}} comboboxStyle={comboStyle} name='time' onSelected={onSelected}/>분
+                                {/* {arr.length === i + 1 && <img className='add' src='/add.png' alt='add' onClick={onAddClick}></img>} */}
                             </div>
                         ))}
                     </div>

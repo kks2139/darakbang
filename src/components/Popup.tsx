@@ -10,12 +10,14 @@ interface Props {
 }
 
 function Popup({children, name='', onPopupClose}: Props){
-    const divRef = useRef<HTMLDivElement | null>(null);
+    const divRef = useRef<HTMLDivElement>(null);
 
     useEffect(()=>{
         document.documentElement.style.overflow = 'hidden';
         return ()=>{
-            document.documentElement.style.overflow = 'auto';
+            if(document.querySelector('#modal-root')!.children.length == 0){
+                document.documentElement.style.overflow = 'auto';
+            }
         }
     });
 
@@ -34,7 +36,6 @@ function Popup({children, name='', onPopupClose}: Props){
         > .popup-wrapper {
             z-index: 101;
             position: fixed;
-            border: 1px solid black;
             background-color: white;
             padding: 10px;
 
