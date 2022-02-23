@@ -19,6 +19,7 @@ interface Props {
 function GatheringFloatingBox({info, isFloat, top}: Props){
     const dispatch = useDispatch();
     const [showPopup, setShowPopup] = useState(false);
+    const [popupOnce, setPopOnce] = useState(false);
     const initDate = divDate(info?.initDate || '');
     const lastActiveDate = divDate(info?.lastActiveDate || '');
     const isOnce = info?.filter.includes('한 번 만남');
@@ -37,7 +38,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
         //     confirmCallback: nextStep
         // }));
 
-        info.once = name === 'once';
+        setPopOnce(name === 'once');
         setShowPopup(true);
     }
 
@@ -213,7 +214,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
             </div>
             {showPopup && 
                 <Popup onPopupClose={onPopupClose}>
-                    <ConfirmJoin info={info} onConfirmJoin={onConfirmJoin}/>
+                    <ConfirmJoin info={info} onConfirmJoin={onConfirmJoin} isOnce={popupOnce}/>
                 </Popup>
             }
         </div>

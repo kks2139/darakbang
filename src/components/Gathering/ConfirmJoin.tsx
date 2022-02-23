@@ -7,14 +7,15 @@ import {GatheringInfo} from '../../util/interfaces';
 interface Props {
     info: GatheringInfo
     onConfirmJoin: ()=>void
+    isOnce: boolean
 }
 
-function ConfirmJoin({info, onConfirmJoin}: Props){
+function ConfirmJoin({info, onConfirmJoin, isOnce}: Props){
     const style = css`
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px 100px;
+        padding: 20px 200px;
 
         .name {
             margin-top: 40px;
@@ -34,9 +35,8 @@ function ConfirmJoin({info, onConfirmJoin}: Props){
 
             <div className='info name'>{info.name}</div>
             <div className='info'>{info.place}</div>
-            {info.once&& <div className='info'>한 번 참여</div>}
+            {isOnce && <div className='info'>한 번 참여</div>}
             <div className='info'>{info.nextActiveDate}</div>
-
             <div>
                 <Button text='참여하기' styles={{margin: '20px 0 10px 0'}} onClick={onConfirmJoin}/>
             </div>

@@ -36,13 +36,26 @@ function Tooltip({children, text}: Props){
             position: absolute;
             top: 0;
             padding: 8px 10px;
-            transform: translateY(55%);
+            transform: translateY(calc(50% + 10px));
             background-color: white;
             color: black;
             border: 1px solid black;
             font-size: 13px;
             width: ${tooltipWidth}px;
             text-align: left;
+        }
+
+        .point {
+            z-index: 1;
+            position: absolute;
+            /* top: 0; */
+            left: 50%;
+            transform: translate(-50%, calc(-100% - 3px)) rotate(-45deg);
+            background-color: white;
+            width: 10px;
+            height: 10px;
+            border: 1px solid black;
+            border-color: black black transparent transparent;
         }
     `;
 
@@ -51,6 +64,7 @@ function Tooltip({children, text}: Props){
             {children}
             <div className='tooltip'  ref={tooltipRef}>
                 {text}
+                <div className='point'></div>
             </div>
         </div>
     );
