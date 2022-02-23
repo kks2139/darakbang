@@ -12,6 +12,7 @@ interface Inputs {
     maleNum: number
     none: boolean
     noneNum: number
+    [key: string]: any
 }
 
 function ModifyTeam(){
@@ -33,9 +34,13 @@ function ModifyTeam(){
     const onCheckChanged = (value: boolean, name: string | undefined = '')=>{
         if(name === 'none'){
             inputs.female = false;
+            inputs.femaleNum = 0;
             inputs.male = false;
+            inputs.maleNum = 0;
         }else{
             inputs.none = false;
+            inputs.noneNum = 0;
+            inputs[name + 'Num'] = 0;
         }
 
         setInputs({
