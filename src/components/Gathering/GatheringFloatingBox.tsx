@@ -37,10 +37,7 @@ function GatheringFloatingBox({info, isFloat, top}: Props){
         //     confirmCallback: nextStep
         // }));
 
-        if(name === 'once' ? '한 번 참여' : ''){
-            info.once = false;
-        }
-
+        info.once = name === 'once';
         setShowPopup(true);
     }
 
