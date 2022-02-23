@@ -34,7 +34,7 @@ function ConfirmJoin({info, onConfirmJoin}: Props){
 
             <div className='info name'>{info.name}</div>
             <div className='info'>{info.place}</div>
-            <div className='info'>{info.once}</div>
+            {info.once&& <div className='info'>한 번 참여</div>}
             <div className='info'>{info.nextActiveDate}</div>
 
             <div>
