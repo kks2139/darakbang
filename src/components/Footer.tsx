@@ -35,7 +35,7 @@ const styles = css`
     height: ${footerHeight}px;
     
     background-color: #FFF;
-    border-top: 1px solid #000;
+    border-top: 1px solid var(--color-dim-gray);
 
     .footer {
         max-width: 1285px;

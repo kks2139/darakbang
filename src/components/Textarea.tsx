@@ -10,13 +10,16 @@ interface Props {
     name?: string
     placeholder?: string
     required?: boolean
+    showLength?: boolean
+    maxLength?: number
     customStyle?: CSS.Properties
 }
 
-function Textarea({value, onChange, name='', placeholder='', required=false, customStyle}: Props){
+function Textarea({value, onChange, name='', placeholder='', required=false, showLength=false, maxLength, customStyle}: Props){
     const taRef = useRef<HTMLTextAreaElement>(null);
 
     const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>)=>{
+        if(maxLength && e.currentTarget.value.length > maxLength) return;
         onChange(e, name);
         clearInvalid(taRef.current!);
     }
@@ -27,29 +30,47 @@ function Textarea({value, onChange, name='', placeholder='', required=false, cus
     },[required]);
 
     const style = css`
-        font-size: 16px;
-        border: 1px solid var(--color-light-gray);
-        transition: .3s;
-
-        &::placeholder {
-            color: var(--color-gray);
+        position: relative;
+        textarea {
+            transition: .3s;
+            padding: 10px;
+            border: 1px solid var(--color-light-gray);
+            font-size: 17px;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            
+            &::placeholder {
+                color: var(--color-dim-gray);
+            }
         }
+
 
         &.invalid {
             position: relative;
             border-color: var(--color-warn);
         }
+
+        .length {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            font-size: 13px;
+            font-weight: normal;
+            color: var(--color-dim-gray);
+        }
     `;
     return(
-        <textarea
-            css={style}
-            style={customStyle}
-            ref={taRef}
-            onChange={changeHandler} 
-            name={name} 
-            placeholder={placeholder} 
-            value={value}>
-        </textarea>
+        <div css={style} style={customStyle}>
+            <textarea
+                ref={taRef}
+                onChange={changeHandler} 
+                name={name} 
+                placeholder={placeholder} 
+                value={value}>
+            </textarea>
+            {showLength && <span className='length'>{`${value.length} ${maxLength ? ` / ${maxLength}` : ''} 자`}</span>}
+        </div>
     );
 }
 
