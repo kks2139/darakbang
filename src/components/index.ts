@@ -64,6 +64,7 @@ import Textarea from "./Textarea"
 import ConfirmJoin from "./Gathering/ConfirmJoin"
 import Tooltip from "./Tooltip"
 import Accuse from "./Notification/Accuse"
+import LoadingIcon from "./LoadingIcon"
 
 export {
     GatheringFilter,
@@ -132,4 +133,5 @@ export {
     ConfirmJoin,
     Tooltip,
     Accuse,
+    LoadingIcon,
 }

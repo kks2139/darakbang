@@ -88,7 +88,7 @@ function Accuse({onClickSend}: Props){
             <h2>신고하기</h2>
             <Combobox name='type' items={ITEMS_1} placeholder='신고유형' width={350} onSelected={onComboSelected} comboboxStyle={comboStyle} required={true}/>
             <Combobox name='reason' items={ITEMS_2} placeholder='사유' width={350} onSelected={onComboSelected} comboboxStyle={comboStyle} required={true}/>
-            <Textarea value={inputs.detail} placeholder='신고 사유의 자세한 내용을 적어주세요.' name='detail' onChange={onChange} customStyle={textareaStyle} required={true}/>
+            <Textarea value={inputs.detail} placeholder='신고 사유의 자세한 내용을 적어주세요.' name='detail' showLength={true} maxLength={200} onChange={onChange} customStyle={textareaStyle} required={true}/>
             <CheckBox name='check' label='이 팀 다시 만나지 않기' value={inputs.noSee} onCheckChanged={onCheckChange}/>
             <Button text='신고 전송' onClick={onClick} styles={buttonStyle}/>
         </div>

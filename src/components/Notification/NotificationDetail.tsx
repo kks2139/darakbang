@@ -31,7 +31,11 @@ function NotificationDetail(){
     }
 
     const onClickCheckMyTeam = ()=>{
+        history.push('/my-team/room/팀아이디');
+    }
 
+    const onClickCloseConfirm = ()=>{
+        history.goBack();
     }
 
     const onClickAccuse = ()=>{
@@ -143,7 +147,7 @@ function NotificationDetail(){
     return (
         <>
             {accepted ? 
-                <ConfirmLayout onClickCheckMyTeam={onClickCheckMyTeam}/> :
+                <ConfirmLayout onClickCheckMyTeam={onClickCheckMyTeam} onClickCloseConfirm={onClickCloseConfirm}/> :
                 <div css={style}>
                     <div className='title-box'>
                         <div className='title'>
@@ -186,23 +190,42 @@ function NotificationDetail(){
 
 interface ConfirmProps {
     onClickCheckMyTeam: ()=>void
+    onClickCloseConfirm: ()=>void
 }
 
-function ConfirmLayout({onClickCheckMyTeam}: ConfirmProps){
+function ConfirmLayout({onClickCheckMyTeam, onClickCloseConfirm}: ConfirmProps){
     const style = css`
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         padding: 0 100px 20px 100px;
+        height: 100%;
         h2 {
-            margin: 20px 0 30px 0;
+            color: white;
+        }
+        .close {
+            color: white;
+            margin: 100px 0 15px 0;
+            font-weight: bold;
+            font-size: 20px;
+            background-color: transparent;
+            transition: .2s;
+            &:hover {
+                transform: translateY(-2px);
+                text-shadow: 0 3px 6px black;
+            }
         }
     `;
 
     return (
         <div css={style}>
-            <h3></h3>
-            <Button text='팀 룸 가기' onClick={onClickCheckMyTeam}/>
+            <img src='/plane.png' alt='비행기 이미지'></img>
+            <h2>초대에 수락하셨습니다.</h2>
+            <h2>이제 다락방의 정식 회원이에요!</h2><br/>
+            <h2>첫 인사는 어떻게 하실건가요? (*^▽^*)</h2>
+            <button className='close' name='close' onClick={onClickCloseConfirm}>x 닫기</button>
+            <Button text='팀 룸 가기' theme='yellow' onClick={onClickCheckMyTeam}/>
         </div>
     );
 }

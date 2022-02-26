@@ -14,8 +14,8 @@ import {
   NotificationDetail,
   LoadingMark,
   LoadingSpinner,
-  SignUp
-
+  LoadingIcon,
+  SignUp,
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
@@ -61,6 +61,7 @@ function App() {
 
   return (
     <div css={style}> 
+      <LoadingIcon/>
       <div>
         <Header/>
         <main>
