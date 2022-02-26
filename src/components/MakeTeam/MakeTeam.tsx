@@ -67,7 +67,7 @@ function MakeTeam(){
         onTeamInfoChanged({name, value});
     }
 
-    const onSelected = (selected: SelectedCombo | null)=>{
+    const onSelected = (selected: SelectedCombo)=>{
         if(selected){
             const {value, label, name} = selected;
             if(name === 'career'){

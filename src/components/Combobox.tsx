@@ -15,7 +15,7 @@ interface Param {
 interface Props {
     defaultValue?: string
     items: ComboboxItem[]
-    onSelected?: (param: SelectedCombo | null, name: string)=> void
+    onSelected?: (selected: SelectedCombo)=> void
     placeholder?: string
     width?: number
     height?: number
@@ -42,7 +42,7 @@ function Combobox({
     visibleItemSize=6
 }: Props){
     const [showItems, setShowItems] = useState(false);
-    const [selected, setSelected] = useState<ComboboxItem | null>(null);
+    const [selected, setSelected] = useState<SelectedCombo | null>(null);
     const defaultItem: ComboboxItem[] = [{value: 'none', label: 'X'}];
     const itemList = defaultItem.concat(items);
     const divRef = useRef<HTMLDivElement | null>(null);
@@ -63,13 +63,16 @@ function Combobox({
     }
 
     const onClickComboItem = (item: Param)=>{
-        const selectedValue = item.value === 'none' ? null : item
-        const param = selectedValue ? {...selectedValue, name} : null;
-
-        setSelected(selectedValue);
+        const {value, label} = item;
+        const selectedValue = {
+            label,
+            value,
+            name,
+        };
+        setSelected(selectedValue.value === 'none' ? null : selectedValue);
         setShowItems(false);
         if(onSelected) {
-            onSelected(param, name);
+            onSelected(selectedValue);
         }
     }
 

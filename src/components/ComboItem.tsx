@@ -22,6 +22,7 @@ function ComboItem({value, label, onClickComboItem}: Props){
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
         height: 52px;
         color: black;
         font-weight: 500;
