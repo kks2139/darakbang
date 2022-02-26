@@ -63,6 +63,7 @@ import Space from "./Space"
 import Textarea from "./Textarea"
 import ConfirmJoin from "./Gathering/ConfirmJoin"
 import Tooltip from "./Tooltip"
+import Accuse from "./Notification/Accuse"
 
 export {
     GatheringFilter,
@@ -130,4 +131,5 @@ export {
     Textarea,
     ConfirmJoin,
     Tooltip,
+    Accuse,
 }

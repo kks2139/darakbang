@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import {css} from '@emotion/react';
 import { Notification } from "../../util/interfaces";
 import {useHistory} from 'react-router-dom';
-import {Overlay, Popup, Button} from '../index';
+import {Overlay, Popup, Button, Accuse} from '../index';
 
 interface Params {
     notification: Notification
@@ -19,22 +19,30 @@ const TEST_DATA = {
 
 function NotificationDetail(){
     const history = useHistory();
+    const [accepted, setAccepted] = useState(false);
     const [showPopup, setShowPopup] = useState(false);
 
     const onClickButton = (e: React.MouseEvent<HTMLButtonElement>)=>{
         if(e.currentTarget.name === 'ok'){
-            setShowPopup(true);
+            setAccepted(true);
         }else{
             history.goBack();
         }
     }
 
     const onClickCheckMyTeam = ()=>{
+
+    }
+
+    const onClickAccuse = ()=>{
+        setShowPopup(true);
+    }
+
+    const onClickSend = ()=>{
         history.push('/my-team');
     }
     
     const onPopupClose = ()=>{
-        history.goBack();
         setShowPopup(false);
     }
 
@@ -133,49 +141,54 @@ function NotificationDetail(){
     `;
 
     return (
-        <div css={style}>
-            <div className='title-box'>
-                <div className='title'>
-                    <img src='/mail-1.png' alt='편지지'></img>
-                    <h2>비밀 초대장</h2>
-                    <img src='/tooltip.png' alt='물음표'></img>
-                </div>
-                <span className='subtitle'>다락방에서 초대장이 도착하였습니다.</span>
-            </div>
-            <div className='content-box'>
-                <div className='message'>
-                    {TEST_DATA.msg.split('\n').map(line => (
-                        <div className='line'>{line}</div>
-                    ))}
-                    <div className='line'/>
-                    <div className='line last'>- {TEST_DATA.teamName} -</div>
-                    <div className='line'/>
-                    <div className='line last date'>
-                    {TEST_DATA.activeDate} 일자 활동 후 보내진 편지입니다.
-                        <img src='/report.png' alt='신고'></img>
+        <>
+            {accepted ? 
+                <ConfirmLayout onClickCheckMyTeam={onClickCheckMyTeam}/> :
+                <div css={style}>
+                    <div className='title-box'>
+                        <div className='title'>
+                            <img src='/mail-1.png' alt='편지지'></img>
+                            <h2>비밀 초대장</h2>
+                            <img src='/tooltip.png' alt='물음표'></img>
+                        </div>
+                        <span className='subtitle'>다락방에서 초대장이 도착하였습니다.</span>
                     </div>
+                    <div className='content-box'>
+                        <div className='message'>
+                            {TEST_DATA.msg.split('\n').map(line => (
+                                <div className='line'>{line}</div>
+                            ))}
+                            <div className='line'/>
+                            <div className='line last'>- {TEST_DATA.teamName} -</div>
+                            <div className='line'/>
+                            <div className='line last date'>
+                            {TEST_DATA.activeDate} 일자 활동 후 보내진 편지입니다.
+                                <img src='/report.png' alt='신고' onClick={onClickAccuse}></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='btn-box'>
+                        <div className='text'>초대를 수락 하시겠어요?</div>
+                        <button className='btn' onClick={onClickButton} name='ok'>예</button>
+                        <button className='btn' onClick={onClickButton}>아니요</button>
+                    </div>
+                    {showPopup &&
+                        <Popup onPopupClose={onPopupClose}>
+                            <Accuse onClickSend={onClickSend}/>
+                        </Popup>
+                    }
                 </div>
-            </div>
-            <div className='btn-box'>
-                <div className='text'>초대를 수락 하시겠어요?</div>
-                <button className='btn' onClick={onClickButton} name='ok'>예</button>
-                <button className='btn' onClick={onClickButton}>아니요</button>
-            </div>
-            {showPopup &&
-                <Popup onPopupClose={onPopupClose}>
-                    <ConfirmPopup onClickCheckMyTeam={onClickCheckMyTeam}/>
-                </Popup>
             }
             <Overlay show={true} zIndex={-1} opacity={0.3}/>
-        </div>
+        </>
     );
 }
 
-interface PopupProps {
+interface ConfirmProps {
     onClickCheckMyTeam: ()=>void
 }
 
-function ConfirmPopup({onClickCheckMyTeam}: PopupProps){
+function ConfirmLayout({onClickCheckMyTeam}: ConfirmProps){
     const style = css`
         display: flex;
         flex-direction: column;
@@ -188,8 +201,8 @@ function ConfirmPopup({onClickCheckMyTeam}: PopupProps){
 
     return (
         <div css={style}>
-            <h2>요청을 수락하셨습니다!</h2>
-            <Button text='내팀 보러가기' onClick={onClickCheckMyTeam}/>
+            <h3></h3>
+            <Button text='팀 룸 가기' onClick={onClickCheckMyTeam}/>
         </div>
     );
 }

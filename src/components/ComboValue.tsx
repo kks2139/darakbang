@@ -51,16 +51,16 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
         }
         input {
             text-align: center;
-            font-size: 15px;
+            font-size: 16px;
             width: 100%;
             height: 100%;
-            border: 1px solid var(--color-gray);
+            border-bottom: 1px solid var(--color-light-gray);
             cursor: pointer;
             transition: .3s;
             &::placeholder {
                 color: var(--color-gray);
                 font-weight: 600;
-                font-size: 15px;
+                font-size: 16px;
                 padding-right: 10px;
             }
         }
@@ -70,6 +70,8 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
             border-color: var(--color-warn) !important;
         }
     `;
+
+
 
     return (
         <div 

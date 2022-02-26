@@ -11,10 +11,10 @@ interface Props {
     required?: boolean
     labelStyle?: CSS.Properties
     boxStyle?: CSS.Properties
-    onCheckChanged: (value: boolean, name: string | undefined)=> void
+    onCheckChanged: (value: boolean, name: string)=> void
 }
 
-function CheckBox({value=false, label='', name, required=false, boxStyle, labelStyle, onCheckChanged}: Props){
+function CheckBox({value=false, label='', name='', required=false, boxStyle, labelStyle, onCheckChanged}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
 
     const onClick = ()=>{
