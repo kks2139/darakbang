@@ -61,7 +61,7 @@ function App() {
 
   return (
     <div css={style}> 
-      <LoadingIcon/>
+      {/* <LoadingIcon/> */}
       <div>
         <Header/>
         <main>
