@@ -16,6 +16,7 @@ import {
   LoadingSpinner,
   LoadingIcon,
   SignUp,
+  Main,
 } from './components/index';
 import {useSelector} from 'react-redux';
 import {RootState} from './store/index';
@@ -48,7 +49,7 @@ function App() {
       > .content-box {
         width: 100%;
         min-height: 600px;
-        padding: 50px 15px 50px 0;
+        padding: 50px 15px 50px 15px;
         overflow-y: hidden;
         transition: .3s;
         &:hover {
@@ -69,7 +70,8 @@ function App() {
             <Suspense fallback={<LoadingMark/>}>
               <Switch>
                 <Route path='/' exact>
-                  <Redirect to='/gathering'/>
+                  <Main/>
+                  {/* <Redirect to='/gathering'/> */}
                 </Route>
                 <Route path='/login'>
                   <Login/>

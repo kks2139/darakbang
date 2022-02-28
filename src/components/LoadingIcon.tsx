@@ -36,7 +36,7 @@ function LoadingIcon(){
             animation: shake 1s linear infinite;
         }
 
-        .effect, .effect-2 {
+        .effect {
             z-index: 2;
             position: absolute;
             top: 35%;
@@ -51,6 +51,7 @@ function LoadingIcon(){
                 height: 10px;
                 border-radius: 3px;
                 background-color: #b5ff00;
+
                 
                 &:nth-child(1){
                     animation: spread-1 var(--grow-for) infinite;
@@ -70,10 +71,10 @@ function LoadingIcon(){
                 }
                 animation-timing-function: cubic-bezier(.15,-0.03,.75,0);
             }
-        }
 
-        .effect-2 {
-            transform: rotate(45deg);
+            &.clone {
+                transform: rotate(45deg);
+            }
         }
 
         .sprout {
@@ -183,7 +184,7 @@ function LoadingIcon(){
                             <div/>
                             <div/>
                         </div>
-                        <div className='effect-2'>
+                        <div className='effect clone'>
                             <div/>
                             <div/>
                             <div/>
