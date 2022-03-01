@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import {Route, useRouteMatch} from 'react-router-dom';
-import {Tab, GatheringFilter, GatheringList, GatheringDetail, SideMenu, LoadingSpinner, LoadingMark} from '../index';
+import {Tab, GatheringFilter, GatheringList, GatheringDetail, SideMenu, LoadingSpinner, LoadingMark, LoadingIcon} from '../index';
 import useRequest from '../../hooks/useRequest';
 
 interface TestData {
@@ -44,9 +44,10 @@ function GatheringPage(){
                                 <button onClick={fetchData}>TEST</button>
                                 {!error && isLoading && 
                                     // <LoadingSpinner/> 
-                                    <LoadingMark/>
+                                    // <LoadingMark/>
+                                    <LoadingIcon/>
                                 }      
-                                <div>
+                                <div style={{width: '852px'}}>
                                     {testData && testData.map(data => (
                                         <div key={data.id}>{data.first_name}</div>
                                     ))}

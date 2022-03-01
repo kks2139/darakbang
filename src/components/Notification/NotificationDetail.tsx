@@ -31,7 +31,7 @@ function NotificationDetail(){
     }
 
     const onClickCheckMyTeam = ()=>{
-        history.push('/my-team/room/팀아이디');
+        history.push('/my-team/room/test');
     }
 
     const onClickCloseConfirm = ()=>{

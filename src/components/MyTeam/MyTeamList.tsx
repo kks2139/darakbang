@@ -16,12 +16,7 @@ function MyTeamList(){
     const {pathname} = window.location;
 
     const onClickRow = (team: MyTeam)=>{
-        history.push({
-            pathname: `/my-team/room`,
-            state: {
-                team
-            }
-        })
+        history.push(`/my-team/room/${team.id}`);
     }
 
     const formatDate = (value: string | number)=> {

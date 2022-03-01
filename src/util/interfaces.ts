@@ -162,3 +162,12 @@ export interface Popup {
     children?: JSX.Element | JSX.Element[]
     show: boolean
 }
+
+export interface RankInfo {
+    rank: number
+    teamName: string
+    lastActivity: string
+    category: string
+    genderRatio: string
+    totalMember: number
+}

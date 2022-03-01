@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
+import { RankList } from '../index';
 
 interface Props {
 }
@@ -19,6 +20,7 @@ function Main({}: Props){
 
         .logo {
             margin: 100px 0 0 0;
+            cursor: pointer;
         }
 
         .sub-title {
@@ -39,6 +41,7 @@ function Main({}: Props){
             <img className='logo' src='/story.png' alt='story logo'></img>
 
             <div className='sub-title'>지금 가장 활발한 팀은 어디지?</div>
+            <RankList/>
 
             <div className='sub-title'>지금 가장 인기있는 활동 TOP 10</div>
         </div>
