@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import {css} from '@emotion/react';
-import {CheckBox} from '../index';
+import {CheckBox, Button, Input} from '../index';
 import {LoginInput} from '../../util/interfaces';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../../store/app';
@@ -69,71 +69,52 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
     const style = css`
         margin: 0 24px 0 0;
         display: flex;
-        .left-box {
-            width: 360px;
-            margin-right: 24px;
-        }
-        .right-box {
+        flex-direction: column;
+        
+        > .wrapper {
             display: flex;
             flex-direction: column;
-        }
-        .inputs {
-            & > input:first-child {
-                margin-bottom: 16px;
-            } 
-        }
-        input {
-            width: 360px;
-            height: 52px;
-            padding: 16px 12px;
-            border: 1px solid var(--color-dim-gray);
-            font-size: 20px;
-            &::placeholder {
-                color: var(--color-gray);
+            justify-content: center;
+            align-items: center;
+            width: 440px;
+
+            .login-btn {
+                width: 100%;
+                height: 52px;
+                margin: 20px 0;
             }
-        }
-        .foot {
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 16px;
-            .button-box {
+
+            .bottom {
                 display: flex;
+                justify-content: space-between;
+                width: 100%;
+                button {
+                    background-color: transparent;
+                    color: var(--color-gray);
+                    font-size: 15px;
+                }
             }
-            .gray {
-                color: var(--color-gray);
-                font-size: 16px;
-                background-color: white;
+    
+            .space {
+                width: 1px;
+                height: 15px;
+                transform: translateY(5px);
+                background-color: var(--color-dim-gray);
             }
-        }
-        .col {
-            width: 1px;
-            height: 15px;
-            background-color: var(--color-gray);
-            margin: 0 14px;
-            transform: translateY(5px);
         }
     `;
 
     return(
         <div css={style}>
-            <div className='left-box'>
-                <div className='inputs'>
-                    <input placeholder='ID' value={inputs.id} name='id' autoComplete='off' onChange={onChange}/>
-                    <input placeholder='Password' type='password' value={inputs.pw} name='pw' autoComplete='off' onChange={onChange}/>
-                </div>
-                <div className='foot'>
-                    <div className='button-box'>
-                        <button className='gray'>ID 찾기</button>
-                        <div className='col'></div>
-                        <button className='gray'>Password 찾기</button>
-                    </div>
-                    <CheckBox label='ID 기억하기' value={inputs.memoId} onCheckChanged={onCheckChanged} labelStyle={{fontWeight: 'normal', fontSize: '16px', color: 'var(--color-gray)'}}/>
-                </div>
-            </div>
-            <div className='right-box'>
+            <div className='wrapper'>
+                <Input placeholder='ID' value={inputs.id} name='id' autoComplete='off' onChange={onChange} customStyle={{borderBottom: '0'}}/>
+                <Input placeholder='Password' type='password' value={inputs.pw} name='pw' autoComplete='off' onChange={onChange}/>
                 <button className='login-btn' onClick={onClickLogin}>로그인</button>
-                <div className='foot center'>
+                <div className='bottom'>
+                    <CheckBox label='ID 기억하기' value={inputs.memoId} onCheckChanged={onCheckChanged} labelStyle={{fontWeight: 'normal', fontSize: '16px', color: 'var(--color-gray)'}}/>
+                    <button className='gray'>ID 찾기</button>
+                    <div className='space'></div>
+                    <button className='gray'>Password 찾기</button>
                     <button className='gray'>회원가입</button>
                 </div>
             </div>

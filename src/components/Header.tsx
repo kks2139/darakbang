@@ -26,12 +26,12 @@ const Header = () => {
                     <NavLink to='/' className='header__logo__logo'>
                         다락방
                     </NavLink>
-                    <NavLink to='' className='header__logo__about gray-16'>
+                    <NavLink to='404' className='header__logo__about gray-16'>
                         About
                     </NavLink>
                 </div>
                 <div className="header__gethering">
-                    <div className="header__gethering__button">게더링</div>
+                    <NavLink to='/gathering' className="header__gethering__button">게더링</NavLink>
                 </div>
                 <div className="header__nav">
                     <ul>

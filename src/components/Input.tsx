@@ -10,12 +10,13 @@ interface Props {
     placeholder?: string
     name?: string
     width?: string
-    type?: 'number'
+    type?: string
     maxValue?: number
     minValue?: number
     required?: boolean
     disabled?: boolean
     noBorder?: boolean
+    autoComplete?: 'on' | 'off'
     customStyle?: CSS.Properties
 }
 
@@ -31,6 +32,7 @@ function Input({
     required=false, 
     disabled=false, 
     noBorder=false, 
+    autoComplete='off', 
     customStyle}: Props){
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -81,12 +83,13 @@ function Input({
             css={style}
             ref={inputRef}
             style={customStyle}
+            type={type}
             name={name}
             placeholder={placeholder}
             value={value}
             onChange={changeHandler}
             disabled={disabled}
-            autoComplete='off'
+            autoComplete={autoComplete}
         />
     );
 }

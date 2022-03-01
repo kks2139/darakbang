@@ -10,17 +10,22 @@ function LoadingIcon(){
         --spread-end: -40px;
         --grow-for: 1.5s;
 
-        z-index: 9999;
+        /* 전체 화면 모달용 */
+        /* z-index: 9999;
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         right: 0;
+        background-color: rgb(0,0,0,0.3); */
+        
+        position: relative;
+        margin: auto;
+        
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgb(0,0,0,0.3);
-        
+
         > .wrapper {
             position: relative;
             width: 30px;
@@ -32,7 +37,7 @@ function LoadingIcon(){
             height: 100%;
             background-color: var(--brown);
             border-radius: 0 20px 0 20px;
-            box-shadow: inset 0 0 10px 2px black;
+            box-shadow: inset 0 0 10px 0px black;
             animation: shake 1s linear infinite;
         }
 
@@ -50,7 +55,7 @@ function LoadingIcon(){
                 width: 6px;
                 height: 10px;
                 border-radius: 3px;
-                background-color: #b5ff00;
+                background-color: #0ce563;
 
                 
                 &:nth-child(1){
@@ -87,17 +92,17 @@ function LoadingIcon(){
             .body {
                 position: absolute;
                 width: 6px;
-                height: 30px;
+                height: 25px;
                 transform: translate(-50%);
                 border-radius: 3px;
                 border: 1px solid green;
-                background-color: #178f17;
+                background-color: #3bbd3b;
             }
             .leaf {
                 position: absolute;
                 width: 30px;
                 height: 30px;
-                background-color: #1cc36e;
+                background-color: #46e795;
                 border: 2px solid green;
                 &.left {
                     border-radius: 28px 0 28px 0;
@@ -173,33 +178,57 @@ function LoadingIcon(){
     `;
 
     return (
-        <>
-            {ReactDOM.createPortal(
-                <div css={style}>
-                    <div className='wrapper'>
-                        <div className='seed'></div>
-                        <div className='effect'>
-                            <div/>
-                            <div/>
-                            <div/>
-                            <div/>
-                        </div>
-                        <div className='effect clone'>
-                            <div/>
-                            <div/>
-                            <div/>
-                            <div/>
-                        </div>
-                        <div className='sprout'>
-                            <div className='body'></div>
-                            <div className='leaf left'></div>
-                            <div className='leaf right'></div>
-                        </div>
-                    </div>
-                </div>,
-                document.querySelector('#modal-root')!
-            )}
-        </>
+        <div css={style}>
+            <div className='wrapper'>
+                <div className='seed'></div>
+                <div className='effect'>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                </div>
+                <div className='effect clone'>
+                    <div/>
+                    <div/>
+                    <div/>
+                    <div/>
+                </div>
+                <div className='sprout'>
+                    <div className='body'></div>
+                    <div className='leaf left'></div>
+                    <div className='leaf right'></div>
+                </div>
+            </div>
+        </div>
+
+        /* 전체 화면 모달용 */
+        // <>
+        //     {ReactDOM.createPortal(
+        //         <div css={style}>
+        //             <div className='wrapper'>
+        //                 <div className='seed'></div>
+        //                 <div className='effect'>
+        //                     <div/>
+        //                     <div/>
+        //                     <div/>
+        //                     <div/>
+        //                 </div>
+        //                 <div className='effect clone'>
+        //                     <div/>
+        //                     <div/>
+        //                     <div/>
+        //                     <div/>
+        //                 </div>
+        //                 <div className='sprout'>
+        //                     <div className='body'></div>
+        //                     <div className='leaf left'></div>
+        //                     <div className='leaf right'></div>
+        //                 </div>
+        //             </div>
+        //         </div>,
+        //         document.querySelector('#modal-root')!
+        //     )}
+        // </>
     );
 }
 
