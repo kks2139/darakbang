@@ -16,7 +16,7 @@ function Tooltip({children, text}: Props){
         const {pageX, pageY} = e;
         const {top, left} = e.currentTarget.getBoundingClientRect();
         const x = pageX - left - (tooltipWidth / 2);
-        const y = pageY - top;
+        const y = pageY - (top + document.documentElement.scrollTop);
 
         tooltipRef.current!.style.left = x + 'px';
         tooltipRef.current!.style.top = y + 'px';
