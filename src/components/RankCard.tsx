@@ -1,25 +1,81 @@
-import React from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
 import {RankInfo} from '../util/interfaces';
 
 interface Props {
     rankInfo: RankInfo
+    isFocus: boolean
+    isReset: boolean
+    moved: number
+    cardTransitionEnd: ()=>void
+    resetEnd: ()=>void
 }
 
-function RankCard({rankInfo}: Props){
+const PADDING = 7;
+
+function RankCard({rankInfo, isFocus, isReset, moved, cardTransitionEnd, resetEnd}: Props){
+    const divRef = useRef<HTMLDivElement>(null);
+    const distance = -1 * 100 * moved;
+
+    const onTransitionEnd = ()=>{
+        cardTransitionEnd();
+    }
+
+    useEffect(()=>{
+        if(isReset){
+            resetEnd();
+        }
+    }, [isReset]);
+
     const style = css`
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 264px;
-        height: 439px;
-        border: 2px solid var(--color-light-gray);
-        margin: 0 10px;
+        min-width: 250px;
+        height: 420px;
+        background-color: white;
+        border: 1px solid var(--color-dim-gray);
+        
+        ${isFocus ? `
+            z-index: 1;
+            border-image: linear-gradient(to right, var(--color-main-text) 0%, var(--color-green) 100%);
+            border-width: 5px;
+            border-image-slice: 1;
+        ` : `
+        `}
+        
+        ${isReset ?  '' : `transition: .3s;`}
 
+        transform: translateX(${distance}%) ${isFocus ? `
+            translateY(-20px)
+            scale(1.05)
+        ` : `
+            // scale(0.95)
+        `};
+
+        &:hover {
+        }
+        
         .rank {
             color: var(--color-main-text);
-            margin: 40px 0 0 0;
+            font-size: 40px;
+            ${isFocus ? `
+                background: -webkit-linear-gradient(#00ca6c, #02BCD6);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                font-size: 60px;
+                margin: 15px 0 0 0;
+                ` : `
+                margin: 40px 0 0 0;
+            `};
+        }
+        
+        .name {
+            font-size: 25px;
+            ${isFocus ? `
+                font-size: 30px;
+            ` : ``};
         }
 
         .txt-1 {
@@ -34,13 +90,13 @@ function RankCard({rankInfo}: Props){
     `;
 
     return (
-        <div css={style}>
-            <h1 className='rank'>{rankInfo.rank}</h1>
-            <h1 className='name'>{rankInfo.teamName}</h1>
-            <div className='txt-1'>{rankInfo.lastActivity}</div>
-            <div className='txt-2'>{rankInfo.category}</div>
-            <div className='txt-2'>{rankInfo.genderRatio}</div>
-            <div className='txt-2'>{rankInfo.totalMember}</div>
+        <div css={style} ref={divRef} onTransitionEnd={onTransitionEnd}>
+                <h1 className='rank'>{rankInfo.rank}</h1>
+                <h2 className='name'>{rankInfo.teamName}</h2>
+                <div className='txt-1'>{rankInfo.lastActivity}</div>
+                <div className='txt-2'>{rankInfo.category}</div>
+                <div className='txt-2'>{rankInfo.genderRatio}</div>
+                <div className='txt-2'>{rankInfo.totalMember}</div>
         </div>
     );
 }
