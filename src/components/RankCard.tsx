@@ -12,6 +12,8 @@ interface Props {
     resetEnd: ()=>void
 }
 
+const PADDING = 7;
+
 function RankCard({rankInfo, isFocus, isReset, moved, cardTransitionEnd, resetEnd}: Props){
     const divRef = useRef<HTMLDivElement>(null);
     const distance = -1 * 100 * moved;
@@ -33,15 +35,17 @@ function RankCard({rankInfo, isFocus, isReset, moved, cardTransitionEnd, resetEn
         min-width: 250px;
         height: 420px;
         background-color: white;
-        border: 2px solid var(--color-light-gray);
-        ${isReset ?  '' : `transition: .3s;`}
-
+        border: 1px solid var(--color-dim-gray);
+        
         ${isFocus ? `
             z-index: 1;
             border-image: linear-gradient(to right, var(--color-main-text) 0%, var(--color-green) 100%);
+            border-width: 5px;
             border-image-slice: 1;
-            ` : `
+        ` : `
         `}
+        
+        ${isReset ?  '' : `transition: .3s;`}
 
         transform: translateX(${distance}%) ${isFocus ? `
             translateY(-20px)
@@ -50,20 +54,28 @@ function RankCard({rankInfo, isFocus, isReset, moved, cardTransitionEnd, resetEn
             // scale(0.95)
         `};
 
+        &:hover {
+        }
+        
         .rank {
             color: var(--color-main-text);
-            margin: 40px 0 0 0;
             font-size: 40px;
             ${isFocus ? `
-                background: -webkit-linear-gradient(#eee, #333);
+                background: -webkit-linear-gradient(#00ca6c, #02BCD6);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-            ` : ``};
+                font-size: 60px;
+                margin: 15px 0 0 0;
+                ` : `
+                margin: 40px 0 0 0;
+            `};
         }
         
         .name {
             font-size: 25px;
-            ${isFocus ? `` : ``};
+            ${isFocus ? `
+                font-size: 30px;
+            ` : ``};
         }
 
         .txt-1 {
@@ -79,12 +91,12 @@ function RankCard({rankInfo, isFocus, isReset, moved, cardTransitionEnd, resetEn
 
     return (
         <div css={style} ref={divRef} onTransitionEnd={onTransitionEnd}>
-            <h1 className='rank'>{rankInfo.rank}</h1>
-            <h2 className='name'>{rankInfo.teamName}</h2>
-            <div className='txt-1'>{rankInfo.lastActivity}</div>
-            <div className='txt-2'>{rankInfo.category}</div>
-            <div className='txt-2'>{rankInfo.genderRatio}</div>
-            <div className='txt-2'>{rankInfo.totalMember}</div>
+                <h1 className='rank'>{rankInfo.rank}</h1>
+                <h2 className='name'>{rankInfo.teamName}</h2>
+                <div className='txt-1'>{rankInfo.lastActivity}</div>
+                <div className='txt-2'>{rankInfo.category}</div>
+                <div className='txt-2'>{rankInfo.genderRatio}</div>
+                <div className='txt-2'>{rankInfo.totalMember}</div>
         </div>
     );
 }
