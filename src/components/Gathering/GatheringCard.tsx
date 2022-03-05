@@ -73,6 +73,7 @@ function GatheringCard({info, onClickGathering}: Props){
 const style = ()=>(css`
     position: relative;
     width: 264px;
+    min-width: 264px;
     margin: 0 10px 32px 10px;
     cursor: pointer;
     .preview {
