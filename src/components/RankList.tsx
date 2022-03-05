@@ -68,7 +68,6 @@ function RankList(){
 
     useEffect(()=>{
         // 랭킹 1,2,3 팀 조회 (지금은 테스트 데이터 사용)
-        TEST_DATA.sort((a, b)=> a.rank - b.rank);
         setRankList(TEST_DATA);
         setMoved(TEST_DATA.length);
     }, []);
@@ -85,7 +84,7 @@ function RankList(){
             align-items: center;
             width: 750px;
             height: 500px;
-            overflow: hidden;
+            /* overflow: hidden; */
         }
 
         .button-box {
@@ -117,6 +116,7 @@ function RankList(){
                         isReset={isReset}
                         isFocus={moved + 1 === i}
                         cardTransitionEnd={cardTransitionEnd}
+                        isOutside={Math.abs(moved+1 - i) > 1}
                         resetEnd={resetEnd}/>
                 ))}
             </div>
