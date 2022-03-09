@@ -83,7 +83,7 @@ function ComboValue({selected, required=false, readOnly, placeholder='', onFocus
             onBlur={(e: React.FocusEvent<HTMLElement>)=> {onBlur(e)}} 
             data-combo-value>
             <input className='value' ref={inputRef} value={value} placeholder={!selected ? placeholder : ''} readOnly/>
-            {(selected || readOnly) ? null :
+            {readOnly ? null :
                 <div className='icon-box'>
                     <img src='/comboDown.png'></img>
                 </div>
