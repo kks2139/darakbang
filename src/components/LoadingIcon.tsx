@@ -28,17 +28,28 @@ function LoadingIcon(){
 
         > .wrapper {
             position: relative;
-            width: 30px;
-            height: 30px;
+            width: 22px;
+            height: 22px;
         }
 
         .seed {
+            position: relative;
             width: 100%;
             height: 100%;
             background-color: var(--brown);
+            border: 1px solid black;
             border-radius: 0 20px 0 20px;
-            box-shadow: inset 0 0 10px 0px black;
             animation: shake 1s linear infinite;
+            .line {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 28px;
+                height: 5px;
+                border-radius: 50%;
+                border: 1px solid black;
+                transform: translate(-50%, -50%) rotate(45deg);
+            }
         }
 
         .effect {
@@ -52,10 +63,11 @@ function LoadingIcon(){
             
             > div{
                 position: absolute;
-                width: 6px;
+                width: 2px;
                 height: 10px;
                 border-radius: 3px;
-                background-color: #0ce563;
+                /* background-color: #0ce563; */
+                background-color: black;
 
                 
                 &:nth-child(1){
@@ -91,26 +103,48 @@ function LoadingIcon(){
 
             .body {
                 position: absolute;
-                width: 6px;
-                height: 25px;
+                width: 2px;
+                height: 20px;
                 transform: translate(-50%);
                 border-radius: 3px;
-                border: 1px solid green;
-                background-color: #3bbd3b;
+                /* border: 1px solid green; */
+                background-color: black;
             }
             .leaf {
                 position: absolute;
-                width: 30px;
-                height: 30px;
+                top: 1px;
+                width: 22px;
+                height: 15px;
                 background-color: #46e795;
-                border: 2px solid green;
+                border: 1px solid black;
+
+                .line {
+                    position: absolute;
+                    width: 24px;
+                    height: 1px;
+                    background-color: black;
+                }
+
                 &.left {
                     border-radius: 28px 0 28px 0;
                     transform: translate(0, -100%);
+                    .line {
+                        top: 0;
+                        right: 0;
+                        transform: rotate(-32deg);  
+                        transform-origin: 100% top;
+                    }
                 }
+                
                 &.right {
                     border-radius: 0 28px 0 28px;
                     transform: translate(-100%, -100%);
+                    .line {
+                        top: 0;
+                        left: 0;
+                        transform: rotate(32deg);  
+                        transform-origin: 0 top;
+                    }
                 }
             }
             animation: grow var(--grow-for) infinite;
@@ -163,7 +197,15 @@ function LoadingIcon(){
 
         @keyframes shake {
             0% {transform: rotate(-45deg);}
+            10% {transform: rotate(-10deg);}
+            20% {transform: rotate(-45deg);}
+            30% {transform: rotate(-10deg);}
+            40% {transform: rotate(-45deg);}
             50% {transform: rotate(-10deg);}
+            60% {transform: rotate(-45deg);}
+            70% {transform: rotate(-10deg);}
+            80% {transform: rotate(-45deg);}
+            90% {transform: rotate(-10deg);}
             100% {transform: rotate(-45deg);}
         }
         
@@ -180,7 +222,9 @@ function LoadingIcon(){
     return (
         <div css={style}>
             <div className='wrapper'>
-                <div className='seed'></div>
+                <div className='seed'>
+                    <div className='line'></div>    
+                </div>
                 <div className='effect'>
                     <div/>
                     <div/>
@@ -195,8 +239,12 @@ function LoadingIcon(){
                 </div>
                 <div className='sprout'>
                     <div className='body'></div>
-                    <div className='leaf left'></div>
-                    <div className='leaf right'></div>
+                    <div className='leaf left'>
+                        <div className='line'></div>    
+                    </div>
+                    <div className='leaf right'>
+                        <div className='line'></div>    
+                    </div>
                 </div>
             </div>
         </div>
