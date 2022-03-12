@@ -40,6 +40,7 @@ function GatheringPage(){
             <section className='content'>
                 <Route path={`${match.path}`} exact>
                         <Tab names={['유료', '일반']}>
+                        <LoadingIcon/>
                             <div>
                                 <button onClick={fetchData}>TEST</button>
                                 {!error && isLoading && 

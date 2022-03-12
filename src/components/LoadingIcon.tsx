@@ -28,8 +28,8 @@ function LoadingIcon(){
 
         > .wrapper {
             position: relative;
-            width: 30px;
-            height: 30px;
+            width: 22px;
+            height: 22px;
         }
 
         .seed {
@@ -37,7 +37,8 @@ function LoadingIcon(){
             height: 100%;
             background-color: var(--brown);
             border-radius: 0 20px 0 20px;
-            box-shadow: inset 0 0 10px 0px black;
+            border: 1px solid black;
+            /* box-shadow: inset 0 0 10px 0px black; */
             animation: shake 1s linear infinite;
         }
 
@@ -91,26 +92,44 @@ function LoadingIcon(){
 
             .body {
                 position: absolute;
-                width: 6px;
-                height: 25px;
+                width: 2px;
+                height: 20px;
                 transform: translate(-50%);
                 border-radius: 3px;
-                border: 1px solid green;
-                background-color: #3bbd3b;
+                /* border: 1px solid green; */
+                background-color: black;
             }
             .leaf {
                 position: absolute;
-                width: 30px;
-                height: 30px;
+                top: 1px;
+                width: 22px;
+                height: 15px;
                 background-color: #46e795;
-                border: 2px solid green;
+                border: 1px solid black;
+
+                .line {
+                    position: absolute;
+                    width: 22px;
+                    height: 1px;
+                    background-color: black;
+                }
+
                 &.left {
                     border-radius: 28px 0 28px 0;
                     transform: translate(0, -100%);
+                    .line {
+                        transform: rotate(-20deg);  
+                        transform-origin: 0 0;
+                    }
                 }
+
                 &.right {
                     border-radius: 0 28px 0 28px;
                     transform: translate(-100%, -100%);
+                    .line {
+                        transform: rotate(20deg);  
+                        transform-origin: 100% 100%;
+                    }
                 }
             }
             animation: grow var(--grow-for) infinite;
@@ -163,7 +182,15 @@ function LoadingIcon(){
 
         @keyframes shake {
             0% {transform: rotate(-45deg);}
+            10% {transform: rotate(-10deg);}
+            20% {transform: rotate(-45deg);}
+            30% {transform: rotate(-10deg);}
+            40% {transform: rotate(-45deg);}
             50% {transform: rotate(-10deg);}
+            60% {transform: rotate(-45deg);}
+            70% {transform: rotate(-10deg);}
+            80% {transform: rotate(-45deg);}
+            90% {transform: rotate(-10deg);}
             100% {transform: rotate(-45deg);}
         }
         
@@ -195,8 +222,12 @@ function LoadingIcon(){
                 </div>
                 <div className='sprout'>
                     <div className='body'></div>
-                    <div className='leaf left'></div>
-                    <div className='leaf right'></div>
+                    <div className='leaf left'>
+                        <div className='line'></div>    
+                    </div>
+                    <div className='leaf right'>
+                        <div className='line'></div>    
+                    </div>
                 </div>
             </div>
         </div>
