@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 /** @jsxImportSource @emotion/react */ 
 import {css} from '@emotion/react';
-import { useHistory } from "react-router-dom";
+import { useHistory, useRouteMatch } from "react-router-dom";
 import {TeamDetail, ActiveHistory} from '../../util/interfaces';
 import {divDate} from '../../util/util';
 import {TeamState, Grid, GridColumn, MemberInfo} from '../index';
@@ -14,6 +14,7 @@ interface Params {
 
 function TeamRoom(){
     const history = useHistory();
+    const match = useRouteMatch();
     const {selectedTeamRoom} = useSelector((state: RootState)=> state.myTeam);
 
     const formatDate = (str: string | number)=>{
@@ -22,7 +23,7 @@ function TeamRoom(){
     }
 
     const onClickTalk = ()=> {
-        history.push('chatting', {
+        history.push(`${selectedTeamRoom.id}/chatting`, {
             state: {
                 teamId: selectedTeamRoom.id
             }

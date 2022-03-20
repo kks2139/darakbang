@@ -7,20 +7,20 @@ import {RankCard} from '../components/index';
 
 const TEST_DATA = [
     {
-        rank: 1,
-        teamName: '다락방',
-        lastActivity: '2022.2월 26일 30번째 활동',
-        category: '라이프 > 도전',
-        genderRatio: '성비 균등',
-        totalMember: 148,
-    },
-    {
         rank: 2,
         teamName: '가락방',
         lastActivity: '2022.2월 24일 14번째 활동',
         category: '취미 > 스포츠 > 자전거',
         genderRatio: '성비 균등',
         totalMember: 166,
+    },
+    {
+        rank: 1,
+        teamName: '다락방',
+        lastActivity: '2022.2월 26일 30번째 활동',
+        category: '라이프 > 도전',
+        genderRatio: '성비 균등',
+        totalMember: 148,
     },
     {
         rank: 3,
@@ -32,45 +32,9 @@ const TEST_DATA = [
     },
 ]
 
-let canMove = true;
-
 function RankList(){
     const {isLoading, error, sendRequest} = useRequest();
-    const [rankList, setRankList] = useState<RankInfo[]>([]);
-    const longList = rankList.concat(rankList, rankList);
-    const [moved, setMoved] = useState(0);
-    const [isReset, setIsReset] = useState(false);
-
-    const onClick = (e: React.MouseEvent<HTMLButtonElement>)=>{
-        if(!canMove) return;
-        const {name} = e.currentTarget;
-        if(name === 'left'){
-            setMoved(pre => --pre);
-        }else{
-            setMoved(pre => ++pre);
-        }
-        canMove = false;
-    }
-
-    const cardTransitionEnd = ()=>{
-        const reset = moved >= longList.length - rankList.length || moved <= 0;
-        if(reset){
-            setIsReset(reset);
-            setMoved(rankList.length);
-        }
-        canMove = true;
-    }
-
-    const resetEnd = ()=>{
-        setIsReset(false);
-        canMove = true;
-    }
-
-    useEffect(()=>{
-        // 랭킹 1,2,3 팀 조회 (지금은 테스트 데이터 사용)
-        setRankList(TEST_DATA);
-        setMoved(TEST_DATA.length);
-    }, []);
+    const [rankList, setRankList] = useState<RankInfo[]>(TEST_DATA);
 
     const style = css`
         position: relative;
@@ -82,9 +46,8 @@ function RankList(){
         > .wrapper {
             display: flex;
             align-items: center;
-            width: 750px;
-            height: 500px;
-            /* overflow: hidden; */
+            justify-content: center;
+            margin-top: 50px;
         }
 
         .button-box {
@@ -108,21 +71,12 @@ function RankList(){
     return (
         <div css={style}>
             <div className='wrapper'>
-                {longList.map((rank, i) => (
+                {rankList.map((rank, i) => (
                     <RankCard 
                         key={i}
-                        rankInfo={rank}
-                        moved={moved}
-                        isReset={isReset}
-                        isFocus={moved + 1 === i}
-                        cardTransitionEnd={cardTransitionEnd}
-                        isOutside={Math.abs(moved+1 - i) > 1}
-                        resetEnd={resetEnd}/>
+                        isTop={rank.rank === 1}
+                        rankInfo={rank}/>
                 ))}
-            </div>
-            <div className='button-box'>
-                <button name='left' onClick={onClick}>{'◂'}</button>
-                <button name='right' onClick={onClick}>{'▸'}</button>
             </div>
         </div>
     );

@@ -5,29 +5,11 @@ import {RankInfo} from '../util/interfaces';
 
 interface Props {
     rankInfo: RankInfo
-    isFocus: boolean
-    isReset: boolean
-    isOutside: boolean
-    moved: number
-    cardTransitionEnd: ()=>void
-    resetEnd: ()=>void
+    isTop: boolean
 }
 
-const PADDING = 7;
-
-function RankCard({rankInfo, isFocus, isReset, isOutside, moved, cardTransitionEnd, resetEnd}: Props){
+function RankCard({rankInfo, isTop}: Props){
     const divRef = useRef<HTMLDivElement>(null);
-    const distance = -1 * 100 * moved;
-
-    const onTransitionEnd = ()=>{
-        cardTransitionEnd();
-    }
-
-    useEffect(()=>{
-        if(isReset){
-            resetEnd();
-        }
-    }, [isReset]);
 
     const style = css`
         display: flex;
@@ -36,50 +18,47 @@ function RankCard({rankInfo, isFocus, isReset, isOutside, moved, cardTransitionE
         min-width: 250px;
         height: 420px;
         background-color: white;
-        border: 1px solid var(--color-dim-gray);
+        border: 2px solid transparent;
         opacity: 1;
+        margin: 0 5px;
 
-        ${isFocus ? `
-            z-index: 1;
-            border-image: linear-gradient(to right, var(--color-main-text) 0%, var(--color-green) 100%);
-            border-width: 5px;
-            border-image-slice: 1;
+        ${isTop ? `
+            background-image: linear-gradient(white, white), linear-gradient(315deg, #02BCD6, #EDFF1C);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
         ` : `
+            border-color: var(--color-light-gray);
         `}
 
-        ${isOutside ? `
-            opacity: 0;
-        ` : ``}
-        
-        ${isReset ?  '' : `transition: .3s;`}
-
-        transform: translateX(${distance}%) ${isFocus ? `
-            translateY(-20px)
-            scale(1.05)
-        ` : `
-            // scale(0.95)
-        `};
-
-        &:hover {
+        .title-box {
+            height: 130px;
+            max-height: 130px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            ${isTop ? 'padding-top: 10px;' : ''}
         }
-        
+
         .rank {
-            color: var(--color-main-text);
-            font-size: 40px;
-            margin: 40px 0 0 0;
-            ${isFocus ? `
-                background: -webkit-linear-gradient(#00ca6c, #02BCD6);
+            ${isTop ? `
+                font-size: 80px;
+                background: linear-gradient(300deg, var(--color-main-text), var(--color-yellow));
+                color: transparent;
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;
-                // margin: 15px 0 0 0;
                 ` : `
+                font-size: 40px;
+                margin: 40px 0 0 0;
+                color: var(--color-main-text);
             `};
         }
         
         .name {
-            font-size: 25px;
-            ${isFocus ? `
-            ` : ``};
+            ${isTop ? `
+                font-size: 35px;
+            ` : `
+                font-size: 25px;
+            `}
         }
 
         .txt-1 {
@@ -94,13 +73,15 @@ function RankCard({rankInfo, isFocus, isReset, isOutside, moved, cardTransitionE
     `;
 
     return (
-        <div css={style} ref={divRef} onTransitionEnd={onTransitionEnd}>
+        <div css={style} ref={divRef}>
+            <div className='title-box'>
                 <h1 className='rank'>{rankInfo.rank}</h1>
                 <h2 className='name'>{rankInfo.teamName}</h2>
-                <div className='txt-1'>{rankInfo.lastActivity}</div>
-                <div className='txt-2'>{rankInfo.category}</div>
-                <div className='txt-2'>{rankInfo.genderRatio}</div>
-                <div className='txt-2'>{rankInfo.totalMember}</div>
+            </div>
+            <div className='txt-1'>{rankInfo.lastActivity}</div>
+            <div className='txt-2'>{rankInfo.category}</div>
+            <div className='txt-2'>{rankInfo.genderRatio}</div>
+            <div className='txt-2'>{rankInfo.totalMember}</div>
         </div>
     );
 }

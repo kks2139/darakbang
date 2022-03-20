@@ -39,7 +39,7 @@ function MyTeamPage(){
                 <Route path={`${match.path}/room/:teamId`} exact>
                     <TeamRoom/>
                 </Route>
-                <Route path={`${match.path}/chatting`} exact>
+                <Route path={`${match.path}/room/:teamId/chatting`} exact>
                     <Chatting/>
                 </Route>
             </div>

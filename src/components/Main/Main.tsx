@@ -20,9 +20,17 @@ function Main({}: Props){
         display: flex;
         flex-direction: column;
         align-items: center;
+        
+        .slider {
+            height: 220px;
+            width: 100%;
+            background-color: var(--color-yellow);
+            margin-bottom: 200px;
+        }
 
         .title {
             text-align: center;
+            font-size: 36px;
         }
 
         .logo {
@@ -32,12 +40,11 @@ function Main({}: Props){
 
         .sub-title {
             font-weight: bold;
-            font-size: 20px;
+            font-size: 25px;
             margin: 200px 0 40px 0;
         }
 
         .gathering-box {
-            /* border: 1px solid red; */
             display: flex;
             width: calc(100% - 100px);
             overflow: auto;
@@ -46,9 +53,11 @@ function Main({}: Props){
 
     return (
         <div css={style}> 
+            <section className='slider'></section>
+
             <h2 className='title'>
                 안녕하세요! 다락방팀 입니다.<br/>
-                우리는 여러분 전부를 사랑해요.<br/>
+                우리는 여러분 전부를 사랑해요.
                 그렇게 다락방이 탄생했습니다!<br/>
             </h2>
 
