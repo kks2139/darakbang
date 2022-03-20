@@ -40,7 +40,6 @@ function GatheringPage(){
             <section className='content'>
                 <Route path={`${match.path}`} exact>
                         <Tab names={['유료', '일반']}>
-                        <LoadingIcon/>
                             <div>
                                 <button onClick={fetchData}>TEST</button>
                                 {!error && isLoading && 
@@ -48,6 +47,7 @@ function GatheringPage(){
                                     // <LoadingMark/>
                                     <LoadingIcon/>
                                 }      
+                                <LoadingIcon/>
                                 <div style={{width: '852px'}}>
                                     {testData && testData.map(data => (
                                         <div key={data.id}>{data.first_name}</div>

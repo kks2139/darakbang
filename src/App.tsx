@@ -49,7 +49,7 @@ function App() {
       > .content-box {
         width: 100%;
         min-height: 600px;
-        padding: 50px 15px 50px 15px;
+        /* padding: 50px 15px 50px 15px; */
         overflow-y: hidden;
         transition: .3s;
         &:hover {
