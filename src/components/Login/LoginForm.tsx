@@ -6,6 +6,7 @@ import {LoginInput} from '../../util/interfaces';
 import {useDispatch} from 'react-redux';
 import {appActions} from '../../store/app';
 import {ToastMessage} from '../index';
+import {Link} from 'react-router-dom';
 
 interface Props{
     onLogin: (param: LoginInput)=> void
@@ -101,6 +102,12 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
                 transform: translateY(5px);
                 background-color: var(--color-dim-gray);
             }
+
+            .gray {
+                color: var(--color-gray);
+                font-size: 16px;
+                background-color: white;
+            }
         }
     `;
 
@@ -112,10 +119,10 @@ function LoginForm({onLogin, onFindId, onFindPw}: Props){
                 <button className='login-btn' onClick={onClickLogin}>로그인</button>
                 <div className='bottom'>
                     <CheckBox label='ID 기억하기' value={inputs.memoId} onCheckChanged={onCheckChanged} labelStyle={{fontWeight: 'normal', fontSize: '16px', color: 'var(--color-gray)'}}/>
-                    <button className='gray'>ID 찾기</button>
+                    <Link className='gray' to='/find-id'>ID 찾기</Link>
                     <div className='space'></div>
-                    <button className='gray'>Password 찾기</button>
-                    <button className='gray'>회원가입</button>
+                    <Link className='gray' to='/find-pw'>Password 찾기</Link>
+                    <Link className='gray' to='/sign-up'>회원가입</Link>
                 </div>
             </div>
         </div>
